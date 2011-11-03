@@ -1,0 +1,104 @@
+/**
+ * @package     Expose
+ * @version     2.0
+ * @author      ThemeXpert http://www.themexpert.com
+ * @copyright   Copyright (C) 2010 - 2011 ThemeXpert
+ * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
+ * @file        expose.css
+ **/
+
+/* Reset */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, caption {margin: 0;padding: 0;border: 0;outline: 0;font-size: 100%;background: transparent;}
+
+/* Layout 
+----------------------------------------*/
+/* Core */
+.tx-container{margin: 0 auto;position: relative}
+.tx-mod{float: left;height: 100%}
+.mod-inner{margin: 0 10px;}
+.tx-block{padding: 10px;margin-bottom: 10px;position: relative}
+#tx-mainbody, #sidebar-left, #sidebar-right{float: left}
+.tx-menu .tx-block{margin-left: 0;margin-right: 0}
+.width50{width: 50%;float: left}
+.width50 .mod-content{padding-right: 5px;}
+.left{float: left;margin-right: 10px;}
+.right{float: right;margin-left: 10px;}
+#tx-copyright,.designed-by{text-align: center}
+#tx-poweredby{margin: 0 auto}
+
+/* Menu */
+.tx-menu {position: relative;z-index: 1000;}
+.tx-menu ul{margin: 0;padding: 0;list-style: none}
+.tx-menu ul li{float: left;padding: 0;position: relative;}
+.tx-menu ul li a{display: block;font-family: "Trebuchet MS",Verdana,Arial,sans-serif;padding: 0 10px;}
+.tx-menu ul ul {position:absolute;left:-9999em;padding: 5px;width: 15em;}
+.tx-menu ul ul li {width:100%;}
+.tx-menu ul li:hover {visibility:inherit; /* fixes IE7 'sticky bug' */}
+.tx-menu ul li:hover ul, .tx-menu ul li.over ul{left: 0;z-index:99;}
+.tx-menu ul li:hover li ul, .tx-menu ul li.over li ul{left: -999em;}
+.tx-menu ul li li:hover ul, .tx-menu ul li li.over ul{left:14em; top:0;}
+.tx-menu ul li li:hover li ul, .tx-menu ul li li.over li ul{top:-999em;}
+.tx-menu ul li li li:hover ul,.tx-menu ul li li li.over ul {left: 14em; /* match ul width */top:0;}
+
+/*Additional*/
+#tx-scrolltop{display: none;position: fixed;right: 15px;bottom: 5px; height: 20px; font-weight: bold;font-size: 11px;text-decoration: none;padding: 0px 15px; }
+.expose-logo, .expose-logo a{width: 152px;height: 40px;display: block}
+.expose-logo span{display: none}
+
+/* RTL */
+/*body.rtl {direction: rtl;}*/
+body.rtl #tx-mainbody, body.rtl #sidebar-left, body.rtl #sidebar-right, body.rtl .tx-mod{float: right}
+body.rtl .tx-menu ul li{float: right}
+body.rtl {min-width: inherit;}
+body.rtl .tx-menu ul li:hover ul, body.rtl .tx-menu ul li.over ul{right: 0;}
+body.rtl .tx-menu ul li:hover li ul, body.rtl .tx-menu ul li.over li ul{right: -999em;}
+body.rtl .tx-menu ul li li:hover ul, body.rtl .tx-menu ul li li.over ul{right:13em;}
+body.rtl .tx-menu ul li li li:hover ul,body.rtl .tx-menu ul li li li.over ul {right: 10em;top:0;}
+body.rtl ul, ol{padding-right: 15px;}
+
+/* Typography 
+----------------------------------------*/
+/* General */
+html{overflow-y: scroll;min-height: 100%}
+body {font:normal 13px/20px "Segoe UI", Arial, Helvetica, sans-serif;color: #444}
+form {margin: 0;padding: 0;}
+h1, h2, h3, h4, h5, p {margin: 15px 0;}
+h1 {font-size: 240%;}
+h2 {font-size: 200%;}
+h2.title {font-size: 170%;}
+h3 {font-size: 175%;}
+h4 {font-size: 120%;}
+h5 {font-size: 120%;}
+a {text-decoration: none;outline: none;}
+blockquote {font: italic 16px/22px Georgia, Serif;}
+
+/* Lists */
+ul, ol {padding-left: 15px;}
+ul li {padding: 0;margin: 0;}
+ul ul {margin-left: 25px;padding: 5px 0;}
+ul li.author {margin: 0;letter-spacing: 1px;list-style: none;font-weight: bold;text-align: right;}
+ul li.date {margin: 0;letter-spacing: 1px;list-style: none;text-align: right;font-weight: bold;}
+ul li.comments {list-style: none;text-align: right;font-weight: bold;}
+ul li.author span, ul li.date span, ul li.comments span {display: block;font-weight: normal;margin-bottom: 10px;line-height: 1em;}
+
+/*Styles
+----------------------------------------*/
+html,body {margin-bottom: 1px;}
+body {color: #333;}
+a:hover {color: #000;}
+.tx-menu ul li a {color: #777;text-shadow: 0 1px 1px #FFF}
+/*First Level*//*
+.tx-menu ul.menu > li:hover > a,.tx-menu ul.menu > li.active > a {background: #eee; outline: 1px solid #ddd; color: #444;}
+*//*Second and above level*//*
+.tx-menu ul li ul li a:hover{color: #ff4500;}
+.tx-menu ul li ul{background: #fff;border: 1px solid #ddd;}*/
+.expose-logo-light{background: url(../images/expose_logo_light.png) no-repeat;}
+.expose-logo-dark{background: url(../images/expose_logo_dark.png) no-repeat;}
+#tx-scrolltop{background: #555;color: #fff; }
+
+/* Clear Float*/
+html body * span.clear, html body * div.clear, html body * li.clear, html body * dd.clear {background: none;border: 0;clear: both;display: block;float: none;font-size: 0;list-style: none;margin: 0;padding: 0;overflow: hidden;visibility: hidden;width: 0;height: 0;}
+.clearfix:after {clear: both;content: '.';display: block;visibility: hidden;height: 0;}
+.clearfix {display: inline-block;}
+* html .clearfix {height: 1%;}
+.clearfix {display: block;}

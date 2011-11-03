@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+		<fields name="params" addfieldpath="/libraries/expose/admin/fields">
+			<fieldset name="mega-params" label="Expose Menu Parameters (ThemeXpert)">
+				<field name="mega_showtitle" type="radio" default="1" label="Show Title" description="Show Title">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="mega_desc" type="textarea" rows="5" cols="30" default="" label="Add Description" description="Description added here will be shown as the Tag line below the Menu Item Title. Works for Sub Menu Items also" />
+				<field name="mega_cols" type="text" size="30" default="1" label="Columns" description="Number of Columns. Works for first level menu items, with groups = Y for each subset going into each column." />
+				<field name="mega_group" type="radio" default="0" label="Group" description="Set to yes for number of columns per first level menu items.">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="mega_width" type="text" size="30" default="" label="Submenu Width" description="Submenu Width" />
+				<field name="mega_colw" type="text" size="30" default="" label="Submenu Column Width" description="Submenu Column Width" />
+				<field name="mega_colxw" type="textarea" rows="5" cols="30" default="" label="Submenu Column[i] Width" description="nter the desired column width as colw1=200 or colw3=300." />
+				<field name="mega_class" type="text" size="30" default="" label="Additional class" description="Additional CSS class to apply to the menu items." />
+				<field name="mega_subcontent" type="list" default="0" label="Submenu Content" description="Choose content to show in submenus. Multiple modules based on name or module position can be selected and loaded. Use Ctrl + Click to select Multiple Items.">
+					<option value="0">Child menu items</option>
+					<option value="mod">Modules</option>
+					<option value="pos">Module positions</option>
+				</field>			
+				<field name="mega_subcontent_mod_modules" type="modules" default="0" label="Select Modules" description="Select Modules" />
+				<field name="mega_subcontent_pos_positions" type="positions" default="0" label="Select Positions" description="Select Positions" />
+			</fieldset>			
+		</fields>
+</form>

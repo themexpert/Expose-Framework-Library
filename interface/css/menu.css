@@ -1,0 +1,365 @@
+/**
+ * @package     Expose
+ * @version     2.0
+ * @author      ThemeXpert http://www.themexpert.com
+ * @copyright   Copyright (C) 2010 - 2011 ThemeXpert
+ * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
+ * @file        mega.css
+ **/
+
+.tx-megamenu { margin: 0; padding: 0; }
+.tx-megamenu a.over, .tx-megamenu a.active {}
+
+ul.megamenu { margin: 10px; /* menu's gutter */ } 
+
+/* lv - 0
+-----------------------------------*/
+/* Styling ---*/
+.tx-megamenu ul.level0 {
+	margin: 0;
+	padding: 0;
+}
+
+.tx-megamenu ul.level0 li.mega {
+	background: none;
+	display: block;
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+
+.tx-megamenu ul.level0 li.mega a.mega {
+	display: block;
+	font-weight: bold;
+	line-height: normal;
+	margin: 0;
+	padding: 8px 15px;
+	text-decoration: none;
+}
+
+.tx-megamenu ul.level0 li.mega .has-image {
+	padding-left: 25px;
+	display: block;
+	background-repeat: no-repeat;
+	background-position: left top;
+	cursor: pointer;
+}
+
+.tx-megamenu ul.level0 li.mega span.menu-title { display: block; }
+
+.tx-megamenu ul.level0 li.mega span.menu-desc {
+	display: block;
+	font-weight: normal;
+	font-size: 92%;
+}
+
+.tx-megamenu ul.level0 li.mega a img {
+	float: left;
+	padding-right: 5px;
+}
+
+.tx-megamenu ul.level0 li.over, ul.level0 li.haschild-over {}
+
+.tx-megamenu ul.level0 li.haschild a.mega span.menu-title,
+.tx-megamenu ul.level0 li.haschild-over a.mega span.menu-title {
+	background: url(../images/arrow3.png) no-repeat left center;
+	padding-left: 12px;
+}
+
+.tx-megamenu ul.level0 li.haschild a.mega span.menu-desc,
+.tx-megamenu ul.level0 li.haschild-over a.mega span.menu-desc {
+	padding-left: 12px;
+}
+
+.tx-megamenu ul.level0 li.active {}
+
+/* lv - 1 and below
+-----------------------------------*/
+/* Layout ---*/
+.tx-megamenu li.mega .childcontent { display: block; height: auto; position: absolute; }
+
+.tx-megamenu li.mega .childcontent,
+.tx-megamenu li.haschild-over li.mega .childcontent,
+.tx-megamenu li.mega li.haschild-over li.mega .childcontent ,
+.tx-megamenu li.mega li.mega li.haschild-over li.mega .childcontent,
+.tx-megamenu li.mega li.mega li.mega li.haschild-over li.mega .childcontent,
+.tx-megamenu li.mega li.mega li.mega li.mega li.haschild-over li.mega .childcontent { left: -999em; /*hide the menu*/ }
+
+.tx-megamenu li.haschild:hover .childcontent,
+.tx-megamenu li.mega li.haschild:hover .childcontent,
+.tx-megamenu li.mega li.mega li.haschild:hover .childcontent,
+.tx-megamenu li.mega li.mega li.mega li.haschild:hover .childcontent,
+.tx-megamenu li.mega li.mega li.mega li.mega li.haschild:hover .childcontent,
+.tx-megamenu li.mega li.mega li.mega li.mega li.mega li.haschild:hover .childcontent { left: auto; /*show on parent:hover*/ }
+
+.tx-megamenu li.mega .right,
+.tx-megamenu li.haschild-over li.mega .right,
+.tx-megamenu li.mega li.haschild-over li.mega .right ,
+.tx-megamenu li.mega li.mega li.haschild-over li.mega .right, 
+.tx-megamenu li.mega li.mega li.mega li.haschild-over li.mega .right, 
+.tx-megamenu li.mega li.mega li.mega li.mega li.haschild-over li.mega .right { right: auto; /*hide the menu*/ }
+
+.tx-megamenu li.haschild-over .right
+{ right: 0; /*show on parent:hover*/ }
+.tx-megamenu li.mega li.haschild-over .right,
+.tx-megamenu li.mega li.mega li.haschild-over .right,
+.tx-megamenu li.mega li.mega li.mega li.haschild-over .right,
+.tx-megamenu li.mega li.mega li.mega li.mega li.haschild-over .right,
+.tx-megamenu li.mega li.mega li.mega li.mega li.mega li.haschild-over .right 
+{ right: 12em; /*show on parent:hover*/ }
+
+.tx-megamenu ul.level1 li.mega { float: none; }
+
+.tx-megamenu ul.level1 .childcontent { margin: -2em 0 0 160px; }
+
+ /* Columns ---*/
+.tx-megamenu .megacol { float: left;}
+
+/* Styling ---*/
+.tx-megamenu ul.level1 li.mega {}
+
+.tx-megamenu ul.level1 li.first {}
+
+.tx-megamenu ul.level1 li.mega a.mega {
+	background: none;
+	border: 0;
+	font-weight: normal;
+	padding: 8px 5px;
+}
+
+.tx-megamenu ul.level1 li.mega a.mega span.menu-title { background: none; padding: 0; }
+
+.tx-megamenu ul.level1 li.haschild,
+.tx-megamenu ul.level1 li.haschild-over {
+	background-image: url(../images/arrow.png);
+	background-repeat: no-repeat;
+	background-position: 95% center;
+	padding: 0;
+}
+
+.tx-megamenu ul.level1 li.over, ul.level1 li.haschild-over {}
+
+.tx-megamenu ul.level1 li.group { background: none; }
+
+ /* CHILD CONTENT
+-----------------------------------*/
+.tx-megamenu .childcontent {
+	z-index: 999;
+}
+
+.tx-megamenu .childcontent-inner {
+	background: #fff;
+}
+
+.tx-megamenu .level1 .childcontent-inner {}
+
+.tx-megamenu .childcontent .tx-moduletable {
+	line-height: 1.5;
+	margin: 10px 0;
+	padding: 0;
+}
+
+.tx-megamenu .childcontent .tx-moduletable h3 {
+	background: none;
+	margin-left: 10px;
+	margin-right: 10px;
+	text-indent: 5px;
+	text-transform: none;
+}
+
+.tx-megamenu .childcontent .tx-moduletable .tx-box-ct {
+	padding: 0 5px;
+}
+
+.tx-megamenu .childcontent .tx-moduletable a {
+	text-decoration: none;
+}
+
+.tx-megamenu .childcontent .tx-moduletable a:hover,
+.tx-megamenu .childcontent .tx-moduletable a:focus,
+.tx-megamenu .childcontent .tx-moduletable a:active {
+	text-decoration: none;
+}
+
+.tx-megamenu .childcontent .tx-moduletable ul:first-child {
+	margin-top: 0 !important;
+}
+
+.tx-megamenu .childcontent .tx-moduletable li {
+	margin-bottom: 5px;
+}
+
+/* Grouped --- */
+.tx-megamenu .group {}
+
+.tx-megamenu .group-title { overflow: hidden; }
+
+.tx-megamenu .group-title .menu-title {}
+
+.tx-megamenu .group-title .menu-desc {
+	padding-left: 0 !important;
+}
+
+.tx-megamenu .group-content .tx-moduletable,
+.tx-megamenu .group-content ul.megamenu  {
+	margin: 10px; /* Group-content's gutter*/
+}
+
+/* reset --- */
+.tx-megamenu .childcontent ul.megamenu .tx-moduletable {
+	padding: 0;
+}
+
+.tx-megamenu .childcontent ul.megamenu .tx-moduletable h3 {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+
+/* Dropline Menu
+-----------------------------------*/
+#txdl-mainnav {
+	position: relative;
+}
+
+#txdl-mainnav ul { }
+
+#txdl-mainnav li {
+	float: left;
+	padding: 0;
+	margin: 0;
+}
+
+#txdl-mainnav a {
+	display: block;
+	float: left;
+	font-weight: bold;
+	line-height: normal;
+	margin: 0;
+	padding: 8px 15px;
+	text-decoration: none;
+}
+
+#txdl-mainnav a:hover,
+#txdl-mainnav ul li.hover a {}
+
+#txdl-mainnav li.active a,
+#txdl-mainnav li.active a:hover,
+#txdl-mainnav li.active a:active,
+#txdl-mainnav li.active a:focus {}
+
+#txdl-subnav .first-item {}
+
+#txdl-subnav { display: none; }
+
+/* Split menu
+-----------------------------------*/
+#tx-splitmenu {
+	position: relative;
+}
+
+#tx-splitmenu ul { }
+
+#tx-splitmenu li {
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+
+#tx-splitmenu a {
+	display: block;
+	float: left;
+	font-weight: bold;
+	line-height: normal;
+	margin: 0;
+	padding: 8px 15px;
+	text-decoration: none;
+}
+
+#tx-splitmenu a:hover,
+#tx-splitmenu a:active,
+#tx-splitmenu a:focus {
+}
+
+#tx-splitmenu li.active a,
+#tx-splitmenu li.active a:hover,
+#tx-splitmenu li.active a:active,
+#tx-splitmenu li.active a:focus {
+}
+
+/* SubNav Common= Dropline+Split menu
+-----------------------------------*/
+#tx-subnav { clear: both; position: relative; z-index: 9; }
+
+#tx-subnav .main { line-height: 1; z-index: 10;}
+#tx-subnav ul.active { }
+
+#tx-subnav li { background: none; display: block; float: left; margin: 0 10px; padding: 10px 0; }
+
+#tx-subnav li.first-item { }
+
+#tx-subnav ul li a { display: block; text-decoration: none; }
+
+#tx-subnav ul li a:hover { color: #333; }
+
+#tx-subnav ul li.active a.active,
+#tx-subnav ul li.active a.active:hover,
+#tx-subnav ul li.active a.active:active,
+#tx-subnav ul li.active a.active:focus { color: #333; }
+
+#tx-subnav ul.active li a { }
+
+#tx-subnav ul.active li a:hover { }
+
+#tx-subnav ul li.empty { visibility: hidden; }
+
+/* Sub Nav (lv2) ---*/
+#tx-subnav ul li ul {
+	display: block;
+	height: auto;
+	left: -999em;
+	top: 2.7em;
+	padding: 0;
+	position: absolute;
+	width: 14em;
+}
+
+#tx-subnav ul li.hover ul { display: block; height: auto; left: auto; position: absolute; }
+
+#tx-subnav ul li.haschild a.haschild span.menu-title {
+	background: url(../images/arrow.png) no-repeat right center;
+	padding-right: 12px;
+}
+
+#tx-subnav ul li.haschild a.haschild:hover span.menu-title { background-image: url(../images/arrow3.png) }
+
+#tx-subnav ul li.haschild li.haschild a.haschild:hover span.menu-title { background-image: url(../images/arrow.png) }
+
+#tx-subnav ul li ul li {
+	display: block;
+	float: none;
+	padding: 5px;
+	margin: 0;
+	text-align: left;
+}
+
+#tx-subnav ul li ul li a { }
+
+#tx-subnav ul li ul li a span.menu-title { line-height: 1.5em; }
+
+#tx-subnav ul li ul li a.active { }
+
+/* Sub Nav (lv3) ---*/
+#tx-subnav ul li.hover ul ul { display: none; top: auto; }
+
+#tx-subnav ul ul li.hover ul, #tx-subnav ul ul li:hover ul {
+	display: block;
+	height: auto;
+	left: auto;
+	margin: -1em 0 0 12em;
+}
+
+#tx-subnav ul li li.haschild a.haschild span.menu-title {
+	display: block;
+}
+

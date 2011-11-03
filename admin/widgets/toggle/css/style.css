@@ -1,0 +1,78 @@
+.toggleContainer {
+  position: relative;
+  height: 27px;
+  cursor: pointer;
+  overflow: hidden; }
+  .toggleContainer input.toggle {
+    position: absolute;
+    top: 5px;
+    left: 30px;
+    opacity: 0;
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0); }
+  .toggleContainer p {
+    white-space: nowrap;
+    font-size: 17px;
+    line-height: 17px;
+    font-weight: bold;
+    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: block;
+    height: 23px;
+    position: absolute;
+    width: auto;
+    top: 0;
+    padding-top: 5px;
+    overflow: hidden; }
+  .toggleContainer, .toggleContainer p {
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none; }
+
+.toggleDisabled {
+  opacity: 0.5;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50); }
+
+p.toggleLabelOn {
+  color: white;
+  background: url(../images/on.png) no-repeat;
+  text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.6);
+  left: 0;
+  padding-top: 5px;
+  max-width: none !important;
+  min-width: none !important;
+}
+  p.toggleLabelOn span {
+    padding-left: 8px; }
+p.toggleLabelOff {
+  color: #8b8b8b;
+  background: url(../images/off.png) no-repeat 100% 0;
+  text-shadow: 0px 0px 2px rgba(255, 255, 255, 0.6);
+  text-align: right;
+  right: 0; }
+  p.toggleLabelOff span {
+    padding-right: 8px; }
+
+.toggleHandle {
+  display: block;
+  height: 27px;
+  cursor: move;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  background: url(../images/slider_left.png) no-repeat;
+  padding-left: 3px; }
+
+.toggleHandleRight {
+  height: 100%;
+  width: 100%;
+  padding-right: 3px;
+  background: url(../images/slider_right.png) no-repeat 100% 0; }
+
+.toggleHandleCenter {
+  height: 100%;
+  width: 100%;
+  background: url(../images/slider_center.png); }
