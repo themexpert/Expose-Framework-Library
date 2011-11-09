@@ -31,7 +31,7 @@ class JFormFieldColorPicker extends JFormField{
         $class		= (string) $this->element['class'];
         $pretext        = ($this->element['pretext'] != NULL) ? '<span class="pre-text hasTip" title="'. JText::_(($this->element['pre-desc']) ? $this->element['pre-desc'] : $this->description) .'">'.(string)$this->element['pretext'].'</span>' : '';
 
-        $wrapstart  = '<div class="box-wrap clearfix '.$class.'">';
+        $wrapstart  = '<div class="field-wrap clearfix '.$class.'">';
         $wrapend    = '</div>';
 
         $js = "
