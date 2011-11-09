@@ -27,15 +27,22 @@ class JFormFieldToggle extends JFormField{
         $class		= $this->element['class'];
         $disabled	= ((string) $this->element['disabled'] == 'true') ? ' disabled="disabled"' : '';
         $checked	= ((string) $this->element['value'] == $this->value) ? ' checked="checked"' : '';
+        $pretext        = ($this->element['pretext'] != NULL) ? '<span class="pre-text hasTip" title="'. JText::_(($this->element['pre-desc']) ? $this->element['pre-desc'] : $this->description) .'">'.(string)$this->element['pretext'].'</span>' : '';
+        $posttext       = ($this->element['posttext'] != NULL) ? '<span class="post-text">'.(string)$this->element['posttext'].'</span>' : '';
+
+        $wrapstart  = '<div class="field-wrap clearfix '.$class.'">';
+        $wrapend    = '</div>';
 
         if(!defined('EXPOSE_TOGGLE')){
             define('EXPOSE_TOGGLE', 1);
             $expose->addScript($expose->exposeUrl.'admin/widgets/toggle/js/toggle.js');
         }
 
-        return '<input class="toggle '.$class.'" type="checkbox" name="'.$this->name.'" id="'.$this->id.'"' .
+        $input = '<input class="toggle '.$class.'" type="checkbox" name="'.$this->name.'" id="'.$this->id.'"' .
                         ' value="'.htmlspecialchars((string) $this->element['value'], ENT_COMPAT, 'UTF-8').'"' .
                         $checked.$disabled.'/>';
+
+        return $wrapstart . $pretext . $input .$wrapend;
     }
 }
 
