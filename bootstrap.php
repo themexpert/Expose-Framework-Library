@@ -49,6 +49,6 @@ if(!defined('EXPOSE_VERSION')){
 
     expose_import('core.expose');
     
-    $expose =& loadClass('Expose','','','');
+    $expose =& loadClass('Core');
 
 }

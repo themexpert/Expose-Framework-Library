@@ -5,7 +5,7 @@
  * @author      ThemeXpert http://www.themexpert.com
  * @copyright   Copyright (C) 2010 - 2011 ThemeXpert
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
- * @file        expose.php
+ * @file        core.php
  **/
 
 // Ensure this file is being included by a parent file

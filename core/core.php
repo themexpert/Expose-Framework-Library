@@ -7,7 +7,7 @@
  * @author      ThemeXpert http://www.themexpert.com
  * @copyright   Copyright (C) 2010 - 2011 ThemeXpert
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
- * @file        expose.php
+ * @file        core.php
  **/
 
 expose_import('libs.Browser');
@@ -15,7 +15,7 @@ expose_import('libs.Browser');
 expose_import('core.typography');
 expose_import('core.compressor');
 
-class Expose{
+class ExposeCore{
     //common var
     public $baseUrl;
     public $basePath;

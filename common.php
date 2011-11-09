@@ -71,7 +71,7 @@ function loadClass($class, $directory='core', $params='', $prefix='Expose'){
     {
         // We use exit() rather then showing error in order to avoid a
         //self-referencing loop with the Excptions class
-        exit('Unable to locate the specified class: '.  strtolower($name) . '.php in '. EXPOSE_BASE . $directory.' directory');
+        exit('Unable to locate the specified class: '.  strtolower($class) . '.php in '. EXPOSE_BASE . $directory.' directory');
     }
 
     // Keep track of what we just loaded
