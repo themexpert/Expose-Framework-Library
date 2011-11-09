@@ -11,8 +11,6 @@
  **/
 
 expose_import('libs.Browser');
-//expose_import('core.layouts');
-expose_import('core.typography');
 expose_import('core.compressor');
 
 class ExposeCore{

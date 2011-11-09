@@ -63,7 +63,7 @@ function loadClass($class, $directory='core', $params='', $prefix='Expose'){
         $name = $prefix . $class;
 
         if(class_exists($name) === FALSE){
-            require(EXPOSE_BASE . DS . $directory . DS . strtolower($class) .'.php');
+            require_once(EXPOSE_BASE . DS . $directory . DS . strtolower($class) .'.php');
         }
     }
     // Did we find the class?
