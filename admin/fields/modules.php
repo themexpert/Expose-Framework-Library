@@ -35,7 +35,6 @@ class JFormFieldModules extends JFormField
             $uri = str_replace("fields",'widgets',$uri);
             
             JHtml::script($jquery_uri.'/jquery-1.5.1.min.js');
-            JHtml::script($uri.'/menu.params.js');
         }
 		$db =& JFactory::getDBO();
 		$query = "SELECT e.extension_id, a.id, a.title, a.note, a.position, a.module, a.language,a.checked_out, a.checked_out_time, a.published, a.access, a.ordering, a.publish_up, a.publish_down,l.title AS language_title,uc.name AS editor,ag.title AS access_level,MIN(mm.menuid) AS pages,e.name AS name
