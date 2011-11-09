@@ -133,11 +133,25 @@ class ExposeCore{
     }
     
     public function getActiveTemplate(){
-        if(!$this->isAdmin()){
-            $app = &JApplication::getInstance('site', array(), 'J');
-            $template = $app->getTemplate();
-            return $template;
+        $templateName = '';
+        $db = JFactory::getDbo();
+        $query = $db->getQuery(true);
+        $query->select('id, home, template, params');
+        $query->from('#__template_styles');
+        $query->where('client_id = 0');
+        $query->where('home = 1');
+        $db->setQuery($query);
+        $templates= $db->loadObjectList('template');
+        foreach($templates as $template){
+            $templateName = $template->template;
         }
+        return $templateName;
+
+//        if(!$this->isAdmin()){
+//            $app = &JApplication::getInstance('site', array(), 'J');
+//            $template = $app->getTemplate();
+//            return $template;
+//        }
     }
 
     public function addStyle($file){

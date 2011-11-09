@@ -22,6 +22,9 @@ class JFormFieldPatterns extends JFormField{
         // Initialize variables.
         $html = array();
         $attr = '';
+        global $expose;
+
+        return $expose->templatePath.DS.'images'.DS.'patterns';
 
         // Initialize some field attributes.
         $class = $this->element['class'];
