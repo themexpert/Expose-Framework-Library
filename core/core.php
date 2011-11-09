@@ -365,11 +365,21 @@ class ExposeCore{
     }
 
     public function loadMenu(){
-        $menu_type = $this->get('menu_type','mega');
-        switch($menu_type){
+        $menuType = $this->get('menu_type','mega');
+        switch($menuType){
             case 'mega':
                 $class = 'MegaMenu';
                 $this->hasSubMenu = FALSE;
+                //load xpertmenu aka mega menu js file
+                $this->addScript($this->exposeUrl.'interface/js/xpertmenu.js');
+                $js = "jQuery('#tx-menu').XpertMenu({
+                    action:'mouseenter',
+                    parent:'.tx-container',
+                    hideDelay:'300',
+                    transition:\"slide\",
+                    easing:\"easeInOutExpo\"
+                });";
+                $this->addjQDom($js);
                 break;
             case 'dropline':
                 $class = 'DroplineMenu';
