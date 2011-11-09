@@ -545,8 +545,10 @@ p.toggleLabelOff {
     height: 17px;
     background: url(colorpicker/images/select.png) center;
 }
-/* slider root element */
-.slider-wrap{width: 16%;float: left; position: relative; margin-bottom: 20px;}
+/* slider and box wrap root element */
+.box-wrap, .slider-wrap{float: left;position: relative;margin-bottom: 20px;}
+.box-wrap{margin-right: 10px;}
+.slider-wrap{width: 16%;}
 .slider-wrap span{}
 .border-lft{border-left: 1px solid #ddd;padding-left: 10px;}
 .slider {

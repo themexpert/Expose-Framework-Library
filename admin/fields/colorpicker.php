@@ -28,7 +28,11 @@ class JFormFieldColorPicker extends JFormField{
             $expose->addScript($expose->exposeUrl.'admin/widgets/colorpicker/js/colorpicker.js');
         }
 
-        $class = $this->element['class'] ? ' class="'.(string) $this->element['class'].'"' : '';
+        $class		= (string) $this->element['class'];
+        $pretext        = ($this->element['pretext'] != NULL) ? '<span class="pre-text hasTip" title="'. JText::_(($this->element['pre-desc']) ? $this->element['pre-desc'] : $this->description) .'">'.(string)$this->element['pretext'].'</span>' : '';
+
+        $wrapstart  = '<div class="box-wrap clearfix '.$class.'">';
+        $wrapend    = '</div>';
 
         $js = "
             $('#$this->id').ColorPicker({
@@ -55,11 +59,12 @@ class JFormFieldColorPicker extends JFormField{
         //should be declear from base class addInlineScript();
         //$expose->doc->addScriptDeclaration($js);
         $expose->addjQDom($js);
-        
-        $output .= '<input class="picker '.$class.'" type="text" name="'.$this->name.'" id="'.$this->id.'-field"' .
+
+        $input .= '<input class="picker" type="text" name="'.$this->name.'" id="'.$this->id.'-field"' .
                    ' value="'.htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8').'"' . '/>';
-        $output .= '<div id="'.$this->id.'" class="color-selector"><div style="background-color:#'.$this->value.'"></div></div>';
-        return $output;
+        $input .= '<div id="'.$this->id.'" class="color-selector"><div style="background-color:#'.$this->value.'"></div></div>';
+
+        return $wrapstart . $pretext . $input . $wrapend;
     }
 }
 
