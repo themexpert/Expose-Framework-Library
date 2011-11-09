@@ -49,7 +49,7 @@ class ExposeCore{
         $this->baseUrl = JURI::root(true). '/';
 
         //expose framework url
-        if(version_compare(JVERSION, '1.5', '>=') && version_compare(JVERSION, '1.6', '<')){
+        if(EXPOSE_JVERSION == '15'){
             $this->exposeUrl = $this->baseUrl . 'plugins/system/expose/';
         }else{
             $this->exposeUrl = $this->baseUrl . 'libraries/expose/';
@@ -58,7 +58,7 @@ class ExposeCore{
         //base path
         $this->basePath = JPATH_ROOT;
 
-        //get the current templatename
+        //get the current template name
         $this->templateName = $this->getActiveTemplate();
 
         //template path
@@ -428,10 +428,10 @@ class ExposeCore{
     }
     
     public function isHomePage(){
-        if (version_compare( JVERSION, '1.5', '>=') && version_compare(JVERSION, '1.6', '<')) {
+        if (EXPOSE_JVERSION == '15') {
             return (JRequest::getCmd( 'view' ) == 'frontpage') ;
         }
-        else if (version_compare(JVERSION, '1.6', '>=')) {
+        else{
             global $app;
             $menu = $app->getMenu();
             return ($menu->getDefault()->id === $menu->getActive()->id) ? TRUE : FALSE;
