@@ -295,9 +295,9 @@ a.close {
     -moz-border-radius: 3px;
     border-radius: 3px;
 }
-#layout-selector span.three-col-left{background: url(images/layouts/3cl.png) no-repeat}
-#layout-selector span.three-col-middle{background: url(images/layouts/3cm.png) no-repeat}
-#layout-selector span.three-col-right{background: url(images/layouts/3cr.png) no-repeat}
+#layout-selector span.content-sidebara-sidebarb{background: url(images/layouts/3cl.png) no-repeat}
+#layout-selector span.sidebara-content-sidebarb{background: url(images/layouts/3cm.png) no-repeat}
+#layout-selector span.sidebara-sidebarb-content{background: url(images/layouts/3cr.png) no-repeat}
 #layout-selector span.active{border-color: #aaa;}
 /***** Toggle css *****
 *******************************/

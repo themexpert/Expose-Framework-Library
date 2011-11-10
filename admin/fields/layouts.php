@@ -25,14 +25,14 @@ class JFormFieldLayouts extends JFormField{
         $html = '';
 
         //dirty logic, need to do more interactive later
-        ($this->value == 'content.left.right') ? $colLeft = 'active': $colLeft = '';
-        ($this->value == 'left.content.right') ? $colMiddle = 'active': $colMiddle = '';
-        ($this->value == 'left.right.content') ? $colRight = 'active': $colRight = '';
+        ($this->value == 'content-sidebara-sidebarb') ? $colLeft = ' active': $colLeft = '';
+        ($this->value == 'sidebara-content-sidebarb') ? $colMiddle = ' active': $colMiddle = '';
+        ($this->value == 'sidebara-sidebarb-content') ? $colRight = ' active': $colRight = '';
 
         $html .= "<div id='layout-selector'>";
-            $html .= "<span class='three-col-left ".$colLeft."' rel='content.left.right'>Three Column Left</span>";
-            $html .= "<span class='three-col-middle ".$colMiddle."' rel='left.content.right'>Three Column Middle</span>";
-            $html .= "<span class='three-col-right ".$colRight."' rel='left.right.content'>Three Column Right</span>";
+            $html .= "<span class='content-sidebara-sidebarb".$colLeft."'>Three Column Left</span>";
+            $html .= "<span class='sidebara-content-sidebarb".$colMiddle."'>Three Column Middle</span>";
+            $html .= "<span class='sidebara-sidebarb-content".$colRight."'>Three Column Right</span>";
         $html .= "</div>";
 
         $html .= "<input type='hidden' name='".$this->name."' id='".$this->id."' value='".$this->value."' />";
@@ -42,11 +42,12 @@ class JFormFieldLayouts extends JFormField{
             jQuery('#layout-selector span').click(function(){
                 var el = $(this);
                 jQuery('#layout-selector span.active').removeClass('active');
+
+                var value = el.attr('class');
+                $('#jform_params_layout_type').val(value);
+
                 el.addClass('active');
                 
-                var rel = el.attr('rel');
-                $('#jform_params_layout_type').attr('value',rel);
-
             });
         ";
         $expose->addjQDom($js);
