@@ -1,11 +1,11 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
- * User: codexpert
- * Date: 10/26/11
- * Time: 9:37 PM
- * To change this template use File | Settings | File Templates.
- */
+ * @package     Expose
+ * @version     3.0.0
+ * @author      ThemeXpert http://www.themexpert.com
+ * @copyright   Copyright (C) 2010 - 2012 ThemeXpert
+ * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
+ **/
  
 // Ensure this file is being included by a parent file
 defined('_JEXEC') or die( 'Restricted access' );
@@ -23,7 +23,8 @@ class JFormFieldLayouts extends JFormField{
         global $expose;
 
         $html = '';
-        //dirty logic
+
+        //dirty logic, need to do more interactive later
         ($this->value == 'content.left.right') ? $colLeft = 'active': $colLeft = '';
         ($this->value == 'left.content.right') ? $colMiddle = 'active': $colMiddle = '';
         ($this->value == 'left.right.content') ? $colRight = 'active': $colRight = '';
