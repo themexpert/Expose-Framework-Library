@@ -20,36 +20,36 @@ class JFormFieldLayouts extends JFormField{
 
     protected function getInput(){
 
-        $maxmods = (int) $this->element['max-mods'];
+        global $expose;
+
         $html = '';
+        //dirty logic
+        ($this->value == 'content.left.right') ? $colLeft = 'active': $colLeft = '';
+        ($this->value == 'left.content.right') ? $colMiddle = 'active': $colMiddle = '';
+        ($this->value == 'left.right.content') ? $colRight = 'active': $colRight = '';
 
-        $position_name = str_replace('jform_params_','',$this->id);
-
-        $html .= "<div id='mods-wrap' data-mods='".$maxmods."'>";
-            $html .= "<div class='mod-tabs'>";
-                $html .= "<ul>";
-                for($nav=1; $nav<=$maxmods; $nav++){
-                    $html .= "<li><a>$nav</a></li>";
-                }
-                $html .= "</ul>";
-
-            $html .= "<div id='$position_name' class='mod-inputs'>";
-            for($pan=1; $pan<=$maxmods; $pan++){
-                $html .= "<div class='inputs'>";
-                    $val = 100/$pan;
-                    if(is_float($val)) $val = sprintf("%01.2f", 100/$pan);
-
-                    for($input=1; $input<=$pan; $input++){
-                        $html .= "<input type='text' class='inputbox' value='".($val)."' /><span>%</span>";
-                    }
-                $html .= "</div>";
-            }
-            $html .= "</div>";
-
-            $html .= "</div>";
+        $html .= "<div id='layout-selector'>";
+            $html .= "<span class='three-col-left ".$colLeft."' rel='content.left.right'>Three Column Left</span>";
+            $html .= "<span class='three-col-middle ".$colMiddle."' rel='left.content.right'>Three Column Middle</span>";
+            $html .= "<span class='three-col-right ".$colRight."' rel='left.right.content'>Three Column Right</span>";
         $html .= "</div>";
 
         $html .= "<input type='hidden' name='".$this->name."' id='".$this->id."' value='".$this->value."' />";
+
+        $js = "
+
+            jQuery('#layout-selector span').click(function(){
+                var el = $(this);
+                jQuery('#layout-selector span.active').removeClass('active');
+                el.addClass('active');
+                
+                var rel = el.attr('rel');
+                $('#jform_params_layout_type').attr('value',rel);
+
+            });
+        ";
+        $expose->addjQDom($js);
+
         return $html;
 
     }

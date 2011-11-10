@@ -279,6 +279,26 @@ a.close {
 .mod-tabs ul li a{padding: 0 6px;border-right: 1px solid #eee;display: block;cursor: pointer}
 .mod-tabs ul li a:hover, .mod-tabs ul li a.current{font-weight: bold;color: #7ab1fa;}
 .mod-inputs{clear: both}
+
+#layout-selector{float: left;}
+#layout-selector span{
+    width:45px;
+    height: 36px;
+    display: block;
+    float: left;
+    border: 3px solid #DEDEDE;
+    cursor: pointer;
+    margin: 0 5px 5px 0;
+    text-indent: -9999px;
+    font-size: 1px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+#layout-selector span.three-col-left{background: url(images/layouts/3cl.png) no-repeat}
+#layout-selector span.three-col-middle{background: url(images/layouts/3cm.png) no-repeat}
+#layout-selector span.three-col-right{background: url(images/layouts/3cr.png) no-repeat}
+#layout-selector span.active{border-color: #aaa;}
 /***** Toggle css *****
 *******************************/
 .toggleContainer {
