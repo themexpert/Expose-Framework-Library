@@ -38,7 +38,7 @@ class JFormFieldPatterns extends JFormField{
         $pretext        = ($this->element['pretext'] != NULL) ? '<span class="pre-text hasTip" title="'. JText::_(($this->element['pre-desc']) ? $this->element['pre-desc'] : $this->description) .'">'.(string)$this->element['pretext'].'</span>' : '';
         $posttext       = ($this->element['posttext'] != NULL) ? '<span class="post-text">'.(string)$this->element['posttext'].'</span>' : '';
 
-        $wrapstart  = '<div class="field-wrap clearfix '.$class.'">';
+        $wrapstart  = '<div class="field-wrap patterns clearfix '.$class.'">';
         $wrapend    = '</div>';
 
         // Get the field options.
@@ -71,9 +71,11 @@ class JFormFieldPatterns extends JFormField{
         $options = array();
 
         $patternsPath = $expose->templatePath.DS.'images'.DS.'patterns';
+        $patternsUrl = $expose->templateUrl .'patterns/';
 
         foreach(glob("$patternsPath/*") as $img){
-            $tmp = JHtml::_('select.option', str_replace($patternsPath.'/','',$img));
+            $patternName = str_replace($patternsPath.'/','',$img);
+            $tmp = JHtml::_('select.option', $patternName );
             $options[] = $tmp;
         }
 
