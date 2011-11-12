@@ -96,18 +96,49 @@ jQuery(window).ready(function($){
     });
 
 
+    var previewText = 'Grumpy wizards make toxic brew for the evil Queen and Jack.';
+    $('div.custom_css').each(function(){
+        $(this).parent().append('<div class="font-preview"><span>Live Preview</span>'+previewText+'</div>');
+    });
+    
+    $('.gfonts').change(function(){
+        var fontName = "";
+        $(this).find("option:selected").each(function() {
+        fontName += $(this).text() + "";
+        });
+        var link = ("<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=" + fontName + "' media='screen' />");
 
-    //real time width calculator
-    $('.inputbox').bind('change', function(){
-       //caching this for efficiency
-        var el = $(this);
-        var values = [];
-
-        alert(el.val());
-        //values.push(el.parent().parent().find('.inputbox').val());
-
-        //alert(el.parent().parent().find('.inputbox').each(function(){$(this).val()}));
+        $("head").append(link);
+        $(this).parent().next('li').find('.font-preview').css("font-family", fontName);
 
     });
+
+    //real time width calculator
+    $('#roof .inputbox').bind('keyup',function(){
+        var valx = '';
+//        $('.inputs .inputbox').each(function(ind,value){
+//            valx += ind + ':' + $(this).val() + ',';
+//        });
+        $('#roof .inputs').each(function(index1,value1){
+            $(this).find('.inputbox').each(function(index2,value2){
+                 valx += (index1 + 1) + ':' +  $(this).val() + ',' ;
+            });
+        });
+        $('#jform_params_roof').val(valx);
+    });
+
+
+    
+//    $('.inputbox').bind('change', function(){
+//       //caching this for efficiency
+//        var el = $(this);
+//        var values = [];
+//
+//        alert(el.val());
+//        //values.push(el.parent().parent().find('.inputbox').val());
+//
+//        //alert(el.parent().parent().find('.inputbox').each(function(){$(this).val()}));
+//
+//    });
 
 });

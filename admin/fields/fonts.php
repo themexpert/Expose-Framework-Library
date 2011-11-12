@@ -218,12 +218,12 @@ class JFormFieldFonts extends JFormField{
 
     protected function getInput(){
         $output = NULL;
-        
+        $class = 'class="gfonts"';
         foreach ($this->gfonts as $font) {
 		   $options_google[] = JHTML::_('select.option', $font[0], JText::_($font[1]));
         }
         $output .= "<a href=\"http://www.google.com/webfonts\" target=\"_blank\">Check Google Font Directory</a><br/>";
-        $output .= JHtml::_('select.genericlist', $options_google, $this->name , '', 'value', 'text', $this->value, $this->id);
+        $output .= JHtml::_('select.genericlist', $options_google, $this->name , $class, 'value', 'text', $this->value, $this->id);
 
         return $output;
     }

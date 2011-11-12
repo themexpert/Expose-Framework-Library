@@ -299,6 +299,26 @@ a.close {
 #layout-selector span.sidebara-content-sidebarb{background: url(images/layouts/3cm.png) no-repeat}
 #layout-selector span.sidebara-sidebarb-content{background: url(images/layouts/3cr.png) no-repeat}
 #layout-selector span.active{border-color: #aaa;}
+.font-preview{
+    background: #fff;
+    border: 1px solid #f5f5f5;
+    font-size: 16px;
+    text-align: center;
+    padding: 10px 15px;
+    margin: 10px 0 0 ;
+    position: relative;
+}
+.font-preview span{
+    background: #f5f5f5;
+    color: #444;
+    text-shadow: 0 1px 1px #fff;
+    padding: 4px 3px;
+    font-size: 11px;
+    font-style: italic;
+    position: absolute;
+    top:0;
+    right: 0;
+}
 /***** Toggle css *****
 *******************************/
 .toggleContainer {
