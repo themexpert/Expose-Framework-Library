@@ -23,7 +23,17 @@ class JFormFieldPositionLayouts extends JFormField{
         $maxmods = (int) $this->element['max-mods'];
         $html = '';
 
-        $position_name = str_replace('jform_params_','',$this->id);
+        $id = str_replace('jform_params_','',$this->id);
+
+        $val = explode(',',$this->value);
+        $finalValue = array();
+
+        foreach($val as $value){
+            list($index, $val) = explode(':',$value);
+            $finalValue[$index][] = $val;
+        }
+
+        echo "<pre>";print_r($finalValue);echo "</pre>";
 
         $html .= "<div id='mods-wrap' data-mods='".$maxmods."'>";
             $html .= "<div class='mod-tabs'>";
@@ -33,7 +43,7 @@ class JFormFieldPositionLayouts extends JFormField{
                 }
                 $html .= "</ul>";
 
-            $html .= "<div id='$position_name' class='mod-inputs'>";
+            $html .= "<div id='$id' class='mod-inputs'>";
             for($pan=1; $pan<=$maxmods; $pan++){
                 $html .= "<div class='inputs'>";
                     $val = 100/$pan;

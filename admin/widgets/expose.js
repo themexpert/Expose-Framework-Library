@@ -104,8 +104,9 @@ jQuery(window).ready(function($){
     $('.gfonts').change(function(){
         var fontName = "";
         $(this).find("option:selected").each(function() {
-        fontName += $(this).text() + "";
+        fontName += $(this).val() + "";
         });
+        alert(fontName);
         var link = ("<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=" + fontName + "' media='screen' />");
 
         $("head").append(link);
