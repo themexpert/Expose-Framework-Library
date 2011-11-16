@@ -71,15 +71,12 @@ input.picker{width: 50px;float: left}
 span.tips{background: url(images/icon_tips.png) no-repeat;width: 13px;height: 13px;float: right;margin: 5px;}
 .assignments span.tips{display: none;}
 
-/*Hidden some label*/
-#jform_params_utility-lbl{display: none;}
-
 .highlight{
     background: #fffff3;
     outline: 1px dotted #fbad48;
 }
 .field-wrap{float: left}
-.field-wrap.border-lft{margin-left: 10px;}
+.field-wrap.border-left{margin-left: 10px;}
 span.pre-text{
     display: block;
     font-size: 10px;
@@ -588,7 +585,7 @@ p.toggleLabelOff {
 /* slider root element */
 .slider-wrap{width: 16%;float: left; position: relative; margin-bottom: 20px;}
 .slider-wrap span{}
-.border-lft{border-left: 1px solid #ddd;padding-left: 10px;}
+.border-left{border-left: 1px solid #ddd;padding-left: 10px;}
 .slider {
     background:#7ab1fa ;
     height:9px;

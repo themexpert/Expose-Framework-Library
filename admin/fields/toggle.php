@@ -38,7 +38,7 @@ class JFormFieldToggle extends JFormField{
             $expose->addScript($expose->exposeUrl.'admin/widgets/toggle/js/toggle.js');
         }
 
-        $input = '<input class="toggle '.$class.'" type="checkbox" name="'.$this->name.'" id="'.$this->id.'"' .
+        $input = '<input class="toggle" type="checkbox" name="'.$this->name.'" id="'.$this->id.'"' .
                         ' value="'.htmlspecialchars((string) $this->element['value'], ENT_COMPAT, 'UTF-8').'"' .
                         $checked.$disabled.'/>';
 
