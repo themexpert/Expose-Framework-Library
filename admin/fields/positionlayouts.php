@@ -1,11 +1,11 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
- * User: codexpert
- * Date: 10/26/11
- * Time: 9:37 PM
- * To change this template use File | Settings | File Templates.
- */
+ * @package     Expose
+ * @version     3.0.0
+ * @author      ThemeXpert http://www.themexpert.com
+ * @copyright   Copyright (C) 2010 - 2011 ThemeXpert
+ * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
+ **/
 
 // Ensure this file is being included by a parent file
 defined('_JEXEC') or die( 'Restricted access' );
@@ -19,21 +19,24 @@ class JFormFieldPositionLayouts extends JFormField{
     protected $type = 'PositionLayouts';
 
     protected function getInput(){
+        global $expose;
 
         $maxmods = (int) $this->element['max-mods'];
         $html = '';
 
         $id = str_replace('jform_params_','',$this->id);
-
-        $val = explode(',',$this->value);
         $finalValue = array();
 
-        foreach($val as $value){
-            list($index, $val) = explode(':',$value);
-            $finalValue[$index][] = $val;
+        if(!empty($this->value)){
+            $tempVal = explode(',',$this->value);
+            array_pop($tempVal); //trim the last empty index
+
+            foreach($tempVal as $value){
+                list($index, $val) = explode(':',$value);
+                $finalValue[$index][] = $val;
+            }
         }
 
-        echo "<pre>";print_r($finalValue);echo "</pre>";
 
         $html .= "<div id='mods-wrap' data-mods='".$maxmods."'>";
             $html .= "<div class='mod-tabs'>";
@@ -46,11 +49,14 @@ class JFormFieldPositionLayouts extends JFormField{
             $html .= "<div id='$id' class='mod-inputs'>";
             for($pan=1; $pan<=$maxmods; $pan++){
                 $html .= "<div class='inputs'>";
-                    $val = 100/$pan;
-                    if(is_float($val)) $val = sprintf("%01.2f", 100/$pan);
-
-                    for($input=1; $input<=$pan; $input++){
-                        $html .= "<input type='text' class='inputbox' value='".($val)."' /><span>%</span>";
+                    for($input=0; $input<$pan; $input++){
+                        if(empty($this->value)){
+                            $val = 100/$pan;
+                            if(is_float($val)) $val = sprintf("%01.2f", 100/$pan);
+                            $finalValue[$pan][$input] = $val;
+                        }
+                        //echo $finalValue[1][1] , ',';
+                        $html .= "<input type='text' class='inputbox' value='".($finalValue[$pan][$input])."' /><span>%</span>";
                     }
                 $html .= "</div>";
             }
@@ -60,6 +66,18 @@ class JFormFieldPositionLayouts extends JFormField{
         $html .= "</div>";
 
         $html .= "<input type='hidden' name='".$this->name."' id='".$this->id."' value='".$this->value."' />";
+
+        $js = "
+        jQuery('#$id .inputbox').bind('keyup',function(){
+        var valx = '';
+        jQuery('#$id .inputs').each(function(index1,value1){
+            jQuery(this).find('.inputbox').each(function(index2,value2){
+                 valx += (index1 + 1) + ':' +  jQuery(this).val() + ',' ;
+            });
+        });
+        jQuery('#jform_params_$id').val(valx);
+    });";
+        $expose->addjQDom($js);
         return $html;
 
     }

@@ -10,7 +10,7 @@
 jQuery.noConflict();
 
 jQuery(window).ready(function($){
-
+    
 //   $.blockUI({
 //        message: '<h1>Please Wait...</h1>',
 //        timeout: 2000
@@ -113,33 +113,5 @@ jQuery(window).ready(function($){
         $(this).parent().next('li').find('.font-preview').css("font-family", fontName);
 
     });
-
-    //real time width calculator
-    $('#roof .inputbox').bind('keyup',function(){
-        var valx = '';
-//        $('.inputs .inputbox').each(function(ind,value){
-//            valx += ind + ':' + $(this).val() + ',';
-//        });
-        $('#roof .inputs').each(function(index1,value1){
-            $(this).find('.inputbox').each(function(index2,value2){
-                 valx += (index1 + 1) + ':' +  $(this).val() + ',' ;
-            });
-        });
-        $('#jform_params_roof').val(valx);
-    });
-
-
-    
-//    $('.inputbox').bind('change', function(){
-//       //caching this for efficiency
-//        var el = $(this);
-//        var values = [];
-//
-//        alert(el.val());
-//        //values.push(el.parent().parent().find('.inputbox').val());
-//
-//        //alert(el.parent().parent().find('.inputbox').each(function(){$(this).val()}));
-//
-//    });
 
 });
