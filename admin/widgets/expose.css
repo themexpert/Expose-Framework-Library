@@ -22,16 +22,16 @@ html[xmlns] .clearfix {display: block;height: 1%;}
 
 /* Joomla Default admin override
 -----------------------------------------------*/
-div#element-box {background: url(images/wrap-bg.jpg) repeat center top  #f1f1f1 !important;}
+/*div#element-box {background: url(images/wrap-bg.jpg) repeat center top  #f1f1f1 !important;}*/
 #element-box{margin: 0 -10px;}
 #element-box .t,#element-box .b,#toolbar-box .t, #toolbar-box .b{display: none;}
 #toolbar-box .m{
-    background: url(images/toolbar-bg.jpg) repeat-x 0 0;
     height: 62px;
     padding: 15px 0 0 !important;
 }
-#toolbar-box{margin: -10px -10px 0 !important;}
-.toolbar-list a{background: #f9f9f9}
+#system-message{margin: 10px}
+#system-message dd ul{border-top: 2px solid #C6EDF9 !important;border-bottom: 2px solid #C6EDF9 !important;}
+#system-message dd.message ul {background-color: #DDF4FB !important}
 #element-box .m{background: none !important; border: none !important}
 legend{display: none !important;}
 pre,code{
@@ -99,10 +99,8 @@ span.pre-text{
     border: none;
 }
 #expose-wrapper .expose-details{
-    background: url(images/trans-black-less.png) repeat;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #FFFFFF #F8F8F8;
+    background: #fbfbfb;
+    border: 1px solid #eee;
     margin: 10px 0;
     padding: 10px;
     -moz-border-radius: 3px;
@@ -120,38 +118,48 @@ span.pre-text{
 #expose-wrapper .expose-details ul.adminformlist li #jform_template{width: 92px;background: none; text-align: left;font-size: 16px;}
 
 .expose-tab-wrapper{
-    
+    background: url(images/tab-bg.jpg) repeat-y;
+    border: 1px solid #eee;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
 .expose-tab{
     width: 16%;
     float: left;
-    padding: 10px 0;
+    margin-right: 4px;
 }
 .expose-tab ul{
     padding: 0;
     margin: 0;
     list-style: none;
-    background: #f3f3f3;
 }
 .expose-tab ul li{
-    background: #f9f9f9;
-    padding: 10px 5px;
-    border-bottom: 1px solid #eee;
-    border-top: 1px solid #fff;
+    padding: 1px 0;
+    margin-right: -3px;
     cursor: pointer;
     color: #444;
     font-size: 13px;
     text-shadow: 1px 1px 1px #FFFFFF;
+    cursor: pointer;
 }
 .expose-tab ul li span{
     background: url(images/icons-sprit.png) no-repeat 7px 0 ;
     text-transform: capitalize;
     padding: 0 0 0 35px;
-    height: 22px;
-    line-height: 20px;
+    line-height: 40px;
 }
 .expose-tab ul li.current{
-    background: url(images/active-tab-bg.png) repeat-y 0 0 #fff;
+    background: #fff;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 0;
+}
+.expose-tab ul li:first-child.current{
+    border-top: none;
+    -webkit-border-radius: 5px 0 0 0;
+    -moz-border-radius: 5px 0 0 0;
+    border-radius: 5px 0 0 0;
 }
 .expose-tab li.styles span{background-position: 7px -148px;}
 .expose-tab li.layouts span{background-position: 7px 0;}
@@ -162,7 +170,7 @@ span.pre-text{
 .expose-tab li.assignments span{background-position: 7px -131px;}
 .expose-tab li.updates span{background-position: 7px -75px;}
 .expose-tab-content{
-    background: url(images/tab-container-bg.png) repeat-y 100% 0 #fff;
+    /*background: url(images/tab-container-bg.png) repeat-y 100% 0 #fff;*/
     width: 83%;
     float: left;
     min-height: 355px;

@@ -26,6 +26,7 @@ class JFormFieldUtility extends JFormField{
             
         // Initialize some field attributes.
         $action     = $this->element['action'];
+        $class		= (string) $this->element['class'];
 
         if($action == 'boot'){
             //load expose bootstrap
@@ -42,6 +43,9 @@ class JFormFieldUtility extends JFormField{
             //finalize addmin
             $expose->finalizedAdmin();
         }
+
+        $html = "<input type='hidden' class='$class'>";
+        return $html;
     }
 }
 
