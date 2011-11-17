@@ -149,12 +149,14 @@ span.pre-text{
     padding: 0 0 0 35px;
     line-height: 40px;
 }
+.expose-tab ul li:hover span{color: #f2560e}
 .expose-tab ul li.current{
     background: #fff;
     border-top: 1px solid #eee;
     border-bottom: 1px solid #eee;
     padding: 0;
 }
+.expose-tab ul li.current:hover span{color: #444}
 .expose-tab ul li:first-child.current{
     border-top: none;
     -webkit-border-radius: 5px 0 0 0;
@@ -169,6 +171,7 @@ span.pre-text{
 .expose-tab li.advance span{background-position: 7px -55px;}
 .expose-tab li.assignments span{background-position: 7px -131px;}
 .expose-tab li.updates span{background-position: 7px -75px;}
+.expose-tab li.developer span{background-position: 7px -206px;}
 .expose-tab-content{
     /*background: url(images/tab-container-bg.png) repeat-y 100% 0 #fff;*/
     width: 83%;

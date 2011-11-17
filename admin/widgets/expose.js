@@ -88,7 +88,7 @@ jQuery(window).ready(function($){
          
     //initiate tab class
     $('.expose-tab ul').tabs('.expose-tab-content > .panel',{
-        effect: 'fade'
+        effect: 'fade', fadeOutSpeed: 200
     });
 
     $('.mod-tabs ul').tabs('.mod-inputs > .inputs',{
