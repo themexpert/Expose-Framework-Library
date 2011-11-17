@@ -86,7 +86,9 @@ jQuery(window).ready(function($){
 	}
     });
          
-    //initiate tab class
+    /*******************
+    * initiate tab class
+    *******************/
     $('.expose-tab ul').tabs('.expose-tab-content > .panel',{
         effect: 'fade', fadeOutSpeed: 200
     });
@@ -95,22 +97,34 @@ jQuery(window).ready(function($){
         effect: 'fade'
     });
 
+    /****************************
+    *  Live Google Font preview
+    ****************************/
 
     var previewText = 'Grumpy wizards make toxic brew for the evil Queen and Jack.';
-    $('div.custom_css').each(function(){
+    $('div.typography .field-wrap').each(function(){
         $(this).parent().append('<div class="font-preview"><span>Live Preview</span>'+previewText+'</div>');
     });
     
     $('.gfonts').change(function(){
         var fontName = "";
-        $(this).find("option:selected").each(function() {
-        fontName += $(this).val() + "";
-        });
+        var fontUrl = '';
+        var pos = '';
+        fontUrl += $(this).val() + "";
+        pos = fontUrl.search(':');
+        //alert(pos);
+        if(pos < 0){
+            fontName = fontUrl.replace('+', ' ');
+        }else{
+            fontName = fontUrl.substr(0,pos);
+            fontName = fontName.replace('+', ' ');
+        }
+
         alert(fontName);
-        var link = ("<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=" + fontName + "' media='screen' />");
+        var link = ("<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=" + fontUrl + "' media='screen' />");
 
         $("head").append(link);
-        $(this).parent().next('li').find('.font-preview').css("font-family", fontName);
+        $(this).parent().find('.font-preview').css("font-family", fontName);
 
     });
 
