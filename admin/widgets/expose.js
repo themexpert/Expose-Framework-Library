@@ -72,7 +72,7 @@ jQuery(window).ready(function($){
     $('<span class="tips"></span>').appendTo('.expose-tab-wrapper label');
 
     $('select,input,.handle,textarea,radio').change(function(){
-        $(this).parent().addClass('highlight');
+        $(this).parent().parent().addClass('highlight');
     });
 
     var toggle = $(".toggle").exposeToggle();
