@@ -32,7 +32,7 @@ html[xmlns] .clearfix {display: block;height: 1%;}
 #system-message{margin: 10px}
 #system-message dd ul{border-top: 2px solid #C6EDF9 !important;border-bottom: 2px solid #C6EDF9 !important;}
 #system-message dd.message ul {background-color: #DDF4FB !important}
-#element-box .m{background: none !important; border: none !important;padding: 0 8px !important;}
+#element-box .m{background: none !important; border: none !important;padding: }
 legend{display: none !important;}
 pre,code{
     background: #ffefbe;
@@ -105,7 +105,7 @@ span.pre-text{
 #expose-wrapper .expose-details{
     background: #fbfbfb;
     border: 1px solid #eee;
-    margin: 0 0 10px;
+    margin: 10px 0;
     padding: 10px;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;

@@ -11,10 +11,10 @@ jQuery.noConflict();
 
 jQuery(window).ready(function($){
     
-//   $.blockUI({
-//        message: '<h1>Please Wait...</h1>',
-//        timeout: 2000
-//   });
+   $.blockUI({
+        message: '<h1>Please Wait...</h1>',
+        //timeout: 2000
+   });
 
     //create basic html skeliton for admin
     $('div.m form.form-validate').append(
@@ -119,13 +119,12 @@ jQuery(window).ready(function($){
             fontName = fontUrl.substr(0,pos);
             fontName = fontName.replace('+', ' ');
         }
-
-        alert(fontName);
         var link = ("<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=" + fontUrl + "' media='screen' />");
 
         $("head").append(link);
         $(this).parent().find('.font-preview').css("font-family", fontName);
 
     });
+    $.unblockUI();
 
 });
