@@ -102,7 +102,7 @@ jQuery(window).ready(function($){
     ****************************/
 
     var previewText = 'Grumpy wizards make toxic brew for the evil Queen and Jack.';
-    $('div.typography .field-wrap').each(function(){
+    $('div.typography .fonts-list').each(function(){
         $(this).parent().append('<div class="font-preview"><span>Live Preview</span>'+previewText+'</div>');
     });
     
@@ -122,7 +122,7 @@ jQuery(window).ready(function($){
         var link = ("<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=" + fontUrl + "' media='screen' />");
 
         $("head").append(link);
-        $(this).parent().find('.font-preview').css("font-family", fontName);
+        $(this).parent().parent().find('.font-preview').css("font-family", fontName);
 
     });
     $.unblockUI();

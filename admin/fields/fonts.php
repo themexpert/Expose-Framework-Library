@@ -217,15 +217,23 @@ class JFormFieldFonts extends JFormField{
     );
 
     protected function getInput(){
-        $output = NULL;
-        $class = 'class="gfonts"';
+        $html = '';
+        // Initialize some field attributes.
+        $class = $this->element['class'];
+        $selectClass = 'class="gfonts"';
+        $pretext        = ($this->element['pretext'] != NULL) ? '<span class="pre-text hasTip" title="'. JText::_(($this->element['pre-desc']) ? $this->element['pre-desc'] : $this->description) .'">'.(string)$this->element['pretext'].'</span>' : '';
+        $posttext       = ($this->element['posttext'] != NULL) ? '<span class="post-text">'.(string)$this->element['posttext'].'</span>' : '';
+
+        $wrapstart  = '<div class="field-wrap fonts-list clearfix '.$class.'">';
+        $wrapend    = '</div>';
+
         foreach ($this->gfonts as $font) {
 		   $options_google[] = JHTML::_('select.option', $font[0], JText::_($font[1]));
         }
-        $output .= "<a href=\"http://www.google.com/webfonts\" target=\"_blank\">Check Google Font Directory</a><br/>";
-        $output .= JHtml::_('select.genericlist', $options_google, $this->name , $class, 'value', 'text', $this->value, $this->id);
+        $html .= "<a href=\"http://www.google.com/webfonts\" target=\"_blank\">Check Google Font Directory</a><br/>";
+        $html .= JHtml::_('select.genericlist', $options_google, $this->name , $selectClass, 'value', 'text', $this->value, $this->id);
 
-        return $output;
+        return $wrapstart . $pretext. $html . $posttext . $wrapend;
     }
 }
 
