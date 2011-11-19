@@ -349,8 +349,8 @@ a.close {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0); }
   .toggleContainer p {
     white-space: nowrap;
-    font-size: 15px;
-    line-height: 16px;
+    font-size: 13px;
+    line-height: 14px;
     font-weight: bold;
     font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
     text-transform: uppercase;
@@ -383,11 +383,11 @@ p.toggleLabelOn {
   width: 30px;
 }
   p.toggleLabelOn span {
-    padding-left: 8px; }
+    padding-left: 11px; }
 p.toggleLabelOff {
   color: #8b8b8b;
   background: url(toggle/images/off.png) no-repeat 100% 0;
-  text-shadow: 0px 0px 2px rgba(255, 255, 255, 0.6);
+  text-shadow: 1px 1px 1px #fff;
   text-align: right;
   right: 0;
   width: 35px;
@@ -587,7 +587,6 @@ p.toggleLabelOff {
     height: 23px;
     background: url(colorpicker/images/select.png);
     float: left;
-    margin-top: 5px;
 }
 .color-selector div {
     position: absolute;
@@ -682,9 +681,10 @@ div.selector span{
 	padding: 0;
 }
 div.selector {
-  background-position: -483px -160px;
-  line-height: 32px;
-	height: 32px;
+    background-position: -487px -160px;
+    line-height: 32px;
+    height: 32px;
+    margin-top: -4px;
 }
 
 div.selector span {
@@ -701,7 +701,7 @@ div.selector select {
 
 div.selector:active, 
 div.selector.active {
-	background-position: -483px -192px;
+	background-position: -487px -192px;
 }
 
 div.selector:active span, 
@@ -712,7 +712,7 @@ div.selector.active span {
 div.selector.focus, 
 div.selector.hover,
 div.selector:hover {
-	background-position: -483px -224px;
+	background-position: -487px -224px;
 }
 
 div.selector.focus span, 
@@ -725,7 +725,7 @@ div.selector.focus:active,
 div.selector.focus.active,
 div.selector:hover:active,
 div.selector.active:hover {
-	background-position: -483px -256px;
+	background-position: -487px -256px;
 }
 
 div.selector.focus:active span,
@@ -738,7 +738,7 @@ div.selector.focus.active span {
 div.selector.disabled,
 div.selector.disabled:active,
 div.selector.disabled.active {
-	background-position: -483px -288px;
+	background-position: -487px -288px;
 }
 
 div.selector.disabled span,
@@ -772,7 +772,7 @@ div.selector.disabled span {
 
 div.selector {
 	position: relative;
-	padding-left: 10px;
+	padding-left: 6px;
 	overflow: hidden;
 }
 
