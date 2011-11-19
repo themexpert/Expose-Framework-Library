@@ -9,12 +9,18 @@
 
 jQuery.noConflict();
 
-jQuery(window).ready(function($){
+jQuery(document).ready(function($){
+
+    $("body").queryLoader2({
+        percentage: true,
+        barHeight: 10,
+        completeAnimation: "grow"
+    });
     
-   $.blockUI({
-        message: '<h1>Please Wait...</h1>',
-        //timeout: 2000
-   });
+//   $.blockUI({
+//        message: '<h1>Please Wait...</h1>',
+//        //timeout: 2000
+//   });
 
     //create basic html skeliton for admin
     $('div.m form.form-validate').append(
@@ -125,6 +131,6 @@ jQuery(window).ready(function($){
         $(this).parent().parent().find('.font-preview').css("font-family", fontName);
 
     });
-    $.unblockUI();
+    //$.unblockUI();
 
 });

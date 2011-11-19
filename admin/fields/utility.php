@@ -31,7 +31,7 @@ class JFormFieldUtility extends JFormField{
         if($action == 'boot'){
             //load expose bootstrap
             jimport('expose.bootstrap');
-            $expose->addScript($expose->exposeUrl.'admin/widgets/jquery.blockUI.js');
+            $expose->addScript($expose->exposeUrl.'interface/js/jquery.queryloader2.js');
             $expose->addScript($expose->exposeUrl.'admin/widgets/expose.js');
             //load expose.css file
             $expose->addStyle($expose->exposeUrl.'admin/widgets/expose.css');
