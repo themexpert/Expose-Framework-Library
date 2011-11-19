@@ -153,7 +153,7 @@ span.pre-text{
     padding: 0 0 0 35px;
     line-height: 40px;
 }
-.expose-tab ul li:hover span{color: #f2560e}
+.expose-tab ul li:hover span{color: #81afc8}
 .expose-tab ul li.current{
     background: #fff;
     border-top: 1px solid #eee;
