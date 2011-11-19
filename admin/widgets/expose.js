@@ -20,7 +20,7 @@ jQuery(document).ready(function($){
     //create basic html skeleton for admin
     var skeleton = '<div id="expose-wrapper" class="clearfix"><div class="expose-details"></div><div class="expose-tab-wrapper clearfix"><div class="expose-tab"><ul></ul></div><div class="expose-tab-content"></div></div></div>';
 
-    $('div.m form.form-validate').append(skeleton);
+    $('#element-box form.form-validate').append(skeleton);
 
     //Mission Control admin template bug fix
     $('#mc-component form.form-validate').append(skeleton);
