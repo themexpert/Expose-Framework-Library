@@ -16,16 +16,15 @@ jQuery(document).ready(function($){
         barHeight: 10,
         completeAnimation: "grow"
     });
-    
-//   $.blockUI({
-//        message: '<h1>Please Wait...</h1>',
-//        //timeout: 2000
-//   });
 
-    //create basic html skeliton for admin
-    $('div.m form.form-validate').append(
-        '<div id="expose-wrapper" class="clearfix"><div class="expose-details"></div><div class="expose-tab-wrapper clearfix"><div class="expose-tab"><ul></ul></div><div class="expose-tab-content"></div></div></div>'
-    );
+    //create basic html skeleton for admin
+    var skeleton = '<div id="expose-wrapper" class="clearfix"><div class="expose-details"></div><div class="expose-tab-wrapper clearfix"><div class="expose-tab"><ul></ul></div><div class="expose-tab-content"></div></div></div>';
+
+    $('div.m form.form-validate').append(skeleton);
+
+    //Mission Control admin template bug fix
+    $('#mc-component form.form-validate').append(skeleton);
+
 
     //loop through all h3 element and convert them to expose tab
     $('h3.title').each(function(){
@@ -42,13 +41,13 @@ jQuery(document).ready(function($){
         }).appendTo('.expose-tab-content');
         //$(this).remove();
     });
-    
+
     //finally remove the parent div of all accordion
     $('.width-40').remove();
 
     //lets insert template info input boxes to expose-details.
     $('.width-60:first').appendTo('.expose-details').removeClass('width-60 fltlft').addClass('expose-inner');
-    
+
     //lets take the menu assingments div and append it to its own div under tab
     $('.width-60 .adminform').appendTo('div.assignments');
 
@@ -77,7 +76,7 @@ jQuery(document).ready(function($){
     $('<div class="clear"></div>').appendTo('.panel li');
     $('<span class="tips"></span>').appendTo('.expose-tab-wrapper label');
 
-    $('select,input,.handle,textarea,radio').change(function(){
+    $('#expose-wrapper').find('select,input,.handle,textarea,radio').change(function(){
         $(this).parent().parent().addClass('highlight');
     });
 
@@ -91,7 +90,7 @@ jQuery(document).ready(function($){
 		opacity: 0.5
 	}
     });
-         
+
     /*******************
     * initiate tab class
     *******************/
@@ -111,7 +110,7 @@ jQuery(document).ready(function($){
     $('div.typography .fonts-list').each(function(){
         $(this).parent().append('<div class="font-preview"><span>Live Preview</span>'+previewText+'</div>');
     });
-    
+
     $('.gfonts').change(function(){
         var fontName = "";
         var fontUrl = '';
@@ -131,6 +130,5 @@ jQuery(document).ready(function($){
         $(this).parent().parent().find('.font-preview').css("font-family", fontName);
 
     });
-    //$.unblockUI();
 
 });
