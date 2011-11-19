@@ -90,7 +90,9 @@ jQuery(document).ready(function($){
 		opacity: 0.5
 	}
     });
-
+    //Beautify select dorpdown.
+    $("select").uniform();
+    
     /*******************
     * initiate tab class
     *******************/

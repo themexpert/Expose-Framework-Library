@@ -33,6 +33,7 @@ class JFormFieldUtility extends JFormField{
             //load expose bootstrap
             jimport('expose.bootstrap');
             $expose->addScript($expose->exposeUrl.'interface/js/jquery.queryloader2.js');
+            $expose->addScript($expose->exposeUrl.'interface/js/jquery.uniform.min.js');
             $expose->addScript($expose->exposeUrl.'admin/widgets/expose.js');
             //load expose.css file
             $expose->addStyle($expose->exposeUrl.'admin/widgets/expose.css');
