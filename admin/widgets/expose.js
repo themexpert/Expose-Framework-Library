@@ -80,7 +80,12 @@ jQuery(document).ready(function($){
         $(this).parent().parent().addClass('highlight');
     });
 
-    var toggle = $(".toggle").exposeToggle();
+    $(".toggle").exposeToggle();
+    $('.toggleContainer').click(function(){
+        $(this).parent().find('input').each(function(){
+            ($(this).attr('value') == 0) ? $(this).attr('value',1) : $(this).attr('value',0);
+        });
+    });
 
 
     $('.overlay-trigger').overlay({
@@ -129,7 +134,7 @@ jQuery(document).ready(function($){
         var link = ("<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=" + fontUrl + "' media='screen' />");
 
         $("head").append(link);
-        $(this).parent().parent().find('.font-preview').css("font-family", fontName);
+        $(this).parent().parent().parent().find('.font-preview').css("font-family", fontName);
 
     });
 
