@@ -109,6 +109,20 @@ jQuery(document).ready(function($){
         effect: 'fade'
     });
 
+    $('.expose-tab li').each(function(){
+        //remove all current class
+        var klass = $(this).removeClass('current').attr('class');
+        var activeClass = $.cookie('active_tab');
+
+        if(klass == activeClass) $(this).addClass('current');
+    });
+
+    $('.expose-tab li').click(function(){
+        var klass = $(this).attr('class');
+        klass = klass.replace(' current','');
+        $.cookie('active_tab',klass);
+    });
+
     /****************************
     *  Live Google Font preview
     ****************************/
