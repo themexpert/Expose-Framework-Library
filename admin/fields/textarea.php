@@ -36,7 +36,7 @@ class JFormFieldTextarea extends JFormField
 
             $input  = '<textarea name="'.$this->name.'" id="'.$this->id.'"' .
                             $columns.$rows.$disabled.'>' .
-                            htmlspecialchars(JText::_($this->value, ENT_COMPAT, 'UTF-8')) .
+                            JTEXT::_($this->value) .
                             '</textarea>';
             $output = $wrapstart . $pretext . $input . $posttext . $wrapend;
             return $output;
