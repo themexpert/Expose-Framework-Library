@@ -102,26 +102,38 @@ jQuery(document).ready(function($){
     * initiate tab class
     *******************/
     $('.expose-tab ul').tabs('.expose-tab-content > .panel',{
-        effect: 'fade', fadeOutSpeed: 200
+        effect: 'fade',
+        fadeOutSpeed: 200,
+        initialIndex: getCurrentIndex()
     });
 
     $('.mod-tabs ul').tabs('.mod-inputs > .inputs',{
         effect: 'fade'
     });
 
-    $('.expose-tab li').each(function(){
-        //remove all current class
-        var klass = $(this).removeClass('current').attr('class');
-        var activeClass = $.cookie('active_tab');
-
-        if(klass == activeClass) $(this).addClass('current');
-    });
-
-    $('.expose-tab li').click(function(){
+    /********************************************
+     * detect active tab and set it on page load
+     *******************************************/
+    var tabs =  $('.expose-tab li');
+    tabs.click(function(){
         var klass = $(this).attr('class');
         klass = klass.replace(' current','');
         $.cookie('active_tab',klass);
     });
+
+    function getCurrentIndex(){
+         $('.expose-tab li').each(function(i){
+            //get the current class name
+            var klass = $(this).attr('class');
+            //get class name form cookie
+            var activeClass = $.cookie('active_tab');
+            //check the match
+            if(activeClass == klass){
+                val = i;
+            }
+        });
+        return val;
+    }
 
     /****************************
     *  Live Google Font preview
