@@ -35,8 +35,10 @@ class JFormFieldImageList extends JFormField
 		//$hideDefault	= (string) $this->element['hide_default'];
         $class = $this->element['class'];
         $attr = $this->element['size'] ? ' size="'.(int) $this->element['size'].'"' : '';
-        $pretext        = ($this->element['pretext'] != NULL) ? '<span class="pre-text hasTip" title="'. JText::_(($this->element['pre-desc']) ? $this->element['pre-desc'] : $this->description) .'">'.(string)$this->element['pretext'].'</span>' : '';
-        $posttext       = ($this->element['posttext'] != NULL) ? '<span class="post-text">'.(string)$this->element['posttext'].'</span>' : '';
+
+        $pretext        = ($this->element['pretext'] != NULL) ? '<span class="pre-text hasTip" title="'. JText::_(($this->element['pre-desc']) ? $this->element['pre-desc'] : $this->description) .'">'. JText::_($this->element['pretext']). '</span>' : '';
+
+        $posttext       = ($this->element['posttext'] != NULL) ? '<span class="post-text">'.JText::_($this->element['posttext']).'</span>' : '';
 
         $wrapstart  = '<div class="field-wrap patterns clearfix '.$class.'">';
         $wrapend    = '</div>';

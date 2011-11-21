@@ -216,22 +216,39 @@ class JFormFieldFonts extends JFormField{
         array('Yanone+Kaffeesatz:bold','Yanone Kaffeesatz (bold)')
     );
 
+    protected $fontStyles = array(
+        array('', 'Normal 400'),
+        array(':400italic', 'Normal 400 italic'),
+        array(':700', 'Bold 700'),
+        array(':700italic', 'Bold 700 italic'),
+    );
+
     protected function getInput(){
         $html = '';
+        $options_google = array();
+        $fontStyles = array();
+
         // Initialize some field attributes.
         $class = $this->element['class'];
         $selectClass = 'class="gfonts"';
-        $pretext        = ($this->element['pretext'] != NULL) ? '<span class="pre-text hasTip" title="'. JText::_(($this->element['pre-desc']) ? $this->element['pre-desc'] : $this->description) .'">'.(string)$this->element['pretext'].'</span>' : '';
-        $posttext       = ($this->element['posttext'] != NULL) ? '<span class="post-text">'.(string)$this->element['posttext'].'</span>' : '';
+
+        $pretext        = ($this->element['pretext'] != NULL) ? '<span class="pre-text hasTip" title="'. JText::_(($this->element['pre-desc']) ? $this->element['pre-desc'] : $this->description) .'">'. JText::_($this->element['pretext']). '</span>' : '';
+
+        $posttext       = ($this->element['posttext'] != NULL) ? '<span class="post-text">'.JText::_($this->element['posttext']).'</span>' : '';
 
         $wrapstart  = '<div class="field-wrap fonts-list clearfix '.$class.'">';
         $wrapend    = '</div>';
 
         foreach ($this->gfonts as $font) {
-		   $options_google[] = JHTML::_('select.option', $font[0], JText::_($font[1]));
+		   $options_google[] = JHtml::_('select.option', $font[0], JText::_($font[1]));
         }
+        foreach($this->fontStyles as $style){
+            $fontStyles[] = JHtml::_('select.option', $style[0], JText::_($style[1]));
+        }
+
         $html .= "<a href=\"http://www.google.com/webfonts\" target=\"_blank\">Check Google Font Directory</a><br/>";
         $html .= JHtml::_('select.genericlist', $options_google, $this->name , $selectClass, 'value', 'text', $this->value, $this->id);
+        $html .= JHtml::_('select.genericlist', $fontStyles, $this->name , $selectClass, 'value', 'text', $this->value, $this->id);
 
         return $wrapstart . $pretext. $html . $posttext . $wrapend;
     }
