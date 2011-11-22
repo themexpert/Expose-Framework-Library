@@ -164,4 +164,28 @@ jQuery(document).ready(function($){
 
     });
 
+//    Hide next li baed on toggle click event
+    $('.hidenext .toggleContainer').each(function(){
+        //get the parent node
+        var parent = $(this).parent().parent();
+        //get the input value
+        var inputVal = parent.find('input.toggle').attr('value');
+        if(inputVal == 0){
+            parent.next().css('display','none');
+        }else{
+            parent.next().css('display','block');
+        }
+    });
+
+    $('.hidenext .toggleContainer').click(function(){
+        //get the parent node
+        var parent = $(this).parent().parent();
+        //get the input value
+        var inputVal = parent.find('input.toggle').attr('value');
+        if(inputVal == 0){
+            parent.next().css('display','none');
+        }else{
+            parent.next().css('display','block').addClass('highlight');
+        }
+    });
 });
