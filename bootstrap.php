@@ -47,7 +47,7 @@ if(!defined('EXPOSE_VERSION')){
     //include common functionality for framework
     require_once 'common.php';
 
-    expose_import('core.expose');
+    expose_import('core.core');
     
     $expose =& loadClass('Core');
 
