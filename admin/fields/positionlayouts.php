@@ -29,7 +29,6 @@ class JFormFieldPositionLayouts extends JFormField{
 
         if(!empty($this->value)){
             $tempVal = explode(',',$this->value);
-            array_pop($tempVal); //trim the last empty index
 
             foreach($tempVal as $value){
                 list($index, $val) = explode(':',$value);
@@ -75,6 +74,7 @@ class JFormFieldPositionLayouts extends JFormField{
                  valx += (index1 + 1) + ':' +  jQuery(this).val() + ',' ;
             });
         });
+        valx = valx.slice(0,-1);//trim , from end
         jQuery('#jform_params_$id').val(valx);
     });";
         $expose->addjQDom($js);
