@@ -118,7 +118,7 @@ jQuery(document).ready(function($){
     tabs.click(function(){
         var klass = $(this).attr('class');
         klass = klass.replace(' current','');
-        $.cookie('active_tab',klass);
+        $.cookie('active_tab',klass, { expires: 30 });
     });
 
     function getCurrentIndex(){
@@ -126,7 +126,12 @@ jQuery(document).ready(function($){
             //get the current class name
             var klass = $(this).attr('class');
             //get class name form cookie
-            var activeClass = $.cookie('active_tab');
+            if($.cookie('active_tab')){
+                var activeClass = $.cookie('active_tab');
+            }else{
+                var activeClass = 'styles';
+            }
+
             //check the match
             if(activeClass == klass){
                 val = i;
