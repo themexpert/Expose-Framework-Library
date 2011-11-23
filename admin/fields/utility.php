@@ -31,7 +31,7 @@ class JFormFieldUtility extends JFormField{
 
         if($action == 'boot'){
             //load expose bootstrap
-            jimport('expose.bootstrap');
+            jimport('expose.expose');
             $expose->addScript($expose->exposeUrl.'interface/js/jquery.queryloader2.js');
             $expose->addScript($expose->exposeUrl.'interface/js/jquery.uniform.min.js');
             $expose->addScript($expose->exposeUrl.'interface/js/jquery.cookie.js');

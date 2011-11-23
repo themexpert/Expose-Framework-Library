@@ -8,7 +8,7 @@
  * @copyright   Copyright (C) 2010 - 2011 ThemeXpert
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
  * @filesource
- * @file        bootstrap.php
+ * @file        expose.php
  **/
 // No direct access.
 defined('_JEXEC') or die;
