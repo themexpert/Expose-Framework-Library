@@ -41,20 +41,21 @@ class JFormFieldFonts extends JFormField{
 
         if(!JFile::exists($path) OR JFile::read($path) == NULL){
             $this->createFontList($path);
-        }else{
-            $data = JFile::read($path);
-            $data = explode(',', $data);
-            //add none
-            $options[] = JHtml::_('select.option', '-1', JText::alt('JOPTION_DO_NOT_USE',preg_replace('/[^a-zA-Z0-9_\-]/', '_', $this->fieldname)));
-
-            foreach($data as $val){
-                list($fontVal,$fontName) = explode('=',$val);
-                $fontVal = str_replace(' ','+',$fontVal);
-                $options[] = JHtml::_('select.option',$fontVal, $fontName);
-            }
-            //pop the last empty array
-            array_pop($options);
         }
+        
+        $data = JFile::read($path);
+        $data = explode(',', $data);
+        //add none
+        $options[] = JHtml::_('select.option', '-1', JText::alt('JOPTION_DO_NOT_USE',preg_replace('/[^a-zA-Z0-9_\-]/', '_', $this->fieldname)));
+
+        foreach($data as $val){
+            list($fontVal,$fontName) = explode('=',$val);
+            $fontVal = str_replace(' ','+',$fontVal);
+            $options[] = JHtml::_('select.option',$fontVal, $fontName);
+        }
+        //pop the last empty array
+        array_pop($options);
+
 
         $html .= "<a href=\"http://www.google.com/webfonts\" target=\"_blank\">Check Google Font Directory</a><br/>";
         $html .= JHtml::_('select.genericlist', $options, $this->name , $selectClass, 'value', 'text', $this->value, $this->id);
