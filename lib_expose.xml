@@ -19,7 +19,6 @@ Expose is based on experience. It does not reinvent the wheel: it uses most of t
         <folder>layouts</folder>
         <folder>libs</folder>
         <file>index.html</file>
-        <file>bootstrap.php</file>
-        <file>common.php</file>
+        <file>expose.php</file>
     </files>
 </extension>

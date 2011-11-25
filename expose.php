@@ -49,11 +49,24 @@ if(!defined('EXPOSE_VERSION'))
     //declare global ver
     global $expose;
     
-    //include common functionality for framework
-    require_once 'common.php';
-
     expose_import('core.layouts');
     
     $expose = new ExposeLayouts();
+
+/**
+* File Loader
+*
+* This function will load file form given paths. Joomla default path style
+*
+* @access	public
+* @param	string	the directory path
+* @return	void
+*/
+
+function expose_import($paths){
+    $paths = str_replace('.', DS, $paths);
+    $file = realpath(dirname(__FILE__)).DS.$paths.'.php';
+    if(file_exists($file))    include_once ($file);
+}
 
 }
