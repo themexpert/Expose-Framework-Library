@@ -42,17 +42,9 @@ if(!defined('EXPOSE_VERSION'))
     if(version_compare(JVERSION, '1.5', '>=') && version_compare(JVERSION, '1.7', '<')){
         //define joomla version for further use
         define('EXPOSE_JVERSION','15');
-        //define expose base path
-        define('EXPOSE_BASE', JPATH_SITE.DS.'plugins'.DS.'system'.DS.'expose');
     }else{
         define('EXPOSE_JVERSION','17');
-        define('EXPOSE_BASE', JPATH_SITE.DS.'libraries'.DS.'expose');
     }
-    //Gists Framework path
-    define('EXPOSE_GISTS_PATH', EXPOSE_BASE.DS.'gists');
-
-    //Layouts Framwork path
-    define('EXPOSE_LAYOUT_PATH', EXPOSE_BASE.DS.'layouts');
 
     //declare global ver
     global $expose;
