@@ -3,22 +3,35 @@
  * Bootstrap for Expose
  *  
  * @package     Expose
- * @version     2.0
+ * @version     3.0.0
  * @author      ThemeXpert http://www.themexpert.com
  * @copyright   Copyright (C) 2010 - 2011 ThemeXpert
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
- * @filesource
- * @file        expose.php
  **/
-// No direct access.
-defined('_JEXEC') or die;
 
-if(!defined('EXPOSE_VERSION')){
+// Protect from unauthorized access
+defined('_JEXEC') or die('Restricted Access');
 
-    /* Define framework version.
-     * Rule of version number should be followed by X.Y.Z
-     * which generally corresponds to major.minor.patch
-     */
+// Check for PHP4
+if(defined('PHP_VERSION')) {
+	$version = PHP_VERSION;
+} elseif(function_exists('phpversion')) {
+	$version = phpversion();
+} else {
+	// No version info. I'll lie and hope for the best.
+	$version = '5.0.0';
+}
+
+// Old PHP version detected. EJECT! EJECT! EJECT!
+if(!version_compare($version, '5.0.0', '>='))
+{
+	return JError::raise(E_ERROR, 500, 'PHP 4 is not supported by Expose Framework');
+}
+
+if(!defined('EXPOSE_VERSION'))
+{
+
+    // Define framework version.
 
     define('EXPOSE_VERSION', '3.0.0');
 
@@ -47,8 +60,8 @@ if(!defined('EXPOSE_VERSION')){
     //include common functionality for framework
     require_once 'common.php';
 
-    expose_import('core.core');
+    expose_import('core.layouts');
     
-    $expose =& loadClass('Core');
+    $expose = new ExposeLayouts();
 
 }
