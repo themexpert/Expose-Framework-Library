@@ -97,19 +97,6 @@ jQuery(document).ready(function($){
     });
     //Beautify select dorpdown.
     $("select").uniform();
-    
-    /*******************
-    * initiate tab class
-    *******************/
-    $('.expose-tab ul').tabs('.expose-tab-content > .panel',{
-        effect: 'fade',
-        fadeOutSpeed: 200,
-        initialIndex: getCurrentIndex()
-    });
-
-    $('.mod-tabs ul').tabs('.mod-inputs > .inputs',{
-        effect: 'fade'
-    });
 
     /********************************************
      * detect active tab and set it on page load
@@ -140,6 +127,34 @@ jQuery(document).ready(function($){
         return val;
     }
 
+     /*******************
+    * initiate tab class
+    *******************/
+    $('.expose-tab ul').tabs('.expose-tab-content > .panel',{
+        effect: 'fade',
+        fadeOutSpeed: 200,
+        initialIndex: getCurrentIndex()
+    });
+
+    $('.mod-tabs ul').tabs('.mod-inputs > .inputs',{
+        effect: 'fade'
+    });
+
+    /****************************
+    *  Layout Selector
+    ****************************/
+    $('#layout-selector span').click(function(){
+        var el = $(this);
+        jQuery('#layout-selector span.active').removeClass('active');
+
+        var value = el.attr('class');
+        $('#jform_params_layout_type').val(value);
+
+        el.addClass('active');
+
+    });
+
+
     /****************************
     *  Live Google Font preview
     ****************************/
@@ -153,6 +168,7 @@ jQuery(document).ready(function($){
         var fontName = "";
         var fontUrl = '';
         var pos = '';
+        var ids = $(this).attr('id');
         fontUrl += $(this).val() + "";
         pos = fontUrl.search(':');
         //alert(pos);
@@ -162,10 +178,15 @@ jQuery(document).ready(function($){
             fontName = fontUrl.substr(0,pos);
             fontName = fontName.replace('+', ' ');
         }
-        var link = ("<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=" + fontUrl + "' media='screen' />");
+        $.cookie(ids,fontName);
 
-        $("head").append(link);
+        if($.cookie(ids)){
+            var link = ("<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=" + fontUrl + "' media='screen' />");
+            $("head").append(link);
         $(this).parent().parent().parent().find('.font-preview').css("font-family", fontName);
+        }
+
+
 
     });
 

@@ -37,21 +37,6 @@ class JFormFieldLayouts extends JFormField{
 
         $html .= "<input type='hidden' name='".$this->name."' id='".$this->id."' value='".$this->value."' />";
 
-        $js = "
-
-            jQuery('#layout-selector span').click(function(){
-                var el = $(this);
-                jQuery('#layout-selector span.active').removeClass('active');
-
-                var value = el.attr('class');
-                $('#jform_params_layout_type').val(value);
-
-                el.addClass('active');
-                
-            });
-        ";
-        $expose->addjQDom($js);
-
         return $html;
 
     }

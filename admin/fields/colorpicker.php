@@ -26,7 +26,7 @@ class JFormFieldColorPicker extends JFormField{
         
         if(!defined('EXPOSE_COLOR_PICKER')){
             define('EXPOSE_COLOR_PICKER', 1);
-            $expose->addScript($expose->exposeUrl.'admin/widgets/colorpicker/js/colorpicker.js');
+            $expose->addScript($expose->exposeUrl.'/admin/widgets/colorpicker/js/colorpicker.js');
         }
 
         $class		= (string) $this->element['class'];
@@ -57,8 +57,6 @@ class JFormFieldColorPicker extends JFormField{
                 }
 
             });";
-        //should be declear from base class addInlineScript();
-        //$expose->doc->addScriptDeclaration($js);
         $expose->addjQDom($js);
 
         $input .= '<input class="picker" type="text" name="'.$this->name.'" id="'.$this->id.'-field"' .

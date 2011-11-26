@@ -49,37 +49,6 @@ class JFormFieldSlider extends JFormField{
 
         return $output = $wrapstart . $pretext . $input . $posttext . $wrapend;
     }
-    /*
-    protected function getLabel(){
-        $html   = array();
-        $label  = '';
 
-        // Build the class for the label.
-        $class = !empty($this->description) ? 'hasTip' : '';
-        $class = $this->required == true ? $class.' required' : $class;
-
-        // Get the label text from the XML element, defaulting to the element name.
-        $text = $this->element['label'] ? (string) $this->element['label'] : '';
-        $text = $this->translateLabel ? JText::_($text) : $text;
-
-        if($text != NULL){
-            // Add the opening label tag and main attributes attributes.
-            $label .= '<label id="'.$this->id.'-lbl" class="'.$class.'"';
-        }
-
-        // If a description is specified, use it to build a tooltip.
-        if (!empty($this->description)) {
-            $label .= ' title="'.JText::_($this->description).'"';
-        }
-
-        // Add the label text and closing tag.
-        if($text != NULL){
-            $label .= '>'.$text.'</label>';
-        }
-
-        $html[] = $label;
-        
-        return implode('', $html);
-    }*/
 }
 
