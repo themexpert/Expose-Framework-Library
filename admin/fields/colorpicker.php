@@ -22,6 +22,7 @@ class JFormFieldColorPicker extends JFormField{
     protected function getInput(){
         global $expose;
         $output = NULL;
+        $input = '';
         
         if(!defined('EXPOSE_COLOR_PICKER')){
             define('EXPOSE_COLOR_PICKER', 1);

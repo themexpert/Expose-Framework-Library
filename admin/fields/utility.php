@@ -23,7 +23,7 @@ class JFormFieldUtility extends JFormField{
 
         //make expose object global
         global $expose;
-            
+
         // Initialize some field attributes.
         $action     = $this->element['action'];
         $class		= (string) $this->element['class'];
@@ -32,18 +32,18 @@ class JFormFieldUtility extends JFormField{
         if($action == 'boot'){
             //load expose bootstrap
             jimport('expose.expose');
-            $expose->addScript($expose->exposeUrl.'interface/js/jquery.queryloader2.js');
-            $expose->addScript($expose->exposeUrl.'interface/js/jquery.uniform.min.js');
-            $expose->addScript($expose->exposeUrl.'interface/js/jquery.cookie.js');
+            $expose->addScript($expose->exposeUrl.'/interface/js/jquery.queryloader2.js');
+            $expose->addScript($expose->exposeUrl.'/interface/js/jquery.uniform.min.js');
+            $expose->addScript($expose->exposeUrl.'/interface/js/jquery.cookie.js');
 
             //load expose.css file
-            $expose->addStyle($expose->exposeUrl.'admin/widgets/expose.css');
+            $expose->addStyle($expose->exposeUrl.'/admin/widgets/expose.css');
         }
         else if($action == 'finalize'){
             //load main expose js file
 
-            $expose->addScript($expose->exposeUrl.'admin/widgets/jquery.tools.min.js');
-            $expose->addScript($expose->exposeUrl.'admin/widgets/expose.js');
+            $expose->addScript($expose->exposeUrl.'/admin/widgets/jquery.tools.min.js');
+            $expose->addScript($expose->exposeUrl.'/admin/widgets/expose.js');
             
             //finalize addmin
             $expose->finalizedAdmin();

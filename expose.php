@@ -49,9 +49,18 @@ if(!defined('EXPOSE_VERSION'))
     //declare global ver
     global $expose;
 
-    expose_import('core.layouts');
+    $app =& JFactory::getApplication();
 
-    $expose = new ExposeLayouts();
+    if($app->isAdmin())
+    {
+        expose_import('core.core');
+        $expose = new ExposeCore();
+    }else{
+        
+        expose_import('core.layouts');
+        $expose = new ExposeLayouts();
+    }
+
 }
 
 /**
