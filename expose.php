@@ -48,10 +48,11 @@ if(!defined('EXPOSE_VERSION'))
 
     //declare global ver
     global $expose;
-    
+
     expose_import('core.layouts');
-    
+
     $expose = new ExposeLayouts();
+}
 
 /**
 * File Loader
@@ -67,6 +68,4 @@ function expose_import($paths){
     $paths = str_replace('.', DS, $paths);
     $file = realpath(dirname(__FILE__)).DS.$paths.'.php';
     if(file_exists($file))    include_once ($file);
-}
-
 }
