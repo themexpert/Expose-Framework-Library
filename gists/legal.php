@@ -12,6 +12,19 @@
 //prevent direct access
 defined ('EXPOSE_VERSION') or die ('resticted aceess');
 
+//import parent gist class
+expose_import('core.gist');
+
+class ExposeGistLegal extends ExposeGist{
+    
+    public $name = 'legal';
+
+    public function render()
+    {
+
+    }
+}
+/*
 ob_start()
 ?>
 <div class="designed-by">
@@ -20,6 +33,7 @@ ob_start()
 
 
 <?php
-echo ob_get_clean();
+echo ob_get_clean(); */
+
 ?>
 

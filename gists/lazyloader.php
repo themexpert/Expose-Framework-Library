@@ -12,6 +12,19 @@
 //prevent direct access
 defined ('EXPOSE_VERSION') or die ('resticted aceess');
 
+//import parent gist class
+expose_import('core.gist');
+
+class ExposeGistLazyLoader extends ExposeGist{
+
+    public $name = 'lazyloader';
+
+    public function render()
+    {
+        //TODO: write
+    }
+}
+/*
 if($this->get('lazy_loader')){
     //due to lazyloader bug for mobile devices, we will not load it on mobile device
     if(!$this->layout->isMobile()){
@@ -24,4 +37,5 @@ if($this->get('lazy_loader')){
     }
     
 }
+*/
 ?>

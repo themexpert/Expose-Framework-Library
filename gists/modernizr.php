@@ -11,8 +11,22 @@
 //prevent direct access
 defined ('EXPOSE_VERSION') or die ('resticted aceess');
 
+//import parent gist class
+expose_import('core.gist');
+
+class ExposeGistModernizr extends ExposeGist{
+
+    public $name = 'modernizr';
+
+    public function render()
+    {
+
+    }
+}
+/*
 if($this->get('modernizr')){
     $this->addScript($this->exposeUrl.'interface/js/modernizr-1.7.min.js');
 }
+*/
 ?>
 

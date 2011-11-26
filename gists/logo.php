@@ -11,6 +11,20 @@
 
 //prevent direct access
 defined ('EXPOSE_VERSION') or die ('resticted aceess');
+
+//import parent gist class
+expose_import('core.gist');
+
+class ExposeGistLogo extends ExposeGist{
+
+    public $name = 'logo';
+
+    public function render()
+    {
+
+    }
+}
+/*
 ob_start();
 ?>
     <div id="tx-logo">
@@ -22,6 +36,7 @@ ob_start();
     </div>
 <?php
 echo ob_get_clean();
+*/
 ?>
 
 

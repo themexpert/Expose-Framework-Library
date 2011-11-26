@@ -11,6 +11,19 @@
 //prevent direct access
 defined ('EXPOSE_VERSION') or die ('resticted aceess');
 
+//import parent gist class
+expose_import('core.gist');
+
+class ExposeGistCopyright extends ExposeGist{
+
+    public $name = 'copyright';
+
+    public function render()
+    {
+        // TODO: Implement render() method.
+    }
+}
+/*
 if($this->get('copyright')){
     ob_start();
     ?>
@@ -21,5 +34,6 @@ if($this->get('copyright')){
     </div>
 <?php
 echo ob_get_clean();
-}
+}*/
+
 ?>

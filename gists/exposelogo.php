@@ -12,6 +12,19 @@
 //prevent direct access
 defined ('EXPOSE_VERSION') or die ('resticted aceess');
 
+//import parent gist class
+expose_import('core.gist');
+
+class ExposeGistExposeLogo extends ExposeGist{
+
+    public $name = 'exposelogo';
+
+    public function render()
+    {
+        // TODO: Implement render() method.
+    }
+}
+/*
 if($this->get('expose_logo')){
     ob_start();
     ?>
@@ -22,6 +35,7 @@ if($this->get('expose_logo')){
     </div>
 <?php
 echo ob_get_clean();
-}
+}*/
+
 ?>
 
