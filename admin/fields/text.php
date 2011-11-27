@@ -29,7 +29,7 @@ class JFormFieldText extends JFormField
             $readonly	= ((string) $this->element['readonly'] == 'true') ? ' readonly="readonly"' : '';
             $disabled	= ((string) $this->element['disabled'] == 'true') ? ' disabled="disabled"' : '';
             
-            $pretext        = ($this->element['pretext'] != NULL) ? '<span class="pre-text hasTip" title="'. JText::_(($this->element['pre-desc']) ? $this->element['pre-desc'] : $this->description) .'">'. JText::_($this->element['pretext']). '</span>' : '';
+            $pretext        = ($this->element['pretext'] != NULL) ? '<span class="pre-text hasTip" title="::'. JText::_(($this->element['pre-desc']) ? $this->element['pre-desc'] : $this->description) .'">'. JText::_($this->element['pretext']). '</span>' : '';
 
         $posttext       = ($this->element['posttext'] != NULL) ? '<span class="post-text">'.JText::_($this->element['posttext']).'</span>' : '';
 

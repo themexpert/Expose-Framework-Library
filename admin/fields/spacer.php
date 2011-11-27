@@ -35,7 +35,7 @@ class JFormFieldSpacer extends JFormField{
 
         // Add the label text and closing tag.
         if($text != NULL){
-            $label .= '<div class="expose-spacer'.(($text != '') ? ' hasText hasTip' : '').'" title="'. JText::_($this->description) .'"><span>' . JText::_($text) . '</span></div>';
+            $label .= '<div class="expose-spacer'.(($text != '') ? ' hasText hasTip' : '').'" title="::'. JText::_($this->description) .'"><span>' . JText::_($text) . '</span></div>';
         }
 
         $html[] = $label;
