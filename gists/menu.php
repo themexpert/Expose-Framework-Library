@@ -12,7 +12,7 @@ class ExposeGistMenu extends ExposeGist{
 
     public function render()
     {
-
+        //TODO: implement menu code from mod_menu
     }
 
 }

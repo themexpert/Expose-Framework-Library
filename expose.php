@@ -58,7 +58,7 @@ if(!defined('EXPOSE_VERSION'))
     }else{
         
         expose_import('core.layouts');
-        $expose = new ExposeLayouts();
+        $expose =& ExposeLayouts::getInstance();
     }
 
 }

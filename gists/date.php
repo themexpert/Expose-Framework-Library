@@ -20,7 +20,7 @@ class ExposeGistDate extends ExposeGist{
 
     public function render()
     {
-
+        return 'date';
     }
 }
 /*

@@ -21,7 +21,7 @@ class ExposeGistLogo extends ExposeGist{
 
     public function render()
     {
-
+        return 'gist-logo';
     }
 }
 /*
