@@ -227,38 +227,14 @@ span.pre-text{
     -webkit-border-radius: 5px;
     border-radius: 5px;
 }
-.overlay-trigger{
-    background: url(images/expose-side-logo.png) no-repeat !important;
-    display: block;
-    height: 100px;
-    width: 30px;
-    cursor: pointer;
-}
-a.close {
-	background-image:url(images/close.png);
-	position:absolute;
-	right:-20px;
-	top:-20px;
-	cursor:pointer;
-	height:32px;
-	width:32px;
-}
+
 #expose-desc{
-    display: none;
-    position: relative;
-    width: 700px;
-    border:10px solid #666;
-    border:10px solid rgba(204, 204, 204, 0.698);
-    -moz-border-radius:8px;
-    -webkit-border-radius:8px;
-    border-radius:8px;
 
 }
 #expose-desc div{
-    padding:10px;
-    background-color:#fff;
 }
-#expose-desc img{margin-bottom: 10px;}
+#expose-desc img{margin: 0 10px 15px 0;}
+
 .desc-wrap h3{
     background: #fff;
     border:1px solid #E9E9E9;
@@ -286,8 +262,72 @@ a.close {
     padding-bottom: 5px;
 }
 .assignments div#menu-assignment .menu-links label{text-align: left}
-#mods-wrap{float: left;margin-right: 20px}
 
+/*Overview tab style*/
+#jform_params_overview-lbl{display: none}
+.overview-panel-left{
+    width: 70%;
+    float: left;
+}
+.overview-panel-right{
+    width: 30%;
+    float: right;
+}
+.overview-panel-left .overview-inner{
+    margin: 25px 15px;
+}
+.overview-panel-right .overview-inner{
+    margin: 25px 15px 25px 0;
+}
+.overview-panel-right .template-name .adminform{
+    margin: 0;
+    padding: 0;
+}
+.overview-panel-right .template-name label{
+    margin: 0;
+    padding: 0 5px 0 0;
+    float: left;
+    max-width: 60px !important;
+    min-width: 60px !important;
+}
+.overview-panel-right .template-name .star,
+.overview-panel-right .template-name .tips{display: none}
+
+.overview-panel-right .template-name input{
+    width:169px;
+    margin-top: 4px !important;
+}
+.overview-panel-right .details{
+
+}
+.gradient, .gradient2, .gradient3{
+    padding: 10px;
+    margin-bottom: 15px;
+}
+.gradient{
+    box-shadow: 0 1px 3px rgba(0,0,0,.35);
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,.35);
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.35);
+    background: #FEFEFE;
+    background: -webkit-gradient(linear,left bottom,left top,color-stop(0, whiteSmoke),color-stop(0.33, white));
+    background: -moz-linear-gradient(center bottom,whiteSmoke 0%,white 33%);
+}
+.gradient2{
+    background: #FDFDFD;
+    background: -webkit-linear-gradient(top, #FDFDFD, #FAFAFA);
+    background: -moz-linear-gradient(top, #FDFDFD, #FAFAFA);
+    box-shadow: 0 1px 3px rgba(0,0,0,.35);
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,.35);
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.35);
+}
+.gradient3{
+    background: #fbfbfb;
+    background: -moz-linear-gradient(top, #FBFBFB, whiteSmoke);
+    background: -webkit-gradient(linear, left top, left bottom, from(#FBFBFB), to(whiteSmoke));
+    border: 3px solid #fff;
+    box-shadow: 0 0 4px #eee;
+}
+#mods-wrap{float: left;margin-right: 20px}
 #mods-wrap .inputs input[type=text],
 #mods-wrap .inputs span {float:left}
 #mods-wrap .inputs span{line-height: 34px;margin-right: 8px}
@@ -296,6 +336,107 @@ a.close {
 .mod-tabs ul li a{padding: 0 6px;border-right: 1px solid #eee;display: block;cursor: pointer}
 .mod-tabs ul li a:hover, .mod-tabs ul li a.current{font-weight: bold;color: #7ab1fa;}
 .mod-inputs{clear: both}
+
+.mods-chrome{
+    background:#fff;
+    display:none;
+    min-width:550px;
+    max-width: 700px;
+    height: 45px;
+    padding:15px;
+    text-align:left;
+    z-index: 999999;
+}
+
+.mods-chrome a.close{
+    float: right;
+	cursor:pointer;
+    display: inline-block;
+    white-space: nowrap;
+    background-color: #ccc;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#eee), to(#ccc));
+    background-image: -webkit-linear-gradient(top, #eee, #ccc);
+    background-image: -moz-linear-gradient(top, #eee, #ccc);
+    background-image: -ms-linear-gradient(top, #eee, #ccc);
+    background-image: -o-linear-gradient(top, #eee, #ccc);
+    background-image: linear-gradient(top, #eee, #ccc);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#eeeeee', EndColorStr='#cccccc');
+    border: 1px solid #777;
+    padding: 0 1.5em;
+    margin: 14px 0 0 0;
+    font: bold 1em/2em Arial, Helvetica;
+    text-decoration: none;
+    color: #333;
+    text-shadow: 0 1px 0 rgba(255,255,255,.8);
+    -moz-border-radius: .2em;
+    -webkit-border-radius: .2em;
+    border-radius: .2em;
+    -moz-box-shadow: 0 0 1px 1px rgba(255,255,255,.8) inset, 0 1px 0 rgba(0,0,0,.3);
+    -webkit-box-shadow: 0 0 1px 1px rgba(255,255,255,.8) inset, 0 1px 0 rgba(0,0,0,.3);
+    box-shadow: 0 0 1px 1px rgba(255,255,255,.8) inset, 0 1px 0 rgba(0,0,0,.3);
+}
+
+.mods-chrome a.close:hover{
+    background-color: #ddd;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#fafafa), to(#ddd));
+    background-image: -webkit-linear-gradient(top, #fafafa, #ddd);
+    background-image: -moz-linear-gradient(top, #fafafa, #ddd);
+    background-image: -ms-linear-gradient(top, #fafafa, #ddd);
+    background-image: -o-linear-gradient(top, #fafafa, #ddd);
+    background-image: linear-gradient(top, #fafafa, #ddd);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#fafafa', EndColorStr='#dddddd');
+}
+
+.mods-chrome a.close:active{
+    -moz-box-shadow: 0 0 4px 2px rgba(0,0,0,.3) inset;
+    -webkit-box-shadow: 0 0 4px 2px rgba(0,0,0,.3) inset;
+    box-shadow: 0 0 4px 2px rgba(0,0,0,.3) inset;
+    position: relative;
+    top: 1px;
+}
+
+.mods-chrome a.close:focus{
+    outline: 0;
+    background: #fafafa;
+}
+
+.mods-chrome a.close:before{
+    content: "\2714";
+    background: #ccc;
+    background: rgba(0,0,0,.1);
+    float: left;
+    width: 1em;
+    text-align: center;
+    font-size: 1.5em;
+    margin: 0 1em 0 -1em;
+    padding: 0 .2em;
+    -moz-box-shadow: 1px 0 0 rgba(0,0,0,.5), 2px 0 0 rgba(255,255,255,.5);
+    -webkit-box-shadow: 1px 0 0 rgba(0,0,0,.5), 2px 0 0 rgba(255,255,255,.5);
+    box-shadow: 1px 0 0 rgba(0,0,0,.5), 2px 0 0 rgba(255,255,255,.5);
+    -moz-border-radius: .15em 0 0 .15em;
+    -webkit-border-radius: .15em 0 0 .15em;
+    border-radius: .15em 0 0 .15em;
+    pointer-events: none;
+}
+.mods-chrome a.close:after{content: "Save"}
+.mods-chrome-boxs {
+    width: 95px;
+    float: left;
+    border-right: 1px solid #ddd;
+    margin-right: 10px;
+}
+.mods-chrome-boxs:last-child{border: none;}
+.mod-chrome-button{
+    margin-bottom: 0;
+    padding: 0;
+    cursor: pointer;
+}
+.mod-chrome-button span{
+    background: url(images/icons-sprit.png) no-repeat 3px -168px;
+    padding: 0 10px 0 30px;
+    line-height: 32px;
+    color: #555;
+}
 
 #layout-selector{float: left;}
 #layout-selector span{
@@ -727,6 +868,9 @@ div.selector span{
 .selector *{
     margin: 0;
 	padding: 0;
+}
+div.selector option {
+    padding: 2px 4px;
 }
 div.selector {
     background-position: -487px -160px;

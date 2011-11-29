@@ -18,7 +18,7 @@ jQuery(document).ready(function($){
     });
 
     //create basic html skeleton for admin
-    var skeleton = '<div id="expose-wrapper" class="clearfix"><div class="expose-details"></div><div class="expose-tab-wrapper clearfix"><div class="expose-tab"><ul></ul></div><div class="expose-tab-content"></div></div></div>';
+    var skeleton = '<div id="expose-wrapper" class="clearfix"><div class="expose-tab-wrapper clearfix"><div class="expose-tab"><ul></ul></div><div class="expose-tab-content"></div></div></div>';
 
     $('#element-box form.form-validate').append(skeleton);
 
@@ -46,7 +46,7 @@ jQuery(document).ready(function($){
     $('.width-40').remove();
 
     //lets insert template info input boxes to expose-details.
-    $('.width-60:first').appendTo('.expose-details').removeClass('width-60 fltlft').addClass('expose-inner');
+    $('.width-60:first').appendTo('.template-name').removeClass('width-60 fltlft').addClass('inner');
 
     //lets take the menu assingments div and append it to its own div under tab
     $('.width-60 .adminform').appendTo('div.assignments');
@@ -54,8 +54,15 @@ jQuery(document).ready(function($){
     //remove old parent div
     $('.width-60').remove();
 
-    //lets remove template details label
-    $('.expose-details label:last').remove();
+    //lets remove template details
+    $('.template-name ul li').each(function(index,val){
+        if(index !=0){
+            $(this).hide();
+        }
+    });
+    $('.template-name legend').remove();
+    $('.template-name label:last').remove();
+    $('.mod-desc').remove();
 
     //now move the template description to expose-wrapper
     $('span.mod-desc').appendTo('#expose-wrapper');
@@ -88,13 +95,15 @@ jQuery(document).ready(function($){
     });
 
 
-    $('.overlay-trigger').overlay({
+    $("p[rel]").overlay({
         mask: {
 		color: '#000',
 		loadSpeed: 200,
 		opacity: 0.5
-	}
+	    },
+        closeOnClick: false
     });
+
     //Beautify select dorpdown.
     $("select").uniform();
 
@@ -116,7 +125,7 @@ jQuery(document).ready(function($){
             if($.cookie('active_tab')){
                 var activeClass = $.cookie('active_tab');
             }else{
-                var activeClass = 'styles';
+                var activeClass = 'overview';
             }
 
             //check the match
