@@ -18,15 +18,13 @@ class ExposeGistModernizr extends ExposeGist{
 
     public $name = 'modernizr';
 
-    public function render()
+    public function init()
     {
+
+        $this->document->addScript($this->exposeUrl.'/interface/js/modernizr-1.7.min.js');
 
     }
 }
-/*
-if($this->get('modernizr')){
-    $this->addScript($this->exposeUrl.'interface/js/modernizr-1.7.min.js');
-}
-*/
+
 ?>
 

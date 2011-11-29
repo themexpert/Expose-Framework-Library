@@ -19,9 +19,14 @@ class ExposeGistToTop extends ExposeGist{
 
     public $name = 'totop';
 
-    public function render()
+    public function init()
     {
-
+        ob_start()
+    ?>
+    <a href="#top" id="tx-scrolltop">Top</a>
+    <?php
+        $this->document->addScript($this->exposeUrl.'/interface/js/scrollTo.js');
+        echo ob_get_clean();
     }
 }
 /*

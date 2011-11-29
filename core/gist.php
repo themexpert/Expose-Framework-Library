@@ -51,7 +51,13 @@ abstract class ExposeGist extends ExposeCore{
         return parent::get($field);
     }
 
-    abstract public function render();
+    public function init(){
+
+    }
+
+    public function render(){
+        
+    }
 
 
 }

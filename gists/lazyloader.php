@@ -19,9 +19,11 @@ class ExposeGistLazyLoader extends ExposeGist{
 
     public $name = 'lazyloader';
 
-    public function render()
+    public function init()
     {
-        //TODO: write
+        $js ='jQuery(\'img\').lazyload({effect: "fadeIn",threshold : 100});';
+        $this->document->addScript($this->exposeUrl.'/interface/js/lazyload.js');
+        $this->addjQDom($js);
     }
 }
 /*

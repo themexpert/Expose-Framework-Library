@@ -19,7 +19,8 @@ class ExposeGistAnalytics extends ExposeGist{
 
     public $name = 'analytics';
 
-    public function render()
+
+    public function init()
     {
         ob_start();
     ?>
