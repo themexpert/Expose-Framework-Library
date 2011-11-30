@@ -47,7 +47,7 @@ class JFormFieldFonts extends JFormField{
         $options[] = JHtml::_('select.option', '0', JText::alt('JOPTION_DO_NOT_USE',preg_replace('/[^a-zA-Z0-9_\-]/', '_', $this->fieldname)));
 
         foreach($data as $val){
-            list($fontVal, $fontName) = explode('=', $val);
+            list($fontVal, $fontName) = explode('=', "$val=");
             $fontVal = str_replace(' ','+',$fontVal);
             $options[] = JHtml::_('select.option',$fontVal, $fontName);
         }
