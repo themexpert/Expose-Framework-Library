@@ -57,7 +57,7 @@ class JFormFieldColorPicker extends JFormField{
                 }
 
             });";
-        $expose->addjQDom($js);
+        //$expose->addjQDom($js);
 
         $input .= '<input class="picker" type="text" name="'.$this->name.'" id="'.$this->id.'-field"' .
                    ' value="'.htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8').'"' . '/>';

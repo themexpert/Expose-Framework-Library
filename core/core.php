@@ -163,16 +163,16 @@ class ExposeCore{
         $type = 'css';
         $site_url = $this->templateUrl . $type . '/' ;
         $expose_url = $this->exposeUrl . 'interface/'.$type.'/';
-        
+
         //make sure core stylesheets are loaded before all style
         if(!$this->isAdmin()){
             if(!defined('EXPOSE_CORE_STYLE_LOADED')){
                 $core_style_sheet = array('expose.css','joomla.css','menu.css');
-                if($this->browser->isMobile()){
-                    $mob_client = strtolower($this->browser->getBrowser());
-                    $mob_css = 'expose-'. $mob_client.'.css';
-                    $core_style_sheet[]=$mob_css;
-                }
+//                if($this->browser->isMobile()){
+//                    $mob_client = strtolower($this->browser->getBrowser());
+//                    $mob_css = 'expose-'. $mob_client.'.css';
+//                    $core_style_sheet[]=$mob_css;
+//                }
                 //load core style
                 foreach($core_style_sheet as $styleSheet){
                     if(file_exists($this->templatePath . DS . 'css' . DS . $styleSheet)){
@@ -184,7 +184,7 @@ class ExposeCore{
                 define('EXPOSE_CORE_STYLE_LOADED', 1);
             }
         }
-        
+
         $dir = dirname($file);
         //check the file source.
         if($dir != '.'){
@@ -204,25 +204,7 @@ class ExposeCore{
         }
     }
 
-//    public function loadGists($gists){
-//        if(defined('EXPOSE_FINAL')) return;
-//        if(is_array($gists)){
-//            foreach($gists as $gist){
-//                $this->loadGists($gist);
-//            }
-//        }
-//        $gist_template_path = $this->templatePath . DS . 'gists';
-//        //check for template copy
-//        if(file_exists($gist_template_path . DS . $gists . '.php')){
-//            include($gist_template_path . DS . $gists . '.php');;
-//        }
-//        elseif(file_exists(EXPOSE_GISTS_PATH . DS . $gists . '.php')){
-//            include(EXPOSE_GISTS_PATH . DS . $gists . '.php');
-//        }
-//        else{
-//            JText::_('UNABLE TO LOAD GISTS');
-//        }
-//    }
+
 
     private function _loadPresetStyle(){
         //if(defined('EXPOSE_FINAL')) return;

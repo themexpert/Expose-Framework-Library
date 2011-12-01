@@ -13,9 +13,9 @@
 defined ('EXPOSE_VERSION') or die ('resticted aceess');
 
 //import parent gist class
-expose_import('core.gist');
+expose_import('core.widget');
 
-class ExposeGistAnalytics extends ExposeGist{
+class ExposeWidgetAnalytics extends ExposeWidget{
 
     public $name = 'analytics';
 

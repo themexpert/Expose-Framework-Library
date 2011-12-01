@@ -12,9 +12,9 @@
 defined ('EXPOSE_VERSION') or die ('resticted aceess');
 
 //import parent gist class
-expose_import('core.gist');
+expose_import('core.widget');
 
-class ExposeGistModernizr extends ExposeGist{
+class ExposeWidgetModernizr extends ExposeWidget{
 
     public $name = 'modernizr';
 
