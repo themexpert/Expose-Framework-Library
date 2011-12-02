@@ -5,8 +5,6 @@
  * @author      ThemeXpert http://www.themexpert.com
  * @copyright   Copyright (C) 2010 - 2011 ThemeXpert
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
- * @filesource
- * @file        exposelogo.php
  **/
 
 //prevent direct access
@@ -21,21 +19,18 @@ class ExposeWidgetExposeLogo extends ExposeWidget{
 
     public function render()
     {
-        return 'expose-logo loaded';
+        $website = 'http://www.expose-framework.org';
+        ob_start();
+            ?>
+            <div id="ex-poweredby" class="expose-logo expose-logo-<?php echo $this->get('type');?>">
+                <a href="<?php echo $website ;?>" target="_blank" title="Powered By Expose Framework">
+                    <span>Powered By Expose Framework</span>
+                </a>
+            </div>
+    <?php
+        echo ob_get_clean();
     }
 }
-/*
-if($this->get('expose_logo')){
-    ob_start();
-    ?>
-    <div id="tx-poweredby" class="expose-logo expose-logo-<?php echo $this->get('expose_logo_type');?>">
-        <a href="http://expose.themexpert.com/" target="_blank" title="Powered By Expose Framework">
-            <span>Powered By Expose Framework</span>
-        </a>
-    </div>
-<?php
-echo ob_get_clean();
-}*/
 
 ?>
 
