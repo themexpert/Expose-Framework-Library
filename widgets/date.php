@@ -27,7 +27,7 @@ class ExposeWidgetDate extends ExposeWidget{
             <span><?php echo $now->toFormat($formate) ;?></span>
         </div>
     <?php
-        echo ob_get_clean();
+        return ob_get_clean();
     }
 }
 
