@@ -11,6 +11,10 @@
 //prevent direct access
 defined ('EXPOSE_VERSION') or die ('resticted aceess');
 
+//import joomla filesystem classes
+jimport('joomla.filesystem.folder');
+jimport('joomla.filesystem.file');
+
 //import core class
 expose_import('core.core');
 
@@ -192,7 +196,7 @@ class ExposeLayout extends ExposeCore
 
     }
 
-    public function getGist($name)
+    public function getWidget($name)
     {
         if(isset($this->widgets[$name]))
         {
@@ -260,11 +264,7 @@ class ExposeLayout extends ExposeCore
 
     protected function loadWidgets()
     {
-        //import joomla filesystem classes
-        jimport('joomla.filesystem.folder');
-        jimport('joomla.filesystem.file');
-
-        //define gist paths
+        //define widgets paths
         $widgetPaths = array(
             $this->exposePath . DS . 'widgets',
             $this->templatePath . DS .'widgets'
@@ -325,6 +325,35 @@ class ExposeLayout extends ExposeCore
         }else{
             $this->platform = 'desktop';
         }
+
+    }
+
+    public function renderBody()
+    {
+        $layoutType = $this->get('layout-type');
+        $bPath = $this->exposePath . DS . 'layouts';
+        $tPath = $this->templatePath . DS .'layouts';
+
+        $ext = '.php';
+        if($this->platform == 'mobile')
+        {
+            $bfile = $bPath .DS . 'mobile' . $ext;
+            $tfile = $tPath .DS . 'mobile' . $ext;
+        }
+        $bfile = $bPath .DS . $layoutType . $ext;
+        $tfile = $tPath .DS . $layoutType . $ext;
+
+        if(JFile::exists($tfile))
+        {
+            require_once($tfile);
+
+        }elseif(JFile::exists($bfile))
+        {
+            require_once($bfile);
+        }else{
+            JError::raiseNotice(E_NOTICE,'No layout file found! Make sure you\'ve selected right layout from template settings');
+        }
+
 
     }
 
