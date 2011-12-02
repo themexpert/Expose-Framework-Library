@@ -44,13 +44,30 @@ class JFormFieldModulesChrome extends JFormField{
             }
             //$val = array_shift($val);
         }else{
-            $val = explode(',',$this->value);
-            foreach($val as $json)
-            {
-                list($modName,$chrome) = explode(':',$json);
-                $val[$modName] = $chrome;
+            $tempval = explode(',',$this->value);
 
+            if(is_array($tempval)){
+                foreach($tempval as $json)
+                {
+                    if(preg_match('/:/',$json)){
+                        list($modName,$chrome) = explode(':',$json);
+                        $val[$modName] = $chrome;
+                    }else{
+                        if(count($tempval) == 1){
+                            $val[$name] = $json;
+                        }else{
+                            for($i=1; $i<=count($tempval); $i++){
+                                $moduleName = $name . '-'. $i;
+                                $val[$moduleName] = $json;
+                            }
+                        }
+                    }
+                }
+            }else{
+                $val[$name] = $this->value;
             }
+
+
         }
 
         $options = (array) $this->getOptions();
@@ -62,7 +79,9 @@ class JFormFieldModulesChrome extends JFormField{
         $html .= "<div id='".$id."' class='mods-chrome'>";
             for($i=0; $i< $maxmods; $i++){
                 $html .= "<div class='mods-chrome-boxs'>";
-                    $modName = $name . '-' . ($i+1);
+                    if($maxmods == 1) $modName = $modName;
+                    else $modName = $name . '-' . ($i+1);
+
                     $html .= "<span class='pre-text'>". ucfirst($modName) ."</span>";
                     $html .= JHtml::_('select.genericlist', $options, '', '', 'value', 'text',$val[$modName],'');
                 $html .= "</div>";
