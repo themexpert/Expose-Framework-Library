@@ -55,10 +55,7 @@ $display_component = !($expose->isHomePage() AND $expose->get('component_display
             <?php /**End Content Bottom**/ endif;?>
         </div>
     </div>
-<<<<<<< .mine
      <?php endif;?>
-=======
     <div class="clear"></div>
->>>>>>> .r87
 </div>
 
