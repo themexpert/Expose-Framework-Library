@@ -319,8 +319,10 @@ class ExposeLayout extends ExposeCore
     {
         expose_import('libs.browser');
         $this->browser = new ExposeBrowser();
+        $browserName = $this->browser->getBrowser();
 
-        if($this->browser->isMobile()){
+        //we'll consider 2 mobile now iPhone and Android, iPad will treat as regular desktop device
+        if($this->browser->isMobile() AND ($browserName == 'iPhone' OR $browserName == 'Android')){
             $this->platform = 'mobile';
         }else{
             $this->platform = 'desktop';
@@ -333,28 +335,50 @@ class ExposeLayout extends ExposeCore
         $layoutType = $this->get('layout-type');
         $bPath = $this->exposePath . DS . 'layouts';
         $tPath = $this->templatePath . DS .'layouts';
-
         $ext = '.php';
-        if($this->platform == 'mobile')
-        {
-            $bfile = $bPath .DS . 'mobile' . $ext;
-            $tfile = $tPath .DS . 'mobile' . $ext;
-        }
-        $bfile = $bPath .DS . $layoutType . $ext;
-        $tfile = $tPath .DS . $layoutType . $ext;
 
-        if(JFile::exists($tfile))
+        if( $this->platform == 'mobile' )
         {
-            require_once($tfile);
+            $device = strtolower($this->browser->getBrowser());
+            $bfile = $bPath .DS . $device . $ext;
+            $tfile = $tPath .DS . $device . $ext;
 
-        }elseif(JFile::exists($bfile))
-        {
-            require_once($bfile);
+            if($this->get('iphone-enabled') AND $device == 'iphone')
+            {
+                $this->loadFile(array($tfile,$bfile));
+            }elseif($this->get('android-enabled') AND $device == 'android'){
+                $this->loadFile(array($tfile,$bfile));
+            }else{
+                return FALSE;
+            }
+
         }else{
-            JError::raiseNotice(E_NOTICE,'No layout file found! Make sure you\'ve selected right layout from template settings');
+            $bfile = $bPath .DS . $layoutType . $ext;
+            $tfile = $tPath .DS . $layoutType . $ext;
+
+            $this->loadFile(array($tfile,$bfile));
         }
+    }
 
+    protected function loadFile($paths)
+    {
+        if(is_array($paths))
+        {
+            foreach($paths as $path)
+            {
+                if(JFile::exists($path)){
 
+                    require_once($path);
+                    break;
+
+                }
+            }
+        }else if(JFile::exists($paths))
+        {
+            require_once ($paths);
+        }else{
+            JError::raiseNotice(E_NOTICE,"No file file found on given path $paths");
+        }
     }
 
 }
