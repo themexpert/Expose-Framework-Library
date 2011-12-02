@@ -14,7 +14,7 @@ Expose is based on experience. It does not reinvent the wheel: it uses most of t
     <files>
         <folder>admin</folder>
         <folder>core</folder>
-        <folder>gists</folder>
+        <folder>widgets</folder>
         <folder>interface</folder>
         <folder>layouts</folder>
         <folder>libs</folder>
