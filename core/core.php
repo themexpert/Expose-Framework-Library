@@ -81,12 +81,6 @@ class ExposeCore{
     }
 
     public function finalizedExpose(){
-        //load typography
-        $typo =& loadClass('Typography');
-        $typo->renderFonts();
-
-        //an easy way to load all menu settings. future adaptar for Mega menu.
-        $this->menu = $this->loadMenu();
 
         //load preset style before loading all stylesset. this will allow to add preset
         //style file at the end of all style files
@@ -109,9 +103,7 @@ class ExposeCore{
             $this->_renderCombinedDom();
         }
          //fix the template width and sidebar width
-        $this->_customLayoutWidth();
-
-        $this->_loadInlineStyles();
+        //$this->_customLayoutWidth();
 
         //$this->layout->init();
         define('EXPOSE_FINAL', 1);
@@ -387,9 +379,10 @@ class ExposeCore{
     
 
     public function displayHead(){
-        //if(defined('EXPOSE_FINAL')) return;
+        if(defined('EXPOSE_FINAL')) return;
         if(!$this->isAdmin()){
             //output joomla head
+            echo '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">';
             echo '<jdoc:include type="head" />';
         }
     }
