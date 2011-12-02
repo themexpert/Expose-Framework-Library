@@ -23,22 +23,11 @@ class ExposeWidgetToTop extends ExposeWidget{
     {
         ob_start()
     ?>
-    <a href="#top" id="tx-scrolltop">Top</a>
+    <a href="#top" id="ex-scrolltop">Top</a>
     <?php
         $this->document->addScript($this->exposeUrl.'/interface/js/scrollTo.js');
         echo ob_get_clean();
     }
 }
-/*
-//we will not load it on mobile devices
-if($this->get('scroll_top') AND !$this->layout->isMobile()){
-    ob_start()
-    ?>
-<a href="#top" id="tx-scrolltop">Top</a>
-<?php
-    $this->addScript($this->exposeUrl.'interface/js/scrollTo.js');
-    echo ob_get_clean();
-}
-*/
 ?>
 
