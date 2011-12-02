@@ -29,31 +29,10 @@ if (!defined ('_EXPOSE_MEGA_MENU')) {
 		function endMenu($startlevel=0, $endlevel = 10){
 			//If rtl, not allow slide and fading effect
 			$rtl = $this->getParam ('rtl');
-			/*$animation = $this->_tmpl->getParam ('ja_menu_mega_animation', 'none');
-			$duration = $this->_tmpl->getParam ('ja_menu_mega_duration', 300);
-			$delayHide = $this->_tmpl->getParam ('ja_menu_mega_delayhide', 300);
-			$fade = 0;
-			$slide = 0;*/
-			/*if (!$rtl) {
-				if (preg_match ('/slide/', $animation)) $slide = 1;
-				if (preg_match ('/fade/', $animation)) $fade = 1;
-			}*/
 			echo "\n</div>";
 			//Create menu
 			?>
-			<!--<script type="text/javascript">
-			var megamenu = new jaMegaMenuMoo ('<?php /*echo $this->getParam('menuname') */?>', {
-				'bgopacity': 0, 
-				'delayHide': <?php /*echo $delayHide */?>,
-				'slide': <?php /*echo $slide */?>,
-				'fading': <?php /*echo $fade */?>,
-				'direction':'down',
-				'action':'mouseover',
-				'tips': false,
-				'duration': <?php /*echo $duration */?>,
-				'hidestyle': 'fastwhenshow'
-			});			
-			</script>-->
+
 			<?php
 		}
 		function beginMenuItems($pid=0, $level=0, $return=false){
