@@ -23,7 +23,7 @@ class ExposeLayout extends ExposeCore
 
     public $browser;
     public $platform;
-    public $modules = array();
+    protected $modules = array();
     public $widgets = array();
 
 
@@ -381,6 +381,11 @@ class ExposeLayout extends ExposeCore
         }else{
             JError::raiseNotice(E_NOTICE,"No file file found on given path $paths");
         }
+    }
+
+    public function getModules()
+    {
+        return $this->modules;
     }
 
 }
