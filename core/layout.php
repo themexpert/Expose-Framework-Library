@@ -102,9 +102,11 @@ class ExposeLayout extends ExposeCore
 
         if($this->modules[$position]['published'] > 0 AND isset($this->modules[$position]['active']))
         {
+            $widths = $this->getModuleSchema($position);
+
             foreach($this->getActiveModuleLists($position) as $positionName)
             {
-                $width = array_shift($this->getModuleSchema($position));
+                $width = array_shift($widths);
 
                 //we'll make all width 100% for mobile device
                 if($this->platform == 'mobile'){
