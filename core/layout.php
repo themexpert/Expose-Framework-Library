@@ -92,31 +92,44 @@ class ExposeLayout extends ExposeCore
 
     public function renderModules($position)
     {
-        $class = 'first';
+        $totalPublished = $this->modules[$position]['published'];
         $i = 1;
 
-        if($this->modules[$position]['published'] > 0 AND isset($this->modules[$position]['active']))
+        if($totalPublished > 0 AND isset($this->modules[$position]['active']))
         {
             $widths = $this->getModuleSchema($position);
+            $containerClass = 'ex-container wrap-blocks';
 
             foreach($this->getActiveModuleLists($position) as $positionName)
             {
+                //$totalModulesInPosition = $this->countModulesForPosition( $positionName );
                 $width = array_shift($widths);
+                $class = '';
+                $html = '';
 
                 //we'll make all width 100% for mobile device
                 if($this->platform == 'mobile'){
                     $width = 100;
                 }
 
-                if($i == 1) $class = 'first';
-                elseif($i == $this->modules[$position]['published']) $class = 'last';
-                else $class = '';
+                if($i == 1) $class .= 'first ';
 
-                $oddEven = ($i%2) ? 'odd' : 'even';
+                $class .= ($i%2) ? 'odd' : 'even';
 
-                $modWrapperStart = "<div class='ex-mods $oddEven $class' style='width:" . $width ."%'>";
+                if($i == ($totalPublished -1)) $class .= ' ie6-offset ';
+
+
+
+                $modWrapperStart = "<div class='$containerClass $class' style='width:" . $width ."%'>";
                 $modWrapperEnd = "</div>";
-                $html = '';
+
+                if($i == $totalPublished){
+                    $class .= ' last ';
+                    $containerClass = str_replace('wrap-blocks', 'wrap-blocks-last', $containerClass);
+                    //$container = 'ex-container wrap-blocks-last';
+                    $modWrapperStart = "<div class='$containerClass $class'>";
+                    $modWrapperEnd = "</div>";
+                }
 
                 //we'll load all widgets first published in this position
                 if($this->countWidgetsForPosition($positionName))
@@ -131,7 +144,6 @@ class ExposeLayout extends ExposeCore
                 $chrome = $this->getModuleChrome($position,$positionName);
 
                 $html .= '<jdoc:include type="modules" name="'.$positionName.'" style="'.$chrome.'" />';
-
 
                 echo $modWrapperStart . $html . $modWrapperEnd;
 
