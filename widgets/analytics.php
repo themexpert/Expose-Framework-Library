@@ -17,6 +17,10 @@ class ExposeWidgetAnalytics extends ExposeWidget{
 
     public $name = 'analytics';
 
+    public function isInMobile()
+    {
+        return TRUE;
+    }
 
     public function init()
     {

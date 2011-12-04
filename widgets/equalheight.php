@@ -17,6 +17,11 @@ class ExposeWidgetEqualHeight extends ExposeWidget{
 
     public $name = 'equalheight';
 
+    public function isInMobile()
+    {
+        return TRUE;
+    }
+
     public function init()
     {
         $js = 'equalHeight(jQuery(".ex-box"));';

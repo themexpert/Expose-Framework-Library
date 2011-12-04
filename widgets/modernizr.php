@@ -18,6 +18,11 @@ class ExposeWidgetModernizr extends ExposeWidget{
 
     public $name = 'modernizr';
 
+    public function isInMobile()
+    {
+        return FALSE;
+    }
+
     public function init()
     {
 

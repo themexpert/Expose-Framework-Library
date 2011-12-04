@@ -16,6 +16,11 @@ class ExposeWidgetDate extends ExposeWidget{
 
     public $name = 'date';
 
+    public function isInMobile()
+    {
+        return FALSE;
+    }
+
     public function render()
     {
         $now = &JFactory::getDate();

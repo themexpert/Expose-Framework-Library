@@ -17,6 +17,11 @@ class ExposeWidgetLazyLoader extends ExposeWidget{
 
     public $name = 'lazyloader';
 
+    public function isInMobile()
+    {
+        return FALSE;
+    }
+
     public function init()
     {
         $js ='jQuery(\'img\').lazyload({effect: "fadeIn",threshold : 100});';

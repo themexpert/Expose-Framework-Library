@@ -17,6 +17,11 @@ class ExposeWidgetDesignedBy extends ExposeWidget{
     
     public $name = 'designedby';
 
+    public function isInMobile()
+    {
+        return TRUE;
+    }
+
     public function render()
     {
 
