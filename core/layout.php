@@ -21,8 +21,6 @@ expose_import('core.core');
 class ExposeLayout extends ExposeCore
 {
 
-    public $browser;
-    public $platform;
     protected $modules = array();
     public $widgets = array();
 
@@ -30,9 +28,6 @@ class ExposeLayout extends ExposeCore
     public function __construct()
     {
         parent::__construct();
-
-        //detect the platform first
-        $this->detectPlatform();
 
         //load all widgets in an array and trigger the initialize event for those widgets.
         $this->loadWidgets();
@@ -315,21 +310,6 @@ class ExposeLayout extends ExposeCore
                 }
             }
         }
-    }
-
-    public function detectPlatform()
-    {
-        expose_import('libs.browser');
-        $this->browser = new ExposeBrowser();
-        $browserName = $this->browser->getBrowser();
-
-        //we'll consider 2 mobile now iPhone and Android, iPad will treat as regular desktop device
-        if($this->browser->isMobile() AND ($browserName == 'iPhone' OR $browserName == 'Android')){
-            $this->platform = 'mobile';
-        }else{
-            $this->platform = 'desktop';
-        }
-
     }
 
     public function renderBody()

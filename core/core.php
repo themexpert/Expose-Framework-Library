@@ -25,10 +25,6 @@ class ExposeCore{
     public  $direction;
     public  $templateName;
 
-    //menu
-    public  $menu;
-    public  $hasSubMenu;
-
     //Joomla Instance
     public $document;
     public $app;
@@ -38,6 +34,10 @@ class ExposeCore{
     public  $_styles = NULL;
     public  $_scripts = array();
     private  $_jqDOM = NULL;
+
+    //browser objects
+    public $browser;
+    public $platform;
 
     public function __construct(){
         //get the document object
@@ -73,6 +73,9 @@ class ExposeCore{
 
         //set document direction
         $this->direction = $this->_setDirection();
+
+        //detect the platform first
+        $this->detectPlatform();
         
     }
 
@@ -195,8 +198,6 @@ class ExposeCore{
             $this->addStyle($file);
         }
     }
-
-
 
     private function _loadPresetStyle(){
         //if(defined('EXPOSE_FINAL')) return;
@@ -406,5 +407,20 @@ class ExposeCore{
             return ($menu->getDefault()->id === $menu->getActive()->id) ? TRUE : FALSE;
         }
         
+    }
+
+    public function detectPlatform()
+    {
+        expose_import('libs.browser');
+        $this->browser = new ExposeBrowser();
+        $browserName = $this->browser->getBrowser();
+
+        //we'll consider 2 mobile now iPhone and Android, iPad will treat as regular desktop device
+        if($this->browser->isMobile() AND ($browserName == 'iPhone' OR $browserName == 'Android')){
+            $this->platform = 'mobile';
+        }else{
+            $this->platform = 'desktop';
+        }
+
     }
 }
