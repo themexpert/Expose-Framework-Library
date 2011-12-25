@@ -24,6 +24,7 @@ class ExposeWidgetExposeLogo extends ExposeWidget{
 
     public function render()
     {
+        global $expose;
         $website = 'http://www.expose-framework.org';
         ob_start();
             ?>

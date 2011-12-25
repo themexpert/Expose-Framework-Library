@@ -18,6 +18,7 @@ class ExposeWidgetCopyright extends ExposeWidget{
 
     public function render()
     {
+        global $expose;
         ob_start();
             ?>
             <div id="ex-copyright">

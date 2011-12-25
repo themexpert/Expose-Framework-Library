@@ -12,56 +12,75 @@ class ExposeWidgetMenu extends ExposeWidget{
 
     public function render()
     {
-        $menuType = $this->get('type');
-        $hasSubMenu = '';
-        $fileName = $menuType.'menu';
+        global $expose;
+        $html = '';
 
-        switch($menuType){
+        $menuStyle = $this->get('style');
+        $hasSubMenu = '';
+        $fileName = $menuStyle.'menu';
+
+        if($expose->platform == 'mobile' AND $expose->browser->getBrowser == 'iPhone')
+        {
+            $menuStyle = 'iphone';
+        }
+
+        switch($menuStyle){
             case 'dropline':
                 $class = 'ExposeDroplineMenu';
                 $hasSubMenu = TURE;
                 break;
+
             case 'split':
                 $class = 'ExposeSplitMenu';
                 $hasSubMenu = TRUE;
                 break;
+
+            case 'iphone':
+                $class = 'ExposeIphoneMenu';
+                $hasSubMenu = FALSE;
+                break;
+
             case 'mega':
             default:
                 $class = 'ExposeMegaMenu';
                 $hasSubMenu = FALSE;
 
+                $expose->addStyleSheet('menu.css');
                 //load xpertmenu aka mega menu js file
-                $this->document->addScript($this->exposeUrl.'/interface/js/xpertmenu.js');
-                $js = "jQuery('#tx-menu').XpertMenu({
+                $expose->document->addScript($expose->exposeUrl.'/interface/js/xpertmenu.js');
+                $js = "$('#ex-megamenu').XpertMenu({
                     action:'mouseenter',
-                    parent:'.tx-container',
+                    parent:'#ex-menu',
                     hideDelay:'300',
                     transition:'slide',
                     easing:'easeInOutExpo'
                 });";
 
-                $this->addjQDom($js);
+                $expose->addjQDom($js);
                 break;
         }
         //import menu file
         expose_import("core.menu.$fileName");
 
-        $menu = new $class($this->document->params);
+        $menu = new $class($expose->document->params);
+        ob_start();
+        ?>
+        <div id='ex-menu'>
+            <?php $menu->loadMenu(); ?>
 
-        echo "<div id='tx-menu'>";
-            $menu->loadMenu($this->get('name'));
+            <?php $menu->genMenu(); ?>
 
-            $menu->genMenu(0,-1);
-
-            if($hasSubMenu)
-            {
-                echo "<div id='tx-subnav' class='clearfix'>";
-                   $menu->genMenu(1);
-                echo "</div>";
-            }
-
-        echo "</div>";
-
+            <?php if($hasSubMenu)
+            { ?>
+                <div id='tx-subnav' class='clearfix'>
+                   <?php $menu->genMenu(1); ?>
+                </div>;
+           <?php
+            } ?>
+        <div class="clear"></div>
+        </div>
+        <?php
+            return ob_get_clean();
     }
 
 }

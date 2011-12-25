@@ -37,7 +37,7 @@ class JFormFieldUtility extends JFormField{
             $expose->addScript($expose->exposeUrl.'/interface/js/jquery.cookie.js');
 
             //load expose.css file
-            $expose->addStyle($expose->exposeUrl.'/admin/widgets/expose.css');
+            $expose->addStyleSheet($expose->exposeUrl.'/admin/widgets/expose.css');
         }
         else if($action == 'finalize'){
             //load main expose js file

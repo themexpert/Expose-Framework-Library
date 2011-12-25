@@ -23,6 +23,7 @@ class ExposeWidgetDate extends ExposeWidget{
 
     public function render()
     {
+        global $expose;
         $now = &JFactory::getDate();
         $formate = $this->get('formats');
 

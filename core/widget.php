@@ -10,7 +10,7 @@
 /**
  * Abstract class for Gists
  **/
-abstract class ExposeWidget extends ExposeCore{
+abstract class ExposeWidget{
 
     protected $name = NULL;
     protected $enabled = NULL;
@@ -57,9 +57,11 @@ abstract class ExposeWidget extends ExposeCore{
 
     public function get($param)
     {
+        global $expose;
+
         $field = $this->name . '-' .$param;
 
-        return parent::get($field);
+        return $expose->get($field);
     }
 
     public function init(){

@@ -25,12 +25,14 @@ class ExposeWidgetIe6Warn extends ExposeWidget{
 
     public function init()
     {
-        if($this->browser->getBrowser() == ExposeBrowser::BROWSER_IE AND $this->browser->getVersion() == 6)
+        global $expose;
+
+        if($expose->browser->getBrowser() == ExposeBrowser::BROWSER_IE AND $expose->browser->getVersion() == 6)
         {
             //add ie6warn js
-            $this->document->addScript($this->exposeUrl . '/interface/js/ie6warn.js');
+            $expose->document->addScript($this->exposeUrl . '/interface/js/ie6warn.js');
             //add js to onload method
-            $this->document->addScriptDeclaration('window.onload=sevenUp.plugin.black.test( options, callback );');
+            $expose->document->addScriptDeclaration('window.onload=sevenUp.plugin.black.test( options, callback );');
         }
     }
 }

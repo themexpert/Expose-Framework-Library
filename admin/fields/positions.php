@@ -10,11 +10,7 @@
 // Ensure this file is being included by a parent file
 defined('_JEXEC') or die( 'Restricted access' );
 
-/**
- * Radio List Element
- *
- * @since      Class available since Release 1.2.0
- */
+
 class JFormFieldPositions extends JFormField
 {
 	/**

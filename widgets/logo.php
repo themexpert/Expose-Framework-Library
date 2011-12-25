@@ -21,17 +21,18 @@ class ExposeWidgetLogo extends ExposeWidget{
 
     public function render()
     {
-        $text = ($this->get('text') == NULL) ? $this->app->getCfg('sitename') : $this->get('text');
+        global $expose;
+        $text = ($this->get('text') == NULL) ? $expose->app->getCfg('sitename') : $this->get('text');
 
         if( JURI::current() == JURI::base() ){
             $html = "<h1 id='ex-logo'>
-                        <a href='".$this->baseUrl."' class='png' title='".$text."'>
+                        <a href='".$expose->baseUrl."' class='png' title='".$text."'>
                             <span>$text</span>
                         </a>
                     </h1>";
         }else{
             $html = "<p id='ex-logo'>
-                        <a href='".$this->baseUrl."' class='png'>
+                        <a href='".$expose->baseUrl."' class='png'>
                             <span>$text</span>
                         </a>
                     </p>";
@@ -40,19 +41,6 @@ class ExposeWidgetLogo extends ExposeWidget{
         return $html;
     }
 }
-/*
-ob_start();
-?>
-    <div id="tx-logo">
-        <div class="tx-block">
-            <a href="<?php echo $this->baseUrl;?>" title="<?php echo $this->app->getCfg('sitename');?>">
-                <span><?php echo $this->app->getCfg('sitename');?></span>
-            </a>
-        </div>
-    </div>
-<?php
-echo ob_get_clean();
-*/
 ?>
 
 

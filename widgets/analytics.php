@@ -24,6 +24,7 @@ class ExposeWidgetAnalytics extends ExposeWidget{
 
     public function init()
     {
+        global $expose;
         ob_start();
     ?>
         // start of Google Analytics javascript
@@ -39,7 +40,7 @@ class ExposeWidgetAnalytics extends ExposeWidget{
       })();
 
       <?php
-      $this->document->addScriptDeclaration(ob_get_clean());
+      $expose->document->addScriptDeclaration(ob_get_clean());
     }
 }
 
