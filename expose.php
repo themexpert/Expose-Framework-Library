@@ -49,17 +49,8 @@ if(!defined('EXPOSE_VERSION'))
     //declare global ver
     global $expose;
 
-    $app =& JFactory::getApplication();
-
-    if($app->isAdmin())
-    {
-        expose_import('core.core');
-        $expose = new ExposeCore();
-    }else{
-        
-        expose_import('core.layout');
-        $expose =& ExposeLayout::getInstance();
-    }
+    expose_import('core.core');
+    $expose =& ExposeCore::getInstance();
 
 }
 
