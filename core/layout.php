@@ -15,10 +15,7 @@ defined ('EXPOSE_VERSION') or die ('resticted aceess');
 jimport('joomla.filesystem.folder');
 jimport('joomla.filesystem.file');
 
-//import core class
-expose_import('core.core');
-
-class ExposeLayout extends ExposeCore
+class ExposeLayout
 {
 
     protected $modules = array();
@@ -27,11 +24,8 @@ class ExposeLayout extends ExposeCore
 
     public function __construct()
     {
-        parent::__construct();
-
         //load all widgets in an array and trigger the initialize event for those widgets.
         $this->loadWidgets();
-
     }
 
     public static function getInstance()
@@ -92,6 +86,8 @@ class ExposeLayout extends ExposeCore
 
     public function renderModules($position)
     {
+        global $expose;
+
         $totalPublished = $this->modules[$position]['published'];
         $i = 1;
 
@@ -108,7 +104,7 @@ class ExposeLayout extends ExposeCore
                 $html = '';
 
                 //we'll make all width 100% for mobile device
-                if($this->platform == 'mobile'){
+                if($expose->platform == 'mobile'){
                     $width = 100;
                 }
 
@@ -116,27 +112,25 @@ class ExposeLayout extends ExposeCore
 
                 $class .= ($i%2) ? 'odd' : 'even';
 
-                if($i == ($totalPublished -1)) $class .= ' ie6-offset ';
+                if($i == ($totalPublished -1)) $class .= ' ie6-offset';
 
-
-
-                $modWrapperStart = "<div class='$containerClass $class' style='width:" . $width ."%'>";
+                $modWrapperStart = "<div class='$containerClass $class $positionName' style='width:" . $width ."%'>";
                 $modWrapperEnd = "</div>";
 
                 if($i == $totalPublished){
                     $class .= ' last ';
                     $containerClass = str_replace('wrap-blocks', 'wrap-blocks-last', $containerClass);
                     //$container = 'ex-container wrap-blocks-last';
-                    $modWrapperStart = "<div class='$containerClass $class'>";
+                    $modWrapperStart = "<div class='$containerClass $class $positionName'>";
                     $modWrapperEnd = "</div>";
                 }
 
                 //we'll load all widgets first published in this position
                 if($this->countWidgetsForPosition($positionName))
                 {
-                    foreach($this->getWidgetsForPosition($positionName) as $gist)
+                    foreach($this->getWidgetsForPosition($positionName) as $widget)
                     {
-                        $html .= $gist->render();
+                        $html .= $widget->render();
                     }
                 }
 
@@ -154,7 +148,9 @@ class ExposeLayout extends ExposeCore
 
     protected function setModuleSchema($position)
     {
-        $values = $this->get($position);
+        global $expose;
+
+        $values = $expose->get($position);
         $values = explode(',', $values);
 
         foreach($values as $value)
@@ -162,7 +158,6 @@ class ExposeLayout extends ExposeCore
             list($i, $v) = explode(':', "$value:");
             $this->modules[$position]['schema'][$i][] = $v;
         }
-
     }
 
     protected function getModuleSchema($position)
@@ -186,8 +181,10 @@ class ExposeLayout extends ExposeCore
 
     protected function setModuleChrome($position)
     {
+        global $expose;
+
         $fieldName = $position . '-chrome';
-        $data = $this->get($fieldName);
+        $data = $expose->get($fieldName);
         $data = explode(',', $data);
 
         foreach($data as $json)
@@ -238,7 +235,9 @@ class ExposeLayout extends ExposeCore
     protected function countWidgetsForPosition($position)
     {
 
-        if($this->platform == 'mobile')
+        global $expose;
+
+        if($expose->platform == 'mobile')
         {
             $count = 0;
 
@@ -255,11 +254,13 @@ class ExposeLayout extends ExposeCore
 
     protected function countModulesForPosition($position)
     {
+        global $expose;
+
         $parentField = substr($position,0,strpos($position,'-')); //split the number and get the parent field name
 
-        if($this->platform == 'mobile')
+        if($expose->platform == 'mobile')
         {
-            if($this->get($parentField.'-mobile'))
+            if($expose->get($parentField.'-mobile'))
             {
                 return $this->document->countModules($position);
             }else{
@@ -267,16 +268,17 @@ class ExposeLayout extends ExposeCore
             }
         }
 
-        return $this->document->countModules($position);
+        return $expose->document->countModules($position);
 
     }
 
     protected function loadWidgets()
     {
+        global $expose;
         //define widgets paths
         $widgetPaths = array(
-            $this->exposePath . DS . 'widgets',
-            $this->templatePath . DS .'widgets'
+            $expose->exposePath . DS . 'widgets',
+            $expose->templatePath . DS .'widgets'
         );
         //first loop through all the template and framework path and take widget instance
         foreach($widgetPaths as $widgetPath)
@@ -309,7 +311,7 @@ class ExposeLayout extends ExposeCore
         foreach($this->widgets as $name => $instance)
         {
             //we'll load the widgets based on platform permission
-            if($this->platform == 'mobile')
+            if($expose->platform == 'mobile')
             {
                 if($instance->isEnabled() AND $instance->isInMobile() AND method_exists($instance , 'init'))
                 {
@@ -326,21 +328,23 @@ class ExposeLayout extends ExposeCore
 
     public function renderBody()
     {
-        $layoutType = $this->get('layout-type');
-        $bPath = $this->exposePath . DS . 'layouts';
-        $tPath = $this->templatePath . DS .'layouts';
+        global $expose;
+
+        $layoutType = $expose->get('layout-type');
+        $bPath = $expose->exposePath . DS . 'layouts';
+        $tPath = $expose->templatePath . DS .'layouts';
         $ext = '.php';
 
-        if( $this->platform == 'mobile' )
+        if( $expose->platform == 'mobile' )
         {
             $device = strtolower($this->browser->getBrowser());
             $bfile = $bPath .DS . $device . $ext;
             $tfile = $tPath .DS . $device . $ext;
 
-            if($this->get('iphone-enabled') AND $device == 'iphone')
+            if($expose->get('iphone-enabled') AND $device == 'iphone')
             {
                 $this->loadFile(array($tfile,$bfile));
-            }elseif($this->get('android-enabled') AND $device == 'android'){
+            }elseif($expose->get('android-enabled') AND $device == 'android'){
                 $this->loadFile(array($tfile,$bfile));
             }else{
                 return FALSE;
@@ -379,5 +383,7 @@ class ExposeLayout extends ExposeCore
     {
         return $this->modules;
     }
+
+
 
 }
