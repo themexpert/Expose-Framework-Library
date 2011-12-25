@@ -10,6 +10,8 @@
  * @file        core.php
  **/
 
+expose_import('core.layout');
+
 class ExposeCore{
 
     //common var
@@ -30,10 +32,10 @@ class ExposeCore{
     public $app;
 
     //style and scripts
-    public  $_styleSheets = array();
-    public  $_styles = NULL;
-    public  $_scripts = array();
-    private  $_jqDOM = NULL;
+    private  $styleSheets = array();
+    private  $styles = NULL;
+    private  $scripts = array();
+    private  $jqDom = NULL;
 
     //browser objects
     public $browser;
@@ -48,6 +50,7 @@ class ExposeCore{
 
         //set the baseurl
         $this->baseUrl = JURI::root(true);
+
 
         //base path
         $this->basePath = JPATH_ROOT;
@@ -79,6 +82,19 @@ class ExposeCore{
         
     }
 
+
+    public static function getInstance()
+    {
+        static $instance;
+
+        if(!isset($instance))
+        {
+            $instance = New ExposeCore;
+        }
+
+        return $instance;
+    }
+
     public function isAdmin(){
         return $this->app->isAdmin();
     }
@@ -87,7 +103,6 @@ class ExposeCore{
 
         //load preset style before loading all stylesset. this will allow to add preset
         //style file at the end of all style files
-        $this->_loadPresetStyle();
 
         if($this->get('compress_css',0)){
             ExposeCompressor::compressCSS();
@@ -102,7 +117,7 @@ class ExposeCore{
             $this->_loadScripts();
         }
         
-        if(isset ($this->_jqDOM) AND $this->_jqDOM != NULL){
+        if(isset ($this->jqDom) AND $this->jqDom != NULL){
             $this->_renderCombinedDom();
         }
          //fix the template width and sidebar width
@@ -143,6 +158,7 @@ class ExposeCore{
         foreach($templates as $template){
             $templateName = $template->template;
         }
+
         return $templateName;
 
 //        if(!$this->isAdmin()){
@@ -152,51 +168,120 @@ class ExposeCore{
 //        }
     }
 
-    public function addStyle($file){
-        if(defined('EXPOSE_FINAL')) return;
-        //TODO: add a override method to override base css file
-        $type = 'css';
-        $site_url = $this->templateUrl . $type . '/' ;
-        $expose_url = $this->exposeUrl . 'interface/'.$type.'/';
-
-        //make sure core stylesheets are loaded before all style
-        if(!$this->isAdmin()){
-            if(!defined('EXPOSE_CORE_STYLE_LOADED')){
-                $core_style_sheet = array('expose.css','joomla.css','menu.css');
-//                if($this->browser->isMobile()){
-//                    $mob_client = strtolower($this->browser->getBrowser());
-//                    $mob_css = 'expose-'. $mob_client.'.css';
-//                    $core_style_sheet[]=$mob_css;
+//    public function addStyle($file){
+//        if(defined('EXPOSE_FINAL')) return;
+//        //TODO: add a override method to override base css file
+//        $type = 'css';
+//        $site_url = $this->templateUrl . $type . '/' ;
+//        $expose_url = $this->exposeUrl . 'interface/'.$type.'/';
+//
+//        //make sure core stylesheets are loaded before all style
+//        if(!$this->isAdmin()){
+//            if(!defined('EXPOSE_CORE_STYLE_LOADED')){
+//                $core_style_sheet = array('expose.css','joomla.css');
+////                if($this->browser->isMobile()){
+////                    $mob_client = strtolower($this->browser->getBrowser());
+////                    $mob_css = 'expose-'. $mob_client.'.css';
+////                    $core_style_sheet[]=$mob_css;
+////                }
+//                //load core style
+//                foreach($core_style_sheet as $styleSheet){
+//                    if(file_exists($this->templatePath . DS . 'css' . DS . $styleSheet)){
+//                        $this->styleSheets[$styleSheet] = $site_url.$styleSheet;
+//                    }else{
+//                        $this->styleSheets[$styleSheet] = $expose_url.$styleSheet;
+//                    }
 //                }
-                //load core style
-                foreach($core_style_sheet as $styleSheet){
-                    if(file_exists($this->templatePath . DS . 'css' . DS . $styleSheet)){
-                        $this->_styleSheets[$styleSheet] = $site_url.$styleSheet;
-                    }else{
-                        $this->_styleSheets[$styleSheet] = $expose_url.$styleSheet;
-                    }
-                }
-                define('EXPOSE_CORE_STYLE_LOADED', 1);
-            }
-        }
+//                define('EXPOSE_CORE_STYLE_LOADED', 1);
+//            }
+//        }
+//
+//        $dir = dirname($file);
+//        //check the file source.
+//        if($dir != '.'){
+//            //path is included so add it directly
+//            $this->styleSheets[$file]= $file;
+//        }
+//        else{
+//            $out_file = $site_url . $file;
+//            $this->styleSheets[$file] = $out_file;
+//        }
+//    }
 
-        $dir = dirname($file);
-        //check the file source.
-        if($dir != '.'){
-            //path is included so add it directly
-            $this->_styleSheets[$file]= $file;
-        }
-        else{
-            $out_file = $site_url . $file;
-            $this->_styleSheets[$file] = $out_file;
+    public function addStyleSheet($file){
+        if(is_array($file)){
+            foreach($file as $path){
+                $this->addLink($path, 'css');
+            }
+        }else{
+            $this->addLink($file, 'css');
         }
     }
 
-    public function addStyles($files=array()){
-        if(defined('EXPOSE_FINAL')) return;
-        foreach($files as $file){
-            $this->addStyle($file);
+    public function addLink($file, $type)
+    {
+        jimport('joomla.filesystem.file');
+
+        $burl = $this->exposeUrl . '/interface/' . $type . '/';
+        $turl = $this->templateUrl  . '/' .$type . '/';
+
+        if($type == 'css')
+        {
+            $dir = dirname($file);
+            //check file source
+            if($dir != '.')
+            {
+                if(preg_match('/^http/', $file))
+                {
+                    $this->styleSheets['url'][] = $file;
+                    return;
+                }
+                //path is included so check its existence and add
+                $path = $this->getFilePath($file);
+                if(JFile::exists($path)){
+                    $this->styleSheets['local'][$path] = $file;
+                    return;
+                }
+
+            }else{
+                $tpath = $this->getFilePath($turl.$file);
+                $bpath = $this->getFilePath($burl.$file);
+                //cross check both base and template path for this file
+                if(JFile::exists($tpath))
+                {
+                    $this->styleSheets['local'][$tpath] = $turl.$file;
+                    return;
+                }elseif(JFile::exists($bpath)){
+                    $this->styleSheets['local'][$bpath] = $burl.$file;
+                    return;
+                }
+            }
+
+            return;
         }
+
+        if($type == 'js')
+        {
+            $this->scripts[]= $file;
+        }
+    }
+
+    private function getFilePath($url)
+    {
+        $uri	    =& JURI::getInstance();
+        $base	    = $uri->toString( array('scheme', 'host', 'port'));
+        $path       = JURI::Root(true);
+        if ($url && $base && strpos($url,$base)!==false) $url = preg_replace('|^'.$base.'|',"",$url);
+        if ($url && $path && strpos($url,$path)!==false) $url = preg_replace('|^'.$path.'|',"",$url);
+        if (substr($url,0,1) != DS) $url = DS.$url;
+        $filepath = JPATH_SITE.$url;
+        return $filepath;
+
+    }
+
+    //TODO: delete this function on code cleanup seassion
+    public function getStyleSheet(){
+        return $this->styleSheets;
     }
 
     private function _loadPresetStyle(){
@@ -207,35 +292,31 @@ class ExposeCore{
             $preset_file = $_REQUEST['style'];
         }
         $preset_file = $preset_file.'.css';
-        $this->addStyle($preset_file);
+        $this->addLink($preset_file, 'css');
     }
 
     public function addInlineStyles($content){
-        if(defined('EXPOSE_FINAL')) return;
         return $this->document->addStyleDeclaration($content);
     }
 
     public function addScript($file){
-        if(defined('EXPOSE_FINAL')) return;
         //make sure jQuery is loaded before all scripts
         $this->addjQuery();
 
-        $this->_scripts[]= $file;
+        $this->scripts[]= $file;
 
         //$this->document->addScript($file);
     }
 
     public function addScripts($files= array()){
-        if(defined('EXPOSE_FINAL')) return;
         foreach($files as $file){
             $this->addScript($file);
         }
     }
 
     public function addjQDom($js=NULL){
-        if(defined('EXPOSE_FINAL')) return;
         if($js != NULL){
-            $this->_jqDOM .= "\t\t\t" . $js ."\n";
+            $this->jqDom .= "\t\t\t" . $js ."\n";
         }
     }
     private function _renderCombinedDom(){
@@ -243,7 +324,7 @@ class ExposeCore{
         $dom = '';
         //add noConflict
         $dom .= $jqNoConflict;
-        $dom .= "\n\t\t" . 'jQuery(document).ready(function($){'."\n".$this->_jqDOM."\n\t\t});";
+        $dom .= "\n\t\t" . 'jQuery(document).ready(function($){'."\n".$this->jqDom."\n\t\t});";
 
         $this->document->addScriptDeclaration($dom);
     }
@@ -254,7 +335,7 @@ class ExposeCore{
         if($this->isAdmin() AND !$this->app->get('jQuery')){
             $file = $this->exposeUrl.'/interface/js/jquery-1.7.1.min.js';
             $this->app->set('jQuery','1.5.1');
-            $this->_scripts[]= $file;
+            $this->scripts[]= $file;
             return;
         }
         
@@ -274,20 +355,22 @@ class ExposeCore{
                     break;
             }
             $this->app->set('jQuery',$version);
-            $this->_scripts[]= $file;
+            $this->scripts[]= $file;
         }
         return;
     }
 
     private function _loadStyles(){
-        if(defined('EXPOSE_FINAL')) return;
-        //print_r($this->_styleSheets);
-        foreach($this->_styleSheets as $file){
-            $this->document->addStyleSheet($file);
+        //if(defined('EXPOSE_FINAL')) return;
+        $this->_loadPresetStyle();
+        //print_r($this->styleSheets);
+        foreach($this->styleSheets['local'] as $file){
+            $version = '?v=' . EXPOSE_VERSION;
+            $this->document->addStyleSheet($file.$version);
         }
     }
     private function _loadScripts(){
-        foreach($this->_scripts as $script){
+        foreach($this->scripts as $script){
             $this->document->addScript($script);
         }
     }
@@ -336,48 +419,6 @@ class ExposeCore{
         $this->addInlineStyles($css);
     }
 
-    public function loadMenu(){
-        $menuType = $this->get('menu_type','mega');
-        switch($menuType){
-            case 'mega':
-                $class = 'MegaMenu';
-                $this->hasSubMenu = FALSE;
-                //load xpertmenu aka mega menu js file
-                $this->addScript($this->exposeUrl.'interface/js/xpertmenu.js');
-                $js = "jQuery('#tx-menu').XpertMenu({
-                    action:'mouseenter',
-                    parent:'.tx-container',
-                    hideDelay:'300',
-                    transition:\"slide\",
-                    easing:\"easeInOutExpo\"
-                });";
-                $this->addjQDom($js);
-                break;
-            case 'dropline':
-                $class = 'DroplineMenu';
-                $this->hasSubMenu = TURE;
-                break;
-            case 'split':
-                $class = 'SplitMenu';
-                $this->hasSubMenu = TRUE;
-                    
-                break;
-            default:
-                $class = 'MegaMenu';
-                $this->hasSubMenu = FALSE;
-                break;
-        }
-        $menu =& loadClass($class,'core/menu',$this->document->params);
-
-        return $menu;
-        /*$menu = (isset ($_COOKIE[$this->templateName.'_menu'])) ? $_COOKIE[$this->templateName.'_menu'] : 'superfish';
-        if(isset ($_REQUEST['menu'])){
-            setcookie($this->templateName.'_menu',$_REQUEST['menu'],time()+3600,'/');
-            $menu = $_REQUEST['menu'];
-        }*/
-
-    }
-    
 
     public function displayHead(){
         if(defined('EXPOSE_FINAL')) return;
@@ -407,6 +448,25 @@ class ExposeCore{
             return ($menu->getDefault()->id === $menu->getActive()->id) ? TRUE : FALSE;
         }
         
+    }
+
+    public function countModules($position)
+    {
+        $layout = ExposeLayout::getInstance();
+
+        return $layout->countModules($position);
+    }
+
+    public function renderModules($position)
+    {
+        $layout = ExposeLayout::getInstance();
+        $layout->renderModules($position);
+    }
+
+    public function renderBody()
+    {
+        $layout = ExposeLayout::getInstance();
+        $layout->renderBody();
     }
 
     public function detectPlatform()
