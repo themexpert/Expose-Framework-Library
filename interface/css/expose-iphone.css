@@ -8,28 +8,28 @@
  **/
 
 body{}
-.tx-container{ max-width: 320px;}
+.ex-container{ max-width: 320px;}
 .iphone img{max-width: 320px;}
 #mobile-header{background: url(../images/iphone/grad-d1.gif) repeat-x; height: 40px;margin-bottom: 15px;}
-#mobile-header .tx-block{margin: 0;}
-#tx-main .tx-container{margin-bottom: -10px;}
-.iphone .tx-content .dynamic .item .tx-article{width: 320px;}
-.iphone .tx-content .item img{width: 300px !important; height: 130px}
-.iphone .tx-content .tx-article-icons{display: none}
-.iphone .tx-pagination{font-size: 10px;}
-.iphone .tx-pagination .tx-results{width: 60px}
-.iphone .tx-pagination ul{width: 260px;}
-.iphone .tx-pagination ul li{margin: 0;padding: 10px 5px 9px;}
-#tx-mobile-header{background: #fff;margin-bottom: 15px;}
-#tx-mobile-header ul{list-style: none;margin: 0;padding: 0}
-#tx-mobile-header ul li{float: left; padding: 3px 4px;margin: 0;}
-#tx-mobile-header ul li a{display: block;font-size: 11px}
-#tx-mobile-header ul li ul{display: none;}
-#tx-mobile-header .tx-container{background: none;}
-#tx-mobile-header .tx-block{padding: 0}
+#mobile-header .ex-block{margin: 0;}
+#ex-main .ex-container{margin-bottom: -10px;}
+.iphone .ex-content .dynamic .item .ex-article{width: 320px;}
+.iphone .ex-content .item img{width: 300px !important; height: 130px}
+.iphone .ex-content .ex-article-icons{display: none}
+.iphone .ex-pagination{font-size: 10px;}
+.iphone .ex-pagination .ex-results{width: 60px}
+.iphone .ex-pagination ul{width: 260px;}
+.iphone .ex-pagination ul li{margin: 0;padding: 10px 5px 9px;}
+#ex-mobile-header{background: #fff;margin-bottom: 15px;}
+#ex-mobile-header ul{list-style: none;margin: 0;padding: 0}
+#ex-mobile-header ul li{float: left; padding: 3px 4px;margin: 0;}
+#ex-mobile-header ul li a{display: block;font-size: 11px}
+#ex-mobile-header ul li ul{display: none;}
+#ex-mobile-header .ex-container{background: none;}
+#ex-mobile-header .ex-block{padding: 0}
 .iphone .cols-3 .column-1,
 .iphone .cols-3 .column-2,
 .iphone .cols-3 .column-3{float: none;width: auto}
-#tx-legal .tx-container{padding: 10px; width: 300px; -webkit-border-radius: 0;}
+#ex-legal .ex-container{padding: 10px; width: 300px; -webkit-border-radius: 0;}
 
-.tx-content .title{font-size: 170%;margin: 5px;}
+.ex-content .title{font-size: 170%;margin: 5px;}

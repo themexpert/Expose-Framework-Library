@@ -12,48 +12,83 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 
 /* Layout 
 ----------------------------------------*/
+
+.wrapper:after, .ex-row:after, .ex-block:after {
+      content: ".";
+      display: block;
+      height: 0;
+      clear: both;
+      visibility: hidden;
+}
+.wrapper, .ex-block, .wrap-blocks, .wrap-blocks-last {display: inline-block; min-height: 0;}    
+/* hides from IE-mac \*/  
+* html .wrapper, * html .ex-block, * html .wrap-blocks, * html .wrap-blocks-last {height: 1%;}  
+.wrapper, .ex-block, .wrap-blocks, .wrap-blocks-last {display: block;}  
+/* end hide from IE-mac */
+
+.wrapper {
+	display:inline-block;
+	width:960px;
+	margin-right: auto;
+	margin-left: auto;
+	text-align: left;
+	position :relative;
+	z-index: 1;
+	text-align: left;
+}
+.wrap-blocks {float:left; margin-right:-1px;}
+.wrap-blocks-last {overflow:hidden;}
+* html .ie6-offset {margin-right: -4px;}
+.wrapper, .ex-row {clear:left;}
+
+/* added styles */
+
+.wrapper, .ex-row {background: #ccc;}
+.ex-block {padding: 10px; margin:10px; background: #fff; border: 1px solid #000000; position: relative;
+}
+
 /* Core */
-.tx-container{margin: 0 auto;position: relative}
-.tx-mod{float: left;height: 100%}
+.wrap-blocks{margin: 0 auto;}
+.ex-mod{height: 100%}
 .mod-inner{margin: 0 10px;}
-.tx-block{padding: 10px;margin-bottom: 10px;position: relative}
-#tx-mainbody, #sidebar-left, #sidebar-right{float: left}
-.tx-menu .tx-block{margin-left: 0;margin-right: 0}
+.ex-block{padding: 10px;margin-bottom: 10px;position: relative}
+#ex-mainbody, #sidebar-left, #sidebar-right{}
+.ex-menu .ex-block{margin-left: 0;margin-right: 0}
 .width50{width: 50%;float: left}
 .width50 .mod-content{padding-right: 5px;}
 .left{float: left;margin-right: 10px;}
 .right{float: right;margin-left: 10px;}
-#tx-copyright,.designed-by{text-align: center}
-#tx-poweredby{margin: 0 auto}
+#ex-copyright,.designed-by{text-align: center}
+#ex-poweredby{margin: 0 auto}
 
 /* Menu */
-.tx-menu {position: relative;z-index: 1000;}
-.tx-menu ul{margin: 0;padding: 0;list-style: none}
-.tx-menu ul li{float: left;padding: 0;position: relative;}
-.tx-menu ul li a{display: block;font-family: "Trebuchet MS",Verdana,Arial,sans-serif;padding: 0 10px;}
-.tx-menu ul ul {position:absolute;left:-9999em;padding: 5px;width: 15em;}
-.tx-menu ul ul li {width:100%;}
-.tx-menu ul li:hover {visibility:inherit; /* fixes IE7 'sticky bug' */}
-.tx-menu ul li:hover ul, .tx-menu ul li.over ul{left: 0;z-index:99;}
-.tx-menu ul li:hover li ul, .tx-menu ul li.over li ul{left: -999em;}
-.tx-menu ul li li:hover ul, .tx-menu ul li li.over ul{left:14em; top:0;}
-.tx-menu ul li li:hover li ul, .tx-menu ul li li.over li ul{top:-999em;}
-.tx-menu ul li li li:hover ul,.tx-menu ul li li li.over ul {left: 14em; /* match ul width */top:0;}
+.ex-menu {position: relative;z-index: 1000;}
+.ex-menu ul{margin: 0;padding: 0;list-style: none}
+.ex-menu ul li{float: left;padding: 0;position: relative;}
+.ex-menu ul li a{display: block;font-family: "Trebuchet MS",Verdana,Arial,sans-serif;padding: 0 10px;}
+.ex-menu ul ul {position:absolute;left:-9999em;padding: 5px;width: 15em;}
+.ex-menu ul ul li {width:100%;}
+.ex-menu ul li:hover {visibility:inherit; /* fixes IE7 'sticky bug' */}
+.ex-menu ul li:hover ul, .ex-menu ul li.over ul{left: 0;z-index:99;}
+.ex-menu ul li:hover li ul, .ex-menu ul li.over li ul{left: -999em;}
+.ex-menu ul li li:hover ul, .ex-menu ul li li.over ul{left:14em; top:0;}
+.ex-menu ul li li:hover li ul, .ex-menu ul li li.over li ul{top:-999em;}
+.ex-menu ul li li li:hover ul,.ex-menu ul li li li.over ul {left: 14em; /* match ul width */top:0;}
 
 /*Additional*/
-#tx-scrolltop{display: none;position: fixed;right: 15px;bottom: 5px; height: 20px; font-weight: bold;font-size: 11px;text-decoration: none;padding: 0px 15px; }
+#ex-scrolltop{display: none;position: fixed;right: 15px;bottom: 5px; height: 20px; font-weight: bold;font-size: 11px;text-decoration: none;padding: 0px 15px; }
 .expose-logo, .expose-logo a{width: 152px;height: 40px;display: block}
 .expose-logo span{display: none}
 
 /* RTL */
 /*body.rtl {direction: rtl;}*/
-body.rtl #tx-mainbody, body.rtl #sidebar-left, body.rtl #sidebar-right, body.rtl .tx-mod{float: right}
-body.rtl .tx-menu ul li{float: right}
+body.rtl #ex-mainbody, body.rtl #sidebar-left, body.rtl #sidebar-right, body.rtl .ex-mod{float: right}
+body.rtl .ex-menu ul li{float: right}
 body.rtl {min-width: inherit;}
-body.rtl .tx-menu ul li:hover ul, body.rtl .tx-menu ul li.over ul{right: 0;}
-body.rtl .tx-menu ul li:hover li ul, body.rtl .tx-menu ul li.over li ul{right: -999em;}
-body.rtl .tx-menu ul li li:hover ul, body.rtl .tx-menu ul li li.over ul{right:13em;}
-body.rtl .tx-menu ul li li li:hover ul,body.rtl .tx-menu ul li li li.over ul {right: 10em;top:0;}
+body.rtl .ex-menu ul li:hover ul, body.rtl .ex-menu ul li.over ul{right: 0;}
+body.rtl .ex-menu ul li:hover li ul, body.rtl .ex-menu ul li.over li ul{right: -999em;}
+body.rtl .ex-menu ul li li:hover ul, body.rtl .ex-menu ul li li.over ul{right:13em;}
+body.rtl .ex-menu ul li li li:hover ul,body.rtl .ex-menu ul li li li.over ul {right: 10em;top:0;}
 body.rtl ul, ol{padding-right: 15px;}
 
 /* Typography 
@@ -86,15 +121,15 @@ ul li.author span, ul li.date span, ul li.comments span {display: block;font-wei
 html,body {margin-bottom: 1px;}
 body {color: #333;}
 a:hover {color: #000;}
-.tx-menu ul li a {color: #777;text-shadow: 0 1px 1px #FFF}
+.ex-menu ul li a {color: #777;text-shadow: 0 1px 1px #FFF}
 /*First Level*//*
-.tx-menu ul.menu > li:hover > a,.tx-menu ul.menu > li.active > a {background: #eee; outline: 1px solid #ddd; color: #444;}
+.ex-menu ul.menu > li:hover > a,.ex-menu ul.menu > li.active > a {background: #eee; outline: 1px solid #ddd; color: #444;}
 *//*Second and above level*//*
-.tx-menu ul li ul li a:hover{color: #ff4500;}
-.tx-menu ul li ul{background: #fff;border: 1px solid #ddd;}*/
+.ex-menu ul li ul li a:hover{color: #ff4500;}
+.ex-menu ul li ul{background: #fff;border: 1px solid #ddd;}*/
 .expose-logo-light{background: url(../images/expose_logo_light.png) no-repeat;}
 .expose-logo-dark{background: url(../images/expose_logo_dark.png) no-repeat;}
-#tx-scrolltop{background: #555;color: #fff; }
+#ex-scrolltop{background: #555;color: #fff; }
 
 /* Clear Float*/
 html body * span.clear, html body * div.clear, html body * li.clear, html body * dd.clear {background: none;border: 0;clear: both;display: block;float: none;font-size: 0;list-style: none;margin: 0;padding: 0;overflow: hidden;visibility: hidden;width: 0;height: 0;}

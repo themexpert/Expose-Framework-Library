@@ -7,20 +7,20 @@
  * @file        mega.css
  **/
 
-.tx-megamenu { margin: 0; padding: 0; }
-.tx-megamenu a.over, .tx-megamenu a.active {}
+.ex-megamenu { margin: 0; padding: 0; }
+.ex-megamenu a.over, .ex-megamenu a.active {}
 
 ul.megamenu { margin: 10px; /* menu's gutter */ } 
 
 /* lv - 0
 -----------------------------------*/
 /* Styling ---*/
-.tx-megamenu ul.level0 {
+.ex-megamenu ul.level0 {
 	margin: 0;
 	padding: 0;
 }
 
-.tx-megamenu ul.level0 li.mega {
+.ex-megamenu ul.level0 li.mega {
 	background: none;
 	display: block;
 	float: left;
@@ -28,7 +28,7 @@ ul.megamenu { margin: 10px; /* menu's gutter */ }
 	padding: 0;
 }
 
-.tx-megamenu ul.level0 li.mega a.mega {
+.ex-megamenu ul.level0 li.mega a.mega {
 	display: block;
 	font-weight: bold;
 	line-height: normal;
@@ -37,7 +37,7 @@ ul.megamenu { margin: 10px; /* menu's gutter */ }
 	text-decoration: none;
 }
 
-.tx-megamenu ul.level0 li.mega .has-image {
+.ex-megamenu ul.level0 li.mega .has-image {
 	padding-left: 25px;
 	display: block;
 	background-repeat: no-repeat;
@@ -45,121 +45,121 @@ ul.megamenu { margin: 10px; /* menu's gutter */ }
 	cursor: pointer;
 }
 
-.tx-megamenu ul.level0 li.mega span.menu-title { display: block; }
+.ex-megamenu ul.level0 li.mega span.menu-title { display: block; }
 
-.tx-megamenu ul.level0 li.mega span.menu-desc {
+.ex-megamenu ul.level0 li.mega span.menu-desc {
 	display: block;
 	font-weight: normal;
 	font-size: 92%;
 }
 
-.tx-megamenu ul.level0 li.mega a img {
+.ex-megamenu ul.level0 li.mega a img {
 	float: left;
 	padding-right: 5px;
 }
 
-.tx-megamenu ul.level0 li.over, ul.level0 li.haschild-over {}
+.ex-megamenu ul.level0 li.over, ul.level0 li.haschild-over {}
 
-.tx-megamenu ul.level0 li.haschild a.mega span.menu-title,
-.tx-megamenu ul.level0 li.haschild-over a.mega span.menu-title {
+.ex-megamenu ul.level0 li.haschild a.mega span.menu-title,
+.ex-megamenu ul.level0 li.haschild-over a.mega span.menu-title {
 	background: url(../images/arrow3.png) no-repeat left center;
 	padding-left: 12px;
 }
 
-.tx-megamenu ul.level0 li.haschild a.mega span.menu-desc,
-.tx-megamenu ul.level0 li.haschild-over a.mega span.menu-desc {
+.ex-megamenu ul.level0 li.haschild a.mega span.menu-desc,
+.ex-megamenu ul.level0 li.haschild-over a.mega span.menu-desc {
 	padding-left: 12px;
 }
 
-.tx-megamenu ul.level0 li.active {}
+.ex-megamenu ul.level0 li.active {}
 
 /* lv - 1 and below
 -----------------------------------*/
 /* Layout ---*/
-.tx-megamenu li.mega .childcontent { display: block; height: auto; position: absolute; }
+.ex-megamenu li.mega .childcontent { display: block; height: auto; position: absolute; }
 
-.tx-megamenu li.mega .childcontent,
-.tx-megamenu li.haschild-over li.mega .childcontent,
-.tx-megamenu li.mega li.haschild-over li.mega .childcontent ,
-.tx-megamenu li.mega li.mega li.haschild-over li.mega .childcontent,
-.tx-megamenu li.mega li.mega li.mega li.haschild-over li.mega .childcontent,
-.tx-megamenu li.mega li.mega li.mega li.mega li.haschild-over li.mega .childcontent { left: -999em; /*hide the menu*/ }
+.ex-megamenu li.mega .childcontent,
+.ex-megamenu li.haschild-over li.mega .childcontent,
+.ex-megamenu li.mega li.haschild-over li.mega .childcontent ,
+.ex-megamenu li.mega li.mega li.haschild-over li.mega .childcontent,
+.ex-megamenu li.mega li.mega li.mega li.haschild-over li.mega .childcontent,
+.ex-megamenu li.mega li.mega li.mega li.mega li.haschild-over li.mega .childcontent { left: -999em; /*hide the menu*/ }
 
-.tx-megamenu li.haschild:hover .childcontent,
-.tx-megamenu li.mega li.haschild:hover .childcontent,
-.tx-megamenu li.mega li.mega li.haschild:hover .childcontent,
-.tx-megamenu li.mega li.mega li.mega li.haschild:hover .childcontent,
-.tx-megamenu li.mega li.mega li.mega li.mega li.haschild:hover .childcontent,
-.tx-megamenu li.mega li.mega li.mega li.mega li.mega li.haschild:hover .childcontent { left: auto; /*show on parent:hover*/ }
+.ex-megamenu li.haschild:hover .childcontent,
+.ex-megamenu li.mega li.haschild:hover .childcontent,
+.ex-megamenu li.mega li.mega li.haschild:hover .childcontent,
+.ex-megamenu li.mega li.mega li.mega li.haschild:hover .childcontent,
+.ex-megamenu li.mega li.mega li.mega li.mega li.haschild:hover .childcontent,
+.ex-megamenu li.mega li.mega li.mega li.mega li.mega li.haschild:hover .childcontent { left: auto; /*show on parent:hover*/ }
 
-.tx-megamenu li.mega .right,
-.tx-megamenu li.haschild-over li.mega .right,
-.tx-megamenu li.mega li.haschild-over li.mega .right ,
-.tx-megamenu li.mega li.mega li.haschild-over li.mega .right, 
-.tx-megamenu li.mega li.mega li.mega li.haschild-over li.mega .right, 
-.tx-megamenu li.mega li.mega li.mega li.mega li.haschild-over li.mega .right { right: auto; /*hide the menu*/ }
+.ex-megamenu li.mega .right,
+.ex-megamenu li.haschild-over li.mega .right,
+.ex-megamenu li.mega li.haschild-over li.mega .right ,
+.ex-megamenu li.mega li.mega li.haschild-over li.mega .right, 
+.ex-megamenu li.mega li.mega li.mega li.haschild-over li.mega .right, 
+.ex-megamenu li.mega li.mega li.mega li.mega li.haschild-over li.mega .right { right: auto; /*hide the menu*/ }
 
-.tx-megamenu li.haschild-over .right
+.ex-megamenu li.haschild-over .right
 { right: 0; /*show on parent:hover*/ }
-.tx-megamenu li.mega li.haschild-over .right,
-.tx-megamenu li.mega li.mega li.haschild-over .right,
-.tx-megamenu li.mega li.mega li.mega li.haschild-over .right,
-.tx-megamenu li.mega li.mega li.mega li.mega li.haschild-over .right,
-.tx-megamenu li.mega li.mega li.mega li.mega li.mega li.haschild-over .right 
+.ex-megamenu li.mega li.haschild-over .right,
+.ex-megamenu li.mega li.mega li.haschild-over .right,
+.ex-megamenu li.mega li.mega li.mega li.haschild-over .right,
+.ex-megamenu li.mega li.mega li.mega li.mega li.haschild-over .right,
+.ex-megamenu li.mega li.mega li.mega li.mega li.mega li.haschild-over .right 
 { right: 12em; /*show on parent:hover*/ }
 
-.tx-megamenu ul.level1 li.mega { float: none; }
+.ex-megamenu ul.level1 li.mega { float: none; }
 
-.tx-megamenu ul.level1 .childcontent { margin: -2em 0 0 160px; }
+.ex-megamenu ul.level1 .childcontent { margin: -2em 0 0 160px; }
 
  /* Columns ---*/
-.tx-megamenu .megacol { float: left;}
+.ex-megamenu .megacol { float: left;}
 
 /* Styling ---*/
-.tx-megamenu ul.level1 li.mega {}
+.ex-megamenu ul.level1 li.mega {}
 
-.tx-megamenu ul.level1 li.first {}
+.ex-megamenu ul.level1 li.first {}
 
-.tx-megamenu ul.level1 li.mega a.mega {
+.ex-megamenu ul.level1 li.mega a.mega {
 	background: none;
 	border: 0;
 	font-weight: normal;
 	padding: 8px 5px;
 }
 
-.tx-megamenu ul.level1 li.mega a.mega span.menu-title { background: none; padding: 0; }
+.ex-megamenu ul.level1 li.mega a.mega span.menu-title { background: none; padding: 0; }
 
-.tx-megamenu ul.level1 li.haschild,
-.tx-megamenu ul.level1 li.haschild-over {
+.ex-megamenu ul.level1 li.haschild,
+.ex-megamenu ul.level1 li.haschild-over {
 	background-image: url(../images/arrow.png);
 	background-repeat: no-repeat;
 	background-position: 95% center;
 	padding: 0;
 }
 
-.tx-megamenu ul.level1 li.over, ul.level1 li.haschild-over {}
+.ex-megamenu ul.level1 li.over, ul.level1 li.haschild-over {}
 
-.tx-megamenu ul.level1 li.group { background: none; }
+.ex-megamenu ul.level1 li.group { background: none; }
 
  /* CHILD CONTENT
 -----------------------------------*/
-.tx-megamenu .childcontent {
+.ex-megamenu .childcontent {
 	z-index: 999;
 }
 
-.tx-megamenu .childcontent-inner {
+.ex-megamenu .childcontent-inner {
 	background: #fff;
 }
 
-.tx-megamenu .level1 .childcontent-inner {}
+.ex-megamenu .level1 .childcontent-inner {}
 
-.tx-megamenu .childcontent .tx-moduletable {
+.ex-megamenu .childcontent .ex-moduletable {
 	line-height: 1.5;
 	margin: 10px 0;
 	padding: 0;
 }
 
-.tx-megamenu .childcontent .tx-moduletable h3 {
+.ex-megamenu .childcontent .ex-moduletable h3 {
 	background: none;
 	margin-left: 10px;
 	margin-right: 10px;
@@ -167,50 +167,50 @@ ul.megamenu { margin: 10px; /* menu's gutter */ }
 	text-transform: none;
 }
 
-.tx-megamenu .childcontent .tx-moduletable .tx-box-ct {
+.ex-megamenu .childcontent .ex-moduletable .ex-box-ct {
 	padding: 0 5px;
 }
 
-.tx-megamenu .childcontent .tx-moduletable a {
+.ex-megamenu .childcontent .ex-moduletable a {
 	text-decoration: none;
 }
 
-.tx-megamenu .childcontent .tx-moduletable a:hover,
-.tx-megamenu .childcontent .tx-moduletable a:focus,
-.tx-megamenu .childcontent .tx-moduletable a:active {
+.ex-megamenu .childcontent .ex-moduletable a:hover,
+.ex-megamenu .childcontent .ex-moduletable a:focus,
+.ex-megamenu .childcontent .ex-moduletable a:active {
 	text-decoration: none;
 }
 
-.tx-megamenu .childcontent .tx-moduletable ul:first-child {
+.ex-megamenu .childcontent .ex-moduletable ul:first-child {
 	margin-top: 0 !important;
 }
 
-.tx-megamenu .childcontent .tx-moduletable li {
+.ex-megamenu .childcontent .ex-moduletable li {
 	margin-bottom: 5px;
 }
 
 /* Grouped --- */
-.tx-megamenu .group {}
+.ex-megamenu .group {}
 
-.tx-megamenu .group-title { overflow: hidden; }
+.ex-megamenu .group-title { overflow: hidden; }
 
-.tx-megamenu .group-title .menu-title {}
+.ex-megamenu .group-title .menu-title {}
 
-.tx-megamenu .group-title .menu-desc {
+.ex-megamenu .group-title .menu-desc {
 	padding-left: 0 !important;
 }
 
-.tx-megamenu .group-content .tx-moduletable,
-.tx-megamenu .group-content ul.megamenu  {
+.ex-megamenu .group-content .ex-moduletable,
+.ex-megamenu .group-content ul.megamenu  {
 	margin: 10px; /* Group-content's gutter*/
 }
 
 /* reset --- */
-.tx-megamenu .childcontent ul.megamenu .tx-moduletable {
+.ex-megamenu .childcontent ul.megamenu .ex-moduletable {
 	padding: 0;
 }
 
-.tx-megamenu .childcontent ul.megamenu .tx-moduletable h3 {
+.ex-megamenu .childcontent ul.megamenu .ex-moduletable h3 {
 	margin-left: 0;
 	margin-right: 0;
 }
@@ -218,19 +218,19 @@ ul.megamenu { margin: 10px; /* menu's gutter */ }
 
 /* Dropline Menu
 -----------------------------------*/
-#txdl-mainnav {
+#exdl-mainnav {
 	position: relative;
 }
 
-#txdl-mainnav ul { }
+#exdl-mainnav ul { }
 
-#txdl-mainnav li {
+#exdl-mainnav li {
 	float: left;
 	padding: 0;
 	margin: 0;
 }
 
-#txdl-mainnav a {
+#exdl-mainnav a {
 	display: block;
 	float: left;
 	font-weight: bold;
@@ -240,33 +240,33 @@ ul.megamenu { margin: 10px; /* menu's gutter */ }
 	text-decoration: none;
 }
 
-#txdl-mainnav a:hover,
-#txdl-mainnav ul li.hover a {}
+#exdl-mainnav a:hover,
+#exdl-mainnav ul li.hover a {}
 
-#txdl-mainnav li.active a,
-#txdl-mainnav li.active a:hover,
-#txdl-mainnav li.active a:active,
-#txdl-mainnav li.active a:focus {}
+#exdl-mainnav li.active a,
+#exdl-mainnav li.active a:hover,
+#exdl-mainnav li.active a:active,
+#exdl-mainnav li.active a:focus {}
 
-#txdl-subnav .first-item {}
+#exdl-subnav .first-item {}
 
-#txdl-subnav { display: none; }
+#exdl-subnav { display: none; }
 
 /* Split menu
 -----------------------------------*/
-#tx-splitmenu {
+#ex-splitmenu {
 	position: relative;
 }
 
-#tx-splitmenu ul { }
+#ex-splitmenu ul { }
 
-#tx-splitmenu li {
+#ex-splitmenu li {
 	float: left;
 	margin: 0;
 	padding: 0;
 }
 
-#tx-splitmenu a {
+#ex-splitmenu a {
 	display: block;
 	float: left;
 	font-weight: bold;
@@ -276,45 +276,45 @@ ul.megamenu { margin: 10px; /* menu's gutter */ }
 	text-decoration: none;
 }
 
-#tx-splitmenu a:hover,
-#tx-splitmenu a:active,
-#tx-splitmenu a:focus {
+#ex-splitmenu a:hover,
+#ex-splitmenu a:active,
+#ex-splitmenu a:focus {
 }
 
-#tx-splitmenu li.active a,
-#tx-splitmenu li.active a:hover,
-#tx-splitmenu li.active a:active,
-#tx-splitmenu li.active a:focus {
+#ex-splitmenu li.active a,
+#ex-splitmenu li.active a:hover,
+#ex-splitmenu li.active a:active,
+#ex-splitmenu li.active a:focus {
 }
 
 /* SubNav Common= Dropline+Split menu
 -----------------------------------*/
-#tx-subnav { clear: both; position: relative; z-index: 9; }
+#ex-subnav { clear: both; position: relative; z-index: 9; }
 
-#tx-subnav .main { line-height: 1; z-index: 10;}
-#tx-subnav ul.active { }
+#ex-subnav .main { line-height: 1; z-index: 10;}
+#ex-subnav ul.active { }
 
-#tx-subnav li { background: none; display: block; float: left; margin: 0 10px; padding: 10px 0; }
+#ex-subnav li { background: none; display: block; float: left; margin: 0 10px; padding: 10px 0; }
 
-#tx-subnav li.first-item { }
+#ex-subnav li.first-item { }
 
-#tx-subnav ul li a { display: block; text-decoration: none; }
+#ex-subnav ul li a { display: block; text-decoration: none; }
 
-#tx-subnav ul li a:hover { color: #333; }
+#ex-subnav ul li a:hover { color: #333; }
 
-#tx-subnav ul li.active a.active,
-#tx-subnav ul li.active a.active:hover,
-#tx-subnav ul li.active a.active:active,
-#tx-subnav ul li.active a.active:focus { color: #333; }
+#ex-subnav ul li.active a.active,
+#ex-subnav ul li.active a.active:hover,
+#ex-subnav ul li.active a.active:active,
+#ex-subnav ul li.active a.active:focus { color: #333; }
 
-#tx-subnav ul.active li a { }
+#ex-subnav ul.active li a { }
 
-#tx-subnav ul.active li a:hover { }
+#ex-subnav ul.active li a:hover { }
 
-#tx-subnav ul li.empty { visibility: hidden; }
+#ex-subnav ul li.empty { visibility: hidden; }
 
 /* Sub Nav (lv2) ---*/
-#tx-subnav ul li ul {
+#ex-subnav ul li ul {
 	display: block;
 	height: auto;
 	left: -999em;
@@ -324,18 +324,18 @@ ul.megamenu { margin: 10px; /* menu's gutter */ }
 	width: 14em;
 }
 
-#tx-subnav ul li.hover ul { display: block; height: auto; left: auto; position: absolute; }
+#ex-subnav ul li.hover ul { display: block; height: auto; left: auto; position: absolute; }
 
-#tx-subnav ul li.haschild a.haschild span.menu-title {
+#ex-subnav ul li.haschild a.haschild span.menu-title {
 	background: url(../images/arrow.png) no-repeat right center;
 	padding-right: 12px;
 }
 
-#tx-subnav ul li.haschild a.haschild:hover span.menu-title { background-image: url(../images/arrow3.png) }
+#ex-subnav ul li.haschild a.haschild:hover span.menu-title { background-image: url(../images/arrow3.png) }
 
-#tx-subnav ul li.haschild li.haschild a.haschild:hover span.menu-title { background-image: url(../images/arrow.png) }
+#ex-subnav ul li.haschild li.haschild a.haschild:hover span.menu-title { background-image: url(../images/arrow.png) }
 
-#tx-subnav ul li ul li {
+#ex-subnav ul li ul li {
 	display: block;
 	float: none;
 	padding: 5px;
@@ -343,23 +343,23 @@ ul.megamenu { margin: 10px; /* menu's gutter */ }
 	text-align: left;
 }
 
-#tx-subnav ul li ul li a { }
+#ex-subnav ul li ul li a { }
 
-#tx-subnav ul li ul li a span.menu-title { line-height: 1.5em; }
+#ex-subnav ul li ul li a span.menu-title { line-height: 1.5em; }
 
-#tx-subnav ul li ul li a.active { }
+#ex-subnav ul li ul li a.active { }
 
 /* Sub Nav (lv3) ---*/
-#tx-subnav ul li.hover ul ul { display: none; top: auto; }
+#ex-subnav ul li.hover ul ul { display: none; top: auto; }
 
-#tx-subnav ul ul li.hover ul, #tx-subnav ul ul li:hover ul {
+#ex-subnav ul ul li.hover ul, #ex-subnav ul ul li:hover ul {
 	display: block;
 	height: auto;
 	left: auto;
 	margin: -1em 0 0 12em;
 }
 
-#tx-subnav ul li li.haschild a.haschild span.menu-title {
+#ex-subnav ul li li.haschild a.haschild span.menu-title {
 	display: block;
 }
 
