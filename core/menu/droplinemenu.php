@@ -17,85 +17,169 @@ if (!defined ('_EXPOSE_DROPLINE_MENU')) {
 	require_once (dirname(__FILE__).DS."basemenu.php");
 
 	class ExposeDroplineMenu extends ExposeBaseMenu{
-		function __construct ($params) {
-			parent::__construct($params);
+       /**
+        * Constructor
+        *
+        * @param array $params  An array parameter
+        *
+        * @return void
+        */
+        function __construct($params)
+        {
+           parent::__construct($params);
 
-			//To show sub menu on a separated place
-			$this->showSeparatedSub = true;
-		}
-
-	    function genMenu($startlevel=0, $endlevel = 10){
-			if ($startlevel == 0) parent::genMenu(0,0);
-			else {
-				$this->setParam('startlevel', $startlevel);
-				$this->setParam('endlevel', $endlevel);
-				$this->beginMenu($startlevel, $endlevel);
-				//Sub level
-				$pid = $this->getParentId($startlevel - 1);
-				if (@$this->children[$pid]) {
-					foreach ($this->children[$pid] as $row) {
-						if (@$this->children[$row->id]) {
-							$this->genMenuItems ($row->id, $startlevel);
-						} else {
-							echo "<ul id=\"txdl-subnav{$row->id}\" class=\"clearfix\"><li class=\"empty\">&nbsp;</li></ul>";
-						}
-					}
-				}
-				$this->endMenu($startlevel, $endlevel);
-			}
-		}
-		
-		function genMenuItems1($pid, $level) {
-			if (@$this->children[$pid]) {
-				$this->beginMenuItems($pid, $level);
-				$i = 0;
-				foreach ($this->children[$pid] as $row) {
-					$pos = ($i == 0 ) ? 'first' : (($i == count($this->children[$pid])-1) ? 'last' :'');
-
-					$this->beginMenuItem($row, $level, $pos);
-					$this->genMenuItem( $row, $level, $pos);
-
-					// show menu with menu expanded - submenus visible
-					if ($level < $this->getParam('endlevel')) $this->genMenuItems( $row->id, $level+1 );
-					$i++;
-
-					if ($level == 0 && $pos == 'last' && in_array($row->id, $this->open)) {
-						global $jaMainmenuLastItemActive;
-						$jaMainmenuLastItemActive = true;
-					}
-					$this->endMenuItem($row, $level, $pos);
-				}
-				$this->endMenuItems($pid, $level);
-			} else if ($level==1){
-				echo "<ul id=\"txdl-subnav$pid\" class=\"clearfix\"><li>&nbsp;</li></ul>";
-			}
-		}
-		
-        function beginMenuItems($pid=0, $level=0){
-            if(!$level) echo "<ul>";
-			else echo "<ul id=\"txdl-subnav$pid\" class=\"clearfix\">";
+           //To show sub menu on a separated place
+           $this->showSeparatedSub = true;
         }
 
-        function beginMenuItem($mitem=null, $level = 0, $pos = ''){
-			$active = $this->genClass ($mitem, $level, $pos);
-			if ($active) $active = " class=\"$active clearfix\"";
-            if(!$level) echo "<li id=\"txdl-mainnav{$mitem->id}\"$active>";
-			else echo "<li id=\"txdl-subnavitem{$mitem->id}\"$active>";
-        }
+       /**
+        * Generate menu
+        *
+        * @param int $startlevel  Start menu level
+        * @param int $endlevel    End menu level
+        *
+        * @return void
+        */
+       function genMenu($startlevel = 0, $endlevel = 10)
+       {
+           if ($startlevel == 0)
+               parent::genMenu(0, 0);
+           else {
+               $this->setParam('startlevel', $startlevel);
+               $this->setParam('endlevel', $endlevel);
+               $this->beginMenu($startlevel, $endlevel);
+               //Sub level
+               $pid = $this->getParentId($startlevel - 1);
+               if (@$this->children[$pid]) {
+                   foreach ($this->children[$pid] as $row) {
+                       if (@$this->children[$row->id]) {
+                           $this->genMenuItems($row->id, $startlevel);
+                       } else {
+                           echo "<ul id=\"exsdl-subnav{$row->id}\" class=\"clearfix\"><li class=\"empty\">&nbsp;</li></ul>";
+                       }
+                   }
+               }
+               $this->endMenu($startlevel, $endlevel);
+           }
+       }
 
-        function beginMenu($startlevel=0, $endlevel = 10){
-            if(!$startlevel) echo "<div id=\"txdl-mainnav\">";
-            else echo "<div id=\"txdl-subnav\">";			
-        }
+       /**
+        * Generate menu items
+        *
+        * @param int $pid    Menu item id
+        * @param int $level  Level
+        *
+        * @return void
+        * @deprecated
+        */
+       function genMenuItems1($pid, $level)
+       {
+           if (@$this->children[$pid]) {
+               $this->beginMenuItems($pid, $level);
+               $i = 0;
+               foreach ($this->children[$pid] as $row) {
+                   $pos = ($i == 0) ? 'first' : (($i == count($this->children[$pid]) - 1) ? 'last' : '');
 
-		function endMenu($startlevel=0, $endlevel = 10){
-			echo "</div>";
-			
-		}
+                   $this->beginMenuItem($row, $level, $pos);
+                   $this->genMenuItem($row, $level, $pos);
+                   // show menu with menu expanded - submenus visible
+                   if ($level < $this->getParam('endlevel')) $this->genMenuItems($row->id, $level + 1);
+                   $i++;
 
-		function hasSubMenu($level) {
-			return true;
-		}
+                   if ($level == 0 && $pos == 'last' && in_array($row->id, $this->open)) {
+                       global $jaMainmenuLastItemActive;
+                       $jaMainmenuLastItemActive = true;
+                   }
+                   $this->endMenuItem($row, $level, $pos);
+               }
+               $this->endMenuItems($pid, $level);
+           } else if ($level == 1) {
+               echo "<ul id=\"exsdl-subnav$pid\" class=\"clearfix\"><li>&nbsp;</li></ul>";
+           }
+       }
+
+       /**
+        * Echo markup before menu items markup
+        *
+        * @param int $pid    Menu item id
+        * @param int $level  Level
+        *
+        * @return void
+        */
+       function beginMenuItems($pid = 0, $level = 0)
+       {
+           if (!$level)
+               echo "<ul>";
+           else
+               echo "<ul id=\"exsdl-subnav$pid\" class=\"clearfix\">";
+       }
+
+       /**
+        * Echo markup before menu item markup
+        *
+        * @param object $mitem  Menu item id
+        * @param int    $level  Level
+        * @param int    $pos    Position
+        *
+        * @return void
+        */
+       function beginMenuItem($mitem = null, $level = 0, $pos = '')
+       {
+           $active = $this->genClass($mitem, $level, $pos);
+           if ($active) $active = " class=\"$active clearfix\"";
+           if (!$level)
+               echo "<li id=\"exsdl-mainnav{$mitem->id}\"$active>";
+           else
+               echo "<li id=\"exsdl-subnavitem{$mitem->id}\"$active>";
+       }
+
+       /**
+        * Echo markup before menu markup
+        *
+        * @param int $startlevel  Start menu level
+        * @param int $endlevel    End menu level
+        *
+        * @return void
+        */
+       function beginMenu($startlevel = 0, $endlevel = 10)
+       {
+           if (!$startlevel)
+               echo "<div id=\"exsdl-mainnav\">";
+           else
+               echo "<div id=\"exsdl-subnav\">";
+       }
+
+       /**
+        * Echo markup after menu markup
+        *
+        * @param int $startlevel  Start menu level
+        * @param int $endlevel    End menu level
+        *
+        * @return void
+        */
+       function endMenu($startlevel = 0, $endlevel = 10)
+       {
+           echo "</div>";
+           if (!$startlevel) {
+               echo "
+               <script type=\"text/exvascript\">
+                   var exsdl_activemenu = [" . ((count($this->open) == 1) ? "\"" . $this->open[0] . "\"" : implode(",", array_slice($this->open, $this->_start - 1))) . "];
+               </script>
+               ";
+           }
+       }
+
+       /**
+        * Check having submenu item
+        *
+        * @param int $level  Level
+        *
+        * @return bool  TRUE
+        */
+       function hasSubMenu($level)
+       {
+           return true;
+       }
 	}
 }
 ?>
