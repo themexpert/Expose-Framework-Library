@@ -30,7 +30,7 @@ class ExposeWidgetIe6Warn extends ExposeWidget{
         if($expose->browser->getBrowser() == ExposeBrowser::BROWSER_IE AND $expose->browser->getVersion() == 6)
         {
             //add ie6warn js
-            $expose->document->addScript($this->exposeUrl . '/interface/js/ie6warn.js');
+            $expose->addLink('ie6warn.js','js');
             //add js to onload method
             $expose->document->addScriptDeclaration('window.onload=sevenUp.plugin.black.test( options, callback );');
         }

@@ -45,9 +45,9 @@ class ExposeWidgetMenu extends ExposeWidget{
                 $class = 'ExposeMegaMenu';
                 $hasSubMenu = FALSE;
 
-                $expose->addStyleSheet('menu.css');
+                $expose->addLink('menu.css','css');
                 //load xpertmenu aka mega menu js file
-                $expose->document->addScript($expose->exposeUrl.'/interface/js/xpertmenu.js');
+                $expose->addLink('xpertmenu.js','js');
                 $js = "$('#ex-megamenu').XpertMenu({
                     action:'mouseenter',
                     parent:'#ex-menu',

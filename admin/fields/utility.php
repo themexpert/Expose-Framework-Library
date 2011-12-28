@@ -21,29 +21,29 @@ class JFormFieldUtility extends JFormField{
 
     protected function getInput(){
 
-        //make expose object global
-        global $expose;
+        //load expose bootstrap
+        require_once (JPATH_LIBRARIES.DS.'expose'.DS.'expose.php');
 
+        global $expose;
         // Initialize some field attributes.
         $action     = $this->element['action'];
         $class		= (string) $this->element['class'];
         $html = '';
 
         if($action == 'boot'){
-            //load expose bootstrap
-            jimport('expose.expose');
-            $expose->addScript($expose->exposeUrl.'/interface/js/jquery.queryloader2.js');
-            $expose->addScript($expose->exposeUrl.'/interface/js/jquery.uniform.min.js');
-            $expose->addScript($expose->exposeUrl.'/interface/js/jquery.cookie.js');
+            $expose->addLink($expose->exposeUrl.'/interface/js/jquery.queryloader2.js','js');
+            $expose->addLink($expose->exposeUrl.'/interface/js/jquery.uniform.min.js','js');
+            $expose->addLink($expose->exposeUrl.'/interface/js/jquery.cookie.js','js');
+            //$expose->addLink(array('jquery.queryloader2.js','jquery.uniform.min.js','jquery.cookie.js'),'js');
 
             //load expose.css file
-            $expose->addStyleSheet($expose->exposeUrl.'/admin/widgets/expose.css');
+            $expose->addLink($expose->exposeUrl.'/admin/widgets/expose.css','css');
         }
         else if($action == 'finalize'){
             //load main expose js file
 
-            $expose->addScript($expose->exposeUrl.'/admin/widgets/jquery.tools.min.js');
-            $expose->addScript($expose->exposeUrl.'/admin/widgets/expose.js');
+            $expose->addLink($expose->exposeUrl.'/admin/widgets/jquery.tools.min.js','js');
+            $expose->addLink($expose->exposeUrl.'/admin/widgets/expose.js','js');
             
             //finalize addmin
             $expose->finalizedAdmin();

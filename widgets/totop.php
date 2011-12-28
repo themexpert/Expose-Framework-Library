@@ -31,7 +31,7 @@ class ExposeWidgetToTop extends ExposeWidget{
     ?>
     <a href="#top" id="ex-scrolltop">Top</a>
     <?php
-        $expose->document->addScript($expose->exposeUrl.'/interface/js/scrollTo.js');
+        $expose->addScript($expose->exposeUrl.'/interface/js/scrollTo.js');
         echo ob_get_clean();
     }
 }

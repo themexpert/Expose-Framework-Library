@@ -37,7 +37,7 @@ class JFormFieldToggle extends JFormField{
 
         if(!defined('EXPOSE_TOGGLE')){
             define('EXPOSE_TOGGLE', 1);
-            $expose->addScript($expose->exposeUrl.'/admin/widgets/toggle/js/toggle.js');
+            $expose->addLink($expose->exposeUrl.'/admin/widgets/toggle/js/toggle.js','js');
         }
 
         $input = '<input type="hidden" name="'.$this->name.'" value="'.$this->value.'" />'."\n".'
