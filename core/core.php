@@ -101,9 +101,6 @@ class ExposeCore{
 
     public function finalizedExpose(){
 
-        //load preset style before loading all stylesset. this will allow to add preset
-        //style file at the end of all style files
-
         if($this->get('compress_css',0)){
             ExposeCompressor::compressCSS();
         }else{
@@ -125,7 +122,6 @@ class ExposeCore{
 
         //$this->layout->init();
         define('EXPOSE_FINAL', 1);
-
     }
 
     //finalized Admin
@@ -160,66 +156,30 @@ class ExposeCore{
         }
 
         return $templateName;
-
-//        if(!$this->isAdmin()){
-//            $app = &JApplication::getInstance('site', array(), 'J');
-//            $template = $app->getTemplate();
-//            return $template;
-//        }
     }
 
-//    public function addStyle($file){
-//        if(defined('EXPOSE_FINAL')) return;
-//        //TODO: add a override method to override base css file
-//        $type = 'css';
-//        $site_url = $this->templateUrl . $type . '/' ;
-//        $expose_url = $this->exposeUrl . 'interface/'.$type.'/';
-//
-//        //make sure core stylesheets are loaded before all style
-//        if(!$this->isAdmin()){
-//            if(!defined('EXPOSE_CORE_STYLE_LOADED')){
-//                $core_style_sheet = array('expose.css','joomla.css');
-////                if($this->browser->isMobile()){
-////                    $mob_client = strtolower($this->browser->getBrowser());
-////                    $mob_css = 'expose-'. $mob_client.'.css';
-////                    $core_style_sheet[]=$mob_css;
-////                }
-//                //load core style
-//                foreach($core_style_sheet as $styleSheet){
-//                    if(file_exists($this->templatePath . DS . 'css' . DS . $styleSheet)){
-//                        $this->styleSheets[$styleSheet] = $site_url.$styleSheet;
-//                    }else{
-//                        $this->styleSheets[$styleSheet] = $expose_url.$styleSheet;
-//                    }
-//                }
-//                define('EXPOSE_CORE_STYLE_LOADED', 1);
-//            }
-//        }
-//
-//        $dir = dirname($file);
-//        //check the file source.
-//        if($dir != '.'){
-//            //path is included so add it directly
-//            $this->styleSheets[$file]= $file;
-//        }
-//        else{
-//            $out_file = $site_url . $file;
-//            $this->styleSheets[$file] = $out_file;
-//        }
-//    }
-
-    public function addStyleSheet($file){
-        if(is_array($file)){
-            foreach($file as $path){
-                $this->addLink($path, 'css');
-            }
+    private function loadCoreStyleSheet()
+    {
+        if($this->platform = 'desktop')
+        {
+            $files = array('expose.css','joomla.css');
+            $this->addLink($files,'css',1);
         }else{
-            $this->addLink($file, 'css');
+            $browser = strtolower($this->browser->getBrowser());
+            $file = 'expose-'.$browser.'.css';
+            $this->addLink($file,'css',1);
+
         }
     }
 
-    public function addLink($file, $type)
+    public function addLink($file, $type, $priority=10)
     {
+        if(is_array($file)){
+            foreach($file as $path){
+                $this->addLink($path, $type, $priority);
+            }
+        }
+
         jimport('joomla.filesystem.file');
 
         $burl = $this->exposeUrl . '/interface/' . $type . '/';
@@ -233,13 +193,13 @@ class ExposeCore{
             {
                 if(preg_match('/^http/', $file))
                 {
-                    $this->styleSheets['url'][] = $file;
+                    $this->styleSheets[$priority]['url'][] = $file;
                     return;
                 }
                 //path is included so check its existence and add
                 $path = $this->getFilePath($file);
                 if(JFile::exists($path)){
-                    $this->styleSheets['local'][$path] = $file;
+                    $this->styleSheets[$priority]['local'][$path] = $file;
                     return;
                 }
 
@@ -249,10 +209,10 @@ class ExposeCore{
                 //cross check both base and template path for this file
                 if(JFile::exists($tpath))
                 {
-                    $this->styleSheets['local'][$tpath] = $turl.$file;
+                    $this->styleSheets[$priority]['local'][$tpath] = $turl.$file;
                     return;
                 }elseif(JFile::exists($bpath)){
-                    $this->styleSheets['local'][$bpath] = $burl.$file;
+                    $this->styleSheets[$priority]['local'][$bpath] = $burl.$file;
                     return;
                 }
             }
@@ -262,7 +222,38 @@ class ExposeCore{
 
         if($type == 'js')
         {
-            $this->scripts[]= $file;
+            $dir = dirname($file);
+            //check file source
+            if($dir != '.')
+            {
+               if(preg_match('/^http/', $file))
+               {
+                   $this->scripts[$priority]['url'][] = $file;
+                   return;
+               }
+               //path is included so check its existence and add
+               $path = $this->getFilePath($file);
+               if(JFile::exists($path)){
+                   $this->scripts[$priority]['local'][$path] = $file;
+                   return;
+               }
+
+           }else{
+               $tpath = $this->getFilePath($turl.$file);
+               $bpath = $this->getFilePath($burl.$file);
+               //cross check both base and template path for this file
+               if(JFile::exists($tpath))
+               {
+                   $this->scripts[$priority]['local'][$tpath] = $turl.$file;
+                   return;
+               }elseif(JFile::exists($bpath)){
+                   $this->scripts[$priority]['local'][$bpath] = $burl.$file;
+                   return;
+               }
+           }
+
+           return;
+            //$this->scripts[]= $file;
         }
     }
 
@@ -279,9 +270,11 @@ class ExposeCore{
 
     }
 
-    //TODO: delete this function on code cleanup seassion
     public function getStyleSheet(){
         return $this->styleSheets;
+    }
+    public function getScripts(){
+        return $this->scripts;
     }
 
     private function _loadPresetStyle(){
@@ -299,26 +292,13 @@ class ExposeCore{
         return $this->document->addStyleDeclaration($content);
     }
 
-    public function addScript($file){
-        //make sure jQuery is loaded before all scripts
-        $this->addjQuery();
-
-        $this->scripts[]= $file;
-
-        //$this->document->addScript($file);
-    }
-
-    public function addScripts($files= array()){
-        foreach($files as $file){
-            $this->addScript($file);
-        }
-    }
 
     public function addjQDom($js=NULL){
         if($js != NULL){
             $this->jqDom .= "\t\t\t" . $js ."\n";
         }
     }
+
     private function _renderCombinedDom(){
         $jqNoConflict = "\n\t\t".'jQuery.noConflict();'."\n";
         $dom = '';
@@ -333,29 +313,26 @@ class ExposeCore{
         //come form admin? just add jquery without asking any question because jquery is heart of
         //expose admin
         if($this->isAdmin() AND !$this->app->get('jQuery')){
-            $file = $this->exposeUrl.'/interface/js/jquery-1.7.1.min.js';
-            $this->app->set('jQuery','1.5.1');
-            $this->scripts[]= $file;
+            $file = 'jquery-1.7.1.min.js';
+            $this->app->set('jQuery','1.7.1');
+            $this->addLink($file,'js',1);
             return;
         }
         
-        if($this->get('jquery_loader') AND !$this->app->get('jQuery')){
-            $version = $this->get('jquery_version');
+        if($this->get('jquery-enabled') AND !$this->app->get('jQuery')){
+            $version = $this->get('jquery-version');
             //get the cdn
-            $cdn = $this->get('jquery_source');
+            $cdn = $this->get('jquery-source');
             switch ($cdn){
                 case 'google_cdn':
                     $file = 'https://ajax.googleapis.com/ajax/libs/jquery/'.$version.'/jquery.min.js';
                     break;
-                case 'ms_cdn':
-                    $file = 'http://ajax.aspnetcdn.com/ajax/jQuery/jquery-'.$version.'.min.js';
-                    break;
                 case 'local':
-                    $file = $this->exposeUrl.'interface/js/jquery-'.$version.'.min.js';
+                    $file = 'jquery-'.$version.'.min.js';
                     break;
             }
             $this->app->set('jQuery',$version);
-            $this->scripts[]= $file;
+            $this->addLink($file,'js',1);
         }
         return;
     }
@@ -363,16 +340,60 @@ class ExposeCore{
     private function _loadStyles(){
         //if(defined('EXPOSE_FINAL')) return;
         $this->_loadPresetStyle();
-        //print_r($this->styleSheets);
-        foreach($this->styleSheets['local'] as $file){
-            $version = '?v=' . EXPOSE_VERSION;
-            $this->document->addStyleSheet($file.$version);
+        $this->loadCoreStyleSheet();
+        ksort($this->styleSheets);
+
+        //load all remote file first.
+        foreach($this->styleSheets as $key => $type)
+        {
+            if(isset($type['url']))
+            {
+                foreach($type['url'] as $url){
+                    $this->document->addStyleSheet($url);
+                }
+            }
         }
+
+        foreach($this->styleSheets as $key => $type){
+            if(isset($type['local']))
+            {
+                foreach($type['local'] as $url)
+                {
+                    $version = '?v=' . EXPOSE_VERSION;
+                    $this->document->addStyleSheet($url.$version);
+                }
+            }
+        }
+
     }
+
     private function _loadScripts(){
-        foreach($this->scripts as $script){
-            $this->document->addScript($script);
+        //load jquery first
+        $this->addjQuery();
+        ksort($this->scripts);
+
+        //load all remote file first.
+        foreach($this->scripts as $key => $type)
+        {
+            if(isset($type['url']))
+            {
+                foreach($type['url'] as $url){
+                    $this->document->addScript($url);
+                }
+            }
         }
+
+        foreach($this->scripts as $key => $type){
+            if(isset($type['local']))
+            {
+                foreach($type['local'] as $url)
+                {
+                    $version = '?v=' . EXPOSE_VERSION;
+                    $this->document->addScript($url.$version);
+                }
+            }
+        }
+
     }
 
     private function _setDirection(){
