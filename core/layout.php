@@ -160,8 +160,12 @@ class ExposeLayout
         }
     }
 
-    protected function getModuleSchema($position)
+    public function getModuleSchema($position)
     {
+        if(!isset($this->modules[$position]))
+        {
+            return;
+        }
         $published = $this->modules[$position]['published'];
 
         //return module schema based on active modules
@@ -169,7 +173,7 @@ class ExposeLayout
 
     }
 
-    protected function getModuleChrome($position, $module)
+    public function getModuleChrome($position, $module)
     {
         if(!isset($this->modules[$position]['chrome']))
         {
@@ -195,7 +199,7 @@ class ExposeLayout
 
     }
 
-    protected function getActiveModuleLists($position)
+    public function getActiveModuleLists($position)
     {
         //return active module array associate with position
         return $this->modules[$position]['active'];
@@ -212,7 +216,7 @@ class ExposeLayout
         return FALSE;
     }
 
-    protected function getWidgetsForPosition($position)
+    public function getWidgetsForPosition($position)
     {
         if(!isset($this->widgets))
         {
@@ -232,7 +236,7 @@ class ExposeLayout
         return $widgets;
     }
 
-    protected function countWidgetsForPosition($position)
+    public function countWidgetsForPosition($position)
     {
 
         global $expose;
@@ -252,7 +256,7 @@ class ExposeLayout
         return count($this->getWidgetsForPosition($position));
     }
 
-    protected function countModulesForPosition($position)
+    public function countModulesForPosition($position)
     {
         global $expose;
 
@@ -358,7 +362,8 @@ class ExposeLayout
         }
     }
 
-    protected function loadFile($paths)
+
+    public function loadFile($paths)
     {
         if(is_array($paths))
         {

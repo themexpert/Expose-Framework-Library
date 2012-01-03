@@ -223,4 +223,8 @@ jQuery(document).ready(function($){
             parent.next().css('display','block').addClass('highlight');
         }
     });
+
+    //remove numbering tab for sidebar position
+    $('#sidebar_a').prev('ul').hide();
+    $('#sidebar_b').prev('ul').hide();
 });

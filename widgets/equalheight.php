@@ -25,7 +25,7 @@ class ExposeWidgetEqualHeight extends ExposeWidget{
     public function init()
     {
         global $expose;
-        $js = 'equalHeight(jQuery(".ex-box"));';
+        $js = '$("#ex-roof").equalHeights();';
         $expose->addLink('jquery.equalheight.js','js');
         $expose->addjQDom($js);
     }

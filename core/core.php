@@ -75,7 +75,7 @@ class ExposeCore{
         $this->templatePath = $this->basePath . DS . 'templates'. DS . $this->templateName ;
 
         //set document direction
-        $this->direction = $this->_setDirection();
+        $this->direction = $this->setDirection();
 
         //detect the platform first
         $this->detectPlatform();
@@ -105,20 +105,20 @@ class ExposeCore{
             ExposeCompressor::compressCSS();
         }else{
             //load all styles sheet from quee
-            $this->_loadStyles();
+            $this->loadStyles();
         }
         if($this->get('compress_js',0)){
             ExposeCompressor::compressJS();
         }else{
             //load all scripts from quee
-            $this->_loadScripts();
+            $this->loadScripts();
         }
         
         if(isset ($this->jqDom) AND $this->jqDom != NULL){
             $this->_renderCombinedDom();
         }
          //fix the template width and sidebar width
-        //$this->_customLayoutWidth();
+        //$this->setCustomStyles();
 
         //$this->layout->init();
         define('EXPOSE_FINAL', 1);
@@ -127,8 +127,8 @@ class ExposeCore{
     //finalized Admin
     public function finalizedAdmin(){
         if($this->isAdmin()){
-            $this->_loadStyles();
-            $this->_loadScripts();
+            $this->loadStyles();
+            $this->loadScripts();
             $this->_renderCombinedDom();
         }
     }
@@ -172,88 +172,136 @@ class ExposeCore{
         }
     }
 
-    public function addLink($file, $type, $priority=10)
+    public function addLink($file, $type, $priority=10, $media='screen')
     {
         if(is_array($file)){
             foreach($file as $path){
-                $this->addLink($path, $type, $priority);
+                if($type == 'css')
+                {
+                    $this->addStyleSheet($path,$priority,$media);
+                }else if($type == 'js'){
+                    $this->addScript($path, $priority);
+                }
             }
+            return;
+        }
+
+        if($type == 'css')
+        {
+            $this->addStyleSheet($file,$priority,$media);
+        }else if($type == 'js'){
+            $this->addScript($file, $priority);
+        }
+
+        return;
+
+    }
+
+    private function addStyleSheet( $file, $priority, $media='screen' )
+    {
+        if(preg_match('/^http/', $file))
+        {
+            $url = $this->styleSheets[$priority]['url'][] = new stdClass();
+            $url->media = $media;
+            $url->url = $file;
+
+            //$this->styleSheets[$priority]['url'][] = $file;
+            return;
         }
 
         jimport('joomla.filesystem.file');
 
+        $type = 'css';
+
         $burl = $this->exposeUrl . '/interface/' . $type . '/';
         $turl = $this->templateUrl  . '/' .$type . '/';
 
-        if($type == 'css')
-        {
-            $dir = dirname($file);
-            //check file source
-            if($dir != '.')
-            {
-                if(preg_match('/^http/', $file))
-                {
-                    $this->styleSheets[$priority]['url'][] = $file;
-                    return;
-                }
-                //path is included so check its existence and add
-                $path = $this->getFilePath($file);
-                if(JFile::exists($path)){
-                    $this->styleSheets[$priority]['local'][$path] = $file;
-                    return;
-                }
+        $local = $this->styleSheets[$priority]['local'][] = new stdClass();
 
-            }else{
-                $tpath = $this->getFilePath($turl.$file);
-                $bpath = $this->getFilePath($burl.$file);
-                //cross check both base and template path for this file
-                if(JFile::exists($tpath))
-                {
-                    $this->styleSheets[$priority]['local'][$tpath] = $turl.$file;
-                    return;
-                }elseif(JFile::exists($bpath)){
-                    $this->styleSheets[$priority]['local'][$bpath] = $burl.$file;
-                    return;
-                }
+        if( dirname($file) != '.' AND dirname($file) != '..' )
+        {
+            //path is included so check its existence and add
+            $path = $this->getFilePath($file);
+            if(JFile::exists($path)){
+                //$local = $this->styleSheets[$priority]['local'][] = new stdClass();
+                $local->path = $path;
+                $local->url = $file;
+                $local->media = $media;
+                //$this->styleSheets[$priority]['local'][$path] = $file;
             }
+
+        }else{
+
+            $tpath = $this->getFilePath($turl.$file);
+            $bpath = $this->getFilePath($burl.$file);
+
+            //$local = $this->styleSheets[$priority]['local'][] = new stdClass();
+            //cross check both base and template path for this file
+            if(JFile::exists($tpath))
+            {
+                //$this->styleSheets[$priority]['local'][] = $class;
+                $local->url = $turl.$file;
+                $local->path = $tpath;
+                $local->media = $media;
+
+            }elseif(JFile::exists($bpath)){
+                $local->url = $burl.$file;
+                $local->path = $bpath;
+                $local->media = $media;
+                //$this->styleSheets[$priority]['local'][$bpath] = $burl.$file;
+
+            }
+        }
+    }
+
+    private function addScript( $file, $priority)
+    {
+        if(preg_match('/^http/', $file))
+        {
+            $url = $this->scripts[$priority]['url'][] = new stdClass();
+            $url->url = $file;
 
             return;
         }
 
-        if($type == 'js')
+        jimport('joomla.filesystem.file');
+
+        $type = 'js';
+
+        $burl = $this->exposeUrl . '/interface/' . $type . '/';
+        $turl = $this->templateUrl  . '/' .$type . '/';
+
+        $local = $this->scripts[$priority]['local'][] = new stdClass();
+
+        if( dirname($file) != '.' AND dirname($file) != '..' )
         {
-            $dir = dirname($file);
-            //check file source
-            if($dir != '.')
+
+            //path is included so check its existence and add
+            $path = $this->getFilePath($file);
+            if(JFile::exists($path)){
+                //$local = $this->styleSheets[$priority]['local'][] = new stdClass();
+                $local->path = $path;
+                $local->url = $file;
+                return;
+            }
+
+        }else{
+
+            $tpath = $this->getFilePath($turl.$file);
+            $bpath = $this->getFilePath($burl.$file);
+
+            //cross check both base and template path for this file
+            if(JFile::exists($tpath))
             {
-               if(preg_match('/^http/', $file))
-               {
-                   $this->scripts[$priority]['url'][] = $file;
-                   return;
-               }
-               //path is included so check its existence and add
-               $path = $this->getFilePath($file);
-               if(JFile::exists($path)){
-                   $this->scripts[$priority]['local'][$path] = $file;
-                   return;
-               }
-
-           }else{
-               $tpath = $this->getFilePath($turl.$file);
-               $bpath = $this->getFilePath($burl.$file);
-               //cross check both base and template path for this file
-               if(JFile::exists($tpath))
-               {
-                   $this->scripts[$priority]['local'][$tpath] = $turl.$file;
-                   return;
-               }elseif(JFile::exists($bpath)){
-                   $this->scripts[$priority]['local'][$bpath] = $burl.$file;
-                   return;
-               }
-           }
-
-           return;
-            //$this->scripts[]= $file;
+                //$this->styleSheets[$priority]['local'][] = $class;
+                $local->url = $turl.$file;
+                $local->path = $tpath;
+                return;
+            }elseif(JFile::exists($bpath)){
+                $local->url = $burl.$file;
+                $local->path = $bpath;
+                return;
+            }
         }
     }
 
@@ -337,10 +385,11 @@ class ExposeCore{
         return;
     }
 
-    private function _loadStyles(){
+    private function loadStyles(){
         //if(defined('EXPOSE_FINAL')) return;
         $this->_loadPresetStyle();
         $this->loadCoreStyleSheet();
+
         ksort($this->styleSheets);
 
         //load all remote file first.
@@ -348,8 +397,9 @@ class ExposeCore{
         {
             if(isset($type['url']))
             {
-                foreach($type['url'] as $url){
-                    $this->document->addStyleSheet($url);
+                foreach($type['url'] as $link){
+
+                    $this->document->addStyleSheet($link->url);
                 }
             }
         }
@@ -357,17 +407,18 @@ class ExposeCore{
         foreach($this->styleSheets as $key => $type){
             if(isset($type['local']))
             {
-                foreach($type['local'] as $url)
+                foreach($type['local'] as $link)
                 {
                     $version = '?v=' . EXPOSE_VERSION;
-                    $this->document->addStyleSheet($url.$version);
+
+                    $this->document->addStyleSheet($link->url.$version,'text/css',$link->media);
                 }
             }
         }
 
     }
 
-    private function _loadScripts(){
+    private function loadScripts(){
         //load jquery first
         $this->addjQuery();
         ksort($this->scripts);
@@ -377,8 +428,8 @@ class ExposeCore{
         {
             if(isset($type['url']))
             {
-                foreach($type['url'] as $url){
-                    $this->document->addScript($url);
+                foreach($type['url'] as $link){
+                    $this->document->addScript($link->path);
                 }
             }
         }
@@ -386,17 +437,17 @@ class ExposeCore{
         foreach($this->scripts as $key => $type){
             if(isset($type['local']))
             {
-                foreach($type['local'] as $url)
+                foreach($type['local'] as $link)
                 {
                     $version = '?v=' . EXPOSE_VERSION;
-                    $this->document->addScript($url.$version);
+                    $this->document->addScript($link->url.$version);
                 }
             }
         }
 
     }
 
-    private function _setDirection(){
+    private function setDirection(){
         if(defined('EXPOSE_FINAL')) return;
         if(isset ($_REQUEST['direction'])){
             setcookie($this->templateName.'_direction', $_REQUEST['direction'], time()+3600, '/');
@@ -416,7 +467,7 @@ class ExposeCore{
 
 
 
-    private function _customLayoutWidth(){
+    private function setCustomStyles(){
         if(defined('EXPOSE_FINAL')) return;
         $css = "/*dynamic css*/ \n";
         if($this->layout->isMobile()){
@@ -469,6 +520,43 @@ class ExposeCore{
             return ($menu->getDefault()->id === $menu->getActive()->id) ? TRUE : FALSE;
         }
         
+    }
+
+    public function getSidebarsWidth($position)
+    {
+        $width = array();
+        $layout = ExposeLayout::getInstance();
+        $width = $layout->getModuleSchema($position);
+        return $width[0];
+
+    }
+
+    public function getComponentWidth()
+    {
+        $widths = array();
+        $layout = ExposeLayout::getInstance();
+
+        if($layout->countModulesForPosition('sidebar-a'))
+        {
+            $width = explode(':',$this->get('sidebar-a'));
+            $widths['a'] = $width[1];
+
+        }
+
+        if($layout->countModulesForPosition('sidebar-b'))
+        {
+            $width = explode(':',$this->get('sidebar-b'));
+            $widths['b'] = $width[1];
+        }
+
+        $mainBodyWidth = 100 - ($widths['a'] + $widths['b']);
+
+        $width['component']= $mainBodyWidth;
+        $width['sidebar-a'] = $widths['a'];
+        $width['sidebar-b'] = $widths['b'];
+
+        return $width;
+
     }
 
     public function countModules($position)
