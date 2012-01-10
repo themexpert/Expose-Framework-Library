@@ -9,6 +9,9 @@
 //prevent direct access
 defined ('EXPOSE_VERSION') or die ('resticted aceess');
 
+//import date utility class
+jimport('joomla.utilities.date');
+
 //import parent gist class
 expose_import('core.widget');
 
@@ -24,13 +27,18 @@ class ExposeWidgetDate extends ExposeWidget{
     public function render()
     {
         global $expose;
-        $now = &JFactory::getDate();
-        $formate = $this->get('formats');
+
+        $date = new JDate();
+        $format = $this->get('formats');
+        $dates = explode(' ', $date->format($format));
+        $i = 1;
 
         ob_start();
         ?>
         <div id="ex-date">
-            <span><?php echo $now->toFormat($formate) ;?></span>
+            <?php foreach($dates as $date) :?>
+                <span class="part<?= $i?>"><?= $date ;?></span>
+            <?php $i++; endforeach;?>
         </div>
     <?php
         return ob_get_clean();
