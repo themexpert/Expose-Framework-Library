@@ -144,10 +144,10 @@ if (!defined ('_EXPOSE_MEGA_MENU')) {
                     if (!$colw) $colw = $this->items[$pid]->megaparams->get('colw', $this->getParam('mega-colwidth', 200));
                     if (is_null($colw) || !is_numeric($colw)) $colw = 200;
                     $style = $colw ? " style=\"width: {$colw}px;\"" : "";
-                    $data .= "<div class=\"megacol column" . ($i + 1) . ($pos ? " $pos" : "") . "\"$style>";
+                    $data .= "<div class=\"megacol col-" . ($i + 1) . ($pos ? " $pos" : "") . "\"$style>";
                 }
             }
-            if (@$this->children[$pid]) $data .= "<ul class=\"megamenu level$level\">";
+            if (@$this->children[$pid]) $data .= "<ul class=\"megamenu level-$level\">";
             if ($return)
                 return $data;
             else
@@ -244,10 +244,13 @@ if (!defined ('_EXPOSE_MEGA_MENU')) {
         {
             $iParams = new JParameter($mitem->params);
             $cls = "mega" . ($pos ? " $pos" : "");
+            if($level == NULL) $level = 0;
+            $cls .= ' level-'.$level;
+
             if (@$this->children[$mitem->id] || (isset($mitem->content) && $mitem->content)) {
                 if ($mitem->megaparams->get('group'))
                     $cls .= " group";
-                else if ($level < $this->getParam('endlevel')) $cls .= " haschild";
+                else if ($level < $this->getParam('endlevel')) $cls .= " has-submenu";
             }
 
             $active = in_array($mitem->id, $this->open);
@@ -312,7 +315,7 @@ if (!defined ('_EXPOSE_MEGA_MENU')) {
             }
             $style = $width ? " style=\"width: {$width}px;\"" : "";
             $right = $this->items[$pid]->megaparams->get('right') ? 'right' : '';
-            $data = "<div class=\"childcontent cols$cols $right\">\n";
+            $data = "<div class=\"childcontent cols-$cols $right\">\n";
             $data .= "<div class=\"childcontent-inner-wrap\">\n"; //Add wrapper
             $data .= "<div class=\"childcontent-inner clearfix\"$style>"; //Move width into inner
             if ($return)
