@@ -94,7 +94,7 @@ class ExposeLayout
         if($totalPublished > 0 AND isset($this->modules[$position]['active']))
         {
             $widths = $this->getModuleSchema($position);
-            $containerClass = 'ex-container wrap-blocks';
+            $containerClass = 'ex-container ex-column';
 
             foreach($this->getActiveModuleLists($position) as $positionName)
             {
@@ -119,7 +119,7 @@ class ExposeLayout
 
                 if($i == $totalPublished){
                     $class .= ' last ';
-                    $containerClass = str_replace('wrap-blocks', 'wrap-blocks-last', $containerClass);
+                    $containerClass = str_replace('ex-column', 'ex-column-last', $containerClass);
                     //$container = 'ex-container wrap-blocks-last';
                     $modWrapperStart = "<div class='$containerClass $class $positionName'>";
                     $modWrapperEnd = "</div>";
@@ -284,6 +284,8 @@ class ExposeLayout
             $expose->exposePath . DS . 'widgets',
             $expose->templatePath . DS .'widgets'
         );
+        $widgetLists = array();
+
         //first loop through all the template and framework path and take widget instance
         foreach($widgetPaths as $widgetPath)
         {
@@ -295,18 +297,22 @@ class ExposeLayout
                 {
                     $widgetName = JFile::stripExt($widget);
                     $path = $widgetPath . DS . $widgetName .'.php';
-                    $className = 'ExposeWidget'. ucfirst($widgetName);
+                    $widgetLists[$widgetName] = $path;
+                }
+            }
+        }
 
-                    if(!class_exists($className) AND JFile::exists($path))
-                    {
-                        require_once($path);
+        foreach($widgetLists as $name => $path)
+        {
+            $className = 'ExposeWidget'. ucfirst($name);
 
-                        if(class_exists($className))
-                        {
-                            $this->widgets[$widgetName] = new $className();
-                        }
-                    }
+            if(!class_exists($className) AND JFile::exists($path))
+            {
+                require_once($path);
 
+                if(class_exists($className))
+                {
+                    $this->widgets[$name] = new $className();
                 }
             }
         }
