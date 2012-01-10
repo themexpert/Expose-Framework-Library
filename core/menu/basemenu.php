@@ -157,7 +157,7 @@ class ExposeBaseMenu extends JObject{
                                if (!isset($mod->name)) $mod->name = $mod->module;
                                $i += $cols;
                                $mod_params = new JObject(json_decode($mod->params));
-                               $v->content .= "<jdoc:include type=\"module\" name=\"{$mod->name}\" title=\"{$mod->title}\" style=\"xpertmenu\" />";
+                               $v->content .= "<jdoc:include type=\"module\" name=\"{$mod->name}\" title=\"{$mod->title}\" style=\"standard\" />";
                            }
                            if ($cols > 1) $v->content .= $this->endSubMenuModules($v->id, 1, true);
                        }
@@ -730,7 +730,7 @@ class ExposeBaseMenu extends JObject{
        $active = in_array($mitem->id, $this->open);
        $cls = ($level ? "" : "menu-item{$mitem->_idx}") . ($active ? " active" : "") . ($pos ? " $pos-item" : "");
        if (@$this->children[$mitem->id] && (!$level || $level < $this->getParam('endlevel'))) {
-           $cls .= " haschild";
+           $cls .= " has-submenu";
        }
        if ($mitem->megaparams->get('class')) {
            $cls .= ' ' . $mitem->megaparams->get('class');
