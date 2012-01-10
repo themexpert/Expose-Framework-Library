@@ -536,14 +536,14 @@ class ExposeCore{
         $widths = array();
         $layout = ExposeLayout::getInstance();
 
-        if($layout->countModulesForPosition('sidebar-a'))
+        if($layout->countModulesForPosition('sidebar-a') OR $layout->countWidgetsForPosition('sidebar-a'))
         {
             $width = explode(':',$this->get('sidebar-a'));
             $widths['a'] = $width[1];
 
         }
 
-        if($layout->countModulesForPosition('sidebar-b'))
+        if($layout->countModulesForPosition('sidebar-b') OR $layout->countWidgetsForPosition('sidebar-b'))
         {
             $width = explode(':',$this->get('sidebar-b'));
             $widths['b'] = $width[1];
