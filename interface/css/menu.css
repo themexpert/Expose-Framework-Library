@@ -1,10 +1,9 @@
 /**
  * @package     Expose
- * @version     2.0
+ * @version     3.0.0
  * @author      ThemeXpert http://www.themexpert.com
  * @copyright   Copyright (C) 2010 - 2011 ThemeXpert
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
- * @file        mega.css
  **/
 
 .ex-megamenu { margin: 0; padding: 0; }
@@ -12,15 +11,17 @@
 
 ul.megamenu { margin: 10px; /* menu's gutter */ } 
 
+ul.megamenu li { overflow: visible; }
+
 /* lv - 0
 -----------------------------------*/
 /* Styling ---*/
-.ex-megamenu ul.level0 {
+.ex-megamenu ul.level-0 {
 	margin: 0;
 	padding: 0;
 }
 
-.ex-megamenu ul.level0 li.mega {
+.ex-megamenu ul.level-0 li.mega {
 	background: none;
 	display: block;
 	float: left;
@@ -28,7 +29,7 @@ ul.megamenu { margin: 10px; /* menu's gutter */ }
 	padding: 0;
 }
 
-.ex-megamenu ul.level0 li.mega a.mega {
+.ex-megamenu ul.level-0 li.mega a.mega {
 	display: block;
 	font-weight: bold;
 	line-height: normal;
@@ -37,7 +38,7 @@ ul.megamenu { margin: 10px; /* menu's gutter */ }
 	text-decoration: none;
 }
 
-.ex-megamenu ul.level0 li.mega .has-image {
+.ex-megamenu ul.level-0 li.mega .has-image {
 	padding-left: 25px;
 	display: block;
 	background-repeat: no-repeat;
@@ -45,101 +46,101 @@ ul.megamenu { margin: 10px; /* menu's gutter */ }
 	cursor: pointer;
 }
 
-.ex-megamenu ul.level0 li.mega span.menu-title { display: block; }
+.ex-megamenu ul.level-0 li.mega span.menu-title { display: block; }
 
-.ex-megamenu ul.level0 li.mega span.menu-desc {
+.ex-megamenu ul.level-0 li.mega span.menu-desc {
 	display: block;
 	font-weight: normal;
 	font-size: 92%;
 }
 
-.ex-megamenu ul.level0 li.mega a img {
+.ex-megamenu ul.level-0 li.mega a img {
 	float: left;
 	padding-right: 5px;
 }
 
-.ex-megamenu ul.level0 li.over, ul.level0 li.haschild-over {}
+.ex-megamenu ul.level-0 li.over, ul.level-0 li.has-submenu-over {}
 
-.ex-megamenu ul.level0 li.haschild a.mega span.menu-title,
-.ex-megamenu ul.level0 li.haschild-over a.mega span.menu-title {
+.ex-megamenu ul.level-0 li.has-submenu a.mega span.menu-title,
+.ex-megamenu ul.level-0 li.has-submenu-over a.mega span.menu-title {
 	background: url(../images/arrow3.png) no-repeat left center;
 	padding-left: 12px;
 }
 
-.ex-megamenu ul.level0 li.haschild a.mega span.menu-desc,
-.ex-megamenu ul.level0 li.haschild-over a.mega span.menu-desc {
+.ex-megamenu ul.level-0 li.has-submenu a.mega span.menu-desc,
+.ex-megamenu ul.level-0 li.has-submenu-over a.mega span.menu-desc {
 	padding-left: 12px;
 }
 
-.ex-megamenu ul.level0 li.active {}
+.ex-megamenu ul.level-0 li.active {}
 
 /* lv - 1 and below
 -----------------------------------*/
 /* Layout ---*/
 .ex-megamenu li.mega .childcontent { display: block; height: auto; position: absolute; }
 
-.ex-megamenu li.mega .childcontent,
-.ex-megamenu li.haschild-over li.mega .childcontent,
-.ex-megamenu li.mega li.haschild-over li.mega .childcontent ,
-.ex-megamenu li.mega li.mega li.haschild-over li.mega .childcontent,
-.ex-megamenu li.mega li.mega li.mega li.haschild-over li.mega .childcontent,
-.ex-megamenu li.mega li.mega li.mega li.mega li.haschild-over li.mega .childcontent { left: -999em; /*hide the menu*/ }
+.ex-megamenu li.mega .childcontent/*,
+.ex-megamenu li.has-submenu-over li.mega .childcontent,
+.ex-megamenu li.mega li.has-submenu-over li.mega .childcontent ,
+.ex-megamenu li.mega li.mega li.has-submenu-over li.mega .childcontent, 
+.ex-megamenu li.mega li.mega li.mega li.has-submenu-over li.mega .childcontent, 
+.ex-megamenu li.mega li.mega li.mega li.mega li.has-submenu-over li.mega .childcontent*/ { left: -999em; /*hide the menu*/ }
 
-.ex-megamenu li.haschild:hover .childcontent,
-.ex-megamenu li.mega li.haschild:hover .childcontent,
-.ex-megamenu li.mega li.mega li.haschild:hover .childcontent,
-.ex-megamenu li.mega li.mega li.mega li.haschild:hover .childcontent,
-.ex-megamenu li.mega li.mega li.mega li.mega li.haschild:hover .childcontent,
-.ex-megamenu li.mega li.mega li.mega li.mega li.mega li.haschild:hover .childcontent { left: auto; /*show on parent:hover*/ }
+.ex-megamenu li.has-submenu:hover > .childcontent/*,
+.ex-megamenu li.mega li.has-submenu:hover > .childcontent,
+.ex-megamenu li.mega li.mega li.has-submenu:hover > .childcontent,
+.ex-megamenu li.mega li.mega li.mega li.has-submenu:hover > .childcontent,
+.ex-megamenu li.mega li.mega li.mega li.mega li.has-submenu:hover > .childcontent,
+.ex-megamenu li.mega li.mega li.mega li.mega li.mega li.has-submenu:hover > .childcontent*/ { left: auto; /*show on parent:hover*/ }
 
 .ex-megamenu li.mega .right,
-.ex-megamenu li.haschild-over li.mega .right,
-.ex-megamenu li.mega li.haschild-over li.mega .right ,
-.ex-megamenu li.mega li.mega li.haschild-over li.mega .right, 
-.ex-megamenu li.mega li.mega li.mega li.haschild-over li.mega .right, 
-.ex-megamenu li.mega li.mega li.mega li.mega li.haschild-over li.mega .right { right: auto; /*hide the menu*/ }
+.ex-megamenu li.has-submenu-over li.mega .right,
+.ex-megamenu li.mega li.has-submenu-over li.mega .right ,
+.ex-megamenu li.mega li.mega li.has-submenu-over li.mega .right, 
+.ex-megamenu li.mega li.mega li.mega li.has-submenu-over li.mega .right, 
+.ex-megamenu li.mega li.mega li.mega li.mega li.has-submenu-over li.mega .right { right: auto; /*hide the menu*/ }
 
-.ex-megamenu li.haschild-over .right
+.ex-megamenu li.has-submenu-over .right
 { right: 0; /*show on parent:hover*/ }
-.ex-megamenu li.mega li.haschild-over .right,
-.ex-megamenu li.mega li.mega li.haschild-over .right,
-.ex-megamenu li.mega li.mega li.mega li.haschild-over .right,
-.ex-megamenu li.mega li.mega li.mega li.mega li.haschild-over .right,
-.ex-megamenu li.mega li.mega li.mega li.mega li.mega li.haschild-over .right 
+.ex-megamenu li.mega li.has-submenu-over .right,
+.ex-megamenu li.mega li.mega li.has-submenu-over .right,
+.ex-megamenu li.mega li.mega li.mega li.has-submenu-over .right,
+.ex-megamenu li.mega li.mega li.mega li.mega li.has-submenu-over .right,
+.ex-megamenu li.mega li.mega li.mega li.mega li.mega li.has-submenu-over .right 
 { right: 12em; /*show on parent:hover*/ }
 
-.ex-megamenu ul.level1 li.mega { float: none; }
+.ex-megamenu ul.level-1 li.mega { float: none; }
 
-.ex-megamenu ul.level1 .childcontent { margin: -2em 0 0 160px; }
+.ex-megamenu ul.level-1 .childcontent { margin: -2em 0 0 160px; }
 
  /* Columns ---*/
 .ex-megamenu .megacol { float: left;}
 
 /* Styling ---*/
-.ex-megamenu ul.level1 li.mega {}
+.ex-megamenu ul.level-1 li.mega {}
 
-.ex-megamenu ul.level1 li.first {}
+.ex-megamenu ul.level-1 li.first {}
 
-.ex-megamenu ul.level1 li.mega a.mega {
+.ex-megamenu ul.level-1 li.mega a.mega {
 	background: none;
 	border: 0;
 	font-weight: normal;
 	padding: 8px 5px;
 }
 
-.ex-megamenu ul.level1 li.mega a.mega span.menu-title { background: none; padding: 0; }
+.ex-megamenu ul.level-1 li.mega a.mega span.menu-title { background: none; padding: 0; }
 
-.ex-megamenu ul.level1 li.haschild,
-.ex-megamenu ul.level1 li.haschild-over {
+.ex-megamenu ul.level-1 li.has-submenu,
+.ex-megamenu ul.level-1 li.has-submenu-over {
 	background-image: url(../images/arrow.png);
 	background-repeat: no-repeat;
 	background-position: 95% center;
 	padding: 0;
 }
 
-.ex-megamenu ul.level1 li.over, ul.level1 li.haschild-over {}
+.ex-megamenu ul.level-1 li.over, ul.level-1 li.has-submenu-over {}
 
-.ex-megamenu ul.level1 li.group { background: none; }
+.ex-megamenu ul.level-1 li.group { background: none; }
 
  /* CHILD CONTENT
 -----------------------------------*/
@@ -151,7 +152,7 @@ ul.megamenu { margin: 10px; /* menu's gutter */ }
 	background: #fff;
 }
 
-.ex-megamenu .level1 .childcontent-inner {}
+.ex-megamenu .level-1 .childcontent-inner {}
 
 .ex-megamenu .childcontent .ex-moduletable {
 	line-height: 1.5;
@@ -326,14 +327,14 @@ ul.megamenu { margin: 10px; /* menu's gutter */ }
 
 #ex-subnav ul li.hover ul { display: block; height: auto; left: auto; position: absolute; }
 
-#ex-subnav ul li.haschild a.haschild span.menu-title {
+#ex-subnav ul li.has-submenu a.has-submenu span.menu-title {
 	background: url(../images/arrow.png) no-repeat right center;
 	padding-right: 12px;
 }
 
-#ex-subnav ul li.haschild a.haschild:hover span.menu-title { background-image: url(../images/arrow3.png) }
+#ex-subnav ul li.has-submenu a.has-submenu:hover span.menu-title { background-image: url(../images/arrow3.png) }
 
-#ex-subnav ul li.haschild li.haschild a.haschild:hover span.menu-title { background-image: url(../images/arrow.png) }
+#ex-subnav ul li.has-submenu li.has-submenu a.has-submenu:hover span.menu-title { background-image: url(../images/arrow.png) }
 
 #ex-subnav ul li ul li {
 	display: block;
@@ -359,7 +360,7 @@ ul.megamenu { margin: 10px; /* menu's gutter */ }
 	margin: -1em 0 0 12em;
 }
 
-#ex-subnav ul li li.haschild a.haschild span.menu-title {
+#ex-subnav ul li li.has-submenu a.has-submenu span.menu-title {
 	display: block;
 }
 
