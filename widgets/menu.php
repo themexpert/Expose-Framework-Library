@@ -15,7 +15,7 @@ class ExposeWidgetMenu extends ExposeWidget{
         global $expose;
         $html = '';
 
-        $menuStyle = $this->get('style');
+        $menuStyle = $this->get('style','mega');
         $hasSubMenu = '';
         $fileName = $menuStyle.'menu';
 
@@ -74,7 +74,7 @@ class ExposeWidgetMenu extends ExposeWidget{
             { ?>
                 <div id='tx-subnav' class='clearfix'>
                    <?php $menu->genMenu(1); ?>
-                </div>;
+                </div>
            <?php
             } ?>
         <div class="clear"></div>
