@@ -20,10 +20,10 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
       clear: both;
       visibility: hidden;
 }
-.wrapper, .ex-block, .wrap-blocks, .wrap-blocks-last {display: inline-block; min-height: 0;}    
-/* hides from IE-mac \*/  
-* html .wrapper, * html .ex-block, * html .wrap-blocks, * html .wrap-blocks-last {height: 1%;}  
-.wrapper, .ex-block, .wrap-blocks, .wrap-blocks-last {display: block;}  
+.wrapper, .ex-block, .wrap-blocks, .wrap-blocks-last {display: inline-block; min-height: 0;}
+/* hides from IE-mac \*/
+* html .wrapper, * html .ex-block, * html .wrap-blocks, * html .wrap-blocks-last {height: 1%;}
+.wrapper, .ex-block, .wrap-blocks, .wrap-blocks-last {display: block;}
 /* end hide from IE-mac */
 
 .wrapper {
@@ -36,15 +36,14 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 	z-index: 1;
 	text-align: left;
 }
-.wrap-blocks {float:left; margin-right:-1px;}
-.wrap-blocks-last {overflow:hidden;}
+.ex-column {float:left; margin-right:-1px;}
+.ex-column-last {overflow:hidden;}
 * html .ie6-offset {margin-right: -4px;}
 .wrapper, .ex-row {clear:left;}
 
 /* added styles */
-
-.wrapper, .ex-row {background: #ccc;}
-.ex-block {padding: 10px; margin:10px; background: #fff; border: 1px solid #000000; position: relative;
+.wrapper, .ex-row {position: relative;}
+.ex-block {padding: 10px; margin:10px; position: relative;
 }
 
 /* Core */
@@ -52,7 +51,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 .ex-mod{height: 100%}
 .mod-inner{margin: 0 10px;}
 .ex-block{padding: 10px;margin-bottom: 10px;position: relative}
-#ex-mainbody, #sidebar-left, #sidebar-right{}
+#ex-mainbody, #ex-sidebar-a, #ex-sidebar-b{position: relative;}
 .ex-menu .ex-block{margin-left: 0;margin-right: 0}
 .width50{width: 50%;float: left}
 .width50 .mod-content{padding-right: 5px;}
@@ -62,18 +61,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 #ex-poweredby{margin: 0 auto}
 
 /* Menu */
-.ex-menu {position: relative;z-index: 1000;}
-.ex-menu ul{margin: 0;padding: 0;list-style: none}
-.ex-menu ul li{float: left;padding: 0;position: relative;}
-.ex-menu ul li a{display: block;font-family: "Trebuchet MS",Verdana,Arial,sans-serif;padding: 0 10px;}
-.ex-menu ul ul {position:absolute;left:-9999em;padding: 5px;width: 15em;}
-.ex-menu ul ul li {width:100%;}
-.ex-menu ul li:hover {visibility:inherit; /* fixes IE7 'sticky bug' */}
-.ex-menu ul li:hover ul, .ex-menu ul li.over ul{left: 0;z-index:99;}
-.ex-menu ul li:hover li ul, .ex-menu ul li.over li ul{left: -999em;}
-.ex-menu ul li li:hover ul, .ex-menu ul li li.over ul{left:14em; top:0;}
-.ex-menu ul li li:hover li ul, .ex-menu ul li li.over li ul{top:-999em;}
-.ex-menu ul li li li:hover ul,.ex-menu ul li li li.over ul {left: 14em; /* match ul width */top:0;}
+
 
 /*Additional*/
 #ex-scrolltop{display: none;position: fixed;right: 15px;bottom: 5px; height: 20px; font-weight: bold;font-size: 11px;text-decoration: none;padding: 0px 15px; }
