@@ -55,13 +55,13 @@ abstract class ExposeWidget{
         return $this->mobile;
     }
 
-    public function get($param)
+    public function get($param,$default=NULL)
     {
         global $expose;
 
         $field = $this->name . '-' .$param;
 
-        return $expose->get($field);
+        return $expose->get($field,$default);
     }
 
     public function init(){
