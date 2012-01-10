@@ -18,7 +18,7 @@ defined ('EXPOSE_VERSION') or die ('resticted aceess');
 
     <jdoc:include type="message" />
 
-    <div id="ex-mainbody" style="width:<?= $width['component']; ?>%;position: relative; left: <?= $width['sidebar-a']; ?>%">
+    <div id="ex-mainbody" class="ex-column" style="width:<?= $width['component']; ?>%;left: <?= $width['sidebar-a']; ?>%">
 
         <?php /**Begin Content top**/ if($expose->countModules('contenttop')): ?>
         <!--Start Content Top Modules-->
@@ -51,7 +51,7 @@ defined ('EXPOSE_VERSION') or die ('resticted aceess');
     <?php /**Begin Sidebar-A**/ if($expose->countModules('sidebar-a')): ?>
 
     <!--Start Sidebar-A Modules-->
-    <div id="ex-sidebar-a" class="ex-sidebars" role="complementary" style="width:<?= $expose->getSidebarsWidth('sidebar-a') ?>%">
+    <div id="ex-sidebar-a" class="ex-column" role="complementary" style="width:<?= $expose->getSidebarsWidth('sidebar-a') ?>%; left: -<?= $width['component'] ?>%">
         <?php $expose->renderModules('sidebar-a'); ?>
         <div class="clear"></div>
     </div>
@@ -62,7 +62,7 @@ defined ('EXPOSE_VERSION') or die ('resticted aceess');
     <?php /**Begin Sidebar-B**/ if($expose->countModules('sidebar-b')): ?>
 
         <!--Start Sidebar-B Modules-->
-        <div id="ex-sidebar-b" class="ex-sidebars" role="complementary" style="width:<?= $expose->getSidebarsWidth('sidebar-b') ?>%">
+        <div id="ex-sidebar-b" class="ex-column" role="complementary" style="width:<?= $expose->getSidebarsWidth('sidebar-b') ?>%">
             <?php $expose->renderModules('sidebar-b'); ?>
             <div class="clear"></div>
         </div>
