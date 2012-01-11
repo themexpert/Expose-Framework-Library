@@ -160,6 +160,8 @@ class ExposeCore{
 
     private function loadCoreStyleSheet()
     {
+        if($this->isAdmin()) return;
+
         if($this->platform == 'desktop')
         {
             $files = array('expose.css','joomla.css');
@@ -327,6 +329,9 @@ class ExposeCore{
     }
 
     private function _loadPresetStyle(){
+
+        if($this->isAdmin()) return;
+
         //if(defined('EXPOSE_FINAL')) return;
         $preset_file = (isset ($_COOKIE[$this->templateName.'_style'])) ? $_COOKIE[$this->templateName.'_style'] : $this->get('style','style1');
         if(isset ($_REQUEST['style'])){
