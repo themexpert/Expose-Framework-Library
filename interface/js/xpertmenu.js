@@ -134,16 +134,20 @@ jQuery.extend( jQuery.easing,
 	}
 });
 
-(function () {
+(function ($) {
 
   var _options = {
     action: 'click',
-    transition: 'slide'
+    transition: 'slide',
+	dir:'left',
+	defaultIcon:3
   },_mouseTimer,_action;
 
   var methods = {
     init: function (_opt) {
       $.extend(_options, _opt);
+	  $(this).find('ul').eq(0).append('<li class="lava_back"></li>')
+	  $(this).XpertMenu('animate_icon',$('.level-0').eq(Number(_options.defaultIcon)));
 	  $('.childcontent').css('display','none');
       $(this).XpertMenu('bindEvents')
 	  _action = _options.action;
@@ -156,21 +160,28 @@ jQuery.extend( jQuery.easing,
 		
       	_targetli.bind(
         _options.action,function(e){
+		  var _this = $(this)
 		  $(this).siblings('li').each(function(){
-		  $(this).find('.childcontent').slideUp(_options.delay);								   
-		 });
-          if ($(this).hasClass('haschild')){
+		  $(this).find('.childcontent').slideUp(_options.delay);												 		  });
+		  if( _options.action=='mouseenter' && $(this).hasClass('level-0')){
+			$(this).XpertMenu('animate_icon',_this);	
+		  }
+          if ($(this).hasClass('has-submenu')){
             clearTimeout(_mouseTimer);
 			if($(this).attr('dir') == undefined)
-            $(this).XpertMenu('checkDirection',e);
+				$(this).XpertMenu('checkDirection',e);
 			else
-			$(this).XpertMenu('setDirection',e);
+				$(this).XpertMenu('setDirection',e);
           }
 	  	});
 		
 		_targetli.bind({
 		'mouseleave':function(e){
+			var _this = $(this);
 			_mouseTimer = setTimeout(function(){
+			if( _options.action=='mouseenter' && _this.hasClass('level-0')){
+				$(this).XpertMenu('animate_icon',$('.level-0').eq(Number(_options.defaultIcon)));	
+			}								  
 			$(this).XpertMenu('hideContent',e);								 
 			},_options.hideDelay);
 			
@@ -185,19 +196,20 @@ jQuery.extend( jQuery.easing,
 		
 		'mouseleave':function(e){
 			_mouseTimer = setTimeout(function(){
-				$(this).XpertMenu('hideContent',e);								 
+				$(this).XpertMenu('hideContent',e);
+				$(this).XpertMenu('animate_icon',$('.level-0').eq(Number(_options.defaultIcon)));
 			},_options.hideDelay);
 		}
 		})
-	  	
-	  
-        
-	  
-    },
+    },animate_icon:function(_this){
+		_lioffset = _this.offset();
+		$('.lava_back').animate({'left':_lioffset.left-150+'px','width':_this.width()+'px'},300,_options.easing);
+	},
 	setDirection:function(e){
 		var _this = $(this);
 		var _childthis = $(this).find('.childcontent').eq(0);
-		var _dir = _this.attr('dir');
+		var _dir = _options.dir||_this.attr('dir');
+		var _defaultIcon = 3;
 		
 		if(_dir == 'left'){
 			_childthis.css({'left':'10px'})
