@@ -79,7 +79,7 @@ class ExposeCore{
 
         //detect the platform first
         $this->detectPlatform();
-        
+
     }
 
 
@@ -118,7 +118,7 @@ class ExposeCore{
             $this->_renderCombinedDom();
         }
          //fix the template width and sidebar width
-        //$this->setCustomStyles();
+        $this->setCustomStyles();
 
         //$this->layout->init();
         define('EXPOSE_FINAL', 1);
@@ -160,7 +160,7 @@ class ExposeCore{
 
     private function loadCoreStyleSheet()
     {
-        if($this->platform = 'desktop')
+        if($this->platform == 'desktop')
         {
             $files = array('expose.css','joomla.css');
             $this->addLink($files,'css',1);
@@ -321,6 +321,7 @@ class ExposeCore{
     public function getStyleSheet(){
         return $this->styleSheets;
     }
+
     public function getScripts(){
         return $this->scripts;
     }
@@ -334,10 +335,6 @@ class ExposeCore{
         }
         $preset_file = $preset_file.'.css';
         $this->addLink($preset_file, 'css');
-    }
-
-    public function addInlineStyles($content){
-        return $this->document->addStyleDeclaration($content);
     }
 
 
@@ -470,33 +467,32 @@ class ExposeCore{
     private function setCustomStyles(){
         if(defined('EXPOSE_FINAL')) return;
         $css = "/*dynamic css*/ \n";
-        if($this->layout->isMobile()){
-            $templWidth     = '320px';
-            $css .= '.tx-container{width:'.$templWidth.'}';
-        }
-        else{
-            $templWidth = (isset ($_COOKIE[$this->templateName.'_templateWidth'])) ? $_COOKIE[$this->templateName.'_templateWidth'] : $this->get('template_width');
-            if(isset ($_REQUEST['templateWidth'])){
-                setcookie($this->templateName.'_templateWidth',$_REQUEST['templateWidth'],time()+3600,'/');
-                $templWidth = $_REQUEST['templateWidth'];
-            }
 
-            if($templWidth == 'fluid'){
-              $css      .= '.tx-container{width:95%}';
-            }else {
-                $width   = $this->get('width','980').'px';
-                $css    .= '.tx-container{width:'.$width.'}';
-            }
-        }
+        /*$templWidth = (isset ($_COOKIE[$this->templateName.'_templateWidth'])) ? $_COOKIE[$this->templateName.'_templateWidth'] : $this->get('template-width');
+        if(isset ($_REQUEST['templateWidth'])){
+            setcookie($this->templateName.'_templateWidth',$_REQUEST['templateWidth'],time()+3600,'/');
+            $templWidth = $_REQUEST['templateWidth'];
+        }*/
+
+
+        $width   = $this->get('template-width','980').'px';
+        $css    .= '.ex-row{width:'.$width.'}';
+
+
         $this->addInlineStyles($css);
+    }
+
+    public function addInlineStyles($content){
+        $this->document->addStyleDeclaration($content);
     }
 
 
     public function displayHead(){
         if(defined('EXPOSE_FINAL')) return;
         if(!$this->isAdmin()){
+
             //output joomla head
-            echo '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">';
+
             echo '<jdoc:include type="head" />';
         }
     }
@@ -535,6 +531,9 @@ class ExposeCore{
     {
         $widths = array();
         $layout = ExposeLayout::getInstance();
+        $widths['a'] = 0;
+        $widths['b'] = 0;
+        $widths['component'] = 0;
 
         if($layout->countModulesForPosition('sidebar-a') OR $layout->countWidgetsForPosition('sidebar-a'))
         {
@@ -585,8 +584,16 @@ class ExposeCore{
         $browserName = $this->browser->getBrowser();
 
         //we'll consider 2 mobile now iPhone and Android, iPad will treat as regular desktop device
-        if($this->browser->isMobile() AND ($browserName == 'iPhone' OR $browserName == 'Android')){
+        if($this->get('iphone-enabled') AND $this->browser->isMobile() AND $browserName == 'iPhone')
+        {
             $this->platform = 'mobile';
+            $this->document->setMetaData('viewport','width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1');
+
+        }elseif($this->get('android-enabled') AND $this->browser->isMobile() AND $browserName == 'android'){
+
+            $this->platform = 'mobile';
+            $this->document->setMetaData('viewport','width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1');
+
         }else{
             $this->platform = 'desktop';
         }
