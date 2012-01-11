@@ -266,7 +266,7 @@ class ExposeLayout
         {
             if($expose->get($parentField.'-mobile'))
             {
-                return $this->document->countModules($position);
+                return $expose->document->countModules($position);
             }else{
                 return FALSE;
             }
@@ -347,7 +347,7 @@ class ExposeLayout
 
         if( $expose->platform == 'mobile' )
         {
-            $device = strtolower($this->browser->getBrowser());
+            $device = strtolower($expose->browser->getBrowser());
             $bfile = $bPath .DS . $device . $ext;
             $tfile = $tPath .DS . $device . $ext;
 
