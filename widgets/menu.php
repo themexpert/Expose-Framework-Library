@@ -17,12 +17,14 @@ class ExposeWidgetMenu extends ExposeWidget{
 
         $menuStyle = $this->get('style','mega');
         $hasSubMenu = '';
-        $fileName = $menuStyle.'menu';
 
-        if($expose->platform == 'mobile' AND $expose->browser->getBrowser == 'iPhone')
+        if($expose->platform == 'mobile' AND $expose->browser->getBrowser() == 'iPhone')
         {
             $menuStyle = 'iphone';
         }
+
+        $fileName = $menuStyle.'menu';
+
 
         switch($menuStyle){
             case 'dropline':
@@ -49,11 +51,11 @@ class ExposeWidgetMenu extends ExposeWidget{
                 //load xpertmenu aka mega menu js file
                 $expose->addLink('xpertmenu.js','js');
                 $js = "$('#ex-megamenu').XpertMenu({
-                    action:'mouseenter',
-                    parent:'#ex-menu',
-                    hideDelay:'300',
-                    transition:'slide',
-                    easing:'easeInOutExpo'
+                        action:'mouseenter',
+                        parent:'.ex-row',
+                        hideDelay:'300',
+                        transition:'slide',
+                        easing:'easeInOutExpo'
                 });";
 
                 $expose->addjQDom($js);
@@ -72,7 +74,7 @@ class ExposeWidgetMenu extends ExposeWidget{
 
             <?php if($hasSubMenu)
             { ?>
-                <div id='tx-subnav' class='clearfix'>
+                <div id='ex-subnav' class='clearfix'>
                    <?php $menu->genMenu(1); ?>
                 </div>
            <?php
