@@ -12,29 +12,19 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 
 /* Layout 
 ----------------------------------------*/
-
-.wrapper:after, .ex-row:after, .ex-block:after {
-      content: ".";
-      display: block;
-      height: 0;
-      clear: both;
-      visibility: hidden;
-}
+.wrapper:after, .ex-row:after, .ex-block:after { content: "."; display: block; height: 0; clear: both; visibility: hidden;}
 .wrapper, .ex-block, .wrap-blocks, .wrap-blocks-last {display: inline-block; min-height: 0;}
 /* hides from IE-mac \*/
 * html .wrapper, * html .ex-block, * html .wrap-blocks, * html .wrap-blocks-last {height: 1%;}
 .wrapper, .ex-block, .wrap-blocks, .wrap-blocks-last {display: block;}
 /* end hide from IE-mac */
 
-.wrapper {
-	display:inline-block;
-	width:960px;
+.wrapper, .ex-row {
 	margin-right: auto;
 	margin-left: auto;
 	text-align: left;
 	position :relative;
 	z-index: 1;
-	text-align: left;
 }
 .ex-column {float:left; margin-right:-1px;}
 .ex-column-last {overflow:hidden;}
@@ -42,26 +32,19 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 .wrapper, .ex-row {clear:left;}
 
 /* added styles */
-.wrapper, .ex-row {position: relative;}
-.ex-block {padding: 10px; margin:10px; position: relative;
-}
+.ex-block {padding: 10px; margin:10px; position: relative;}
 
 /* Core */
 .wrap-blocks{margin: 0 auto;}
 .ex-mod{height: 100%}
 .mod-inner{margin: 0 10px;}
-.ex-block{padding: 10px;margin-bottom: 10px;position: relative}
 #ex-mainbody, #ex-sidebar-a, #ex-sidebar-b{position: relative;}
 .ex-menu .ex-block{margin-left: 0;margin-right: 0}
-.width50{width: 50%;float: left}
-.width50 .mod-content{padding-right: 5px;}
 .left{float: left;margin-right: 10px;}
 .right{float: right;margin-left: 10px;}
 #ex-copyright,.designed-by{text-align: center}
 #ex-poweredby{margin: 0 auto}
-
-/* Menu */
-
+.no-title .ex-header{display: none;}
 
 /*Additional*/
 #ex-scrolltop{display: none;position: fixed;right: 15px;bottom: 5px; height: 20px; font-weight: bold;font-size: 11px;text-decoration: none;padding: 0px 15px; }
@@ -109,12 +92,6 @@ ul li.author span, ul li.date span, ul li.comments span {display: block;font-wei
 html,body {margin-bottom: 1px;}
 body {color: #333;}
 a:hover {color: #000;}
-.ex-menu ul li a {color: #777;text-shadow: 0 1px 1px #FFF}
-/*First Level*//*
-.ex-menu ul.menu > li:hover > a,.ex-menu ul.menu > li.active > a {background: #eee; outline: 1px solid #ddd; color: #444;}
-*//*Second and above level*//*
-.ex-menu ul li ul li a:hover{color: #ff4500;}
-.ex-menu ul li ul{background: #fff;border: 1px solid #ddd;}*/
 .expose-logo-light{background: url(../images/expose_logo_light.png) no-repeat;}
 .expose-logo-dark{background: url(../images/expose_logo_dark.png) no-repeat;}
 #ex-scrolltop{background: #555;color: #fff; }
