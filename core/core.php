@@ -471,20 +471,24 @@ class ExposeCore{
 
     private function setCustomStyles(){
         if(defined('EXPOSE_FINAL')) return;
-        $css = "/*dynamic css*/ \n";
 
-        /*$templWidth = (isset ($_COOKIE[$this->templateName.'_templateWidth'])) ? $_COOKIE[$this->templateName.'_templateWidth'] : $this->get('template-width');
-        if(isset ($_REQUEST['templateWidth'])){
-            setcookie($this->templateName.'_templateWidth',$_REQUEST['templateWidth'],time()+3600,'/');
-            $templWidth = $_REQUEST['templateWidth'];
-        }*/
+        if($this->get('template-layout','fixed') == 'fixed'){
+
+            $css = "/*dynamic css*/ \n";
+
+            /*$templWidth = (isset ($_COOKIE[$this->templateName.'_templateWidth'])) ? $_COOKIE[$this->templateName.'_templateWidth'] : $this->get('template-width');
+            if(isset ($_REQUEST['templateWidth'])){
+                setcookie($this->templateName.'_templateWidth',$_REQUEST['templateWidth'],time()+3600,'/');
+                $templWidth = $_REQUEST['templateWidth'];
+            }*/
 
 
-        $width   = $this->get('template-width','980').'px';
-        $css    .= '.ex-row{width:'.$width.'}';
+            $width   = $this->get('template-width','980').'px';
+            $css    .= '.ex-row{width:'.$width.'}';
 
 
-        $this->addInlineStyles($css);
+            $this->addInlineStyles($css);
+        }
     }
 
     public function addInlineStyles($content){
