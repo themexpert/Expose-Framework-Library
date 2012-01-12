@@ -56,7 +56,6 @@ tr.sectiontableentry0 td, td.sectiontableentry0, tr.sectiontableentry1 td, td.se
 .ex-content ul#archive-items li.row0, .ex-content ul#archive-items li.row1 {padding: 10px 0;margin: 10px 0;}
 
 /* Article Layout */
-.ex-content {padding: 15px;margin: 0 10px 10px; overflow: hidden}
 .ex-content .title {width: auto;font-size: 260%;line-height: 1.1em;}
 .ex-content span.edit {margin-left: 10px;float: left;}
 .ex-content .ex-articleinfo {margin-bottom: 15px;}

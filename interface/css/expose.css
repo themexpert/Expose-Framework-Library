@@ -1,10 +1,9 @@
 /**
  * @package     Expose
- * @version     2.0
+ * @version     3.0.0
  * @author      ThemeXpert http://www.themexpert.com
  * @copyright   Copyright (C) 2010 - 2011 ThemeXpert
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
- * @file        expose.css
  **/
 
 /* Reset */
@@ -12,48 +11,33 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 
 /* Layout 
 ----------------------------------------*/
-.wrapper:after, .ex-row:after, .ex-block:after { content: "."; display: block; height: 0; clear: both; visibility: hidden;}
-.wrapper, .ex-block, .wrap-blocks, .wrap-blocks-last {display: inline-block; min-height: 0;}
+ex-row:after, .ex-block:after { content: "."; display: block; height: 0; clear: both; visibility: hidden;}
+
 /* hides from IE-mac \*/
-* html .wrapper, * html .ex-block, * html .wrap-blocks, * html .wrap-blocks-last {height: 1%;}
-.wrapper, .ex-block, .wrap-blocks, .wrap-blocks-last {display: block;}
+* html, * html .ex-block{height: 1%;}
 /* end hide from IE-mac */
 
-.wrapper, .ex-row {
-	margin-right: auto;
-	margin-left: auto;
-	text-align: left;
-	position :relative;
-	z-index: 1;
-}
-.ex-column {float:left; margin-right:-1px;}
-.ex-column-last {overflow:hidden;}
-* html .ie6-offset {margin-right: -4px;}
-.wrapper, .ex-row {clear:left;}
+.ex-row {margin-right: auto; margin-left: auto; text-align: left; position :relative; clear:left; z-index: 1;}
+    .ex-column, .ex-column-last {float:left; margin-right:-1px;}
+        .ex-block {padding: 10px; margin:10px; position: relative; display: block; min-height: 0;height: 100%}
+            .no-title .ex-header{display: none;}
+            .ex-content{padding: 10px}
+    * html .ie6-offset {margin-right: -4px;}
 
-/* added styles */
-.ex-block {padding: 10px; margin:10px; position: relative;}
-
-/* Core */
-.wrap-blocks{margin: 0 auto;}
-.ex-mod{height: 100%}
-.mod-inner{margin: 0 10px;}
 #ex-mainbody, #ex-sidebar-a, #ex-sidebar-b{position: relative;}
-.ex-menu .ex-block{margin-left: 0;margin-right: 0}
-.left{float: left;margin-right: 10px;}
-.right{float: right;margin-left: 10px;}
+    #ex-sidebar-a .ex-column-last, #ex-sidebar-b .ex-column-last{float: none}
+
 #ex-copyright,.designed-by{text-align: center}
 #ex-poweredby{margin: 0 auto}
-.no-title .ex-header{display: none;}
 
 /*Additional*/
 #ex-scrolltop{display: none;position: fixed;right: 15px;bottom: 5px; height: 20px; font-weight: bold;font-size: 11px;text-decoration: none;padding: 0px 15px; }
 .expose-logo, .expose-logo a{width: 152px;height: 40px;display: block}
-.expose-logo span{display: none}
+    .expose-logo span{display: none}
 
 /* RTL */
 /*body.rtl {direction: rtl;}*/
-body.rtl #ex-mainbody, body.rtl #sidebar-left, body.rtl #sidebar-right, body.rtl .ex-mod{float: right}
+body.rtl #ex-mainbody, body.rtl #ex-sidebar-a, body.rtl #ex-sidebar-b, body.rtl .ex-column{float: right}
 body.rtl .ex-menu ul li{float: right}
 body.rtl {min-width: inherit;}
 body.rtl .ex-menu ul li:hover ul, body.rtl .ex-menu ul li.over ul{right: 0;}
@@ -62,13 +46,20 @@ body.rtl .ex-menu ul li li:hover ul, body.rtl .ex-menu ul li li.over ul{right:13
 body.rtl .ex-menu ul li li li:hover ul,body.rtl .ex-menu ul li li li.over ul {right: 10em;top:0;}
 body.rtl ul, ol{padding-right: 15px;}
 
+/* Clear Float*/
+html body * span.clear, html body * div.clear, html body * li.clear, html body * dd.clear {background: none;border: 0;clear: both;display: block;float: none;font-size: 0;list-style: none;margin: 0;padding: 0;overflow: hidden;visibility: hidden;width: 0;height: 0;}
+.clearfix:after {clear: both;content: '.';display: block;visibility: hidden;height: 0;}
+.clearfix {display: inline-block;}
+* html .clearfix {height: 1%;}
+.clearfix {display: block;}
+
 /* Typography 
 ----------------------------------------*/
 /* General */
 html{overflow-y: scroll;min-height: 100%}
 body {font:normal 13px/20px "Segoe UI", Arial, Helvetica, sans-serif;color: #444}
 form {margin: 0;padding: 0;}
-h1, h2, h3, h4, h5, p {margin: 15px 0;}
+h1, h2, h3, h4, h5{margin: 10px 0;}
 h1 {font-size: 240%;}
 h2 {font-size: 200%;}
 h2.title {font-size: 170%;}
@@ -95,10 +86,3 @@ a:hover {color: #000;}
 .expose-logo-light{background: url(../images/expose_logo_light.png) no-repeat;}
 .expose-logo-dark{background: url(../images/expose_logo_dark.png) no-repeat;}
 #ex-scrolltop{background: #555;color: #fff; }
-
-/* Clear Float*/
-html body * span.clear, html body * div.clear, html body * li.clear, html body * dd.clear {background: none;border: 0;clear: both;display: block;float: none;font-size: 0;list-style: none;margin: 0;padding: 0;overflow: hidden;visibility: hidden;width: 0;height: 0;}
-.clearfix:after {clear: both;content: '.';display: block;visibility: hidden;height: 0;}
-.clearfix {display: inline-block;}
-* html .clearfix {height: 1%;}
-.clearfix {display: block;}
