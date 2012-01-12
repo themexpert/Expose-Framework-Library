@@ -108,9 +108,9 @@ class ExposeLayout
                     $width = 100;
                 }
 
-                if($i == 1) $class .= 'first ';
+                if($i == 1) $class .= 'ex-first ';
 
-                $class .= ($i%2) ? 'odd' : 'even';
+                $class .= ($i%2) ? 'ex-odd' : 'ex-even';
 
                 if($i == ($totalPublished -1)) $class .= ' ie6-offset';
 
@@ -118,10 +118,13 @@ class ExposeLayout
                 $modWrapperEnd = "</div>";
 
                 if($i == $totalPublished){
-                    $class .= ' last ';
+                    $class .= ' ex-last ';
                     $containerClass = str_replace('ex-column', 'ex-column-last', $containerClass);
-                    //$container = 'ex-container wrap-blocks-last';
-                    $modWrapperStart = "<div class='$containerClass $class $positionName'>";
+                    $style = "style='width: $width%'";
+
+                    if(count($this->modules[$position]['schema']) == 1) $style = '';
+
+                    $modWrapperStart = "<div class='$containerClass $class $positionName' $style>";
                     $modWrapperEnd = "</div>";
                 }
 
@@ -130,7 +133,10 @@ class ExposeLayout
                 {
                     foreach($this->getWidgetsForPosition($positionName) as $widget)
                     {
-                        $html .= $widget->render();
+                        $html .= '<div class="ex-block no-title column-spacing clearfix">';
+                            $html .= $widget->render();
+                        $html .= '</div>';
+
                     }
                 }
 
