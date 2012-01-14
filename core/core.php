@@ -499,32 +499,46 @@ class ExposeCore{
     public function displayHead(){
         if(defined('EXPOSE_FINAL')) return;
         if(!$this->isAdmin()){
-
             //output joomla head
-
             echo '<jdoc:include type="head" />';
         }
     }
 
-    public function generateBodyClass(){
+    public function generateBodyClass()
+    {
         $class  = NULL;
         $class .= $this->get('style');
         $class .= ' '.$this->direction;
-        $class .= ' layout-'. $this->get('layout_type');
+        $class .= ' '. $this->get('layout-type');
+        $class .= ' ' . strtolower($this->browser->getBrowser());
+        $class .= ($this->displayComponent()) ? '' : ' component-disabled';
 
         return 'class="'.$class.'"';
     }
     
-    public function isHomePage(){
-        if (EXPOSE_JVERSION == '15') {
-            return (JRequest::getCmd( 'view' ) == 'frontpage') ;
+    public function displayComponent(){
+
+        if($this->get('component-disable'))
+        {
+            $ids = $this->get('component-disable-menu-ids');
+
+            if(!empty($ids))
+            {
+                $menuIds = explode(',',$ids);
+                $currentMenuId = JRequest::getInt('Itemid');
+                if(in_array($currentMenuId, $menuIds))
+                {
+                    return FALSE;
+
+                }else{
+                    return TRUE;
+                }
+            }else{
+                return TRUE;
+            }
+        }else{
+            return TRUE;
         }
-        else{
-            global $app;
-            $menu = $app->getMenu();
-            return ($menu->getDefault()->id === $menu->getActive()->id) ? TRUE : FALSE;
-        }
-        
     }
 
     public function getSidebarsWidth($position)

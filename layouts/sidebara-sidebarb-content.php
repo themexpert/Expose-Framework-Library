@@ -29,6 +29,7 @@ defined ('EXPOSE_VERSION') or die ('resticted aceess');
         <!--End Content top Modules-->
         <?php /**End Content top **/ endif;?>
 
+        <?php if($expose->displayComponent()) :?>
         <div id="ex-content" role="article">
             <div class="ex-container">
                 <div class="ex-block">
@@ -36,6 +37,7 @@ defined ('EXPOSE_VERSION') or die ('resticted aceess');
                 </div>
             </div>
         </div>
+        <?php endif;?>
 
         <?php /**Begin Content bottom**/ if($expose->countModules('contentbottom')): ?>
         <!--Start Content Bottom Modules-->
@@ -68,4 +70,7 @@ defined ('EXPOSE_VERSION') or die ('resticted aceess');
         </div>
         <!--End Sidebar-B Modules-->
     <?php /**End Sidebar-B **/ endif;?>
+
+    <div class="clear"></div>
+
 </div>
