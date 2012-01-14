@@ -28,7 +28,7 @@ class JFormFieldOverview extends JFormField{
         $html = '';
 
         $html .= "<div class='overview-panel-left'>";
-            $html .= "<div class='overview-inner gradient3'>";
+            $html .= "<div class='overview-inner gradient3 clearfix'>";
                 $html .= "<img src='".$expose->templateUrl."/template_thumbnail.png' width='275px' height='250px' alt='".$expose->templateName."_preview' />";
                 $html .= JText::_('EXPOSE_DESCRIPTION');
             $html .= "</div>";
@@ -48,7 +48,7 @@ class JFormFieldOverview extends JFormField{
 
                 $html .= "<div class='getting-help gradient3'>";
                     $html .= "<h2 class='help-title'>". JText::_('EXPOSE_GETTING_HELP_TITLE') . "</h2>";
-                    $html .= "<p class='help-info'>". JText::_('EXPOSE_GETTING_HELP_DESC') . "</p>";
+                    $html .=  JText::_('EXPOSE_GETTING_HELP_DESC');
                 $html .= "</div>";
             $html .= "</div>";
         $html .= "</div>";

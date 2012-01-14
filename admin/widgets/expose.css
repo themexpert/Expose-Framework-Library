@@ -281,6 +281,10 @@ span.pre-text{
 .overview-panel-right .overview-inner{
     margin: 25px 15px 25px 0;
 }
+.overview-panel-left .overview-inner h3{margin: 32px 0 5px 0; font-size: 16px;line-height: 24px}
+.overview-panel-left .overview-inner ul{}
+.overview-panel-left .overview-inner ul li{float: left; list-style: square inside;width: 48%}
+
 .overview-panel-right .template-name .adminform{
     margin: 0;
     padding: 0;
@@ -302,6 +306,7 @@ span.pre-text{
 .overview-panel-right .details{
 
 }
+.getting-help ul li{background: url(images/liststyle_paper.png) no-repeat 0 1px;; padding-left: 18px !important;margin:0 0 8px !important;}
 .gradient, .gradient2, .gradient3{
     padding: 10px;
     margin-bottom: 15px;
