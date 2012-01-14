@@ -25,7 +25,7 @@ ex-row:after, .ex-block:after { content: "."; display: block; height: 0; clear: 
     * html .ie6-offset {margin-right: -4px;}
 
 #ex-mainbody, #ex-sidebar-a, #ex-sidebar-b{position: relative;}
-    #ex-sidebar-a .ex-column-last, #ex-sidebar-b .ex-column-last{float: none}
+    #ex-sidebar-a .ex-column-last, #ex-sidebar-b .ex-column-last, #ex-legal .ex-column-last{float: none}
 
 #ex-copyright,.designed-by{text-align: center}
 #ex-poweredby{margin: 0 auto}
