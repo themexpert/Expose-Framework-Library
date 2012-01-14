@@ -83,9 +83,9 @@ jQuery(document).ready(function($){
     $('<div class="clear"></div>').appendTo('.panel li');
     $('<span class="tips"></span>').appendTo('.expose-tab-wrapper label');
 
-    $('#expose-wrapper').find('select,input,.handle,textarea,radio').change(function(){
+    /*$('#expose-wrapper').find('select,input,.handle,textarea,radio').change(function(){
         $(this).parent().parent().addClass('highlight');
-    });
+    });*/
 
     $(".toggle").exposeToggle();
     $('.toggleContainer').click(function(){
@@ -220,7 +220,7 @@ jQuery(document).ready(function($){
         if(inputVal == 0){
             parent.next().css('display','none');
         }else{
-            parent.next().css('display','block').addClass('highlight');
+            parent.next().css('display','block');
         }
     });
 
