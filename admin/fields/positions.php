@@ -33,18 +33,7 @@ class JFormFieldPositions extends JFormField
         $wrapstart  = '<div class="field-wrap clearfix '.$class.'">';
         $wrapend    = '</div>';
 
-        //get template name from template id
-        $id = JRequest::getInt('id');
-
-        $db = JFactory::getDbo();
-        $query = $db->getQuery(true);
-        $query->select('template');
-        $query->from('#__template_styles');
-        $query->where("id=$id");
-        $db->setQuery($query);
-        $result = $db->loadObject();
-
-        $path = JPATH_ROOT . '/templates/' . $result->template .'/templateDetails.xml';
+        $path = JPATH_ROOT . '/templates/' . $this->getCurrentTemplate() .'/templateDetails.xml';
 
         if (file_exists($path)){
             $xml = simplexml_load_file($path);
@@ -64,5 +53,21 @@ class JFormFieldPositions extends JFormField
         $html[] = JHtml::_('select.genericlist', $options, $this->name, '', 'value', 'text', $this->value, $this->id);
 
         return $wrapstart . $pretext. implode($html) . $posttext . $wrapend;
+    }
+
+    private function getCurrentTemplate()
+    {
+       //get template name from template id
+       $id = JRequest::getInt('id');
+
+       $db = JFactory::getDbo();
+       $query = $db->getQuery(true);
+       $query->select('template');
+       $query->from('#__template_styles');
+       $query->where("id=$id");
+       $db->setQuery($query);
+       $result = $db->loadObject();
+
+       return $result->template;
     }
 }
