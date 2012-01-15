@@ -133,7 +133,8 @@ class ExposeLayout
                 {
                     foreach($this->getWidgetsForPosition($positionName) as $widget)
                     {
-                        $html .= '<div class="ex-block no-title column-spacing clearfix">';
+                        $name = 'widget-' . $widget->name;
+                        $html .= "<div class='ex-block no-title column-spacing $name clearfix'>";
                             $html .= $widget->render();
                         $html .= '</div>';
 
@@ -307,6 +308,7 @@ class ExposeLayout
                 }
             }
         }
+        ksort($widgetLists);
 
         foreach($widgetLists as $name => $path)
         {
