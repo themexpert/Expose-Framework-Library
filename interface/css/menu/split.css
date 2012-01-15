@@ -1,0 +1,118 @@
+/**
+ * @package     Expose
+ * @version     3.0.0
+ * @author      ThemeXpert http://www.themexpert.com
+ * @copyright   Copyright (C) 2010 - 2011 ThemeXpert
+ * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
+ **/
+
+/* Split menu
+-----------------------------------*/
+#ex-splitmenu {
+	position: relative;
+}
+
+#ex-splitmenu ul { }
+
+#ex-splitmenu li {
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+
+#ex-splitmenu a {
+	display: block;
+	float: left;
+	font-weight: bold;
+	line-height: normal;
+	margin: 0;
+	padding: 8px 15px;
+	text-decoration: none;
+}
+
+#ex-splitmenu a:hover,
+#ex-splitmenu a:active,
+#ex-splitmenu a:focus {
+}
+
+#ex-splitmenu li.active a,
+#ex-splitmenu li.active a:hover,
+#ex-splitmenu li.active a:active,
+#ex-splitmenu li.active a:focus {
+}
+
+/* SubNav Common= Dropline+Split menu
+-----------------------------------*/
+#ex-subnav { clear: both; position: relative; z-index: 9; }
+
+#ex-subnav .main { line-height: 1; z-index: 10;}
+#ex-subnav ul.active { }
+
+#ex-subnav li { background: none; display: block; float: left; margin: 0 10px; padding: 10px 0; }
+
+#ex-subnav li.first-item { }
+
+#ex-subnav ul li a { display: block; text-decoration: none; }
+
+#ex-subnav ul li a:hover { color: #333;}
+
+#ex-subnav ul li.active a.active,
+#ex-subnav ul li.active a.active:hover,
+#ex-subnav ul li.active a.active:active,
+#ex-subnav ul li.active a.active:focus { color: #333; }
+
+#ex-subnav ul.active li a { }
+
+#ex-subnav ul.active li a:hover { }
+
+#ex-subnav ul li.empty { visibility: hidden; }
+
+/* Sub Nav (lv2) ---*/
+#ex-subnav ul li ul {
+	display: block;
+	height: auto;
+	left: -999em;
+	top: 2.7em;
+	padding: 0;
+	position: absolute;
+	width: 14em;
+}
+
+/*#ex-subnav ul li.hover ul { display: block; height: auto; left: auto; position: absolute; } Blocked by santhanam*/
+
+#ex-subnav ul li.has-submenu a.has-submenu span.menu-title {
+	background: url(../../images/arrow.png) no-repeat right center;
+	padding-right: 12px;
+}
+
+#ex-subnav ul li.has-submenu a.has-submenu:hover span.menu-title { background-image: url(../../images/arrow3.png) }
+
+#ex-subnav ul li.has-submenu li.has-submenu a.has-submenu:hover span.menu-title { background-image: url(../../images/arrow.png) }
+
+#ex-subnav ul li ul li {
+	display: block;
+	float: none;
+	padding: 5px;
+	margin: 0;
+	text-align: left;
+}
+
+#ex-subnav ul li ul li a { }
+
+#ex-subnav ul li ul li a span.menu-title { line-height: 1.5em; }
+
+#ex-subnav ul li ul li a.active { }
+
+/* Sub Nav (lv3) ---*/
+#ex-subnav ul li.hover ul ul { display: none; top: auto; }
+
+#ex-subnav ul ul li.hover ul, #ex-subnav ul ul li:hover ul {
+	display: block;
+	height: auto;
+	left: auto;
+	margin: -1em 0 0 12em;
+}
+
+#ex-subnav ul li li.has-submenu a.has-submenu span.menu-title {
+	display: block;
+}
