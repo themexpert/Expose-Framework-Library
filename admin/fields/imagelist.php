@@ -45,7 +45,20 @@ class JFormFieldImageList extends JFormField
 
         // Get the path in which to search for file options.
 		$directory = (string) $this->element['directory'];
-        $path = $expose->templatePath.'/images/'.$directory;
+
+         //get template name from template id
+         $id = JRequest::getInt('id');
+
+         $db = JFactory::getDbo();
+         $query = $db->getQuery(true);
+         $query->select('template');
+         $query->from('#__template_styles');
+         $query->where("id=$id");
+         $db->setQuery($query);
+         $result = $db->loadObject();
+
+         $path = JPATH_ROOT . '/templates/' . $result->template . '/images/' .$directory;
+
 
          // Prepend some default options based on field attributes.
 		if (!$hideNone) {
