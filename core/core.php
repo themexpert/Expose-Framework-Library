@@ -143,11 +143,8 @@ class ExposeCore{
     }
     
     public function getActiveTemplate(){
-        if(!$this->isAdmin()){
-            $app = &JApplication::getInstance('site');
-            $template = $app->getTemplate();
-            return $template;
-        }
+        $app = JFactory::getApplication('site');
+        return $app->getTemplate();
     }
 
     private function loadCoreStyleSheet()
