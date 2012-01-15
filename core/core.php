@@ -36,6 +36,7 @@ class ExposeCore{
     private  $styles = NULL;
     private  $scripts = array();
     private  $jqDom = NULL;
+    private $prefix = '';
 
     //browser objects
     public $browser;
@@ -469,12 +470,12 @@ class ExposeCore{
 
 
 
-    private function setCustomStyles(){
+    private function setCustomStyles()
+    {
         if(defined('EXPOSE_FINAL')) return;
+        $css = '';
 
-        if($this->get('template-layout','fixed') == 'fixed'){
-
-            $css = "/*dynamic css*/ \n";
+        if($this->get('template-layout','fixed') == 'fixed' AND $this->platform != 'mobile'){
 
             /*$templWidth = (isset ($_COOKIE[$this->templateName.'_templateWidth'])) ? $_COOKIE[$this->templateName.'_templateWidth'] : $this->get('template-width');
             if(isset ($_REQUEST['templateWidth'])){
@@ -482,13 +483,136 @@ class ExposeCore{
                 $templWidth = $_REQUEST['templateWidth'];
             }*/
 
-
             $width   = $this->get('template-width','980').'px';
             $css    .= '.ex-row{width:'.$width.'}';
 
-
-            $this->addInlineStyles($css);
         }
+
+        if($this->get('custom-style-enabled') AND $this->platform != 'mobile')
+        {
+            $prefix = $this->getPrefix();
+
+            $css .= "
+                body{
+                    background-color: #{$this->get('background-color')};
+                    {$this->setBackgroundImage('background-image')}
+                }
+
+                .ex-header .ex-title{
+                    color: #{$this->get('module-title-color')}
+                }
+
+                #{$prefix}main #ex-content .ex-title,
+                #{$prefix}main #ex-content .ex-title a{
+                    color: #{$this->get('article-title-color')}
+                }
+
+                #{$prefix}header{
+                    background-color: #{$this->get('header-bg-color')};
+                    {$this->setBackgroundImage('header-image')}
+                    color: #{$this->get('header-text-color')};
+                }
+                #{$prefix}header a{
+                    color: #{$this->get('header-link-color')};
+                }
+                #{$prefix}header a:hover{
+                    color: #{$this->get('header-link-hover-color')};
+                }
+
+                #{$prefix}top{
+                    background-color: #{$this->get('top-bg-color')};
+                    {$this->setBackgroundImage('top-image')}
+                    color: #{$this->get('top-text-color')};
+                }
+                #{$prefix}top a{
+                    color: #{$this->get('top-link-color')};
+                }
+                #{$prefix}top a:hover{
+                    color: #{$this->get('top-link-hover-color')};
+                }
+
+                #{$prefix}feature{
+                    background-color: #{$this->get('feature-bg-color')};
+                    {$this->setBackgroundImage('feature-image')}
+                    color: #{$this->get('feature-text-color')};
+                }
+                #{$prefix}feature a{
+                    color: #{$this->get('feature-link-color')};
+                }
+                #{$prefix}feature a:hover{
+                    color: #{$this->get('feature-link-hover-color')};
+                }
+
+                #{$prefix}main #ex-content{
+                    background-color: #{$this->get('maincontent-bg-color')};
+                    {$this->setBackgroundImage('maincontent-image')}
+                    color: #{$this->get('maincontent-text-color')};
+                }
+                #{$prefix}main #ex-content a{
+                    color: #{$this->get('maincontent-link-color')};
+                }
+                #{$prefix}main #ex-content a:hover{
+                    color: #{$this->get('maincontent-link-hover-color')};
+                }
+
+                #{$prefix}bottom{
+                    background-color: #{$this->get('bottom-bg-color')};
+                    {$this->setBackgroundImage('bottom-image')}
+                    color: #{$this->get('bottom-text-color')};
+                }
+                #{$prefix}bottom a{
+                    color: #{$this->get('bottom-link-color')};
+                }
+                #{$prefix}bottom a:hover{
+                    color: #{$this->get('bottom-link-hover-color')};
+                }
+
+                #{$prefix}footer{
+                    background-color: #{$this->get('footer-bg-color')};
+                    {$this->setBackgroundImage('footer-image')}
+                    color: #{$this->get('footer-text-color')};
+                }
+                #{$prefix}footer a{
+                    color: #{$this->get('footer-link-color')};
+                }
+                #{$prefix}footer a:hover{
+                    color: #{$this->get('footer-link-hover-color')};
+                }
+
+            ";
+        }
+
+        $this->addInlineStyles($css);
+    }
+
+    public function setPrefix($name)
+    {
+        $this->prefix = $name;
+    }
+
+    public function getPrefix()
+    {
+        if($this->prefix == '')
+        {
+            $this->setPrefix('ex-');
+        }
+
+        return $this->prefix;
+    }
+
+    public function setBackgroundImage($param, $dir='backgrounds')
+    {
+        $image = $this->get($param);
+        $repeat = $this->get($param.'-repeat','repeat');
+        $css = '';
+
+        if($image == -1) return;
+
+        $path = $this->templateUrl . '/images/'. $dir .'/' . $image;
+        $css  .= "background-image: url({$path});";
+        $css .= "background-repeat: $repeat;";
+
+        return $css;
     }
 
     public function addInlineStyles($content){
@@ -510,6 +634,7 @@ class ExposeCore{
         $class .= $this->get('style');
         $class .= ' '.$this->direction;
         $class .= ' '. $this->get('layout-type');
+        $class .= ' '. $this->get('template-layout');
         $class .= ' ' . strtolower($this->browser->getBrowser());
         $class .= ($this->displayComponent()) ? '' : ' component-disabled';
 
