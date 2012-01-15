@@ -143,20 +143,11 @@ class ExposeCore{
     }
     
     public function getActiveTemplate(){
-        $templateName = '';
-        $db = JFactory::getDbo();
-        $query = $db->getQuery(true);
-        $query->select('id, home, template, params');
-        $query->from('#__template_styles');
-        $query->where('client_id = 0');
-        $query->where('home = 1');
-        $db->setQuery($query);
-        $templates= $db->loadObjectList('template');
-        foreach($templates as $template){
-            $templateName = $template->template;
+        if(!$this->isAdmin()){
+            $app = &JApplication::getInstance('site');
+            $template = $app->getTemplate();
+            return $template;
         }
-
-        return $templateName;
     }
 
     private function loadCoreStyleSheet()
