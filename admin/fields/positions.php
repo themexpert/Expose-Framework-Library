@@ -33,7 +33,18 @@ class JFormFieldPositions extends JFormField
         $wrapstart  = '<div class="field-wrap clearfix '.$class.'">';
         $wrapend    = '</div>';
 
-        $path = $expose->templatePath.'/templateDetails.xml';
+        //get template name from template id
+        $id = JRequest::getInt('id');
+
+        $db = JFactory::getDbo();
+        $query = $db->getQuery(true);
+        $query->select('template');
+        $query->from('#__template_styles');
+        $query->where("id=$id");
+        $db->setQuery($query);
+        $result = $db->loadObject();
+
+        $path = JPATH_ROOT . '/templates/' . $result->template .'/templateDetails.xml';
 
         if (file_exists($path)){
             $xml = simplexml_load_file($path);
