@@ -43,7 +43,7 @@ class ExposeCompressor {
             if(!is_writable($path)){
                 foreach($path as $file => $url){
                     $url = $expose->baseUrl . $url;
-                    $expose->addStyleSheet($url);
+                    //$expose->addStyleSheet($url);
                 }
             }
             else{
