@@ -88,7 +88,7 @@ jQuery(document).ready(function($){
     });*/
 
     $(".toggle").exposeToggle();
-    $('.toggleContainer').click(function(){
+    $('.toggleContainer').bind('iPhoneDragEnd',function(){
         $(this).parent().find('input').each(function(){
             ($(this).attr('value') == 0) ? $(this).attr('value',1) : $(this).attr('value',0);
         });
