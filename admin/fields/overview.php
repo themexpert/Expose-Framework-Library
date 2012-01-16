@@ -29,7 +29,7 @@ class JFormFieldOverview extends JFormField{
 
         $html .= "<div class='overview-panel-left'>";
             $html .= "<div class='overview-inner gradient3 clearfix'>";
-                $html .= "<img src='".$expose->templateUrl."/template_thumbnail.png' width='275px' height='250px' alt='".$expose->templateName."_preview' />";
+                $html .= "<img src='". $expose->baseUrl. '/templates/' . $this->getCurrentTemplate()."/template_thumbnail.png' width='275px' height='250px' alt='".$expose->templateName."_preview' />";
                 $html .= JText::_('EXPOSE_DESCRIPTION');
             $html .= "</div>";
         $html .= "</div>";
@@ -57,6 +57,21 @@ class JFormFieldOverview extends JFormField{
 
 
         return $html;
+    }
+    private function getCurrentTemplate()
+    {
+       //get template name from template id
+       $id = JRequest::getInt('id');
+
+       $db = JFactory::getDbo();
+       $query = $db->getQuery(true);
+       $query->select('template');
+       $query->from('#__template_styles');
+       $query->where("id=$id");
+       $db->setQuery($query);
+       $result = $db->loadObject();
+
+       return $result->template;
     }
 }
 
