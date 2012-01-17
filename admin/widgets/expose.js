@@ -1,21 +1,18 @@
 /**
+ *
  * @package     Expose
- * @version     2.0
+ * @version     3.0.0
  * @author      ThemeXpert http://www.themexpert.com
  * @copyright   Copyright (C) 2010 - 2011 ThemeXpert
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
- * @file        expose.php
+ *
  **/
 
 jQuery.noConflict();
 
 jQuery(document).ready(function($){
 
-    $("body").queryLoader2({
-        percentage: true,
-        barHeight: 10,
-        completeAnimation: "grow"
-    });
+    //$('body').css('display','none');
 
     //create basic html skeleton for admin
     var skeleton = '<div id="expose-wrapper" class="clearfix"><div class="expose-tab-wrapper clearfix"><div class="expose-tab"><ul></ul></div><div class="expose-tab-content"></div></div></div>';
@@ -87,6 +84,8 @@ jQuery(document).ready(function($){
         $(this).parent().parent().addClass('highlight');
     });*/
 
+
+
     $(".toggle").exposeToggle();
     $('.toggleContainer').bind('iPhoneDragEnd',function(){
         $(this).parent().find('input').each(function(){
@@ -106,6 +105,8 @@ jQuery(document).ready(function($){
 
     //Beautify select dorpdown.
     $("select").uniform();
+
+    $('body').fadeIn(500);
 
     /********************************************
      * detect active tab and set it on page load
@@ -227,4 +228,5 @@ jQuery(document).ready(function($){
     //remove numbering tab for sidebar position
     $('#sidebar_a').prev('ul').hide();
     $('#sidebar_b').prev('ul').hide();
+
 });

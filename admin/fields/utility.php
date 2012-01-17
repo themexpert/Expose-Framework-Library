@@ -31,10 +31,8 @@ class JFormFieldUtility extends JFormField{
         $html = '';
 
         if($action == 'boot'){
-            $expose->addLink($expose->exposeUrl.'/interface/js/jquery.queryloader2.js','js');
             $expose->addLink($expose->exposeUrl.'/interface/js/jquery.uniform.min.js','js');
             $expose->addLink($expose->exposeUrl.'/interface/js/jquery.cookie.js','js');
-            //$expose->addLink(array('jquery.queryloader2.js','jquery.uniform.min.js','jquery.cookie.js'),'js');
 
             //load expose.css file
             $expose->addLink($expose->exposeUrl.'/admin/widgets/expose.css','css');

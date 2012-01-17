@@ -1,18 +1,20 @@
-/* 
-    Document   : expose
-    Created on : Mar 6, 2011, 1:54:21 PM
-    Author     : mike
-    Description:
-        Purpose of the stylesheet follows.
-*/
+/**
+ *
+ * @package     Expose
+ * @version     3.0.0
+ * @author      ThemeXpert http://www.themexpert.com
+ * @copyright   Copyright (C) 2010 - 2011 ThemeXpert
+ * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
+ *
+ **/
 /* Selection colours (easy to forget) */
+
+body {-webkit-tap-highlight-color: rgb(255,255,158); display: none}
 
 ::selection 	 	{background: rgb(255,255,158);}
 ::-moz-selection 	{background: rgb(255,255,158);}
 img::selection 		{background: transparent;}
 img::-moz-selection	{background: transparent;}
-body {-webkit-tap-highlight-color: rgb(255,255,158);}
-
 /* Clear Floated Elements
 -----------------------------------------------*/
 .clear {clear: both; display: block;overflow: hidden;visibility: hidden;width: 0;height: 0;}
