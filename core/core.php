@@ -32,9 +32,9 @@ class ExposeCore{
     public $app;
 
     //style and scripts
-    private  $styleSheets = array();
-    private  $styles = NULL;
-    private  $scripts = array();
+    public  $styleSheets = array();
+    //private  $styles = NULL;
+    public  $scripts = array();
     private  $jqDom = NULL;
     private $prefix = '';
 
@@ -307,14 +307,6 @@ class ExposeCore{
         $filepath = JPATH_SITE.$url;
         return $filepath;
 
-    }
-
-    public function getStyleSheet(){
-        return $this->styleSheets;
-    }
-
-    public function getScripts(){
-        return $this->scripts;
     }
 
     private function _loadPresetStyle(){
