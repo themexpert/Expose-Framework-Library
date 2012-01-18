@@ -5,17 +5,43 @@
  * For Js compression we used JSMIN Engine
  *
  * @package     Expose
- * @version     2.0    Apr 10, 2011
+ * @version     3.0.0
  * @author      ThemeXpert http://www.themexpert.com
  * @copyright   Copyright (C) 2010 - 2011 ThemeXpert
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
- * @filesource
- * @file        compressor.php
+ *
  **/
+
 //prevent direct access
 defined ('EXPOSE_VERSION') or die ('resticted aceess');
 
 class ExposeCompressor {
+
+    public static function combine()
+    {
+
+    }
+
+    public static function minifyCss()
+    {
+
+    }
+
+    public static function minifyJs()
+    {
+
+    }
+
+    public static function processRemoteFiles()
+    {
+
+    }
+
+    protected function getFileheader($type, $expireTime)
+    {
+
+    }
+
 
     public function compressCSS(){
         global $expose;
