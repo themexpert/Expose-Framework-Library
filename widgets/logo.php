@@ -30,6 +30,8 @@ class ExposeWidgetLogo extends ExposeWidget{
             $imagePath = "templates/{$expose->templateName}/images/logo.png";
         }
 
+        if(!JFile::exists(JPATH_ROOT. '/' . $imagePath)) return;
+
         // Automatically detect image size of uploaded image
         $imageSize = getimagesize($imagePath);
         $imageWidth = $imageSize[0];
