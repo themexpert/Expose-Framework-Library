@@ -14,29 +14,33 @@ class ExposeWidgetMenu extends ExposeWidget{
     {
         global $expose;
         $html = '';
+        $action = $this->get('action');
+        $delay = $this->get('delay', 300);
+        $animation = $this->get('animation');
+        $fancy = ($this->get('fancy-animation')) ? 'true' : 'false';
 
-        $menuStyle = $this->get('style','mega');
+        $style = $this->get('style','mega');
         $hasSubMenu = '';
 
         if($expose->platform == 'mobile' AND $expose->browser->getBrowser() == 'iPhone')
         {
-            $menuStyle = 'iphone';
+            $style = 'iphone';
         }
 
-        $fileName = $menuStyle.'menu';
+        $fileName = $style.'menu';
 
 
-        switch($menuStyle){
+        switch($style){
             case 'dropline':
                 $class = 'ExposeDroplineMenu';
                 $hasSubMenu = TRUE;
-                $expose->addLink($expose->exposeUrl.'/interface/css/menu/dropline.css','css');
+                $expose->addLink($expose->exposeUrl.'/interface/css/menu/dropline.css','css',2);
                 break;
 
             case 'split':
                 $class = 'ExposeSplitMenu';
                 $hasSubMenu = TRUE;
-                $expose->addLink($expose->exposeUrl.'/interface/css/menu/split.css','css');
+                $expose->addLink($expose->exposeUrl.'/interface/css/menu/split.css','css',2);
                 break;
 
             case 'iphone':
@@ -49,17 +53,20 @@ class ExposeWidgetMenu extends ExposeWidget{
                 $class = 'ExposeMegaMenu';
                 $hasSubMenu = FALSE;
 
-                $expose->addLink($expose->exposeUrl.'/interface/css/menu/mega.css','css');
+                $expose->addLink($expose->exposeUrl.'/interface/css/menu/mega.css','css',2);
 
                 //load xpertmenu aka mega menu js file
                 $expose->addLink('xpertmenu.js','js');
-                $js = "$('#ex-megamenu').XpertMenu({
-                        action:'mouseenter',
-                        parent:'.ex-row',
-                        hideDelay:'300',
-                        transition:'slide',
-                        easing:'easeInOutExpo'
-                });";
+
+                $js = "
+                var _options = {
+                    _action:'{$action}',
+                    _hideDelay:{$delay},
+                    _easing:'{$animation}',
+                    _isFancy:{$fancy}
+                };
+                jQuery('#ex-megamenu').XpertMenu(_options);
+                ";
 
                 $expose->addjQDom($js);
                 break;
