@@ -309,9 +309,9 @@ class ExposeCore{
 
     }
 
-    private function _loadPresetStyle(){
+    private function loadPresetStyle(){
 
-        if($this->isAdmin()) return;
+        if($this->isAdmin() OR $this->get('style') == '-1') return;
 
         //if(defined('EXPOSE_FINAL')) return;
         $preset_file = (isset ($_COOKIE[$this->templateName.'_style'])) ? $_COOKIE[$this->templateName.'_style'] : $this->get('style','style1');
@@ -355,7 +355,7 @@ class ExposeCore{
             //get the cdn
             $cdn = $this->get('jquery-source');
             switch ($cdn){
-                case 'google_cdn':
+                case 'google-cdn':
                     $file = 'https://ajax.googleapis.com/ajax/libs/jquery/'.$version.'/jquery.min.js';
                     break;
                 case 'local':
@@ -370,7 +370,7 @@ class ExposeCore{
 
     private function loadStyles(){
         //if(defined('EXPOSE_FINAL')) return;
-        $this->_loadPresetStyle();
+        $this->loadPresetStyle();
         $this->loadCoreStyleSheet();
 
         ksort($this->styleSheets);
@@ -412,7 +412,7 @@ class ExposeCore{
             if(isset($type['url']))
             {
                 foreach($type['url'] as $link){
-                    $this->document->addScript($link->path);
+                    $this->document->addScript($link->url);
                 }
             }
         }
@@ -605,14 +605,21 @@ class ExposeCore{
         if(!$this->isAdmin()){
             //output joomla head
             echo '<jdoc:include type="head" />';
+            $this->document->setMetaData('viewport','width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1');
         }
     }
 
     public function generateBodyClass()
     {
+        $menu = $this->app->getMenu();
+        $active = $menu->getActive();
         $class  = NULL;
-        $class .= $this->get('style');
+        $component = str_replace('_','-', JRequest::getCmd('option'));
+        $view = JRequest::getCmd('view');
+        $class .= ($this->get('style') == '-1') ? 'style-none' : $this->get('style');
         $class .= ' '.$this->direction;
+        $class .= ' page-id-'. (isset($active) ? $active->id : $menu->getDefault()->id);
+        $class .= ' '.$component . '-' . $view;
         $class .= ' '. $this->get('layout-type');
         $class .= ' '. $this->get('template-layout');
         $class .= ' ' . strtolower($this->browser->getBrowser());
@@ -715,12 +722,10 @@ class ExposeCore{
         if($this->get('iphone-enabled') AND $this->browser->isMobile() AND $browserName == 'iPhone')
         {
             $this->platform = 'mobile';
-            $this->document->setMetaData('viewport','width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1');
 
         }elseif($this->get('android-enabled') AND $this->browser->isMobile() AND $browserName == 'android'){
 
             $this->platform = 'mobile';
-            $this->document->setMetaData('viewport','width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1');
 
         }else{
             $this->platform = 'desktop';
