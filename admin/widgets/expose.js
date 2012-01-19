@@ -12,8 +12,6 @@ jQuery.noConflict();
 
 jQuery(document).ready(function($){
 
-    //$('body').css('display','none');
-
     //create basic html skeleton for admin
     var skeleton = '<div id="expose-wrapper" class="clearfix"><div class="expose-tab-wrapper clearfix"><div class="expose-tab"><ul></ul></div><div class="expose-tab-content"></div></div></div>';
 
@@ -106,7 +104,7 @@ jQuery(document).ready(function($){
     //Beautify select dorpdown.
     $("select").uniform();
 
-    $('body').fadeIn(500);
+    $('body').css('display','block');
 
     /********************************************
      * detect active tab and set it on page load
