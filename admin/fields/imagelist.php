@@ -26,6 +26,8 @@ class JFormFieldImageList extends JFormField
         global $expose;
         $html = array();
         $options = array();
+        //get template id
+        $id = JRequest::getInt('id');
 
         // Initialize some field attributes.
         $filter			= '\.png$|\.gif$|\.jpg$|\.bmp$|\.jpeg$';
@@ -46,7 +48,7 @@ class JFormFieldImageList extends JFormField
         // Get the path in which to search for file options.
 		$directory = (string) $this->element['directory'];
 
-        $path = JPATH_ROOT . '/templates/' . $this->getCurrentTemplate() . '/images/' .$directory;
+        $path = JPATH_ROOT . '/templates/' . getTemplate($id) . '/images/' .$directory;
 
 
          // Prepend some default options based on field attributes.

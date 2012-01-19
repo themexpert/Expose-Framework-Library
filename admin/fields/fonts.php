@@ -22,6 +22,8 @@ class JFormFieldFonts extends JFormField{
     protected function getInput(){
         $html = '';
         $options = array();
+        //get template id
+        $id = JRequest::getInt('id');
         // Initialize some field attributes.
         $class = $this->element['class'];
         $selectClass = 'class="gfonts"';
@@ -35,7 +37,7 @@ class JFormFieldFonts extends JFormField{
 
         //create a google font list file on admin folder to avoid api call and slow down the admin panel
         $fileName = 'gfonts.txt';
-        $path = JPATH_ROOT . '/templates/' . $this->getCurrentTemplate() .'/'. $fileName;
+        $path = JPATH_ROOT . DS . 'templates' . DS. getTemplate($id) . DS . $fileName;
         //$path = realpath(dirname(dirname(__FILE__))) .'/'.$fileName;
 
         if(!JFile::exists($path) OR JFile::read($path) == NULL){
@@ -130,22 +132,6 @@ class JFormFieldFonts extends JFormField{
 
         JFile::write($path,$buffer);
 
-    }
-
-    private function getCurrentTemplate()
-    {
-       //get template name from template id
-       $id = JRequest::getInt('id');
-
-       $db = JFactory::getDbo();
-       $query = $db->getQuery(true);
-       $query->select('template');
-       $query->from('#__template_styles');
-       $query->where("id=$id");
-       $db->setQuery($query);
-       $result = $db->loadObject();
-
-       return $result->template;
     }
 }
 

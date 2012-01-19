@@ -26,6 +26,8 @@ class JFormFieldPositions extends JFormField
         $options = array();
         $html = array();
         $class		= $this->element['class'];
+        //get template id
+        $id = JRequest::getInt('id');
         
         $pretext        = ($this->element['pretext'] != NULL) ? '<span class="pre-text hasTip" title="::'. JText::_(($this->element['pre-desc']) ? $this->element['pre-desc'] : $this->description) .'">'. JText::_($this->element['pretext']). '</span>' : '';
 
@@ -33,7 +35,7 @@ class JFormFieldPositions extends JFormField
         $wrapstart  = '<div class="field-wrap clearfix '.$class.'">';
         $wrapend    = '</div>';
 
-        $path = JPATH_ROOT . '/templates/' . $this->getCurrentTemplate() .'/templateDetails.xml';
+        $path = JPATH_ROOT . '/templates/' . getTemplate($id) .'/templateDetails.xml';
 
         if (file_exists($path)){
             $xml = simplexml_load_file($path);
