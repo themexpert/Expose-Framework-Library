@@ -117,7 +117,7 @@ class ExposeLayout
                 $class .= ($i%2) ? 'ex-odd' : 'ex-even';
                 if($i == ($totalPublished -1)) $class .= ' ie6-offset';
 
-                $style = "style='width:$width%'";
+                $style = "style='width: $width%'";
                 if(count($this->modules[$position]['schema']) == 1) $style = ''; //Exception for single module position
 
                 //we'll load all widgets first published in this position
