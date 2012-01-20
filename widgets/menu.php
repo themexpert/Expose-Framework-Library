@@ -77,14 +77,14 @@ class ExposeWidgetMenu extends ExposeWidget{
         $menu = new $class($expose->document->params);
         ob_start();
         ?>
-        <div id='ex-menu'>
+        <div id="ex-menu">
             <?php $menu->loadMenu(); ?>
 
             <?php $menu->genMenu(); ?>
 
             <?php if($hasSubMenu)
             { ?>
-                <div id='ex-subnav' class='clearfix'>
+                <div id="ex-subnav" class="clearfix">
                    <?php $menu->genMenu(1); ?>
                 </div>
            <?php

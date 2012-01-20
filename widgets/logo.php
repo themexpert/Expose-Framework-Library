@@ -63,19 +63,19 @@ class ExposeWidgetLogo extends ExposeWidget{
 
         // Pull in tagline if it's set. If it's not suppose to be visible then hide the tagline by positioning it off of the page.
         if ( ( $this->get('display-tagline') ) AND ( $this->get('tagline') ) ) {
-            $tagline = "<span class='logo-tagline'>{$this->get('tagline', '')}</span>";
+            $tagline = "<span class=\"logo-tagline\">{$this->get('tagline', '')}</span>";
         } else {
-            $tagline = "<span style='position:absolute; top:-999em;'> - {$this->get('tagline', '')} </span>";
+            $tagline = "<span style=\"position:absolute; top:-999em;\"> - {$this->get('tagline', '')} </span>";
         }
 
         // Output the logo. Determine whether it's text or an image, then pull in all the values set previously to display properly.
         if ( $this->get('type') == 'text' )
         {
-            $logo = "<{$tag} id='ex-logo' class='brand {$this->get('type')}'> <a href='{$expose->baseUrl}'>$logoText $tagline</a>  </{$tag}>";
+            $logo = "<{$tag} id=\"ex-logo\" class=\"brand {$this->get('type')}\"> <a href=\"{$expose->baseUrl}\">$logoText $tagline</a>  </{$tag}>";
 
         } else {
 
-            $logo = "<{$tag} id='ex-logo' class='brand {$this->get('type')}' style='{$tagStyle}'> <a style='{$linkStyle} display:block;text-indent: -9999px'  href='{$expose->baseUrl}'>$logoText $tagline</a>  </{$tag}>";
+            $logo = "<{$tag} id=\"ex-logo\" class=\"brand {$this->get('type')}\" style=\"{$tagStyle}\"> <a style=\"{$linkStyle} display:block;text-indent: -9999px\"  href=\"{$expose->baseUrl}\">$logoText $tagline</a>  </{$tag}>";
 
         }
 
