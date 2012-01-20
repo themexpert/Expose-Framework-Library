@@ -617,13 +617,13 @@ class ExposeCore{
         $component = str_replace('_','-', JRequest::getCmd('option'));
         $view = JRequest::getCmd('view');
         $class .= ($this->get('style') == '-1') ? 'style-none' : $this->get('style');
-        $class .= ' '.$this->direction;
+        $class .= ' align-'.$this->direction;
         $class .= ' page-id-'. (isset($active) ? $active->id : $menu->getDefault()->id);
         $class .= ' '.$component . '-' . $view;
         $class .= ' '. $this->get('layout-type');
-        $class .= ' '. $this->get('template-layout');
+        $class .= ' layout-'. $this->get('template-layout');
         $class .= ' ' . strtolower($this->browser->getBrowser());
-        $class .= ($this->displayComponent()) ? '' : ' component-disabled';
+        $class .= ($this->displayComponent()) ? '' : ' com-disabled';
 
         return 'class="'.$class.'"';
     }
