@@ -110,23 +110,15 @@ class ExposeLayout
 
                 if($i == 1) $class .= 'ex-first ';
 
-                $class .= ($i%2) ? 'ex-odd' : 'ex-even';
+                if($i == $totalPublished){
+                    $class .= 'ex-last ';
+                }
 
+                $class .= ($i%2) ? 'ex-odd' : 'ex-even';
                 if($i == ($totalPublished -1)) $class .= ' ie6-offset';
 
-                $modWrapperStart = "<div class='$containerClass $class $positionName' style='width:" . $width ."%'>";
-                $modWrapperEnd = "</div>";
-
-                if($i == $totalPublished){
-                    $class .= ' ex-last ';
-                    $containerClass = str_replace('ex-column', 'ex-column-last', $containerClass);
-                    $style = "style='width: $width%'";
-
-                    if(count($this->modules[$position]['schema']) == 1) $style = '';
-
-                    $modWrapperStart = "<div class='$containerClass $class $positionName' $style>";
-                    $modWrapperEnd = "</div>";
-                }
+                $style = "style='width:$width%'";
+                if(count($this->modules[$position]['schema']) == 1) $style = ''; //Exception for single module position
 
                 //we'll load all widgets first published in this position
                 if($this->countWidgetsForPosition($positionName))
@@ -134,12 +126,15 @@ class ExposeLayout
                     foreach($this->getWidgetsForPosition($positionName) as $widget)
                     {
                         $name = 'widget-' . $widget->name;
-                        $html .= "<div class='ex-block no-title column-spacing $name clearfix'>";
+                        $html .= "<div class=\"ex-block no-title column-spacing $name clearfix\">";
                             $html .= $widget->render();
                         $html .= '</div>';
 
                     }
                 }
+
+                $modWrapperStart = "<div class=\"$containerClass $class $positionName\" $style>";
+                $modWrapperEnd = "</div>";
 
                 //now load modules content
                 $chrome = $this->getModuleChrome($position,$positionName);
