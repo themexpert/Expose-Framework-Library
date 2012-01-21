@@ -81,13 +81,13 @@
 /*#ex-subnav ul li.hover ul { display: block; height: auto; left: auto; position: absolute; } Blocked by santhanam*/
 
 #ex-subnav ul li.has-submenu a.has-submenu span.menu-title {
-	background: url(../../images/arrow.png) no-repeat right center;
+	background: url(../images/arrow.png) no-repeat right center;
 	padding-right: 12px;
 }
 
-#ex-subnav ul li.has-submenu a.has-submenu:hover span.menu-title { background-image: url(../../images/arrow3.png) }
+#ex-subnav ul li.has-submenu a.has-submenu:hover span.menu-title { background-image: url(../images/arrow3.png) }
 
-#ex-subnav ul li.has-submenu li.has-submenu a.has-submenu:hover span.menu-title { background-image: url(../../images/arrow.png) }
+#ex-subnav ul li.has-submenu li.has-submenu a.has-submenu:hover span.menu-title { background-image: url(../images/arrow.png) }
 
 #ex-subnav ul li ul li {
 	display: block;

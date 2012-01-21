@@ -34,13 +34,13 @@ class ExposeWidgetMenu extends ExposeWidget{
             case 'dropline':
                 $class = 'ExposeDroplineMenu';
                 $hasSubMenu = TRUE;
-                $expose->addLink($expose->exposeUrl.'/interface/css/menu/dropline.css','css',2);
+                $expose->addLink('droplinemenu.css','css',2);
                 break;
 
             case 'split':
                 $class = 'ExposeSplitMenu';
                 $hasSubMenu = TRUE;
-                $expose->addLink($expose->exposeUrl.'/interface/css/menu/split.css','css',2);
+                $expose->addLink('splitmenu.css','css',2);
                 break;
 
             case 'iphone':
@@ -53,7 +53,7 @@ class ExposeWidgetMenu extends ExposeWidget{
                 $class = 'ExposeMegaMenu';
                 $hasSubMenu = FALSE;
 
-                $expose->addLink($expose->exposeUrl.'/interface/css/menu/mega.css','css',2);
+                $expose->addLink('megamenu.css','css',2);
 
                 //load xpertmenu aka mega menu js file
                 $expose->addLink('xpertmenu.js','js');

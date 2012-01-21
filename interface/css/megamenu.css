@@ -221,3 +221,4 @@ ul.megamenu li { overflow: visible; }
 }
 
 .fancy{ position:absolute; width:auto; height:auto; background:#999; z-index:1; list-style:none;}
+.lavaLamp{ position:absolute; width:auto; height:auto; background:#999; z-index:1; list-style:none;}
