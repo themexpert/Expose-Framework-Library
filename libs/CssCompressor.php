@@ -36,7 +36,7 @@ class ExposeCssCompressor {
      */
     public static function process($css, $options = array())
     {
-        $obj = new self($options);
+        $obj = new ExposeCssCompressor($options);
         return $obj->_process($css);
     }
     

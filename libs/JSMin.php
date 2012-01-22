@@ -87,7 +87,7 @@ class ExposeJSMin {
      */
     public static function minify($js)
     {
-        $jsmin = new self($js);
+        $jsmin = new ExposeJSMin($js);
         return $jsmin->min();
     }
 

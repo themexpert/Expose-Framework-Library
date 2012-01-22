@@ -102,19 +102,11 @@ class ExposeCore{
 
     public function finalizedExpose(){
 
-        if($this->get('compress_css',0)){
-            ExposeCompressor::compressCSS();
-        }else{
-            //load all styles sheet from quee
-            $this->loadStyles();
-        }
-        if($this->get('compress_js',0)){
-            ExposeCompressor::compressJS();
-        }else{
-            //load all scripts from quee
-            $this->loadScripts();
-        }
-        
+        expose_import('core.processor');
+
+        ExposeProcessor::process('css');
+        ExposeProcessor::process('js');
+
         if(isset ($this->jqDom) AND $this->jqDom != NULL){
             $this->_renderCombinedDom();
         }
@@ -123,6 +115,7 @@ class ExposeCore{
 
         //$this->layout->init();
         define('EXPOSE_FINAL', 1);
+
     }
 
     //finalized Admin
@@ -147,7 +140,7 @@ class ExposeCore{
         return $app->getTemplate();
     }
 
-    private function loadCoreStyleSheet()
+    public function loadCoreStyleSheets()
     {
         if($this->isAdmin()) return;
 
@@ -161,6 +154,8 @@ class ExposeCore{
             $this->addLink($file,'css',1);
 
         }
+        //load preset style
+        $this->loadPresetStyle();
     }
 
     public function addLink($file, $type, $priority=10, $media='screen')
@@ -309,7 +304,7 @@ class ExposeCore{
 
     }
 
-    private function loadPresetStyle(){
+    public function loadPresetStyle(){
 
         if($this->isAdmin() OR $this->get('style') == '-1') return;
 
@@ -330,7 +325,8 @@ class ExposeCore{
         }
     }
 
-    private function _renderCombinedDom(){
+    private function _renderCombinedDom()
+    {
         $jqNoConflict = "\n\t\t".'jQuery.noConflict();'."\n";
         $dom = '';
         //add noConflict
@@ -340,7 +336,8 @@ class ExposeCore{
         $this->document->addScriptDeclaration($dom);
     }
 
-    public function addjQuery(){
+    public function addjQuery()
+    {
         //come form admin? just add jquery without asking any question because jquery is heart of
         //expose admin
         if($this->isAdmin() AND !$this->app->get('jQuery')){
@@ -363,74 +360,13 @@ class ExposeCore{
                     break;
             }
             $this->app->set('jQuery',$version);
-            $this->addLink($file,'js',1);
+            $this->addLink($file,'js',2);
         }
         return;
     }
 
-    private function loadStyles(){
-        //if(defined('EXPOSE_FINAL')) return;
-        $this->loadPresetStyle();
-        $this->loadCoreStyleSheet();
-
-        ksort($this->styleSheets);
-
-        //load all remote file first.
-        foreach($this->styleSheets as $key => $type)
-        {
-            if(isset($type['url']))
-            {
-                foreach($type['url'] as $link){
-
-                    $this->document->addStyleSheet($link->url);
-                }
-            }
-        }
-
-        foreach($this->styleSheets as $key => $type){
-            if(isset($type['local']))
-            {
-                foreach($type['local'] as $link)
-                {
-                    $version = '?v=' . EXPOSE_VERSION;
-
-                    $this->document->addStyleSheet($link->url.$version,'text/css',$link->media);
-                }
-            }
-        }
-
-    }
-
-    private function loadScripts(){
-        //load jquery first
-        $this->addjQuery();
-        ksort($this->scripts);
-
-        //load all remote file first.
-        foreach($this->scripts as $key => $type)
-        {
-            if(isset($type['url']))
-            {
-                foreach($type['url'] as $link){
-                    $this->document->addScript($link->url);
-                }
-            }
-        }
-
-        foreach($this->scripts as $key => $type){
-            if(isset($type['local']))
-            {
-                foreach($type['local'] as $link)
-                {
-                    $version = '?v=' . EXPOSE_VERSION;
-                    $this->document->addScript($link->url.$version);
-                }
-            }
-        }
-
-    }
-
-    private function setDirection(){
+    private function setDirection()
+    {
         if(defined('EXPOSE_FINAL')) return;
         if(isset ($_REQUEST['direction'])){
             setcookie($this->templateName.'_direction', $_REQUEST['direction'], time()+3600, '/');
