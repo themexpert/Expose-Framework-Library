@@ -60,7 +60,6 @@ class ExposeWidgetMenu extends ExposeWidget{
 
                 $js = "
                 var _options = {
-                    _action:'{$action}',
                     _hideDelay:{$delay},
                     _easing:'{$animation}',
                     _isFancy:{$fancy}
