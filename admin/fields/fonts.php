@@ -37,7 +37,7 @@ class JFormFieldFonts extends JFormField{
 
         //create a google font list file on admin folder to avoid api call and slow down the admin panel
         $fileName = 'gfonts.txt';
-        $path = JPATH_ROOT . DS . 'templates' . DS. getTemplate($id) . DS . $fileName;
+        $path = JPATH_ROOT . '/templates/' . getTemplate($id). '/' . $fileName;
         //$path = realpath(dirname(dirname(__FILE__))) .'/'.$fileName;
 
         if(!JFile::exists($path) OR JFile::read($path) == NULL){
