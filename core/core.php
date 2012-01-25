@@ -11,6 +11,7 @@
  **/
 
 expose_import('core.layout');
+expose_import('core.typography');
 
 class ExposeCore{
 
@@ -113,7 +114,9 @@ class ExposeCore{
          //fix the template width and sidebar width
         $this->setCustomStyles();
 
-        //$this->layout->init();
+        $typo = new ExposeTypography();
+        $typo->renderFonts();
+
         define('EXPOSE_FINAL', 1);
 
     }
@@ -121,8 +124,11 @@ class ExposeCore{
     //finalized Admin
     public function finalizedAdmin(){
         if($this->isAdmin()){
-            $this->loadStyles();
-            $this->loadScripts();
+            expose_import('core.processor');
+
+            ExposeProcessor::process('css');
+            ExposeProcessor::process('js');
+
             $this->_renderCombinedDom();
         }
     }
