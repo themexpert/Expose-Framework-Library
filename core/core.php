@@ -575,6 +575,12 @@ class ExposeCore{
 
         if($this->get('component-disable'))
         {
+            $component = JRequest::getCmd('option');
+            if($component == 'com_search')
+            {
+                return TRUE;
+            }
+
             $ids = $this->get('component-disable-menu-ids');
 
             if(!empty($ids))
