@@ -320,8 +320,9 @@ class ExposeCore{
             setcookie($this->templateName.'_style',$_REQUEST['style'],time()+3600,'/');
             $preset_file = $_REQUEST['style'];
         }
-        $preset_file = $preset_file.'.css';
-        $this->addLink($preset_file, 'css');
+        $path = $this->templateUrl . '/css/styles/';
+        $file = $path . $preset_file.'.css';
+        $this->addLink($file, 'css');
     }
 
 
