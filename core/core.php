@@ -546,6 +546,10 @@ class ExposeCore{
     public function displayHead(){
         if(defined('EXPOSE_FINAL')) return;
         if(!$this->isAdmin()){
+            if($this->get('remove-joomla-metainfo'))
+            {
+                $this->document->setGenerator('');
+            }
             //output joomla head
             echo '<jdoc:include type="head" />';
             $this->document->setMetaData('viewport','width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1');
@@ -634,6 +638,11 @@ class ExposeCore{
 
         $mainBodyWidth = 100 - ($widths['a'] + $widths['b']);
 
+        if($this->isEditpage())
+        {
+            $mainBodyWidth = 100;
+        }
+
         $width['component']= $mainBodyWidth;
         $width['sidebar-a'] = $widths['a'];
         $width['sidebar-b'] = $widths['b'];
@@ -680,5 +689,15 @@ class ExposeCore{
             $this->platform = 'desktop';
         }
 
+    }
+
+    public function isEditpage()
+    {
+        //joomla content edit layout
+        $layout = JRequest::getCmd('layout');
+        if($layout == 'edit')
+        {
+            return TRUE;
+        }
     }
 }

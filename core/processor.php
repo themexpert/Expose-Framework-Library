@@ -17,6 +17,14 @@ jimport('joomla.filesystem.file');
 
 class ExposeProcessor {
 
+    /*
+     * Combine function for combine all css and js all together
+     *
+     * @params string $type either css/js
+     *
+     * @return void
+     *
+     * */
     protected static function combine($type)
     {
         global $expose;
@@ -27,13 +35,6 @@ class ExposeProcessor {
 
         }elseif($type == 'js'){
 
-            $joomlaFiles = array_keys($expose->document->_scripts);
-
-            foreach($joomlaFiles as $url){
-                $expose->addLink($url,'js',1);
-                //remove this file from joomla header
-                unset($expose->document->_scripts[$url]);
-            }
             $source = $expose->scripts;
 
         }
@@ -58,6 +59,15 @@ class ExposeProcessor {
         self::createFiles($fileGroup, $type);
     }
 
+    /*
+     * Create combined file all together based on its relative path and add this to expose css/js record
+     *
+     * @params array $fileGroup group files by its path
+     * @params string $type either css/js
+     *
+     * @return void
+     *
+     * */
     protected static function createFiles($fileGroup = array(), $type)
     {
         global $expose;
@@ -172,6 +182,15 @@ class ExposeProcessor {
         }
     }
 
+    /*
+    * Minified the css/js file contents
+    *
+    * @params string $content css/js file content
+    * @params string $type either css/js
+    *
+    * @return minified content
+    *
+    * */
     protected static function minify($content, $type)
     {
         if($type == 'css')
@@ -188,29 +207,63 @@ class ExposeProcessor {
         }
     }
 
+    /*
+    * Main processor function for css/js. It pre-process all css/js dependencies and finally add it to joomla
+    * document header.
+    *
+    * @params string $type either css/js
+    *
+    * @return void
+    *
+    * */
     public static function process($type)
     {
         global $expose;
 
+        //if mootools loading is disable and its not edit page.
+        if($type == 'js' AND $expose->get('disable-mootools') AND !$expose->isEditpage())
+        {
+            self::removeMootools();
+        }
+        //marge all stylesheet and script called by joomla and 3pd extension with Expose
+        self::margeStyleScript($type);
+
         if($type == 'css')
         {
-            self::processRemoteFiles($type);
-
+            //load expoe core stylesheets
             $expose->loadCoreStyleSheets();
+        }elseif($type == 'js'){
+            //always check jquery and add if not exist
+            $expose->addjQuery();
+        }
+        //prevent js/css being loaded
+        if($expose->get('prevent-css-js') != NULL)
+        {
+            $preventUrls = explode(',',$expose->get('prevent-css-js'));
+        }
 
+        if($type == 'css')
+        {
             if($expose->get('combined-css',0))
             {
+                //process remote file first
+                self::processRemoteFiles($type);
                 self::combine($type);
             }
 
             ksort($expose->styleSheets);
             $version = '?v=' . EXPOSE_VERSION;
 
-            foreach($expose->styleSheets as $key => $place){
-                if(isset($place['local']))
-                {
-                    foreach($place['local'] as $link)
+            foreach($expose->styleSheets as $key => $places){
+                foreach($places as $place){
+                    foreach($place as $link)
                     {
+                        if(isset($preventUrls))
+                        {
+                            if(in_array($link->url, $preventUrls)){
+                                continue;
+                            }
+                        }
                         $expose->document->addStyleSheet($link->url.$version,'text/css',$link->media);
                     }
                 }
@@ -219,25 +272,28 @@ class ExposeProcessor {
 
         if($type == 'js')
         {
-            //load jquery first
-            $expose->addjQuery();
-
-            self::processRemoteFiles($type);
-
             if($expose->get('combined-js',0))
             {
+                //process remote file first
+                self::processRemoteFiles($type);
+
                 self::combine('js');
 
             }
-
+            //sort scripts
             ksort($expose->scripts);
             $version = '?v=' . EXPOSE_VERSION;
 
-            foreach($expose->scripts as $key => $place){
-                if(isset($place['local']))
-                {
-                    foreach($place['local'] as $link)
+            foreach($expose->scripts as $key => $places){
+                foreach($places as $place){
+                    foreach($place as $link)
                     {
+                        if(isset($preventUrls))
+                        {
+                            if(in_array($link->url, $preventUrls)){
+                               continue;
+                            }
+                        }
                         $expose->document->addScript($link->url.$version);
                     }
                 }
@@ -246,6 +302,73 @@ class ExposeProcessor {
 
     }
 
+   /*
+    * marge all css/js files from joomla document header with expose record
+    *
+    * @params string $type either css/js
+    *
+    * @return void
+    *
+    * */
+
+    protected static function margeStyleScript($type)
+    {
+        global $expose;
+
+        if($type == 'css'){
+            $joomlaFiles = array_keys($expose->document->_styleSheets);
+
+            foreach($joomlaFiles as $url){
+                $expose->addLink($url,'css',1);
+                //remove this file from joomla header
+                unset($expose->document->_styleSheets[$url]);
+            }
+
+        }elseif($type == 'js')
+        {
+            $joomlaFiles = array_keys($expose->document->_scripts);
+
+            foreach($joomlaFiles as $url){
+                $expose->addLink($url,'js',1);
+                //remove this file from joomla header
+                unset($expose->document->_scripts[$url]);
+            }
+        }
+    }
+
+   /*
+    * Remove mootools and all its dependencies files.
+    *
+    * @return void
+    *
+    * */
+    protected static function removeMootools()
+    {
+        global $expose;
+
+        $coreFiles = array(
+            'mootools-core.js',
+            'core.js',
+            'mootools-more.js',
+            'modal.js',
+            'caption.js'
+        );
+        $path = $expose->baseUrl . '/media/system/js/';
+        //start unseting
+        foreach($coreFiles as $file)
+        {
+            $key = $path.$file;
+            unset($expose->document->_scripts[$key]);
+        }
+    }
+
+   /*
+    * Process all remote file, it used when combined method is called.
+    *
+    * @params string $type either css/js
+    * @return void
+    *
+    * */
     protected static function processRemoteFiles($type)
     {
         global $expose;
@@ -278,7 +401,9 @@ class ExposeProcessor {
 
     }
 
-    /* This function borrowed from Gantry GPL Framework
+    /*
+     * Add expire header in file
+     * This function borrowed from Gantry GPL Framework
      * Author: RocketTheme
      */
     protected static function getFileheader($type = "css", $expires_time = 1440)
