@@ -111,8 +111,15 @@ class ExposeCore{
         if(isset ($this->jqDom) AND $this->jqDom != NULL){
             $this->_renderCombinedDom();
         }
-         //fix the template width and sidebar width
+         //load custom css file based on platform check
         $this->setCustomStyles();
+
+        //add custom js
+        if($this->get('custom-js') != NULL)
+        {
+            $js = $this->get('custom-js');
+            $this->document->addScriptDeclaration($js);
+        }
 
         $typo = new ExposeTypography();
         $typo->renderFonts();
@@ -396,6 +403,7 @@ class ExposeCore{
     private function setCustomStyles()
     {
         if(defined('EXPOSE_FINAL')) return;
+
         $css = '';
 
         if($this->get('template-layout','fixed') == 'fixed' AND $this->platform != 'mobile'){
@@ -505,6 +513,10 @@ class ExposeCore{
             ";
         }
 
+        if( ($this->get('custom-css') != NULL) AND $this->platform != 'mobile' )
+        {
+            $css .= $this->get('custom-css');
+        }
         $this->addInlineStyles($css);
     }
 
