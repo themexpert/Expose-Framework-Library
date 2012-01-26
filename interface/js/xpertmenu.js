@@ -205,7 +205,7 @@ jQuery.extend(jQuery.easing, {
                 'mouseleave': function (e) {
                     var _chiThis = this;
                     if ($(this).hasClass(_options._hasClass)) {
-                        //_globalTimer = setTimeout(function(){
+                        //_globalTimer = setTimeout(function(){							   
                         if ($(_chiThis).hasClass('level-0')) {
                             _this.XpertMenu("hideParentElement", e);
                             if (_options._isFancy) _this.XpertMenu("defaultLavaPosition");
@@ -236,10 +236,9 @@ jQuery.extend(jQuery.easing, {
 			var _marLeft = _childElement.offset().left + _childElement.width();
 			var _maxLeft = $(this).offset().left + $(this).width();
 			var _tempWidth = 0;
-
+			//console.info(_marLeft,_maxLeft);
 			if(_marLeft < _maxLeft){
 			_tempWidth = _childElement.parent().width();
-
             _childElement.animate({
                 'left': _tempWidth + "px",
                 "opacity": "1"
@@ -251,9 +250,9 @@ jQuery.extend(jQuery.easing, {
                 "opacity": "1"
             }, _options._hideDelay, _options._easing);
 			}
-
+			
             //.slideDown('300');
-			console.info(_childElement.offset().left);
+			//console.info(_childElement.offset().left);
         },
         hideParentElement: function (_tarObj) {
             var _currTar = $(_tarObj.currentTarget);
@@ -290,7 +289,7 @@ jQuery.extend(jQuery.easing, {
             }, _options._hideDelay);
         },
         setDirection: function (_tarObj) {
-            console.info('setDirection');
+           // console.info('setDirection');
             var _currTar = $(_tarObj.currentTarget);
             var _childContent = _currTar.find(_options.childClass).eq(0);
             var _parentLimit = $(this);
@@ -335,7 +334,6 @@ jQuery(document).ready(function ($) {
         _isFancy: true
     };
     $("#ex-megamenu").XpertMenu();*/
-	//console.info('called');
 	var _options = {
                     _hideDelay:300,
                     _easing:'easeInOutQuad',
