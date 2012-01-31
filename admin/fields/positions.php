@@ -56,20 +56,4 @@ class JFormFieldPositions extends JFormField
 
         return $wrapstart . $pretext. implode($html) . $posttext . $wrapend;
     }
-
-    private function getCurrentTemplate()
-    {
-       //get template name from template id
-       $id = JRequest::getInt('id');
-
-       $db = JFactory::getDbo();
-       $query = $db->getQuery(true);
-       $query->select('template');
-       $query->from('#__template_styles');
-       $query->where("id=$id");
-       $db->setQuery($query);
-       $result = $db->loadObject();
-
-       return $result->template;
-    }
 }

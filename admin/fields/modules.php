@@ -27,15 +27,7 @@ class JFormFieldModules extends JFormField
 	protected $type = 'Modules';
 
 	protected function getInput() {
-        if(!defined('EXPOSE_MENU_PARAMS')){
-            define('EXPOSE_MENU_PARAMS',1);
-            $uri = str_replace(DS,"/",str_replace( JPATH_SITE, JURI::base (), dirname(__FILE__) ));
-			$uri = str_replace("/administrator/", "", $uri);
-            $jquery_uri = str_replace('admin/fields','interface/js',$uri) ;
-            $uri = str_replace("fields",'widgets',$uri);
-            
-            JHtml::script($jquery_uri.'/jquery-1.5.1.min.js');
-        }
+
 		$db =& JFactory::getDBO();
 		$query = "SELECT e.extension_id, a.id, a.title, a.note, a.position, a.module, a.language,a.checked_out, a.checked_out_time, a.published, a.access, a.ordering, a.publish_up, a.publish_down,l.title AS language_title,uc.name AS editor,ag.title AS access_level,MIN(mm.menuid) AS pages,e.name AS name
 					FROM `#__modules` AS a
