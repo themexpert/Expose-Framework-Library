@@ -318,26 +318,3 @@ jQuery.extend(jQuery.easing, {
         }
     };
 })(jQuery);
-
-jQuery(document).ready(function ($) {
-    /*var _options = {
-        childClass: ".childcontent",
-        _action: "mouseenter",
-        _hasClass: "has-submenu",
-        _hideDelay: 300,
-        _lavaActive: "active",
-        _lavaClass: "lavaLamp",
-        _lavaTarget: 'div',
-        _defaultLava: {},
-        _easing: 'easeInOutQuad',
-        _childLef: 50,
-        _isFancy: true
-    };
-    $("#ex-megamenu").XpertMenu();*/
-	var _options = {
-                    _hideDelay:300,
-                    _easing:'easeInOutQuad',
-                    _isFancy:true
-                };
-     $('#ex-megamenu').XpertMenu(_options);
-});
