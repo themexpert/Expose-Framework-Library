@@ -157,7 +157,7 @@ class ExposeBaseMenu extends JObject{
                                if (!isset($mod->name)) $mod->name = $mod->module;
                                $i += $cols;
                                $mod_params = new JObject(json_decode($mod->params));
-                               $v->content .= "<jdoc:include type=\"module\" name=\"{$mod->name}\" title=\"{$mod->title}\" style=\"standard\" />";
+                               $v->content .= $this->loadModule($mod->id);
                            }
                            if ($cols > 1) $v->content .= $this->endSubMenuModules($v->id, 1, true);
                        }
@@ -238,6 +238,7 @@ class ExposeBaseMenu extends JObject{
                unset($this->items[$v->id]);
            }
        }
+       //echo "<pre>";print_r($this->items);echo "</pre>";
    }
 
     /**
@@ -295,6 +296,66 @@ class ExposeBaseMenu extends JObject{
        return $result;
     }
 
+    //Load Module by id or position
+    function loadModule($mod)
+    {
+        $app        = JFactory::getApplication();
+        $user        = JFactory::getUser();
+        $groups        = implode(',', $user->getAuthorisedViewLevels());
+        $lang         = JFactory::getLanguage()->getTag();
+        $clientId     = (int) $app->getClientId();
+
+        $db    = JFactory::getDbo();
+        $query = $db->getQuery(true);
+        $query->select('id, title, module, position, content, showtitle, params');
+        $query->from('#__modules AS m');
+        $query->where('m.published = 1');
+        if (is_numeric($mod)) {
+            $query->where('m.id = ' . $mod);
+        } else {
+            $query->where('m.position = "' . $mod . '"');
+        }
+
+        $date = JFactory::getDate();
+        $now = $date->toMySQL();
+        $nullDate = $db->getNullDate();
+        $query->where('(m.publish_up = '.$db->Quote($nullDate).' OR m.publish_up <= '.$db->Quote($now).')');
+        $query->where('(m.publish_down = '.$db->Quote($nullDate).' OR m.publish_down >= '.$db->Quote($now).')');
+
+        $query->where('m.access IN ('.$groups.')');
+        $query->where('m.client_id = '. $clientId);
+
+        // Filter by language
+        if ($app->isSite() && $app->getLanguageFilter()) {
+            $query->where('m.language IN (' . $db->Quote($lang) . ',' . $db->Quote('*') . ')');
+        }
+
+        $query->order('position, ordering');
+
+        // Set the query
+        $db->setQuery($query);
+
+        $modules = $db->loadObjectList();
+
+        if (!$modules) return null;
+
+        $options = array('style' => 'standard');
+        $output = '';
+        ob_start();
+        foreach ($modules as $module) {
+            $file                = $module->module;
+            $custom                = substr($file, 0, 4) == 'mod_' ?  0 : 1;
+            $module->user        = $custom;
+            $module->name        = $custom ? $module->title : substr($file, 4);
+            $module->style        = null;
+            $module->position    = strtolower($module->position);
+            $clean[$module->id]    = $module;
+            echo JModuleHelper::renderModule($module, $options);
+        }
+        $output = ob_get_clean();
+        return $output;
+    }
+
     /**
     * Load modules
     *
@@ -306,10 +367,10 @@ class ExposeBaseMenu extends JObject{
     {
        //Load module
        $modules = array();
+
        switch ($params->get('subcontent')) {
            case 'mod':
                $ids = $params->get('subcontent_mod_modules', '');
-               if (!$ids) $ids = $params->get('subcontent-mod-modules', ''); //compatible with old T3 params
                $ids = preg_split('/,/', $ids);
                foreach ($ids as $id) {
                    if ($id && $module = $this->getModule($id)) $modules[] = $module;
@@ -318,57 +379,17 @@ class ExposeBaseMenu extends JObject{
                break;
            case 'pos':
                $poses = $params->get('subcontent_pos_positions', '');
-               if (!$poses) $poses = $params->get('subcontent-pos-positions', ''); //compatible with old T3 params
                $poses = preg_split('/,/', $poses);
                foreach ($poses as $pos) {
                    $modules = array_merge($modules, $this->getModules($pos));
                }
                return $modules;
                break;
-           default:
-               return $this->loadModules_($params); //load as old method
-               break;
        }
        return null;
     }
 
-    /**
-    * loadModules_
-    *
-    * @param JParameter $params  Modules parameter
-    *
-    * @return mixed
-    * @deprecated
-    */
-    function loadModules_($params)
-    {
-       //Load module
-       $modules = array();
-       if (($modid = $params->get('modid'))) {
-           $ids = preg_split('/,/', $modid);
-           foreach ($ids as $id) {
-               if ($module = $this->getModule($id)) $modules[] = $module;
-           }
-           return $modules;
-       }
 
-       if (($modname = $params->get('modname'))) {
-           $names = preg_split('/,/', $modname);
-           foreach ($names as $name) {
-               if (($module = $this->getModule(0, $name))) $modules[] = $module;
-           }
-           return $modules;
-       }
-
-       if (($modpos = $params->get('modpos'))) {
-           $poses = preg_split('/,/', $modpos);
-           foreach ($poses as $pos) {
-               $modules = array_merge($modules, $this->getModules($pos));
-           }
-           return $modules;
-       }
-       return null;
-    }
 
     /**
     * Get modules by position
@@ -494,7 +515,7 @@ class ExposeBaseMenu extends JObject{
        $id = 'id="menu' . $tmp->id . '"';
        $iParams = $item->jparams;
        $itembg = '';
-       if ($this->getParam('menu_images') && $iParams->get('menu_image') && $iParams->get('menu_image') != -1) {
+       if ($iParams->get('menu_image') && $iParams->get('menu_image') != -1) {
            if ($this->getParam('menu_background')) {
                $itembg = 'style="background-image:url(' . JURI::base(true) . '/' . $iParams->get('menu_image') . ');"';
                $txt = '<span class="menu-title">' . $tmpname . '</span>';

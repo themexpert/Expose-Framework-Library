@@ -53,6 +53,7 @@ class ExposeWidgetMenu extends ExposeWidget{
                 $class = 'ExposeMegaMenu';
                 $hasSubMenu = FALSE;
 
+
                 $expose->addLink('megamenu.css','css',2);
 
                 //load xpertmenu aka mega menu js file
@@ -70,10 +71,12 @@ class ExposeWidgetMenu extends ExposeWidget{
                 $expose->addjQDom($js);
                 break;
         }
+
         //import menu file
         expose_import("core.menu.$fileName");
 
         $menu = new $class($expose->document->params);
+
         ob_start();
         ?>
         <div id="ex-menu">
@@ -81,7 +84,7 @@ class ExposeWidgetMenu extends ExposeWidget{
 
             <?php $menu->genMenu(); ?>
 
-            <?php if($hasSubMenu)
+            <?php if($hasSubMenu AND $menu->hasSubMenu(1) AND $menu->showSeparatedSub)
             { ?>
                 <div id="ex-subnav" class="clearfix">
                    <?php $menu->genMenu(1); ?>
@@ -91,7 +94,8 @@ class ExposeWidgetMenu extends ExposeWidget{
         <div class="clear"></div>
         </div>
         <?php
-            return ob_get_clean();
+        return ob_get_clean();
+
     }
 
 }
