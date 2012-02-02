@@ -198,13 +198,14 @@ class ExposeCore{
 
     private function addStyleSheet( $file, $priority, $media='screen' )
     {
+        $obj = $this->styleSheets[$priority][] = new stdClass();
+
         if(preg_match('/^http/', $file))
         {
-            $url = $this->styleSheets[$priority]['url'][] = new stdClass();
-            $url->media = $media;
-            $url->url = $file;
-
-            //$this->styleSheets[$priority]['url'][] = $file;
+            $obj->media = $media;
+            $obj->url = $file;
+            $obj->path = $file;
+            $obj->source = 'url';
             return;
         }
 
@@ -215,18 +216,16 @@ class ExposeCore{
         $burl = $this->exposeUrl . '/interface/' . $type . '/';
         $turl = $this->templateUrl  . '/' .$type . '/';
 
-        $local = $this->styleSheets[$priority]['local'][] = new stdClass();
-
         if( dirname($file) != '.' AND dirname($file) != '..' )
         {
             //path is included so check its existence and add
             $path = $this->getFilePath($file);
             if(JFile::exists($path)){
-                //$local = $this->styleSheets[$priority]['local'][] = new stdClass();
-                $local->path = $path;
-                $local->url = $file;
-                $local->media = $media;
-                //$this->styleSheets[$priority]['local'][$path] = $file;
+                $obj->path = $path;
+                $obj->url = $file;
+                $obj->media = $media;
+                $obj->source = 'local';
+                return;
             }
 
         }else{
@@ -234,31 +233,34 @@ class ExposeCore{
             $tpath = $this->getFilePath($turl.$file);
             $bpath = $this->getFilePath($burl.$file);
 
-            //$local = $this->styleSheets[$priority]['local'][] = new stdClass();
             //cross check both base and template path for this file
             if(JFile::exists($tpath))
             {
-                //$this->styleSheets[$priority]['local'][] = $class;
-                $local->url = $turl.$file;
-                $local->path = $tpath;
-                $local->media = $media;
+                $obj->url = $turl.$file;
+                $obj->path = $tpath;
+                $obj->media = $media;
+                $obj->source = 'local';
+                return;
 
             }elseif(JFile::exists($bpath)){
-                $local->url = $burl.$file;
-                $local->path = $bpath;
-                $local->media = $media;
-                //$this->styleSheets[$priority]['local'][$bpath] = $burl.$file;
-
+                $obj->url = $burl.$file;
+                $obj->path = $bpath;
+                $obj->media = $media;
+                $obj->source = 'local';
+                return;
             }
         }
     }
 
     private function addScript( $file, $priority)
     {
+        $obj = $this->scripts[$priority][] = new stdClass();
+
         if(preg_match('/^http/', $file))
         {
-            $url = $this->scripts[$priority]['url'][] = new stdClass();
-            $url->url = $file;
+            $obj->url = $file;
+            $obj->path = $file;
+            $obj->source = 'url';
 
             return;
         }
@@ -270,17 +272,15 @@ class ExposeCore{
         $burl = $this->exposeUrl . '/interface/' . $type . '/';
         $turl = $this->templateUrl  . '/' .$type . '/';
 
-        $local = $this->scripts[$priority]['local'][] = new stdClass();
-
         if( dirname($file) != '.' AND dirname($file) != '..' )
         {
 
             //path is included so check its existence and add
             $path = $this->getFilePath($file);
             if(JFile::exists($path)){
-                //$local = $this->styleSheets[$priority]['local'][] = new stdClass();
-                $local->path = $path;
-                $local->url = $file;
+                $obj->path = $path;
+                $obj->url = $file;
+                $obj->source = 'local';
                 return;
             }
 
@@ -292,13 +292,14 @@ class ExposeCore{
             //cross check both base and template path for this file
             if(JFile::exists($tpath))
             {
-                //$this->styleSheets[$priority]['local'][] = $class;
-                $local->url = $turl.$file;
-                $local->path = $tpath;
+                $obj->url = $turl.$file;
+                $obj->path = $tpath;
+                $obj->source = 'local';
                 return;
             }elseif(JFile::exists($bpath)){
-                $local->url = $burl.$file;
-                $local->path = $bpath;
+                $obj->url = $burl.$file;
+                $obj->path = $bpath;
+                $obj->source = 'local';
                 return;
             }
         }
@@ -374,7 +375,7 @@ class ExposeCore{
                     break;
             }
             $this->app->set('jQuery',$version);
-            $this->addLink($file,'js',2);
+            $this->addLink($file,'js',1);
         }
         return;
     }

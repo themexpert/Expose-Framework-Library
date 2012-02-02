@@ -43,16 +43,16 @@ class ExposeProcessor {
 
         //Group file located on same path
         $fileGroup = array();
-        foreach($source as $key => $place)
+        foreach($source as $key => $v)
         {
-            if(isset($place['local']))
-            {
-                foreach($place['local'] as $link)
+            foreach($v as $link){
+                if($link->source == 'local')
                 {
                     $fileName = basename($link->path);
                     $path = str_replace($fileName, '', $link->path);
                     $fileGroup[$path][$fileName] = str_replace($fileName, '', $link->url);
                 }
+
             }
         }
 
@@ -75,6 +75,12 @@ class ExposeProcessor {
         $cacheFiles = array();
         $url = '';
         $version = '?v=' . EXPOSE_VERSION;
+
+        //if this script is not runing on safe mood then increase the max_execution_time on runtime
+        //to avoid interruption
+        if( !ini_get('safe_mode') ){
+            set_time_limit(120);
+        }
 
         if($type == 'css')
         {
@@ -253,19 +259,17 @@ class ExposeProcessor {
 
             ksort($expose->styleSheets);
             $version = '?v=' . EXPOSE_VERSION;
-
-            foreach($expose->styleSheets as $key => $places){
-                foreach($places as $place){
-                    foreach($place as $link)
+            echo "<pre>";print_r($expose->styleSheets);echo "</pre>";
+            foreach($expose->styleSheets as $key => $v){
+                foreach($v as $link)
+                {
+                    if(isset($preventUrls))
                     {
-                        if(isset($preventUrls))
-                        {
-                            if(in_array($link->url, $preventUrls)){
-                                continue;
-                            }
+                        if(in_array($link->url, $preventUrls)){
+                            continue;
                         }
-                        $expose->document->addStyleSheet($link->url.$version,'text/css',$link->media);
                     }
+                    $expose->document->addStyleSheet($link->url.$version,'text/css',$link->media);
                 }
             }
         }
@@ -283,19 +287,17 @@ class ExposeProcessor {
             //sort scripts
             ksort($expose->scripts);
             $version = '?v=' . EXPOSE_VERSION;
-
-            foreach($expose->scripts as $key => $places){
-                foreach($places as $place){
-                    foreach($place as $link)
+            echo "<pre>";print_r($expose->scripts);echo "</pre>";
+            foreach($expose->scripts as $key => $v){
+                foreach($v as $link)
+                {
+                    if(isset($preventUrls))
                     {
-                        if(isset($preventUrls))
-                        {
-                            if(in_array($link->url, $preventUrls)){
-                               continue;
-                            }
+                        if(in_array($link->url, $preventUrls)){
+                           continue;
                         }
-                        $expose->document->addScript($link->url.$version);
                     }
+                    $expose->document->addScript($link->url.$version);
                 }
             }
         }
@@ -381,22 +383,22 @@ class ExposeProcessor {
             $source = $expose->scripts;
         }
 
-        foreach($source as $key => $place)
+        foreach($source as $key => $v)
         {
-           if(isset($place['url']))
-           {
-               foreach($place['url'] as $link){
-
-                   if($type == 'css')
-                   {
-                       $expose->document->addStyleSheet($link->url);
-                   }
-                   if($type == 'js')
-                   {
-                       $expose->document->addScript($link->url);
-                   }
-               }
-           }
+            foreach($v as $link)
+            {
+                if($link->source == 'url')
+                {
+                    if($type == 'css')
+                    {
+                        $expose->document->addStyleSheet($link->url);
+                    }
+                    if($type == 'js')
+                    {
+                        $expose->document->addScript($link->url);
+                    }
+                }
+            }
         }
 
     }
