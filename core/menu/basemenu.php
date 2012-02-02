@@ -546,7 +546,8 @@ class ExposeBaseMenu extends JObject{
        }
        if ($tmpname) {
            if ($tmp->type == 'separator') {
-               $data = '<a href="#" ' . $active . ' ' . $id . ' ' . $title . '>' . $txt . '</a>';
+               //$data = '<a href="#" ' . $active . ' ' . $id . ' ' . $title . '>' . $txt . '</a>';
+               $data = '<span ' . $active . ' ' . $id . ' ' . $title . '>' . $txt . '</span>';
            } else {
                if ($tmp->url != null) {
                    switch ($tmp->browserNav) {

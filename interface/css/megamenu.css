@@ -9,9 +9,10 @@
 .ex-megamenu { margin: 0; padding: 0; }
 .ex-megamenu a.over, .ex-megamenu a.active {}
 
-ul.megamenu { margin: 10px; /* menu's gutter */ }
+ul.megamenu { margin: 0; padding: 0; /* menu's gutter */ }
 
 ul.megamenu li { overflow: visible; }
+.ex-megamenu span.mega{cursor: default}
 
 /* lv - 0
 -----------------------------------*/
@@ -19,10 +20,8 @@ ul.megamenu li { overflow: visible; }
 .ex-megamenu ul.level-0 {
 	margin: 0;
 	padding: 0;
-
 }
 .ex-megamenu ul.level-0 li.mega {
-	background: none;
 	display: block;
 	float: left;
 	margin: 0;
@@ -31,9 +30,10 @@ ul.megamenu li { overflow: visible; }
 	/*z-index:2;*/
 }
 
-.ex-megamenu ul.level-0 li.mega a.mega {
+.ex-megamenu ul.level-0 li.mega a.mega,
+.ex-megamenu ul.level-0 li.mega span.mega{
 	display: block;
-	font-weight: bold;
+	/*font-weight: bold;*/
 	line-height: normal;
 	margin: 0;
 	padding: 8px 15px;
@@ -41,11 +41,11 @@ ul.megamenu li { overflow: visible; }
 }
 
 .ex-megamenu ul.level-0 li.mega .has-image {
-	padding-left: 25px;
+	padding-left: 35px;
 	display: block;
 	background-repeat: no-repeat;
-	background-position: left top;
-	cursor: pointer;
+	background-position: 0;
+    line-height: 125%;
 }
 
 .ex-megamenu ul.level-0 li.mega span.menu-title { display: block; }
@@ -64,22 +64,19 @@ ul.megamenu li { overflow: visible; }
 .ex-megamenu ul.level-0 li.over, ul.level-0 li.has-submenu-over {}
 
 .ex-megamenu ul.level-0 li.has-submenu a.mega span.menu-title,
-.ex-megamenu ul.level-0 li.has-submenu-over a.mega span.menu-title {
+.ex-megamenu ul.level-0 li.has-submenu span.mega.level-0 span.menu-title{
 	background: url(../images/arrow3.png) no-repeat left center;
 	padding-left: 12px;
 }
 
-.ex-megamenu ul.level-0 li.has-submenu a.mega span.menu-desc,
-.ex-megamenu ul.level-0 li.has-submenu-over a.mega span.menu-desc {
-	padding-left: 12px;
-}
+.ex-megamenu ul.level-0 li.has-submenu a.mega span.menu-desc{padding-left: 12px;}
 
 .ex-megamenu ul.level-0 li.active {}
 
 /* lv - 1 and below
 -----------------------------------*/
 /* Layout ---*/
-.ex-megamenu li.mega .childcontent { display: block; height: auto; position: absolute; border:1px solid #999; }
+.ex-megamenu li.mega .childcontent { display: block; height: auto; position: absolute; border:1px solid #eee; }
 
 .ex-megamenu li.mega .childcontent,
 .ex-megamenu li.has-submenu-over li.mega .childcontent,
@@ -127,7 +124,12 @@ ul.megamenu li { overflow: visible; }
 	background: none;
 	border: 0;
 	font-weight: normal;
-	padding: 8px 5px;
+	padding: 8px 10px;
+}
+.ex-megamenu ul.level-1 li.mega .group-content > ul > li > a,
+.ex-megamenu ul.level-1 li.mega .group-content > ul > li > span{
+    padding: 4px 12px 4px 6px;
+    font-size: 85%;
 }
 
 .ex-megamenu ul.level-1 li.mega a.mega span.menu-title { background: none; padding: 0; }
@@ -204,10 +206,10 @@ ul.megamenu li { overflow: visible; }
 	padding-left: 0 !important;
 }
 
-.ex-megamenu .group-content .ex-moduletable,
 .ex-megamenu .group-content ul.megamenu  {
-	margin: 10px; /* Group-content's gutter*/
+	margin: 0; /* Group-content's gutter*/
 }
+.ex-megamenu .group-content ul.megamenu .group-content{padding: 0 10px;}
 
 /* reset --- */
 .ex-megamenu .childcontent ul.megamenu .ex-moduletable {
@@ -219,4 +221,4 @@ ul.megamenu li { overflow: visible; }
 	margin-right: 0;
 }
 
-.lavaLamp{ position:absolute; width:auto; height:auto; background:#999; z-index:1; list-style:none;}
+.lavaLamp{ position:absolute; width:auto; height:auto; background:#eee; z-index:1; list-style:none;}
