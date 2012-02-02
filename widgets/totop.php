@@ -24,15 +24,25 @@ class ExposeWidgetToTop extends ExposeWidget{
         return FALSE;
     }
 
-    public function init()
+    public function render()
     {
         global $expose;
+        $js = "
+            jQuery('#ex-scrolltop a').click(function () {
+                jQuery('body,html').animate({
+                    scrollTop: 0
+                }, 800);
+                return false;
+            });
+        ";
+        $expose->addjQDom($js);
+
         ob_start()
     ?>
-    <a href="#top" id="ex-scrolltop">Top</a>
+    <p id="ex-scrolltop"><a href="#top"><span>Back to Top</span></a></p>
+
     <?php
-        $expose->addLink($expose->exposeUrl.'/interface/js/scrollTo.js','js');
-        echo ob_get_clean();
+        return ob_get_clean();
     }
 }
 ?>

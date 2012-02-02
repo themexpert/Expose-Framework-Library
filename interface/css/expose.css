@@ -31,7 +31,8 @@ ex-row:after, .ex-block:after { content: "."; display: block; height: 0; clear: 
 #ex-poweredby{margin: 0 auto}
 
 /*Additional*/
-#ex-scrolltop{display: none;position: fixed;right: 15px;bottom: 5px; height: 20px; font-weight: bold;font-size: 11px;text-decoration: none;padding: 0px 15px; }
+.widget-totop{position: absolute;right: 15px;bottom: 5px;padding: 0;margin: 0;height: 20px;}
+#ex-scrolltop{font-weight: bold;font-size: 11px;text-decoration: none;padding: 0px 15px; }
 .expose-logo, .expose-logo a{width: 152px;height: 40px;display: block}
     .expose-logo span{display: none}
 
