@@ -259,7 +259,7 @@ class ExposeProcessor {
 
             ksort($expose->styleSheets);
             $version = '?v=' . EXPOSE_VERSION;
-            echo "<pre>";print_r($expose->styleSheets);echo "</pre>";
+
             foreach($expose->styleSheets as $key => $v){
                 foreach($v as $link)
                 {
@@ -287,7 +287,7 @@ class ExposeProcessor {
             //sort scripts
             ksort($expose->scripts);
             $version = '?v=' . EXPOSE_VERSION;
-            echo "<pre>";print_r($expose->scripts);echo "</pre>";
+
             foreach($expose->scripts as $key => $v){
                 foreach($v as $link)
                 {
