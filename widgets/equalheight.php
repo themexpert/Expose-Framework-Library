@@ -25,9 +25,22 @@ class ExposeWidgetEqualHeight extends ExposeWidget{
     public function init()
     {
         global $expose;
-        $js = '$("#ex-roof").equalHeights();';
+        $js = '';
+        $js .= "$('#ex-roof .ex-column').equalHeight('.ex-block');";
+        $js .= "$('#ex-header .ex-column').equalHeight('.ex-block');";
+        $js .= "$('#ex-top .ex-column').equalHeight('.ex-block');";
+        $js .= "$('#ex-utility .ex-column').equalHeight('.ex-block');";
+        $js .= "$('#ex-feature .ex-column').equalHeight('.ex-block');";
+        $js .= "$('#ex-maintop .ex-column').equalHeight('.ex-block');";
+        $js .= "$('#ex-contenttop .ex-column').equalHeight('.ex-block');";
+        $js .= "$('#ex-contentbottom .ex-column').equalHeight('.ex-block');";
+        $js .= "$('#ex-mainbottom .ex-column').equalHeight('.ex-block');";
+        $js .= "$('#ex-bottom .ex-column').equalHeight('.ex-block');";
+        $js .= "$('#ex-footer .ex-column').equalHeight('.ex-block');";
+        $js .= "$('#ex-mainbody, #ex-sidebar-a, #ex-sidebar-b').equalHeight();";
+
         $expose->addLink('jquery.equalheight.js','js');
-        //$expose->addjQDom($js);
+        $expose->addjQDom($js);
     }
 }
 
