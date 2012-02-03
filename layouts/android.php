@@ -22,15 +22,14 @@ global $expose;
 
         <?php /**Begin Content top**/ if($expose->countModules('contenttop')): ?>
         <!--Start Content Top Modules-->
-        <div id="ex-contenttop">
+        <div id="ex-contenttop" class="clearfix">
             <?php $expose->renderModules('contenttop'); ?>
-            <div class="clear"></div>
         </div>
         <!--End Content top Modules-->
         <?php /**End Content top **/ endif;?>
 
         <?php if($expose->displayComponent()): ?>
-        <div id="ex-content" role="article">
+        <div id="ex-content" role="article" class="clearfix">
             <div class="ex-container">
                 <div class="ex-block">
                     <jdoc:include type="component" />
@@ -41,15 +40,14 @@ global $expose;
 
         <?php /**Begin Content bottom**/ if($expose->countModules('contentbottom')): ?>
         <!--Start Content Bottom Modules-->
-        <div id="ex-contentbottom">
+        <div id="ex-contentbottom" class="clearfix">
             <?php $expose->renderModules('contentbottom'); ?>
-            <div class="clear"></div>
         </div>
         <!--End Content Bottom Modules-->
         <?php /**End Content bottom **/ endif;?>
 
     </div>
     
-    <div class="clear"></div>
+
 
 </div>

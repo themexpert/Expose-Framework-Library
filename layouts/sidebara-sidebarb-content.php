@@ -22,15 +22,14 @@ defined ('EXPOSE_VERSION') or die ('resticted aceess');
 
         <?php /**Begin Content top**/ if($expose->countModules('contenttop')): ?>
         <!--Start Content Top Modules-->
-        <div id="ex-contenttop">
+        <div id="ex-contenttop" class="clearfix">
             <?php $expose->renderModules('contenttop'); ?>
-            <div class="clear"></div>
         </div>
         <!--End Content top Modules-->
         <?php /**End Content top **/ endif;?>
 
         <?php if($expose->displayComponent()) :?>
-        <div id="ex-content" role="article">
+        <div id="ex-content" role="article" class="clearfix">
             <div class="ex-container">
                 <div class="ex-block">
                     <jdoc:include type="component" />
@@ -41,9 +40,8 @@ defined ('EXPOSE_VERSION') or die ('resticted aceess');
 
         <?php /**Begin Content bottom**/ if($expose->countModules('contentbottom')): ?>
         <!--Start Content Bottom Modules-->
-        <div id="ex-contentbottom">
+        <div id="ex-contentbottom" class="clearfix">
             <?php $expose->renderModules('contentbottom'); ?>
-            <div class="clear"></div>
         </div>
         <!--End Content Bottom Modules-->
         <?php /**End Content bottom **/ endif;?>
@@ -55,7 +53,7 @@ defined ('EXPOSE_VERSION') or die ('resticted aceess');
     <!--Start Sidebar-A Modules-->
     <div id="ex-sidebar-a" class="ex-column" role="complementary" style="width:<?= $expose->getSidebarsWidth('sidebar-a') ?>%; left: -<?= $width['component'] ?>%">
         <?php $expose->renderModules('sidebar-a'); ?>
-        <div class="clear"></div>
+
     </div>
 
     <!--End Sidebar-A Modules-->
@@ -66,11 +64,11 @@ defined ('EXPOSE_VERSION') or die ('resticted aceess');
         <!--Start Sidebar-B Modules-->
         <div id="ex-sidebar-b" class="ex-column" role="complementary" style="width:<?= $expose->getSidebarsWidth('sidebar-b') ?>%;left: -<?= $width['component'] ?>%">
             <?php $expose->renderModules('sidebar-b'); ?>
-            <div class="clear"></div>
+
         </div>
         <!--End Sidebar-B Modules-->
     <?php /**End Sidebar-B **/ endif;?>
 
-    <div class="clear"></div>
+
 
 </div>

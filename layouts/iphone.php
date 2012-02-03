@@ -24,7 +24,7 @@ global $expose;
         <!--Start Content Top Modules-->
         <div id="ex-contenttop">
             <?php $expose->renderModules('contenttop'); ?>
-            <div class="clear"></div>
+
         </div>
         <!--End Content top Modules-->
         <?php /**End Content top **/ endif;?>
@@ -43,13 +43,13 @@ global $expose;
         <!--Start Content Bottom Modules-->
         <div id="ex-contentbottom">
             <?php $expose->renderModules('contentbottom'); ?>
-            <div class="clear"></div>
+
         </div>
         <!--End Content Bottom Modules-->
         <?php /**End Content bottom **/ endif;?>
 
     </div>
 
-    <div class="clear"></div>
+
 
 </div>
