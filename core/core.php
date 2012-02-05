@@ -361,6 +361,9 @@ class ExposeCore{
             $this->addLink($file,'js',1);
             return;
         }
+
+        //we won't load jquery on mobile device
+        if($this->platform == 'mobile') return;
         
         if($this->get('jquery-enabled') AND !$this->app->get('jQuery')){
             $version = $this->get('jquery-version');
@@ -694,7 +697,7 @@ class ExposeCore{
         {
             $this->platform = 'mobile';
 
-        }elseif($this->get('android-enabled') AND $this->browser->isMobile() AND $browserName == 'android'){
+        }elseif($this->get('android-enabled') AND $this->browser->isMobile() AND ($browserName == 'android' OR $browserName == 'Android')){
 
             $this->platform = 'mobile';
 
