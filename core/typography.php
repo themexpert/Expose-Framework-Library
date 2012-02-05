@@ -28,28 +28,28 @@ class ExposeTypography {
         //body font settings
         if($expose->get('body-font') != '0' AND $expose->get('body-selectors') != NULL){
 
-            $family= "font-family:'{$this->cleanName($expose->get('body-font'))}';";
+            $family= "font-family:'{$this->cleanName($expose->get('body-font'))}' !important;";
             $this->css .= $expose->get('body-selectors'). '{'. $family .'}';
             $this->urls[]= $this->gfontUrl . $expose->get('body-font');
         }
         //Main navigation font settings
         if($expose->get('menu-font') != '0' AND $expose->get('menu-selectors') != NULL){
 
-            $family= "font-family:'{$this->cleanName($expose->get('menu-font'))}';";
+            $family= "font-family:'{$this->cleanName($expose->get('menu-font'))}' !important;";
             $this->css .= $expose->get('menu-selectors'). '{'.$family .'}';
             $this->urls[]= $this->gfontUrl . $expose->get('menu-font');
         }
         //heading font settings
         if($expose->get('heading-font') != '0' AND $expose->get('heading-selectors') != NULL){
 
-            $family= "font-family:'{$this->cleanName($expose->get('heading-font'))}';";
+            $family= "font-family:'{$this->cleanName($expose->get('heading-font'))}' !important;";
             $this->css .= $expose->get('heading-selectors'). '{'.$family.'}';
             $this->urls[]= $this->gfontUrl . $expose->get('heading-font');
         }
         //module header font settings
         if($expose->get('module-font') != '0' AND $expose->get('module-selectors') != NULL){
 
-            $family= "font-family:'{$this->cleanName($expose->get('module-font'))}';";
+            $family= "font-family:'{$this->cleanName($expose->get('module-font'))}' !important;";
             $this->css .= $expose->get('module-selectors'). '{'.$family.'}';
             $this->urls[]= $this->gfontUrl . $expose->get('module-font');
         }
