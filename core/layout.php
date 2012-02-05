@@ -363,7 +363,13 @@ class ExposeLayout
     {
         global $expose;
 
-        $layoutType = $expose->get('layout-type');
+        $layouts = (isset ($_COOKIE[$expose->templateName.'_layouts'])) ? $_COOKIE[$expose->templateName.'_layouts'] : $expose->get('layouts');
+
+        if(isset ($_REQUEST['layouts'])){
+            setcookie($expose->templateName.'_layouts',$_REQUEST['layouts'],time()+3600,'/');
+            $layouts = $_REQUEST['layouts'];
+        }
+
         $bPath = $expose->exposePath . DS . 'layouts';
         $tPath = $expose->templatePath . DS .'layouts';
         $ext = '.php';
@@ -384,8 +390,8 @@ class ExposeLayout
             }
 
         }else{
-            $bfile = $bPath .DS . $layoutType . $ext;
-            $tfile = $tPath .DS . $layoutType . $ext;
+            $bfile = $bPath .DS . $layouts . $ext;
+            $tfile = $tPath .DS . $layouts . $ext;
 
             $this->loadFile(array($tfile,$bfile));
         }

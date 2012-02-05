@@ -48,11 +48,11 @@ body{font:normal 14px/20px Arial,Helvetica,sans-serif; position:relative;color: 
 
 /* RTL */
 /*body.rtl {direction: rtl;}*/
-body.rtl #ex-mainbody, body.rtl #ex-sidebar-a, body.rtl #ex-sidebar-b, body.rtl .ex-column{float: right}
-body.rtl .ex-menu ul li{float: right}
-body.rtl {min-width: inherit;}
-body.rtl .ex-menu ul li:hover ul, body.rtl .ex-menu ul li.over ul{right: 0;}
-body.rtl .ex-menu ul li:hover li ul, body.rtl .ex-menu ul li.over li ul{right: -999em;}
-body.rtl .ex-menu ul li li:hover ul, body.rtl .ex-menu ul li li.over ul{right:13em;}
-body.rtl .ex-menu ul li li li:hover ul,body.rtl .ex-menu ul li li li.over ul {right: 10em;top:0;}
-body.rtl ul, ol{padding-right: 15px;}
+body.align-rtl #ex-mainbody, body.align-rtl #ex-sidebar-a, body.align-rtl #ex-sidebar-b, body.align-rtl .ex-column{float: right}
+body.align-rtl #ex-menu ul li{float: right}
+body.align-rtl {min-width: inherit;}
+body.align-rtl .ex-menu ul li:hover ul, body.align-rtl .ex-menu ul li.over ul{right: 0;}
+body.align-rtl .ex-menu ul li:hover li ul, body.align-rtl .ex-menu ul li.over li ul{right: -999em;}
+body.align-rtl .ex-menu ul li li:hover ul, body.align-rtl .ex-menu ul li li.over ul{right:13em;}
+body.align-rtl .ex-menu ul li li li:hover ul,body.align-rtl .ex-menu ul li li li.over ul {right: 10em;top:0;}
+body.align-rtl ul, ol{padding-right: 15px;}

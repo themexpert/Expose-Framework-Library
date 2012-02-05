@@ -19,7 +19,13 @@ class ExposeWidgetMenu extends ExposeWidget{
         $animation = $this->get('animation');
         $fancy = ($this->get('fancy-animation')) ? 'true' : 'false';
 
-        $style = $this->get('style','mega');
+        $style = (isset ($_COOKIE[$expose->templateName.'_menu'])) ? $_COOKIE[$expose->templateName.'_menu'] : $this->get('style','mega');
+        if(isset ($_REQUEST['menu'])){
+            setcookie($expose->templateName.'_menu',$_REQUEST['menu'],time()+3600,'/');
+            $style = $_REQUEST['menu'];
+        }
+
+        //$style = $this->get('style','mega');
         $hasSubMenu = '';
 
         if($expose->platform == 'mobile')

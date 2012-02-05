@@ -156,7 +156,7 @@ jQuery(document).ready(function($){
         jQuery('#layout-selector span.active').removeClass('active');
 
         var value = el.attr('class');
-        $('#jform_params_layout_type').val(value);
+        $('#jform_params_layouts').val(value);
 
         el.addClass('active');
 

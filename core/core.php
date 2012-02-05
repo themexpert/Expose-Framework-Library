@@ -77,7 +77,7 @@ class ExposeCore{
         $this->templatePath = $this->basePath . DS . 'templates'. DS . $this->templateName ;
 
         //set document direction
-        $this->direction = $this->setDirection();
+        $this->direction = $this->getDirection();
 
         //detect the platform first
         $this->detectPlatform();
@@ -323,7 +323,7 @@ class ExposeCore{
         if($this->isAdmin() OR $this->get('style') == '-1') return;
 
         //if(defined('EXPOSE_FINAL')) return;
-        $preset_file = (isset ($_COOKIE[$this->templateName.'_style'])) ? $_COOKIE[$this->templateName.'_style'] : $this->get('style','style1');
+        $preset_file = (isset ($_COOKIE[$this->templateName.'_style'])) ? $_COOKIE[$this->templateName.'_style'] : $this->get('style');
         if(isset ($_REQUEST['style'])){
             setcookie($this->templateName.'_style',$_REQUEST['style'],time()+3600,'/');
             $preset_file = $_REQUEST['style'];
@@ -383,7 +383,7 @@ class ExposeCore{
         return;
     }
 
-    private function setDirection()
+    private function getDirection()
     {
         if(defined('EXPOSE_FINAL')) return;
         if(isset ($_REQUEST['direction'])){
@@ -410,13 +410,14 @@ class ExposeCore{
 
         $css = '';
 
-        if($this->get('template-layout','fixed') == 'fixed' AND $this->platform != 'mobile'){
+        $layoutType = (isset ($_COOKIE[$this->templateName.'_layoutsType'])) ? $_COOKIE[$this->templateName.'_layoutsType'] : $this->get('layouts-type','fixed');
 
-            /*$templWidth = (isset ($_COOKIE[$this->templateName.'_templateWidth'])) ? $_COOKIE[$this->templateName.'_templateWidth'] : $this->get('template-width');
-            if(isset ($_REQUEST['templateWidth'])){
-                setcookie($this->templateName.'_templateWidth',$_REQUEST['templateWidth'],time()+3600,'/');
-                $templWidth = $_REQUEST['templateWidth'];
-            }*/
+        if(isset ($_REQUEST['layoutsType'])){
+            setcookie($this->templateName.'_layoutsType',$_REQUEST['layoutsType'],time()+3600,'/');
+            $layoutType = $_REQUEST['layoutsType'];
+        }
+
+        if($layoutType == 'fixed' AND $this->platform != 'mobile'){
 
             $width   = $this->get('template-width','980').'px';
             $css    .= '.ex-row{width:'.$width.'}';
@@ -581,12 +582,15 @@ class ExposeCore{
         $class  = NULL;
         $component = str_replace('_','-', JRequest::getCmd('option'));
         $view = JRequest::getCmd('view');
-        $class .= ($this->get('style') == '-1') ? 'style-none' : $this->get('style');
+        $class .= (isset ($_COOKIE[$this->templateName.'_style'])) ? $_COOKIE[$this->templateName.'_style'] : $this->get('style');
         $class .= ' align-'.$this->direction;
         $class .= ' page-id-'. (isset($active) ? $active->id : $menu->getDefault()->id);
         $class .= ' '.$component . '-' . $view;
-        $class .= ' '. $this->get('layout-type');
-        $class .= ' layout-'. $this->get('template-layout');
+
+        $class .= (isset ($_COOKIE[$this->templateName.'_layouts'])) ? ' '.$_COOKIE[$this->templateName.'_layouts'] : ' '.$this->get('layouts');
+
+        $class .= (isset ($_COOKIE[$this->templateName.'_layoutsType'])) ? ' layout-'.$_COOKIE[$this->templateName.'_layoutsType'] : ' layout-'.$this->get('layouts-type');
+
         $class .= ' ' . strtolower($this->browser->getBrowser());
         $class .= ($this->displayComponent()) ? '' : ' com-disabled';
 
