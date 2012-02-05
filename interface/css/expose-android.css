@@ -152,15 +152,14 @@ a.button {
     background: url(../images/iphone/nav_arrow.png) no-repeat center;
     background-color: rgba(0, 0, 0, .4);
     box-shadow: 0 1px 0 rgba(255, 255, 255, .4);
-    border-radius: 9px;
     display: block;
-    height: 19px;
+    height: 100%;
     padding: 0 !important;
     text-indent: -1000em;
-    width: 19px;
+    width: 50px;
     position: absolute;
-    right: 15px;
-    top: 38%;
+    right: 0;
+    top: 0;
 }
 
 #ex-toolbar-main ul.toolbox li:hover a.ex-folder,
