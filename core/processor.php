@@ -331,7 +331,7 @@ class ExposeProcessor {
             $joomlaFiles = array_keys($expose->document->_scripts);
 
             foreach($joomlaFiles as $url){
-                $expose->addLink($url,'js',1);
+                $expose->addLink($url,'js',0);
                 //remove this file from joomla header
                 unset($expose->document->_scripts[$url]);
             }
@@ -347,6 +347,9 @@ class ExposeProcessor {
     protected static function removeMootools()
     {
         global $expose;
+
+        //iphone/android menu based on mootools so here is the exception
+        if($expose->platform == 'mobile') return;
 
         $coreFiles = array(
             'mootools-core.js',
