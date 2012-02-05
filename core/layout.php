@@ -18,9 +18,9 @@ jimport('joomla.filesystem.file');
 class ExposeLayout
 {
 
-    protected $modules = array();
-    public $widgets = array();
-
+    protected $modules          = array();
+    protected $widgets          = array();
+    protected $activeWidgets    = array();
 
     public function __construct()
     {
@@ -123,7 +123,7 @@ class ExposeLayout
                 //we'll load all widgets first published in this position
                 if($this->countWidgetsForPosition($positionName))
                 {
-                    foreach($this->getWidgetsForPosition($positionName) as $widget)
+                    foreach($this->activeWidgets[$positionName] as $widget)
                     {
                         $name = 'widget-' . $widget->name;
                         $html .= "<div class=\"ex-block no-title column-spacing $name clearfix\">";
@@ -242,20 +242,40 @@ class ExposeLayout
     {
 
         global $expose;
+        $count = 0;
+        $this->activeWidgets[$position] = array();
 
         if($expose->platform == 'mobile')
         {
-            $count = 0;
-
-            foreach($this->getWidgetsForPosition($position) as $gist)
+            foreach($this->getWidgetsForPosition($position) as $widget)
             {
-               ($gist->isInMobile()) ? $count++ : '';
+               if($widget->isInMobile())
+               {
+                   if(!in_array($widget, $this->activeWidgets[$position]))
+                   {
+                       $this->activeWidgets[$position][] = $widget;
+                   }
+
+                   $count++ ;
+               }
             }
 
-            return $count;
-        }
 
-        return count($this->getWidgetsForPosition($position));
+        }else{
+            foreach ($this->getWidgetsForPosition($position) as $widget) {
+
+                if(!in_array($widget, $this->activeWidgets[$position]))
+                {
+                    $this->activeWidgets[$position][] = $widget;
+                }
+
+                $count++;
+            }
+
+        }
+        return $count;
+
+        //return count($this->getWidgetsForPosition($position));
     }
 
     public function countModulesForPosition($position)
