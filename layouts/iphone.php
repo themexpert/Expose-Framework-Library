@@ -13,7 +13,6 @@ defined ('EXPOSE_VERSION') or die ('resticted aceess');
 global $expose;
 
 ?>
-
 <div id="ex-main" class="ex-row">
 
     <jdoc:include type="message" />

@@ -22,7 +22,7 @@ class ExposeWidgetMenu extends ExposeWidget{
         $style = $this->get('style','mega');
         $hasSubMenu = '';
 
-        if($expose->platform == 'mobile' AND $expose->browser->getBrowser() == 'iPhone')
+        if($expose->platform == 'mobile')
         {
             $style = 'iphone';
         }
@@ -46,13 +46,15 @@ class ExposeWidgetMenu extends ExposeWidget{
             case 'iphone':
                 $class = 'ExposeIphoneMenu';
                 $hasSubMenu = FALSE;
+
+                $expose->addLink('iphone.js','js',1);
+
                 break;
 
             case 'mega':
             default:
                 $class = 'ExposeMegaMenu';
                 $hasSubMenu = FALSE;
-
 
                 $expose->addLink('megamenu.css','css',2);
 
@@ -87,7 +89,27 @@ class ExposeWidgetMenu extends ExposeWidget{
 
         ob_start();
         ?>
+
         <div id="ex-menu">
+            <?php if($expose->platform == 'mobile'): ?>
+            <div id="ex-toolbar">
+            <div id="ex-toolbar-top">
+                <div class="nav-btns">
+                    <div class="links">
+                        <a class="toggle button btn-menu ip-button" href="#ex-iphonemenu" title="Menu">Menu</a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="ex-toolbar-main">
+                <div id="ex-toolbar-wrap">
+                    <div id="ex-toolbar-title">
+                        <a class="button btn-back" href="#" id="toolbar-back" title=""></a>
+                        <span id="toolbar-title">&nbsp;</span>
+                        <a class="button btn-close" href="#" id="toolbar-close" title="">Close</a>
+                    </div>
+            <?php endif; ?>
+
             <?php $menu->loadMenu(); ?>
 
             <?php $menu->genMenu(); ?>
@@ -99,8 +121,17 @@ class ExposeWidgetMenu extends ExposeWidget{
                 </div>
            <?php
             } ?>
-        <div class="clear"></div>
-        </div>
+
+            <?php if($expose->platform == 'mobile'):?>
+                </div><!-- ex-toolbar-wrap end -->
+            </div> <!-- ex-toolbar-main end -->
+            </div>
+            <div id="ex-overlay">&nbsp;</div>
+            <?php endif;?>
+
+        </div> <!-- ex-menu end -->
+
+
         <?php
         return ob_get_clean();
 

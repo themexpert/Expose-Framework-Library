@@ -19,11 +19,6 @@ class ExposeWidgetToTop extends ExposeWidget{
 
     public $name = 'totop';
 
-    public function isInMobile()
-    {
-        return FALSE;
-    }
-
     public function render()
     {
         global $expose;

@@ -48,7 +48,7 @@ class ExposeWidgetLogo extends ExposeWidget{
         if ( $expose->platform == 'mobile' )
         {
             $tagStyle = 'width:100%;';
-            $linkStyle = "background: url({$imagePath}) no-repeat; width:{$imageWidth}px; width: 100%; max-height:{$imageHeight}px; -o-background-size: 100% auto; -webkit-background-size: 100% auto; background-size: 100% auto;";
+            $linkStyle = "background: url({$imagePath}) no-repeat; width:{$imageWidth}px; width: 100%;height:60px; -o-background-size: 210px; -webkit-background-size: 210px; background-size: 210px;";
         } else {
             $tagStyle = '';
             $linkStyle = "background: url({$imagePath}) no-repeat; width: {$imageWidth}px; height:{$imageHeight}px;";

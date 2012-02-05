@@ -17,10 +17,6 @@ class ExposeWidgetExposeLogo extends ExposeWidget{
 
     public $name = 'exposelogo';
 
-    public function isInMobile()
-    {
-        return FALSE;
-    }
 
     public function render()
     {
