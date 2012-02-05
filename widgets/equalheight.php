@@ -17,22 +17,24 @@ class ExposeWidgetEqualHeight extends ExposeWidget{
 
     public $name = 'equalheight';
 
+
+
     public function init()
     {
         global $expose;
         $js = '';
-        $js .= "$('#ex-roof .ex-column').equalHeight('.ex-block');";
-        $js .= "$('#ex-header .ex-column').equalHeight('.ex-block');";
-        $js .= "$('#ex-top .ex-column').equalHeight('.ex-block');";
-        $js .= "$('#ex-utility .ex-column').equalHeight('.ex-block');";
-        $js .= "$('#ex-feature .ex-column').equalHeight('.ex-block');";
-        $js .= "$('#ex-maintop .ex-column').equalHeight('.ex-block');";
-        $js .= "$('#ex-contenttop .ex-column').equalHeight('.ex-block');";
-        $js .= "$('#ex-contentbottom .ex-column').equalHeight('.ex-block');";
-        $js .= "$('#ex-mainbottom .ex-column').equalHeight('.ex-block');";
-        $js .= "$('#ex-bottom .ex-column').equalHeight('.ex-block');";
-        $js .= "$('#ex-footer .ex-column').equalHeight('.ex-block');";
-        $js .= "$('#ex-mainbody, #ex-sidebar-a, #ex-sidebar-b').equalHeight();";
+        $js .= "jQuery('#ex-roof .ex-column').equalHeight('.ex-block');";
+        $js .= "jQuery('#ex-header .ex-column').equalHeight('.ex-block');";
+        $js .= "jQuery('#ex-top .ex-column').equalHeight('.ex-block');";
+        $js .= "jQuery('#ex-utility .ex-column').equalHeight('.ex-block');";
+        $js .= "jQuery('#ex-feature .ex-column').equalHeight('.ex-block');";
+        $js .= "jQuery('#ex-maintop .ex-column').equalHeight('.ex-block');";
+        $js .= "jQuery('#ex-contenttop .ex-column').equalHeight('.ex-block');";
+        $js .= "jQuery('#ex-contentbottom .ex-column').equalHeight('.ex-block');";
+        $js .= "jQuery('#ex-mainbottom .ex-column').equalHeight('.ex-block');";
+        $js .= "jQuery('#ex-bottom .ex-column').equalHeight('.ex-block');";
+        $js .= "jQuery('#ex-footer .ex-column').equalHeight('.ex-block');";
+        $js .= "jQuery('#ex-mainbody, #ex-sidebar-a, #ex-sidebar-b').equalHeight();";
 
         $expose->addLink('jquery.equalheight.js','js');
         $expose->addjQDom($js);
