@@ -55,7 +55,7 @@ if (!defined ('_EXPOSE_DROPLINE_MENU')) {
                        if (@$this->children[$row->id]) {
                            $this->genMenuItems($row->id, $startlevel);
                        } else {
-                           echo "<ul id=\"exsdl-subnav{$row->id}\" class=\"clearfix\"><li class=\"empty\">&nbsp;</li></ul>";
+                           echo "<ul id=\"exdl-subnav{$row->id}\" class=\"clearfix\"><li class=\"empty\">&nbsp;</li></ul>";
                        }
                    }
                }
@@ -94,7 +94,7 @@ if (!defined ('_EXPOSE_DROPLINE_MENU')) {
                }
                $this->endMenuItems($pid, $level);
            } else if ($level == 1) {
-               echo "<ul id=\"exsdl-subnav$pid\" class=\"clearfix\"><li>&nbsp;</li></ul>";
+               echo "<ul id=\"exdl-subnav$pid\" class=\"clearfix\"><li>&nbsp;</li></ul>";
            }
        }
 
@@ -111,7 +111,7 @@ if (!defined ('_EXPOSE_DROPLINE_MENU')) {
            if (!$level)
                echo "<ul>";
            else
-               echo "<ul id=\"exsdl-subnav$pid\" class=\"clearfix\">";
+               echo "<ul id=\"exdl-subnav$pid\" class=\"clearfix\">";
        }
 
        /**
@@ -128,9 +128,9 @@ if (!defined ('_EXPOSE_DROPLINE_MENU')) {
            $active = $this->genClass($mitem, $level, $pos);
            if ($active) $active = " class=\"$active clearfix\"";
            if (!$level)
-               echo "<li id=\"exsdl-mainnav{$mitem->id}\"$active>";
+               echo "<li id=\"exdl-mainnav{$mitem->id}\"$active>";
            else
-               echo "<li id=\"exsdl-subnavitem{$mitem->id}\"$active>";
+               echo "<li id=\"exdl-subnavitem{$mitem->id}\"$active>";
        }
 
        /**
@@ -144,9 +144,9 @@ if (!defined ('_EXPOSE_DROPLINE_MENU')) {
        function beginMenu($startlevel = 0, $endlevel = 10)
        {
            if (!$startlevel)
-               echo "<div id=\"exsdl-mainnav\">";
+               echo "<div id=\"exdl-mainnav\">";
            else
-               echo "<div id=\"exsdl-subnav\">";
+               echo "<div id=\"exdl-subnav\">";
        }
 
        /**
@@ -160,13 +160,7 @@ if (!defined ('_EXPOSE_DROPLINE_MENU')) {
        function endMenu($startlevel = 0, $endlevel = 10)
        {
            echo "</div>";
-           if (!$startlevel) {
-               echo "
-               <script type=\"text/exvascript\">
-                   var exsdl_activemenu = [" . ((count($this->open) == 1) ? "\"" . $this->open[0] . "\"" : implode(",", array_slice($this->open, $this->_start - 1))) . "];
-               </script>
-               ";
-           }
+
        }
 
        /**

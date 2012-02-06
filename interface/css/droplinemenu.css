@@ -11,7 +11,10 @@
 	position: relative;
 }
 
-#exdl-mainnav ul { }
+#ex-menu ul {
+    margin: 0;
+    list-style: none;
+}
 
 #exdl-mainnav li {
 	float: left;
@@ -19,7 +22,8 @@
 	margin: 0;
 }
 
-#exdl-mainnav a {
+#exdl-mainnav a,
+#exdl-mainnav ul li > span {
 	display: block;
 	float: left;
 	font-weight: bold;
@@ -29,6 +33,16 @@
 	text-decoration: none;
 }
 
+#exdl-mainnav .menu-title,
+#exdl-subnav .menu-title{
+    display: block;
+}
+#exdl-mainnav .menu-desc,
+#exdl-subnav .menu-desc{
+    display: block;
+    font-weight: normal;
+    font-size: 92%;
+}
 #exdl-mainnav a:hover,
 #exdl-mainnav ul li.hover a {}
 
@@ -41,6 +55,12 @@
 
 #exdl-subnav { display: none; }
 
+#ex-menu .has-image {
+	padding-left: 35px;
+	display: block;
+	background-repeat: no-repeat;
+	background-position: 0;
+}
 /* SubNav Common= Dropline+Split menu
 -----------------------------------*/
 #ex-subnav { clear: both; position: relative; z-index: 9; }
@@ -48,7 +68,7 @@
 #ex-subnav .main { line-height: 1; z-index: 10;}
 #ex-subnav ul.active { }
 
-#ex-subnav li { background: none; display: block; float: left; margin: 0 10px; padding: 10px 0; }
+#ex-subnav li { background: none; display: block; float: left; margin: 0 10px; padding: 10px 0;position: relative; }
 
 #ex-subnav li.first-item { }
 
@@ -78,7 +98,7 @@
 	width: 14em;
 }
 
-/*#ex-subnav ul li.hover ul { display: block; height: auto; left: auto; position: absolute; } Blocked by santhanam*/
+#ex-subnav ul li.hover ul { display: block; height: auto; left: auto; position: absolute; background: #000}
 
 #ex-subnav ul li.has-submenu a.has-submenu span.menu-title {
 	background: url(../images/arrow.png) no-repeat right center;

@@ -38,9 +38,6 @@ tr.sectiontableentry0 td, td.sectiontableentry0, tr.sectiontableentry1 td, td.se
 .ex-content .cat-children .category-desc {margin: 10px 0 25px;}
 .ex-content ul.subcategories {margin: 20px 20px 20px 10px;}
 .ex-content .subcategories-link {font-weight: bold}
-.ex-content ul {list-style-position: outside;list-style-type: square;padding: 0 0 0 15px;margin: 10px 0;}
-.ex-content ol {padding: 0 0 0 20px;margin: 10px 0;list-style-position: outside;}
-.ex-content ul li, .ex-content ol li {padding: 0;line-height: 1.7em;margin: 0;}
 .ex-content .category-list {padding: 0 5px;display: block;}
 .ex-content .categories-list {padding: 0 5px;}
 .ex-content .categories-list ul {margin: 0 0 0 20px;padding: 0;list-style: none;}

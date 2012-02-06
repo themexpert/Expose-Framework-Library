@@ -11,6 +11,10 @@
 #ex-splitmenu {
 	position: relative;
 }
+#ex-menu ul {
+    margin: 0;
+    list-style: none;
+}
 
 #ex-splitmenu ul { }
 
@@ -20,7 +24,8 @@
 	padding: 0;
 }
 
-#ex-splitmenu a {
+#ex-splitmenu a,
+#ex-splitmenu ul li > span{
 	display: block;
 	float: left;
 	font-weight: bold;
@@ -39,6 +44,21 @@
 #ex-splitmenu li.active a:hover,
 #ex-splitmenu li.active a:active,
 #ex-splitmenu li.active a:focus {
+}
+#ex-splitmenu .menu-title{
+    display: block;
+}
+#ex-splitmenu .menu-desc{
+    display: block;
+    font-weight: normal;
+    font-size: 92%;
+}
+
+#ex-menu .has-image {
+	padding-left: 35px;
+	display: block;
+	background-repeat: no-repeat;
+	background-position: 0;
 }
 
 /* SubNav Common= Dropline+Split menu
