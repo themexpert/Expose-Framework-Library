@@ -323,7 +323,7 @@ class ExposeCore{
         if($this->isAdmin() OR $this->get('style') == '-1') return;
 
         //if(defined('EXPOSE_FINAL')) return;
-        $preset_file = (isset ($_COOKIE[$this->templateName.'_style'])) ? $_COOKIE[$this->templateName.'_style'] : $this->get('style');
+        $preset_file = (isset ($_COOKIE[$this->templateName.'_style'])) ? $_COOKIE[$this->templateName.'_style'] : $this->get('style','style1');
         if(isset ($_REQUEST['style'])){
             setcookie($this->templateName.'_style',$_REQUEST['style'],time()+3600,'/');
             $preset_file = $_REQUEST['style'];
@@ -582,7 +582,7 @@ class ExposeCore{
         $class  = NULL;
         $component = str_replace('_','-', JRequest::getCmd('option'));
         $view = JRequest::getCmd('view');
-        $class .= (isset ($_COOKIE[$this->templateName.'_style'])) ? $_COOKIE[$this->templateName.'_style'] : $this->get('style');
+        $class .= ($this->get('style') == '-1') ? 'style-none' : $this->get('style');
         $class .= ' align-'.$this->direction;
         $class .= ' page-id-'. (isset($active) ? $active->id : $menu->getDefault()->id);
         $class .= ' '.$component . '-' . $view;
@@ -602,7 +602,7 @@ class ExposeCore{
         if($this->get('component-disable'))
         {
             $component = JRequest::getCmd('option');
-            if($component == 'com_search')
+            if($component == 'com_search' OR $component == 'com_finder')
             {
                 return TRUE;
             }
