@@ -317,14 +317,14 @@ span.pre-text{
     box-shadow: 0 1px 3px rgba(0,0,0,.35);
     -moz-box-shadow: 0 1px 3px rgba(0,0,0,.35);
     -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.35);
-    background: #FEFEFE;
-    background: -webkit-gradient(linear,left bottom,left top,color-stop(0, whiteSmoke),color-stop(0.33, white));
-    background: -moz-linear-gradient(center bottom,whiteSmoke 0%,white 33%);
+    background: #FEFEFE !important;
+    background: -webkit-gradient(linear,left bottom,left top,color-stop(0, whiteSmoke),color-stop(0.33, white)) !important;
+    background: -moz-linear-gradient(center bottom,whiteSmoke 0%,white 33%) !important;
 }
 .gradient2{
-    background: #FDFDFD;
-    background: -webkit-linear-gradient(top, #FDFDFD, #FAFAFA);
-    background: -moz-linear-gradient(top, #FDFDFD, #FAFAFA);
+    background: #FDFDFD !important;
+    background: -webkit-linear-gradient(top, #FDFDFD, #FAFAFA) !important;
+    background: -moz-linear-gradient(top, #FDFDFD, #FAFAFA) !important;
     box-shadow: 0 1px 3px rgba(0,0,0,.35);
     -moz-box-shadow: 0 1px 3px rgba(0,0,0,.35);
     -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.35);
@@ -356,7 +356,20 @@ span.pre-text{
     text-align:left;
     z-index: 999999;
 }
-
+.positions-map{
+    /*padding: 8px 3px;*/
+    font-size: 11px;
+    color: #222;
+    position: absolute;
+    top: 330px;
+    right: 40px;
+}
+    .positions-map span{
+        background: url(images/icons-sprit.png) no-repeat 3px -36px !important;
+        padding: 0 10px 0 30px !important;
+        line-height: 17px;
+        display: inline-block;
+    }
 .mods-chrome a.close{
     float: right;
 	cursor:pointer;

@@ -97,8 +97,8 @@ jQuery(document).ready(function($){
 		color: '#000',
 		loadSpeed: 200,
 		opacity: 0.5
-	    },
-        closeOnClick: false
+
+	    }
     });
 
     //Beautify select dorpdown.

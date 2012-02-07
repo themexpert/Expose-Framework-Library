@@ -24,6 +24,7 @@ class JFormFieldSpacer extends JFormField{
     }
 
     protected function getLabel(){
+        global $expose;
         $html   = array();
         $class  = (string) $this->element['class'];
         $label  = '';
@@ -35,9 +36,14 @@ class JFormFieldSpacer extends JFormField{
 
         // Add the label text and closing tag.
         if($text != NULL){
-            $label .= '<div class="expose-spacer'.(($text != '') ? ' hasText hasTip' : '').'" title="::'. JText::_($this->description) .'"><span>' . JText::_($text) . '</span></div>';
+            $label .= '<div class="expose-spacer'.(($text != '') ? ' hasText hasTip ' . $class  : '').'"title="::'. JText::_($this->description) .'"><span>' . JText::_($text) . '</span></div>';
         }
 
+        //only for positions page image
+        if($class != NULL AND $class == 'positions-map')
+        {
+            $label = "<a class=\"$class gradient2\" href=\"{$expose->exposeUrl}/admin/widgets/images/positions_map.jpg\" target='_blank' title=\"Module Position maps\" /><span>". JText::_($text) . "</span></a>";
+        }
         $html[] = $label;
 
         return implode('', $html);
