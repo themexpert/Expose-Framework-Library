@@ -29,7 +29,7 @@ defined ('EXPOSE_VERSION') or die ('resticted aceess');
         <?php /**End Content top **/ endif;?>
 
         <?php if($expose->displayComponent()) :?>
-        <div id="ex-content" role="article" class="clearfix">
+        <div id="ex-component" role="article" class="clearfix">
             <div class="ex-container">
                 <div class="ex-block">
                     <jdoc:include type="component" />
