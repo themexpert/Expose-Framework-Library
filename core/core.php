@@ -320,14 +320,16 @@ class ExposeCore{
 
     public function loadPresetStyle(){
 
-        if($this->isAdmin() OR $this->get('style') == '-1') return;
+        if( $this->isAdmin() ) return;
 
         //if(defined('EXPOSE_FINAL')) return;
-        $preset_file = (isset ($_COOKIE[$this->templateName.'_style'])) ? $_COOKIE[$this->templateName.'_style'] : $this->get('style','style1');
+        $preset_file = (isset ($_COOKIE[$this->templateName.'_style'])) ? $_COOKIE[$this->templateName.'_style'] : $this->get('style');
         if(isset ($_REQUEST['style'])){
             setcookie($this->templateName.'_style',$_REQUEST['style'],time()+3600,'/');
             $preset_file = $_REQUEST['style'];
         }
+        if($preset_file == '-1' OR $preset_file == 'none') return;
+
         $path = $this->templateUrl . '/css/styles/';
         $file = $path . $preset_file.'.css';
         $this->addLink($file, 'css');
