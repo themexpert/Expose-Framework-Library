@@ -328,12 +328,20 @@ class ExposeProcessor {
 
         }elseif($type == 'js')
         {
+            $i = 1;
             $joomlaFiles = array_keys($expose->document->_scripts);
 
             foreach($joomlaFiles as $url){
-                $expose->addLink($url,'js',0);
+                //add jquery right after mootools files, joomla has 4/5 core mootools file and we just count 4 now
+                if($i > 4)
+                {
+                    $expose->addLink($url,'js',2);
+                }else{
+                    $expose->addLink($url,'js',0);
+                }
                 //remove this file from joomla header
                 unset($expose->document->_scripts[$url]);
+                $i++;
             }
         }
     }
