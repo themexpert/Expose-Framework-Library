@@ -31,14 +31,10 @@ body{font:normal 14px/20px Arial,Helvetica,sans-serif; position:relative;color: 
 
 #ex-mainbody, #ex-sidebar-a, #ex-sidebar-b{position: relative;}
     #ex-sidebar-a .ex-column, #ex-sidebar-b .ex-column, #ex-legal .ex-column{width:100%}
-#ex-legal .ex-column{width: 100%;}
-#ex-copyright,.designed-by{text-align: center}
-#ex-poweredby{margin: 0 auto}
+#ex-copyright .ex-block{padding: 10px 15px;margin: 0;}
 
 /* Core Widgets
 -------------------------------------------*/
-.widget-totop{position: absolute;right: 15px;bottom: 5px;padding: 0;margin: 0;height: 20px;}
-#ex-scrolltop{font-weight: bold;font-size: 11px;text-decoration: none;padding: 0px 15px; }
 .expose-logo, .expose-logo a{width: 152px;height: 40px;display: block}
     .expose-logo-light{background: url(../images/expose_logo_light.png) no-repeat;}
     .expose-logo-dark{background: url(../images/expose_logo_dark.png) no-repeat;}
