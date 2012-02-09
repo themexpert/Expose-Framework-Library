@@ -23,7 +23,7 @@ class ExposeWidgetToTop extends ExposeWidget{
     {
         global $expose;
         $js = "
-            jQuery('#ex-scrolltop a').click(function () {
+            jQuery('#ex-scrolltop').click(function () {
                 jQuery('body,html').animate({
                     scrollTop: 0
                 }, 800);
@@ -34,7 +34,7 @@ class ExposeWidgetToTop extends ExposeWidget{
 
         ob_start()
     ?>
-    <p id="ex-scrolltop"><a href="#top"><span>Back to Top</span></a></p>
+    <a id="ex-scrolltop" href="#top"><span>Back to Top</span></a>
 
     <?php
         return ob_get_clean();
