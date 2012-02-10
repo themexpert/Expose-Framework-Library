@@ -1,6 +1,6 @@
 /**
  * @package     Expose
- * @version     2.0    Mar 3, 2011
+ * @version     3.0.0
  * @author      ThemeXpert http://www.themexpert.com
  * @copyright   Copyright (C) 2010 - 2011 ThemeXpert
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
@@ -56,7 +56,6 @@ tr.sectiontableentry0 td, td.sectiontableentry0, tr.sectiontableentry1 td, td.se
 #ex-component .ex-title {width: auto;font-size: 260%;line-height: 1.1em;}
 #ex-component span.edit {margin-left: 10px;float: left;}
 #ex-component .ex-articleinfo {margin-bottom: 15px;}
-#ex-component .ex-category, #ex-component .ex-date-modified, #ex-component .ex-date-published, #ex-component .ex-author, #ex-component .ex-date-posted, #ex-component .ex-hits {display: block;font-size: 95%;}
 #ex-component .ex-author {font-style: italic;}
 #ex-component .ex-date-created, #ex-component .ex-date-published {font-weight: bold;}
 #ex-component .ex-description {margin: 10px 0px 10px 0px;overflow: hidden;}
@@ -74,66 +73,31 @@ tr.sectiontableentry0 td, td.sectiontableentry0, tr.sectiontableentry1 td, td.se
 #ex-component .edit-icon a {background-position: -48px 0;margin-left: 0 !important;margin-right: 5px;}
 #ex-component .edit img {opacity: 0;}
 #ex-component .ex-article-cat {font-weight: bold;margin-top: 15px;margin-bottom: 0;}
+/*Auto image resize*/
+.auto_size{max-width: 100%;height: auto}
 
 /* Editing */
-#ex-component .edit #editor-xtd-buttons a:link, #ex-component .edit #editor-xtd-buttons a:visited, #ex-component .edit #editor-xtd-buttons a:hover {color: #323232;}
-#ex-component .edit .inputbox, #ex-component .edit textarea {border: 1px solid #ddd;}
-#ex-component .edit legend {font-size: 150%;}
-#ex-component .edit form#adminForm fieldset {padding: 20px 15px;margin: 10px 0 15px 0;}
-#ex-component .formelm {margin: 5px 0;}
-#ex-component .formelm label {width: 9em;display: inline-block;vertical-align: top;}
-#ex-component form#adminForm .formelm-area {padding: 5px 0;}
-#ex-component form#adminForm .formelm-area label {vertical-align: top;display: inline-block;width: 7em}
-#ex-component .formelm-buttons {text-align: right;margin-bottom: 10px}
-#ex-component .button2-left {float: left;margin-right: 5px;margin-top: 10px;}
-#ex-component .button2-left a {background: #eee;padding: 4px;margin: 0;line-height: 1.2em;border: solid 1px #ddd;font-weight: bold;text-decoration: none;}
+#ex-component .edit .formelm{float: left; width: 70%;margin-top: 10px}
+#ex-component .edit .formelm label{float: left;line-height: 22px; width:110px}
+#ex-component .edit textarea{margin-top: 10px;}
+#ex-component .edit .formelm-buttons{float: right; margin-top: 10px;}
+#ex-component .button2-left {float: left;margin-right: 5px;}
+
 
 /* User */
 #ex-component .registration dt{ float: left; width: 200px;}
 #ex-component .registration dt:nth-child(1){float: none;}
 #ex-component .registration label{line-height: 27px;margin-bottom: 0}
-
 #ex-component .profile dt, #ex-component .profile-edit dt{font-weight: bold; float: left; min-width: 220px; background: #f5f5f5; padding: 5px; clear: left; border-bottom: 1px solid #EEE; margin-right: 10px; border-top: 1px solid white;text-align: right;}
 #ex-component .profile dd, #ex-component .profile-edit dd{clear:right;padding: 5px;line-height: 20px}
 #ex-component .profile-edit label{display: inline-block;}
 
 /* Contact */
-.contact .panel {margin-bottom: 2px; border: 1px solid #E5E5E5; -webkit-border-radius: 4px; -moz-border-radius: 4px;border-radius: 4px;}
-.contact .ex-title a{display: block;padding: 8px 15px;}
-.contact .pane-slider{ padding: 9px 15px;}
-.contact .pane-toggler-down{border-bottom: 1px solid #E5E5E5;margin-bottom: 9px;}
+#ex-component .contact .panel {margin-bottom: 2px; border: 1px solid #E5E5E5; -webkit-border-radius: 4px; -moz-border-radius: 4px;border-radius: 4px;}
+#ex-component .contact .title a{display: block;padding: 8px 15px;}
+#ex-component .contact .pane-slider{ padding: 9px 15px;}
+#ex-component .contact .pane-toggler-down{border-bottom: 1px solid #E5E5E5;margin-bottom: 9px;}
 
-/* Weblinks */
-#ex-component .weblinks fieldset div {overflow: hidden;}
-#ex-component .weblinks label.label-left {display: block;width: 150px;float: left;}
-#ex-component .weblink-category .ex-title{float: left; width: 87%; border-right: 1px solid #ddd;font-size: inherit;padding: 10px}
-#ex-component .weblink-category p{margin: 0px;line-height: 1.7em}
-#ex-component .weblink-category img{float: left;margin-right: 5px}
-#ex-component .weblink-category .hits{float: left; width: 5%;margin: 0px 0 0 15px;min-height: 45px; line-height: 46px;}
-#ex-component .weblink-category .cat-list-row0{background: #fff;border-bottom: 1px solid #ddd}
-#ex-component .weblink-category .cat-list-row1{background: #f5f5f5;border-top: 1px solid #fff}
-
-/* Search */
-#ex-component .searchintro {font-weight: normal;margin: 20px 0 20px;}
-#ex-component #searchForm {padding: 0;}
-#ex-component .form-limit {margin: 20px 0 0;text-align: right;padding: 0 10px 0 20px;}
-#ex-component .highlight {font-weight: bold;}
-#ex-component .ordering-box {float: none;}
-#ex-component .phrases-box {float: none;margin-bottom: 10px;}
-#ex-component .ordering-box .inputbox {width: auto !important}
-#ex-component .only, #ex-component .phrases {margin: 10px 0 0 0px;padding: 15px 0;line-height: 1.3em;}
-#ex-component label.ordering {display: block;margin: 10px 0 10px 0;}
-#ex-component .word {padding: 0;}
-#ex-component .word input {font-weight: bold;}
-#ex-component .word label {font-weight: bold;}
-#ex-component fieldset.only label, #ex-component fieldset.phrases label {margin: 0 10px 0 0;}
-#ex-component .ordering-box label.ordering {margin: 0 10px 5px 0;float: left;}
-#ex-component form .search label {display: none;}
-#ex-component dl.search-results dt.result-title {padding: 15px 15px 0px 5px;font-weight: bold;}
-#ex-component dl.search-results dd {padding: 2px 15px 2px 5px;}
-#ex-component dl.search-results dd.result-text {padding: 10px 15px 10px 5px;line-height: 1.7em;}
-#ex-component dl.search-results dd.result-created {padding: 2px 15px 15px 5px;}
-#ex-component dl.search-results dd.result-category {padding: 10px 15px 5px 5px;}
 
 /* Accessibility */
 #ex-accessibility .ex-desc {float: left;padding-right: 5px;}
@@ -144,10 +108,7 @@ tr.sectiontableentry0 td, td.sectiontableentry0, tr.sectiontableentry1 td, td.se
 
 /* Other */
 #ex-component .categorylist input {border: 1px solid #ddd;font-size: 1.2em;padding: 2px;margin: 0;}
-#ex-component th {padding: 5px;background: #ebebeb;border-bottom: 2px solid #ddd;font-weight : bold;}
-#ex-component tr.even td {padding: 5px;background: #f0f0f0;border-bottom: 1px solid #ddd;}
-#ex-component tr.odd td {padding: 5px;background: #fafafa;border-bottom: 1px solid #ddd;}
-.ex-breadcrumb-surround {margin: 0;display: block;position:relative;overflow: hidden;height: 20px;padding: 15px 25px;}
+
 #ex-component .contentpaneopen_edit {float: left;}
 #ex-component table.contenttoc {padding: 10px;margin: 10px;float: right;}
 #ex-component table.contenttoc tr td {padding: 1px 0;}
@@ -167,35 +128,9 @@ p.syndicate {float: left;display: block;text-align: left;}
 .phrases .inputbox {width: 10em;}
 .phrases .inputbox option {padding: 2px;}
 
-/* Newsflash */
-.newsflash {margin: 0;}
-.newsflash-horiz {overflow: hidden;list-style-type: none;margin: 0 5px;padding: 20px 10px;}
-.newsflash-horiz li {float: left;width: 30%;margin: 0 1%;padding: 10px 5px;}
-.newsflash-horiz li h4 {font-size: 1.4em;}
-.newsflash-horiz li img {display: block;margin-bottom: 10px;}
-.newsflash-vert {padding: 0;}
-
-/* Newsfeeds */
-#ex-component .newsfeed {padding: 0 5px;}
-#ex-component ul.newsfeed {padding: 0;}
-#ex-component .newsfeed-item {padding: 5px 0 0 0;margin: 0;}
-#ex-component .newsfeed-item h5 a {font-size: 1.1em;font-weight: bold;}
-#ex-component .feed-item-description img {margin: 5px 10px 10px 0;}
-#ex-component dl.newsfeed-count dt, #ex-component dl.newsfeed-count dd {display: inline;}
-#ex-component dl.weblink-count dt, #ex-component dl.weblink-count dd {display: inline;}
-
-
-/* Pagenav */
-#ex-component .pagenav {list-style-type: none;padding: 0;overflow: hidden;}
-#ex-component .pagenav li {display: inline-block;padding: 0px;margin: 0;}
-#ex-component .pagenav li {line-height: 2em;}
-#ex-component .pagenav li a {display: inline;padding: 2px;text-decoration: none;}
-#ex-component .pagenav li.pagenav-prev {float: left;}
-#ex-component .pagenav li.pagenav-next {float: right;}
-
 /* Tooltips */
 .tip-wrap {float: left;background: #ffc;border: 1px solid #D4D5AA;padding: 5px;max-width: 200px;color: #323232;}
-.tip-title {padding: 0;margin: 0;font-size: 100%;font-weight: bold;margin-top: -15px;padding-top: 15px;padding-bottom: 5px;background: url(../../system/images/selector-arrow.png) no-repeat;}
+.tip-title {padding: 0;margin: 0;font-size: 100%;font-weight: bold;margin-top: -15px;padding-top: 15px;padding-bottom: 5px;background: url(../../../../templates/system/images/selector-arrow.png) no-repeat;}
 .tip-text {font-size: 100%;margin: 0;}
 
 /* Mailto */
