@@ -265,7 +265,7 @@ span.pre-text{
     border-bottom: 3px solid #888;
     padding-bottom: 5px;
 }
-.assignments div#menu-assignment .menu-links label{text-align: left}
+.assignments div#menu-assignment .menu-links label{text-align: left;padding: 0;margin: 0;line-height: normal}
 
 /*Overview tab style*/
 #jform_params_overview-lbl{display: none}

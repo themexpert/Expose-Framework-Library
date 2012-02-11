@@ -53,25 +53,17 @@ class ExposeCore{
         //set the baseurl
         $this->baseUrl = JURI::root(true);
 
-
         //base path
         $this->basePath = JPATH_ROOT;
 
-        //expose framework url and path based on Joomla version
-        if(EXPOSE_JVERSION == '15'){
-            $this->exposeUrl = $this->baseUrl . '/plugins/system/expose';
-            $this->exposePath = $this->basePath . DS . 'plugins' . DS . 'system' . DS . 'expose';
-        }else{
-            $this->exposeUrl = $this->baseUrl . '/libraries/expose';
-            $this->exposePath = $this->basePath . DS . 'libraries' . DS . 'expose';
-        }
+        $this->exposeUrl = $this->baseUrl . '/libraries/expose';
+        $this->exposePath = $this->basePath . DS . 'libraries' . DS . 'expose';
 
         //get the current template name
         $this->templateName = $this->getActiveTemplate();
         
         //template url
         $this->templateUrl = $this->baseUrl . '/templates/'. $this->templateName;
-
 
         //template path
         $this->templatePath = $this->basePath . DS . 'templates'. DS . $this->templateName ;
@@ -318,7 +310,8 @@ class ExposeCore{
 
     }
 
-    public function loadPresetStyle(){
+    public function loadPresetStyle()
+    {
 
         if( $this->isAdmin() ) return;
 
@@ -336,7 +329,8 @@ class ExposeCore{
     }
 
 
-    public function addjQDom($js=NULL){
+    public function addjQDom($js=NULL)
+    {
         if($js != NULL){
             $this->jqDom .= "\t\t\t" . $js ."\n";
         }
@@ -403,8 +397,6 @@ class ExposeCore{
             return $_COOKIE[$this->templateName.'_direction'];
         }
     }
-
-
 
     private function setCustomStyles()
     {
@@ -562,7 +554,8 @@ class ExposeCore{
     }
 
 
-    public function displayHead(){
+    public function displayHead()
+    {
         if(defined('EXPOSE_FINAL')) return;
         if(!$this->isAdmin()){
             if($this->get('remove-joomla-metainfo'))
@@ -599,7 +592,8 @@ class ExposeCore{
         return 'class="'.$class.'"';
     }
     
-    public function displayComponent(){
+    public function displayComponent()
+    {
 
         if($this->get('component-disable'))
         {
