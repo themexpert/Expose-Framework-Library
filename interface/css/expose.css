@@ -22,7 +22,7 @@ body{font:normal 14px/20px Arial,Helvetica,sans-serif; position:relative;color: 
 * html, * html .ex-block{height: 1%;}
 /* end hide from IE-mac */
 
-.ex-row {margin-right: auto; margin-left: auto; text-align: left; position :relative; clear:left;}
+.ex-row, .ex-wrapper {margin-right: auto; margin-left: auto; text-align: left; position :relative; clear:left;}
     .ex-column {float:left; margin-right:-1px;}
         .ex-block {padding: 15px; margin:10px; position: relative; display: block;}
             .no-title > .ex-header{display: none;}

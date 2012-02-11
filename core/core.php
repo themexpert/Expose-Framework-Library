@@ -411,6 +411,7 @@ class ExposeCore{
         if(defined('EXPOSE_FINAL')) return;
 
         $css = '';
+        $prefix = $this->getPrefix();
 
         $layoutType = (isset ($_COOKIE[$this->templateName.'_layoutsType'])) ? $_COOKIE[$this->templateName.'_layoutsType'] : $this->get('layouts-type','fixed');
 
@@ -422,14 +423,13 @@ class ExposeCore{
         if($layoutType == 'fixed' AND $this->platform != 'mobile'){
 
             $width   = $this->get('template-width','980').'px';
-            $css    .= '.ex-row{width:'.$width.'}';
+            $css    .= "\t.{$prefix}row, .{$prefix}wrapper{width: $width}";
+            //$css    .= '.ex-row, .ex-wrapper{width:'.$width.'}';
 
         }
 
         if($this->get('custom-style-enabled') AND $this->platform != 'mobile')
         {
-            $prefix = $this->getPrefix();
-
             $css .= "
                 body{
                     background-color: #{$this->get('background-color')};
