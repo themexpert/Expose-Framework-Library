@@ -192,7 +192,7 @@ jQuery.extend(jQuery.easing, {
             var _this = this;
 			$(this).find('li').each(function(){
 				if($(this).hasClass(_options._hasClass) && $(this).hasClass('level-0')){
-				_this.XpertMenu("setDirection", $(this).find(_options.childClass));
+				_this.XpertMenu("setDirection", $(this));
 				}
 			});	
 			
@@ -336,7 +336,6 @@ jQuery.extend(jQuery.easing, {
             
         },
         setDirection: function (_tarObj) {
-           // console.info('setDirection');
             var _currTar = _tarObj;
             var _childContent = _currTar.find(_options.childClass).eq(0);
             var _parentLimit = $(this);
@@ -366,16 +365,3 @@ jQuery.extend(jQuery.easing, {
         }
     };
 })(jQuery);
-
-jQuery(document).ready(function ($) {
-	var _options = {
-		_hideDelay:300,
-		_easing:'easeInOutQuad',
-		_isFancy:true
-	};
-	
-    //$('#ex-megamenu').XpertMenu(_options);
-	 
-	
-});
-
