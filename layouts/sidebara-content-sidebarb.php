@@ -12,17 +12,17 @@ defined ('EXPOSE_VERSION') or die ('resticted aceess');
 
     global $expose;
     $width = $expose->getComponentWidth();
+    $prefix = $expose->getPrefix();
 ?>
-
-<div id="ex-main" class="ex-row">
+<div id="ex-main" class="<?php echo $prefix;?>row">
 
     <jdoc:include type="message" />
 
-    <div id="ex-mainbody" class="ex-column" style="width:<?= $width['component']; ?>%;left: <?= $width['sidebar-a']; ?>%">
+    <div id="<?php echo $prefix;?>mainbody" class="ex-column" style="width:<?php echo $width['component']; ?>%;left: <?php echo $width['sidebar-a']; ?>%">
 
         <?php /**Begin Content top**/ if($expose->countModules('contenttop')): ?>
         <!--Start Content Top Modules-->
-        <div id="ex-contenttop" class="clearfix">
+        <div id="<?php echo $prefix;?>contenttop" class="clearfix">
             <?php $expose->renderModules('contenttop'); ?>
         </div>
         <!--End Content top Modules-->
@@ -40,7 +40,7 @@ defined ('EXPOSE_VERSION') or die ('resticted aceess');
 
         <?php /**Begin Content bottom**/ if($expose->countModules('contentbottom')): ?>
         <!--Start Content Bottom Modules-->
-        <div id="ex-contentbottom" class="clearfix">
+        <div id="<?php echo $prefix;?>contentbottom" class="clearfix">
             <?php $expose->renderModules('contentbottom'); ?>
         </div>
         <!--End Content Bottom Modules-->
@@ -51,7 +51,7 @@ defined ('EXPOSE_VERSION') or die ('resticted aceess');
     <?php /**Begin Sidebar-A**/ if($expose->countModules('sidebar-a')): ?>
 
     <!--Start Sidebar-A Modules-->
-    <div id="ex-sidebar-a" class="ex-column" role="complementary" style="width:<?= $expose->getSidebarsWidth('sidebar-a') ?>%; left: -<?= $width['component'] ?>%">
+    <div id="<?php echo $prefix;?>sidebar-a" class="ex-column clearfix" role="complementary" style="width:<?php echo $expose->getSidebarsWidth('sidebar-a') ?>%; left: -<?php echo $width['component'] ?>%">
         <?php $expose->renderModules('sidebar-a'); ?>
 
     </div>
@@ -62,7 +62,7 @@ defined ('EXPOSE_VERSION') or die ('resticted aceess');
     <?php /**Begin Sidebar-B**/ if($expose->countModules('sidebar-b')): ?>
 
         <!--Start Sidebar-B Modules-->
-        <div id="ex-sidebar-b" class="ex-column" role="complementary" style="width:<?= $expose->getSidebarsWidth('sidebar-b') ?>%">
+        <div id="<?php echo $prefix;?>sidebar-b" class="ex-column clearfix" role="complementary" style="width:<?php echo $expose->getSidebarsWidth('sidebar-b') ?>%">
             <?php $expose->renderModules('sidebar-b'); ?>
 
         </div>

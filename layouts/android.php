@@ -11,10 +11,10 @@
 defined ('EXPOSE_VERSION') or die ('resticted aceess');
 
 global $expose;
-
+$prefix = $expose->getPrefix();
 ?>
 
-<div id="ex-main" class="ex-row">
+<div id="ex-main" class="<?php echo $prefix;?>row">
 
     <jdoc:include type="message" />
 
@@ -22,14 +22,14 @@ global $expose;
 
         <?php /**Begin Content top**/ if($expose->countModules('contenttop')): ?>
         <!--Start Content Top Modules-->
-        <div id="ex-contenttop" class="clearfix">
+        <div id="<?php echo $prefix;?>contenttop" class="clearfix">
             <?php $expose->renderModules('contenttop'); ?>
         </div>
         <!--End Content top Modules-->
         <?php /**End Content top **/ endif;?>
 
         <?php if($expose->displayComponent()): ?>
-        <div id="ex-content" role="article" class="clearfix">
+        <div id="ex-component" role="article" class="clearfix">
             <div class="ex-container">
                 <div class="ex-block">
                     <jdoc:include type="component" />
@@ -40,7 +40,7 @@ global $expose;
 
         <?php /**Begin Content bottom**/ if($expose->countModules('contentbottom')): ?>
         <!--Start Content Bottom Modules-->
-        <div id="ex-contentbottom" class="clearfix">
+        <div id="<?php echo $prefix;?>contentbottom" class="clearfix">
             <?php $expose->renderModules('contentbottom'); ?>
         </div>
         <!--End Content Bottom Modules-->
