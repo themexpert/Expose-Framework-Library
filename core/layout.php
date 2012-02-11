@@ -94,7 +94,7 @@ class ExposeLayout
         if($totalPublished > 0 AND isset($this->modules[$position]['active']))
         {
             $widths = $this->getModuleSchema($position);
-            $containerClass = 'ex-container ex-column';
+            $containerClass = 'ex-column';
 
             foreach($this->getActiveModuleLists($position) as $positionName)
             {
