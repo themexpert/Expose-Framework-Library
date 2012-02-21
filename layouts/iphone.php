@@ -13,15 +13,15 @@ defined ('EXPOSE_VERSION') or die ('resticted aceess');
 global $expose;
 $prefix = $expose->getPrefix();
 ?>
-<div id="ex-main" class="<?php echo $prefix;?>row">
+<div id="<?php echo $prefix;?>main" class="<?php echo $prefix;?>row">
 
     <jdoc:include type="message" />
 
-    <div id="ex-mainbody" class="ex-column">
+    <div id="<?php echo $prefix;?>mainbody" class="ex-column">
 
         <?php /**Begin Content top**/ if($expose->countModules('contenttop')): ?>
         <!--Start Content Top Modules-->
-        <div id="<?php echo $prefix;?>contenttop" class="clearfix">
+        <div id="<?php echo $prefix;?>content-top" class="clearfix">
             <?php $expose->renderModules('contenttop'); ?>
 
         </div>
@@ -40,7 +40,7 @@ $prefix = $expose->getPrefix();
 
         <?php /**Begin Content bottom**/ if($expose->countModules('contentbottom')): ?>
         <!--Start Content Bottom Modules-->
-        <div id="<?php echo $prefix;?>contentbottom" class="clearfix">
+        <div id="<?php echo $prefix;?>content-bottom" class="clearfix">
             <?php $expose->renderModules('contentbottom'); ?>
 
         </div>

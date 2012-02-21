@@ -126,8 +126,10 @@ class ExposeLayout
                     foreach($this->activeWidgets[$positionName] as $widget)
                     {
                         $name = 'widget-' . $widget->name;
-                        $html .= "<div class=\"ex-block no-title column-spacing $name clearfix\">";
-                            $html .= $widget->render();
+                        $html .= "<div class=\"ex-block ex-widget no-title column-spacing $name clearfix\">";
+                            $html .= "<div class=\"ex-content\">";
+                                $html .= $widget->render();
+                            $html .= "</div>";
                         $html .= "</div>";
 
                     }

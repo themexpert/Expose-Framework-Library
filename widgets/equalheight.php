@@ -22,19 +22,21 @@ class ExposeWidgetEqualHeight extends ExposeWidget{
     public function init()
     {
         global $expose;
+        $prefix = $expose->getPrefix();
         $js = '';
-        $js .= "jQuery('#ex-roof .ex-column').equalHeight('.ex-block');";
-        $js .= "jQuery('#ex-header .ex-column').equalHeight('.ex-block');";
-        $js .= "jQuery('#ex-top .ex-column').equalHeight('.ex-block');";
-        $js .= "jQuery('#ex-utility .ex-column').equalHeight('.ex-block');";
-        $js .= "jQuery('#ex-feature .ex-column').equalHeight('.ex-block');";
-        $js .= "jQuery('#ex-maintop .ex-column').equalHeight('.ex-block');";
-        $js .= "jQuery('#ex-contenttop .ex-column').equalHeight('.ex-block');";
-        $js .= "jQuery('#ex-contentbottom .ex-column').equalHeight('.ex-block');";
-        $js .= "jQuery('#ex-mainbottom .ex-column').equalHeight('.ex-block');";
-        $js .= "jQuery('#ex-bottom .ex-column').equalHeight('.ex-block');";
-        $js .= "jQuery('#ex-footer .ex-column').equalHeight('.ex-block');";
-        $js .= "jQuery('#ex-mainbody, #ex-sidebar-a, #ex-sidebar-b').equalHeight();";
+
+        $js .= "jQuery('#{$prefix}roof .ex-column').equalHeight('.ex-block');";
+        $js .= "jQuery('#{$prefix}header .ex-column').equalHeight('.ex-block');";
+        $js .= "jQuery('#{$prefix}top .ex-column').equalHeight('.ex-block');";
+        $js .= "jQuery('#{$prefix}utility .ex-column').equalHeight('.ex-block');";
+        $js .= "jQuery('#{$prefix}feature .ex-column').equalHeight('.ex-block');";
+        $js .= "jQuery('#{$prefix}maintop .ex-column').equalHeight('.ex-block');";
+        $js .= "jQuery('#{$prefix}contenttop .ex-column').equalHeight('.ex-block');";
+        $js .= "jQuery('#{$prefix}contentbottom .ex-column').equalHeight('.ex-block');";
+        $js .= "jQuery('#{$prefix}mainbottom .ex-column').equalHeight('.ex-block');";
+        $js .= "jQuery('#{$prefix}bottom .ex-column').equalHeight('.ex-block');";
+        $js .= "jQuery('#{$prefix}footer .ex-column').equalHeight('.ex-block');";
+        $js .= "jQuery('#{$prefix}mainbody, #{$prefix}sidebar-a, #{$prefix}sidebar-b').equalHeight();";
 
         $expose->addLink('jquery.equalheight.js','js');
         $expose->addjQDom($js);
