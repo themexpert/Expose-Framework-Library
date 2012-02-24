@@ -526,7 +526,7 @@ class ExposeBaseMenu extends JObject{
            $txt = '<span class="menu-title">' . $tmpname . '</span>';
        }
        //Add page title to item
-       if ($tmp->megaparams->get('desc')) {
+       if ($tmp->megaparams->get('desc') != "&nbsp;") {
            $txt .= '<span class="menu-desc">' . JText::_($tmp->megaparams->get('desc')) . '</span>';
        }
 
@@ -719,7 +719,12 @@ class ExposeBaseMenu extends JObject{
     function beginMenuItem($mitem = null, $level = 0, $pos = '')
     {
        $active = $this->genClass($mitem, $level, $pos);
-       if ($active) $active = " class=\"$active\"";
+
+       if($mitem->megaparams->get('desc') != "&nbsp;") $cls = "has-desc";
+
+       if ($active) $active = " class=\"$active $cls\"";
+       else $active = " class=\"$cls\"";
+
        echo "<li $active>";
     }
 

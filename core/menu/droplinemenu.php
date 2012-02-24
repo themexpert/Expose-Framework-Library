@@ -126,7 +126,12 @@ if (!defined ('_EXPOSE_DROPLINE_MENU')) {
        function beginMenuItem($mitem = null, $level = 0, $pos = '')
        {
            $active = $this->genClass($mitem, $level, $pos);
-           if ($active) $active = " class=\"$active clearfix\"";
+
+           if($mitem->megaparams->get('desc') != "&nbsp;") $cls = "has-desc";
+
+           if ($active) $active = " class=\"$active $cls clearfix\"";
+           else $active = " class=\"$cls\"";
+
            if (!$level)
                echo "<li id=\"exdl-mainnav{$mitem->id}\"$active>";
            else
