@@ -75,7 +75,7 @@ class ExposeWidgetLogo extends ExposeWidget{
 
         } else {
 
-            $logo = "<{$tag} id=\"ex-logo\" class=\"brand {$this->get('type')}\" style=\"{$tagStyle}\"> <a style=\"{$linkStyle} display:block;text-indent: -9999px\"  href=\"{$expose->baseUrl}\">$logoText $tagline</a>  </{$tag}>";
+            $logo = "<{$tag} id=\"ex-logo\" class=\"brand {$this->get('type')}\" style=\"{$tagStyle}\"> <a style=\"{$linkStyle} display:block;text-indent: -9999px;font-size:0\"  href=\"{$expose->baseUrl}\">$logoText $tagline</a>  </{$tag}>";
 
         }
 

@@ -13,7 +13,7 @@ defined ('EXPOSE_VERSION') or die ('resticted aceess');
 //import parent gist class
 expose_import('core.widget');
 
-class ExposeWidgetExposeLogo extends ExposeWidget{
+class ExposeWidgetExposelogo extends ExposeWidget{
 
     public $name = 'exposelogo';
 

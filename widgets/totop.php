@@ -15,7 +15,7 @@ defined ('EXPOSE_VERSION') or die ('resticted aceess');
 //import parent gist class
 expose_import('core.widget');
 
-class ExposeWidgetToTop extends ExposeWidget{
+class ExposeWidgetTotop extends ExposeWidget{
 
     public $name = 'totop';
 

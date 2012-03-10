@@ -84,8 +84,9 @@ class ExposeWidgetMenu extends ExposeWidget{
         expose_import("core.menu.$fileName");
 
         //set some menu params
-        $expose->document->params->set('menu_images_align', 'left');
         $expose->document->params->set('menu_background', 1); //0: image, 1: background
+        $align = ($expose->direction == 'rtl') ? 'right' : 'left';
+        $expose->document->params->set('menu_images_align', $align); //applicapbe when selected as image
         //$expose->document->params->set('mega-colwidth', 200); //Megamenu only: Default column width
         $expose->document->params->set('mega-style', 1); //Megamenu only: Menu style.
         $expose->document->params->set('startlevel', 0); //Startlevel
