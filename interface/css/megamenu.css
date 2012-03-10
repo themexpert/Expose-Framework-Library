@@ -78,13 +78,6 @@ ul.megamenu li { overflow: visible; }
 /* Layout ---*/
 .ex-megamenu li.mega .childcontent { display: block; height: auto; position: absolute; border:1px solid #eee; }
 
-.ex-megamenu li.mega .childcontent,
-.ex-megamenu li.has-submenu-over li.mega .childcontent,
-.ex-megamenu li.mega li.has-submenu-over li.mega .childcontent ,
-.ex-megamenu li.mega li.mega li.has-submenu-over li.mega .childcontent,
-.ex-megamenu li.mega li.mega li.mega li.has-submenu-over li.mega .childcontent,
-.ex-megamenu li.mega li.mega li.mega li.mega li.has-submenu-over li.mega .childcontent { visibility: hidden;  }
-
 .ex-megamenu li.has-submenu:hover > .childcontent,
 .ex-megamenu li.mega li.has-submenu:hover > .childcontent,
 .ex-megamenu li.mega li.mega li.has-submenu:hover > .childcontent,
@@ -133,7 +126,6 @@ ul.megamenu li { overflow: visible; }
 }
 
 .ex-megamenu ul.level-1 li.mega a.mega span.menu-title { background: none; padding: 0; }
-
 .ex-megamenu ul.level-1 li.has-submenu,
 .ex-megamenu ul.level-1 li.has-submenu-over {
 	background-image: url(../images/arrow.png);
@@ -144,81 +136,25 @@ ul.megamenu li { overflow: visible; }
 }
 
 .ex-megamenu ul.level-1 li.over, ul.level-1 li.has-submenu-over {}
-
 .ex-megamenu ul.level-1 li.group { background: none; }
 
  /* CHILD CONTENT
 -----------------------------------*/
-.ex-megamenu .childcontent {
-	z-index: 10;
-}
-
-.ex-megamenu .childcontent-inner {
-	background: #fff;
-}
-
+.ex-megamenu .childcontent {z-index: 10;}
+.ex-megamenu .childcontent-inner {background: #fff;}
 .ex-megamenu .level-1 .childcontent-inner {}
-
-.ex-megamenu .childcontent .ex-moduletable {
-	line-height: 1.5;
-	margin: 10px 0;
-	padding: 0;
-}
-
-.ex-megamenu .childcontent .ex-moduletable h3 {
-	background: none;
-	margin-left: 10px;
-	margin-right: 10px;
-	text-indent: 5px;
-	text-transform: none;
-}
-
-.ex-megamenu .childcontent .ex-moduletable .ex-box-ct {
-	padding: 0 5px;
-}
-
-.ex-megamenu .childcontent .ex-moduletable a {
-	text-decoration: none;
-}
-
-.ex-megamenu .childcontent .ex-moduletable a:hover,
-.ex-megamenu .childcontent .ex-moduletable a:focus,
-.ex-megamenu .childcontent .ex-moduletable a:active {
-	text-decoration: none;
-}
-
-.ex-megamenu .childcontent .ex-moduletable ul:first-child {
-	margin-top: 0 !important;
-}
-
-.ex-megamenu .childcontent .ex-moduletable li {
-	margin-bottom: 5px;
-}
 
 /* Grouped --- */
 .ex-megamenu .group {}
-
 .ex-megamenu .group-title { overflow: hidden; }
-
 .ex-megamenu .group-title .menu-title {}
-
-.ex-megamenu .group-title .menu-desc {
-	padding-left: 0 !important;
-}
-
-.ex-megamenu .group-content ul.megamenu  {
-	margin: 0; /* Group-content's gutter*/
-}
+.ex-megamenu .group-title .menu-desc {padding-left: 0 !important;}
+.ex-megamenu .group-content ul.megamenu  {margin: 0; /* Group-content's gutter*/}
 .ex-megamenu .group-content ul.megamenu .group-content{padding: 0 10px;}
 
 /* reset --- */
-.ex-megamenu .childcontent ul.megamenu .ex-moduletable {
-	padding: 0;
-}
+.ex-megamenu .childcontent ul.megamenu .ex-moduletable {padding: 0;}
 
-.ex-megamenu .childcontent ul.megamenu .ex-moduletable h3 {
-	margin-left: 0;
-	margin-right: 0;
-}
+.ex-megamenu .childcontent ul.megamenu .ex-moduletable h3 {margin-left: 0;margin-right: 0;}
 
 .lavaLamp{ position:absolute; width:auto; height:auto; background:#eee; z-index:1; list-style:none;}

@@ -164,7 +164,7 @@ jQuery.extend(jQuery.easing, {
         _isFancy: true,
 		_reduceLeft:30
     };
-    var _globalTimer,_setLavaTimer;
+    var _globalTimer,_setLavaTimer,_globalTimerChild,_isChildShowing=false;
     var methods = {
         init: function (_opt) {
             $.extend(_options, _opt);
@@ -187,8 +187,7 @@ jQuery.extend(jQuery.easing, {
                 $.extend(_options._defaultLava, lavaTarget);
             }
         },
-        bindEvents: function () {
-            //$(this)options.action
+        bindEvents: function (){
             var _this = this;
 			$(this).find('li').each(function(){
 				if($(this).hasClass(_options._hasClass) && $(this).hasClass('level-0')){
@@ -196,55 +195,50 @@ jQuery.extend(jQuery.easing, {
 				}
 			});	
 			
-            $(this).find('li').bind("mouseenter", function (e) {
-				
-				clearTimeout(_globalTimer);
+           $(this).find('li').bind("mouseenter", function (e) {
+				var _tempList = $(this).parentsUntil("."+_options._hasClass);
+				_tempList = _tempList[_tempList.length - 1];
 				var _target = $(this);
 				
-				//_globalTimer = setTimeout(function(){
+				clearTimeout(_globalTimerChild);
+				
+				if(!$(_tempList).is(':animated') && !_target.find(_options.childClass).is(":visible")){
 				
                 _target.siblings('li').each(function (){
 					if ($(this).hasClass('level-0')) {
 						$(this).find(_options.childClass).slideUp(_options._hideDelay); //css('display','none');
 					}
 					else{
-						$(this).find(_options.childClass).fadeOut(_options._hideDelay)/*animate({
-						'left': "0px",
-						'opacity':'0',
-						'z-index':'-9999'
-						},_options._hideDelay,function(){
-						});*/
-					//$(this).css('display','none');
+						$(this).find(_options.childClass).fadeOut(_options._hideDelay);
 					}
                 });
 				
 				if (_options._isFancy && _target.hasClass('level-0')) 
 				_this.XpertMenu("changeLavaDirection", e);
 				
-				
                 if (_target.hasClass(_options._hasClass)) {
 						if (_target.hasClass('level-0')) {
 						_this.XpertMenu("showParentContent", e);
 						} else{
+						_isChildShowing = true;
 						_this.XpertMenu("showChildContent", e);
 						}	
                 }
 				
-				//},_options._hideDelay)
+				}
             });
 			
-            $(this).find('li').bind({
-                'mouseleave': function (e) {
+           $(this).find('li').bind({
+                'mouseleave': function (e){
+                    var _chiThis = this,_tarCurrent,_isParentBool = false;
 					
-                    var _chiThis = this;
                     if ($(this).hasClass(_options._hasClass)) {
-                        if ($(_chiThis).hasClass('level-0')) {
-                            _this.XpertMenu("hideParentElement", e);
-                        } else _this.XpertMenu("hideChildElement", e);
+                       
+					   if ($(_chiThis).hasClass('level-0'))
+						_isParentBool = true;
+						$(this).XpertMenu("hideElement",$(e.currentTarget).find(_options.childClass),_isParentBool);
                     }
-					if ($(_chiThis).hasClass('level-0') && _options._isFancy){
-					_this.XpertMenu("defaultLavaPosition");
-					}
+					
                 },
                 'click': function () {
                     // Written For Upgrading
@@ -256,63 +250,54 @@ jQuery.extend(jQuery.easing, {
             _currTar.find(_options.childClass).eq(0).slideDown('300', _options._easing);
         },
         showChildContent: function (_tarObj) {
-				
-			clearTimeout(_globalTimer);
-            var _currTar = $(_tarObj.currentTarget);
+	        var _currTar = $(_tarObj.currentTarget);
             var _childElement = _currTar.find(_options.childClass).eq(0);
-            _childElement.css({
-                'left': '0px',
-                "top": "5px",
-                "opacity": "0",
-				'z-index':'1000',
-                "display": "block"
-            });
 			
-            var _setLeft = _options._childLef;
-			var _marLeft = _childElement.offset().left + _childElement.width();
-			var _maxLeft = $(this).offset().left + $(this).width();
-			var _tempWidth = 0;
+			if(_childElement.css('display') != 'block'){
+				_childElement.css({
+					'left': '0px',
+					"top": "5px",
+					"opacity": "0",
+					'z-index':'1000',
+					"display": "block"
+				});
+				
+				var _setLeft = _options._childLef;
+				var _marLeft = _childElement.offset().left + _childElement.width();
+				var _maxLeft = $(this).offset().left + $(this).width();
+				var _tempWidth = 0;
+				
+				if(_marLeft < _maxLeft){
+				_tempWidth = _childElement.parent().width() - _options._reduceLeft;
+				
+				_childElement.animate({
+					'left': _tempWidth + "px",
+					"opacity": "1"
+				}, _options._hideDelay, _options._easing);
+				}else{
+				_tempWidth = _childElement.width();
+				_childElement.animate({
+					'left': -_tempWidth + "px",
+					"opacity": "1"
+				}, _options._hideDelay, _options._easing);
+				}
 			
-			if(_marLeft < _maxLeft){
-			_tempWidth = _childElement.parent().width() - _options._reduceLeft;
-            _childElement.animate({
-                'left': _tempWidth + "px",
-                "opacity": "1"
-            }, _options._hideDelay, _options._easing);
-			}else{
-			_tempWidth = _childElement.width();
-			_childElement.animate({
-                'left': -_tempWidth + "px",
-                "opacity": "1"
-            }, _options._hideDelay, _options._easing);
 			}
         },
-        hideParentElement: function (_tarObj) {
-			
-            var _currTar = $(_tarObj.currentTarget);
-			
-			_globalTimer = setTimeout(function(){
-			_currTar.find(_options.childClass).slideUp( _options._hideDelay);
-			},_options._hideDelay)
-        },
-        hideChildElement: function (_tarObj) {
-			
-            var _currTar = $(_tarObj.currentTarget);
-            var _childElement = _currTar.find(_options.childClass);
-            var _setLeft = _currTar.width();
-			
-			_globalTimer = setTimeout(function(){
-			
-				_childElement.fadeOut(_options._hideDelay)/*animate({
-					'left': "0px",
-					"opacity": "0",
-					'z-index':'0'
-				}, _options._hideDelay, _options._easing,function(){
-					$(this).css('display','none');
-				});*/
+       hideElement:function(elem,_isParent){
+	   
+			var _this = $(this);
+			clearTimeout(_globalTimerChild);
+			_globalTimerChild = setTimeout(function(){
+			if(_isParent){
+				elem.slideUp(_options._hideDelay);
+				_this.XpertMenu("defaultLavaPosition");	
+			}else{
+				elem.fadeOut(_options._hideDelay);
+			}
+			},_options._hideDelay*2);
 				
-			},_options._hideDelay)
-        },
+		},
         changeLavaDirection: function (_tarObj) {
 			clearTimeout(_setLavaTimer)
             var lavaTarget = $(_tarObj.currentTarget);
