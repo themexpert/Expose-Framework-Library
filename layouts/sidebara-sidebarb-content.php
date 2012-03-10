@@ -13,13 +13,14 @@ defined ('EXPOSE_VERSION') or die ('resticted aceess');
     global $expose;
     $width = $expose->getComponentWidth();
     $prefix = $expose->getPrefix();
+    $leftright = ($expose->direction == 'rtl') ? 'right' : 'left';
 ?>
 
 <div id="<?php echo $prefix;?>main" class="<?php echo $prefix;?>row">
 
     <jdoc:include type="message" />
 
-    <div id="<?php echo $prefix;?>mainbody" class="ex-column" style="width:<?php echo  $width['component']; ?>%;left: <?php echo  $width['sidebar-a'] + $width['sidebar-b'] ; ?>%">
+    <div id="<?php echo $prefix;?>mainbody" class="ex-column" style="width:<?php echo  $width['component']; ?>%; <?php echo $leftright; ?>: <?php echo  $width['sidebar-a'] + $width['sidebar-b'] ; ?>%">
 
         <?php /**Begin Content top**/ if($expose->countModules('contenttop')): ?>
         <!--Start Content Top Modules-->
@@ -52,7 +53,7 @@ defined ('EXPOSE_VERSION') or die ('resticted aceess');
     <?php /**Begin Sidebar-A**/ if($expose->countModules('sidebar-a')): ?>
 
     <!--Start Sidebar-A Modules-->
-    <div id="<?php echo $prefix;?>sidebar-a" class="ex-column clearfix" role="complementary" style="width:<?php echo  $expose->getSidebarsWidth('sidebar-a') ?>%; left: -<?php echo  $width['component'] ?>%">
+    <div id="<?php echo $prefix;?>sidebar-a" class="ex-column clearfix" role="complementary" style="width:<?php echo  $expose->getSidebarsWidth('sidebar-a') ?>%; <?php echo $leftright; ?>: -<?php echo  $width['component'] ?>%">
         <?php $expose->renderModules('sidebar-a'); ?>
 
     </div>
@@ -63,7 +64,7 @@ defined ('EXPOSE_VERSION') or die ('resticted aceess');
     <?php /**Begin Sidebar-B**/ if($expose->countModules('sidebar-b')): ?>
 
         <!--Start Sidebar-B Modules-->
-        <div id="<?php echo $prefix;?>sidebar-b" class="ex-column clearfix" role="complementary" style="width:<?php echo  $expose->getSidebarsWidth('sidebar-b') ?>%;left: -<?php echo  $width['component'] ?>%">
+        <div id="<?php echo $prefix;?>sidebar-b" class="ex-column clearfix" role="complementary" style="width:<?php echo  $expose->getSidebarsWidth('sidebar-b') ?>%;<?php echo $leftright; ?>: -<?php echo  $width['component'] ?>%">
             <?php $expose->renderModules('sidebar-b'); ?>
 
         </div>

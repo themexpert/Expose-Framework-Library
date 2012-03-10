@@ -23,7 +23,7 @@ body{font:normal 14px/20px Arial,Helvetica,sans-serif; position:relative;color: 
 /* end hide from IE-mac */
 
 .ex-row, .ex-wrapper {margin-right: auto; margin-left: auto; text-align: left; position :relative; clear:left;}
-    .ex-column {float:left; margin-right:-1px;}
+    .ex-column {float:left;}
         .ex-block {padding: 15px; margin:10px; position: relative; display: block;}
             .no-title > .ex-header{display: none;}
             .ex-title{margin: 0 0 7px;padding: 0 0 7px;}
@@ -45,10 +45,11 @@ body{font:normal 14px/20px Arial,Helvetica,sans-serif; position:relative;color: 
 /* RTL */
 /*body.rtl {direction: rtl;}*/
 body.align-rtl #ex-mainbody, body.align-rtl #ex-sidebar-a, body.align-rtl #ex-sidebar-b, body.align-rtl .ex-column{float: right}
-body.align-rtl #ex-menu ul li{float: right}
+body.align-rtl #ex-menu ul.level-0{float: right;text-align: right}
 body.align-rtl {min-width: inherit;}
-body.align-rtl .ex-menu ul li:hover ul, body.align-rtl .ex-menu ul li.over ul{right: 0;}
-body.align-rtl .ex-menu ul li:hover li ul, body.align-rtl .ex-menu ul li.over li ul{right: -999em;}
-body.align-rtl .ex-menu ul li li:hover ul, body.align-rtl .ex-menu ul li li.over ul{right:13em;}
-body.align-rtl .ex-menu ul li li li:hover ul,body.align-rtl .ex-menu ul li li li.over ul {right: 10em;top:0;}
-body.align-rtl ul, ol{padding-right: 15px;}
+/*body.align-rtl .ex-menu ul li:hover ul, body.align-rtl .ex-menu ul li.over ul{right: 0;}*/
+/*body.align-rtl .ex-menu ul li:hover li ul, body.align-rtl .ex-menu ul li.over li ul{right: -999em;}*/
+/*body.align-rtl .ex-menu ul li li:hover ul, body.align-rtl .ex-menu ul li li.over ul{right:13em;}*/
+/*body.align-rtl .ex-menu ul li li li:hover ul,body.align-rtl .ex-menu ul li li li.over ul {right: 10em;top:0;}*/
+/*body.align-rtl ul, ol{padding-right: 15px;}*/
+body.align-rtl #ex-menu .has-image {padding-left: 0;padding-right: 35px;background-position: 100% 0;}

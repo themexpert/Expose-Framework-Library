@@ -74,7 +74,7 @@ tr.sectiontableentry0 td, td.sectiontableentry0, tr.sectiontableentry1 td, td.se
 #ex-component .edit img {opacity: 0;}
 #ex-component .ex-article-cat {font-weight: bold;margin-top: 15px;margin-bottom: 0;}
 /*Auto image resize*/
-.auto_size{max-width: 100%;height: auto}
+.auto-size{max-width: 100%;height: auto}
 
 /* Editing */
 #ex-component .edit .formelm{float: left; width: 70%;margin-top: 10px}

@@ -387,7 +387,7 @@ class ExposeCore{
             return $_REQUEST['direction'];
         }
         if(!isset($_COOKIE[$this->templateName.'_direction'])){
-            if($this->document->direction == 'rtl' OR $this->get('rtl_enable')){
+            if($this->document->direction == 'rtl' OR $this->get('rtl-support')){
                 return 'rtl';
             }else{
                 return 'ltr';
