@@ -96,12 +96,15 @@
 	padding: 0;
 	position: absolute;
 	width: 14em;
+    z-index : 10;
 }
 
 #ex-subnav ul li:hover > ul {
     display: block;
     height: auto;
     left: auto;
+    top: 2.8em;
+    background: #f5f5f5
 }
 
 #ex-subnav ul li.has-submenu a.has-submenu span.menu-title {

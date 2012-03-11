@@ -41,6 +41,8 @@ class ExposeWidgetMenu extends ExposeWidget{
                 $class = 'ExposeDroplineMenu';
                 $hasSubMenu = TRUE;
                 $expose->addLink('droplinemenu.css','css',2);
+                //load dropline menu js file
+                $expose->addLink('droplinemenu.js','js');
                 break;
 
             case 'split':

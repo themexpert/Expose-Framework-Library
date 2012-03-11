@@ -34,12 +34,17 @@ ul.megamenu li { overflow: visible; }
 .ex-megamenu ul.level-0 li.mega span.mega{
 	display: block;
 	/*font-weight: bold;*/
-	line-height: normal;
+	line-height: 29px;
 	margin: 0;
 	padding: 8px 15px;
 	text-decoration: none;
 }
-
+.ex-megamenu ul li.has-desc .menu-title{
+    line-height: 16px;
+}
+.ex-megamenu ul li.has-desc .menu-desc{
+    line-height: 13px;
+}
 .ex-megamenu ul.level-0 li.mega .has-image {
 	padding-left: 35px;
 	display: block;
@@ -157,4 +162,4 @@ ul.megamenu li { overflow: visible; }
 
 .ex-megamenu .childcontent ul.megamenu .ex-moduletable h3 {margin-left: 0;margin-right: 0;}
 
-.lavaLamp{ position:absolute; width:auto; height:auto; background:#eee; z-index:1; list-style:none;}
+.fancy{ position:absolute; width:auto; height:auto; background:#eee; z-index:1; list-style:none;}

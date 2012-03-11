@@ -526,7 +526,7 @@ class ExposeBaseMenu extends JObject{
            $txt = '<span class="menu-title">' . $tmpname . '</span>';
        }
        //Add page title to item
-       if ($tmp->megaparams->get('desc') != "&nbsp;") {
+       if ($tmp->megaparams->get('desc') != "&nbsp;" AND $tmp->megaparams->get('desc') != " ") {
            $txt .= '<span class="menu-desc">' . JText::_($tmp->megaparams->get('desc')) . '</span>';
        }
 

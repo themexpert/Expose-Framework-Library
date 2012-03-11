@@ -34,11 +34,11 @@
 }
 
 #exdl-mainnav .menu-title,
-#exdl-subnav .menu-title{
+#ex-subnav .menu-title{
     display: block;
 }
 #exdl-mainnav .menu-desc,
-#exdl-subnav .menu-desc{
+#ex-subnav .menu-desc{
     display: block;
     font-weight: normal;
     font-size: 92%;
@@ -51,9 +51,9 @@
 #exdl-mainnav li.active a:active,
 #exdl-mainnav li.active a:focus {}
 
-#exdl-subnav .first-item {}
+#ex-subnav .first-item {}
 
-#exdl-subnav { display: none; }
+#ex-subnav { display: none; }
 
 #ex-menu .has-image {
 	padding-left: 35px;
@@ -96,13 +96,15 @@
 	padding: 0;
 	position: absolute;
 	width: 14em;
+    z-index : 10;
 }
 
 #ex-subnav ul li:hover > ul {
     display: block;
     height: auto;
     left: auto;
-    background: #000
+    top: 2.8em;
+    background: #f5f5f5
 }
 
 #ex-subnav ul li.has-submenu a.has-submenu span.menu-title {
@@ -135,7 +137,7 @@
 	display: block;
 	height: auto;
 	left: auto;
-	margin: -1em 0 0 12em;
+	margin: -1.8em 0 0 12em;
 }
 
 #ex-subnav ul li li.has-submenu a.has-submenu span.menu-title {

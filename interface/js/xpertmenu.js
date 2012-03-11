@@ -156,7 +156,7 @@ jQuery.extend(jQuery.easing, {
         _hasClass: "has-submenu",
         _hideDelay: 300,
         _lavaActive: "active",
-        _lavaClass: "lavaLamp",
+        _lavaClass: "fancy",
         _lavaTarget: 'div',
         _defaultLava: {},
         _easing: 'easeInOutQuad',
@@ -171,7 +171,7 @@ jQuery.extend(jQuery.easing, {
             $(_options.childClass).css('display', 'none');
             $(this).XpertMenu("bindEvents");
             if (_options._isFancy) {
-                var _lavaHtml = "<" + _options._lavaTarget + " class='" + _options._lavaClass + "'></" + _options._lavaTarget + ">"
+                var _lavaHtml = "<" + _options._lavaTarget + " class='" + _options._lavaClass + "'><div class=\"fancy-inner\"></div></" + _options._lavaTarget + ">"
                 $('body').append(_lavaHtml);
                 var lavaTarget;
                 $(this).find('li').each(function () {
