@@ -36,7 +36,7 @@ ul.megamenu li { overflow: visible; }
 	/*font-weight: bold;*/
 	line-height: 29px;
 	margin: 0;
-	padding: 8px 15px;
+	padding: 8px 8px;
 	text-decoration: none;
 }
 .ex-megamenu ul li.has-desc .menu-title{
@@ -74,7 +74,9 @@ ul.megamenu li { overflow: visible; }
 	padding-left: 12px;
 }
 
-.ex-megamenu ul.level-0 li.has-submenu a.mega span.menu-desc{padding-left: 12px;}
+.ex-megamenu ul.level-0 li.has-submenu a.mega span.menu-desc,
+.ex-megamenu ul.level-0 li.has-submenu span.mega span.menu-desc
+{padding-left: 12px;}
 
 .ex-megamenu ul.level-0 li.active {}
 
@@ -126,8 +128,9 @@ ul.megamenu li { overflow: visible; }
 }
 .ex-megamenu ul.level-1 li.mega .group-content > ul > li > a,
 .ex-megamenu ul.level-1 li.mega .group-content > ul > li > span{
-    padding: 4px 12px 4px 6px;
+    padding: 4px ;
     font-size: 85%;
+    margin: 0 10px;
 }
 
 .ex-megamenu ul.level-1 li.mega a.mega span.menu-title { background: none; padding: 0; }
