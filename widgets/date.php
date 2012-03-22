@@ -28,17 +28,14 @@ class ExposeWidgetDate extends ExposeWidget{
     {
         global $expose;
 
-        $date = new JDate();
+        //$date = new JDate();
         $format = $this->get('formats');
-        $dates = explode(' ', $date->format($format));
-        $i = 1;
+        //$dates = $date->format($format);
 
         ob_start();
         ?>
         <div id="ex-date">
-            <?php foreach($dates as $date) :?>
-                <span class="part<?= $i?>"><?= $date ;?></span>
-            <?php $i++; endforeach;?>
+            <?php echo $format; ?>
         </div>
     <?php
         return ob_get_clean();
