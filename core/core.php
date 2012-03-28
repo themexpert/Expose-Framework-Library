@@ -212,6 +212,12 @@ class ExposeCore{
         {
             //path is included so check its existence and add
             $path = $this->getFilePath($file);
+
+            if(strpos($path, '?'))
+            {
+                $path = substr($path, 0, strpos($path, '?'));
+            }
+
             if(JFile::exists($path)){
                 $obj->path = $path;
                 $obj->url = $file;
@@ -266,9 +272,14 @@ class ExposeCore{
 
         if( dirname($file) != '.' AND dirname($file) != '..' )
         {
-
             //path is included so check its existence and add
             $path = $this->getFilePath($file);
+
+            if(strpos($path, '?'))
+            {
+                $path = substr($path, 0, strpos($path, '?'));
+            }
+
             if(JFile::exists($path)){
                 $obj->path = $path;
                 $obj->url = $file;
