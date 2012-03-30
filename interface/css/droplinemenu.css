@@ -27,11 +27,13 @@
 	display: block;
 	float: left;
 	font-weight: bold;
-	line-height: normal;
+	line-height: 30px;
 	margin: 0;
 	padding: 8px 15px;
 	text-decoration: none;
 }
+#exdl-mainnav li.has-desc a,
+#exdl-mainnav ul li.has-desc > span{line-height: 15px}
 
 #exdl-mainnav .menu-title,
 #ex-subnav .menu-title{
@@ -110,6 +112,7 @@
 #ex-subnav ul li.has-submenu a.has-submenu span.menu-title {
 	background: url(../images/arrow.png) no-repeat right center;
 	padding-right: 12px;
+    display: block;
 }
 
 #ex-subnav ul li.has-submenu a.has-submenu:hover span.menu-title { background-image: url(../images/arrow3.png) }
