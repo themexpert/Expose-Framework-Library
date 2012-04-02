@@ -42,14 +42,25 @@ body{font:normal 14px/20px Arial,Helvetica,sans-serif; position:relative;color: 
 
 #ex-menu{position: relative;z-index: 99}
 
-/* RTL */
-/*body.rtl {direction: rtl;}*/
+/* RTL Core
+-------------------------------------------*/
+/* Overall */
+body.align-rtl *{text-align: right}
 body.align-rtl #ex-mainbody, body.align-rtl #ex-sidebar-a, body.align-rtl #ex-sidebar-b, body.align-rtl .ex-column{float: right}
-body.align-rtl #ex-menu ul.level-0{float: right;text-align: right}
+/* Menu (Mega + Dropline + Split) */
+body.align-rtl .ex-megamenu ul.level-0 > li.mega,
+body.align-rtl #exdl-mainnav li,
+body.align-rtl #ex-splitmenu li,
+body.align-rtl #exdl-subnav > ul > li,
+body.align-rtl #ex-subnav .sublevel > ul > li{float: right}
 body.align-rtl {min-width: inherit;}
-/*body.align-rtl .ex-menu ul li:hover ul, body.align-rtl .ex-menu ul li.over ul{right: 0;}*/
-/*body.align-rtl .ex-menu ul li:hover li ul, body.align-rtl .ex-menu ul li.over li ul{right: -999em;}*/
-/*body.align-rtl .ex-menu ul li li:hover ul, body.align-rtl .ex-menu ul li li.over ul{right:13em;}*/
-/*body.align-rtl .ex-menu ul li li li:hover ul,body.align-rtl .ex-menu ul li li li.over ul {right: 10em;top:0;}*/
-/*body.align-rtl ul, ol{padding-right: 15px;}*/
-body.align-rtl #ex-menu .has-image {padding-left: 0;padding-right: 35px;background-position: 100% 0;}
+body.align-rtl .ex-menu ul li:hover ul, body.align-rtl .ex-menu ul li.over ul{right: 0;}
+body.align-rtl .ex-menu ul li:hover li ul, body.align-rtl .ex-menu ul li.over li ul{right: -999em;}
+body.align-rtl .ex-menu ul li li:hover ul, body.align-rtl .ex-menu ul li li.over ul{right:13em;}
+body.align-rtl .ex-menu ul li li li:hover ul,body.align-rtl .ex-menu ul li li li.over ul {right: 10em;top:0;}
+
+body.align-rtl .ex-megamenu ul.level-0 li.has-submenu a.mega span.menu-title,
+body.align-rtl .ex-megamenu ul.level-0 li.has-submenu span.mega.level-0 span.menu-title {padding-right: 12px;background-position: right center;}
+body.align-rtl .ex-megamenu ul.level-0 li.has-submenu a.mega span.menu-desc,
+.ex-megamenu ul.level-0 li.has-submenu span.mega span.menu-desc{padding-right: 12px;}
+body.align-rtl .ex-megamenu ul.level-0 li.mega .has-image{padding-right: 35px;padding-left: 0; background-position: 100%;}
