@@ -252,7 +252,9 @@ if (!defined ('_EXPOSE_MEGA_MENU')) {
                     $cls .= " group";
                 else if ($level < $this->getParam('endlevel')) $cls .= " has-submenu";
             }
-            if($mitem->megaparams->get('desc') != "&nbsp;" AND $mitem->megaparams->get('desc') != " ") $cls .= " has-desc";
+
+            $desc = (string) $mitem->megaparams->get('desc');
+            if( $desc != "&nbsp;" AND !empty($desc) ) $cls .= " has-desc";
 
             $active = in_array($mitem->id, $this->open);
             if (!preg_match('/group/', $cls)) $cls .= ($active ? " active" : "");

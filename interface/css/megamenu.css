@@ -83,7 +83,7 @@ ul.megamenu li { overflow: visible; }
 /* lv - 1 and below
 -----------------------------------*/
 /* Layout ---*/
-.ex-megamenu li.mega .childcontent { display: block; height: auto; position: absolute; border:1px solid #eee; }
+.ex-megamenu li.mega .childcontent { display: none; height: auto; position: absolute; border:1px solid #eee; }
 
 .ex-megamenu li.has-submenu:hover > .childcontent,
 .ex-megamenu li.mega li.has-submenu:hover > .childcontent,
@@ -133,7 +133,8 @@ ul.megamenu li { overflow: visible; }
     margin: 0 10px;
 }
 
-.ex-megamenu ul.level-1 li.mega a.mega span.menu-title { background: none; padding: 0; }
+.ex-megamenu ul.level-1 li.mega a.mega span.menu-title,
+.ex-megamenu ul.level-1 li.mega a.mega span.menu-desc{ background: none; padding: 0; }
 .ex-megamenu ul.level-1 li.has-submenu,
 .ex-megamenu ul.level-1 li.has-submenu-over {
 	background-image: url(../images/arrow.png);
