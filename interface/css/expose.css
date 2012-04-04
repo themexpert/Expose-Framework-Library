@@ -6,6 +6,11 @@
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
  **/
 
+/**
+ * Base Style Sheet - Reduces inconsistencies across all browsers
+ * Stripped down and improved collection of best practises
+**/
+
 /* Reset */
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, caption {margin: 0;padding: 0;border: 0;outline: 0;font-size: 100%;background: transparent;}
 
@@ -14,10 +19,20 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 .clearfix:before, .clearfix:after, .ex-row:before, .ex-row:after, .ex-block:before, .ex-block:after {content: '';display: table;}
 .clearfix:after, .ex-row:after, .ex-block:after{clear: both;}
 
+/* Remove outline when clicking links: people.opera.com/patrickl/experiments/keyboard/test */
+a:hover, a:active { outline: none; }
+
+/* Removes scrollbar in IE */
+textarea { overflow: auto; }
+
+/* Remove background from selected images */
+img::selection { background: transparent; }
+img::-moz-selection { background: transparent; }
+
 /* Layout 
 ----------------------------------------*/
 html{overflow-y:scroll;min-height:100%}
-body{font:normal 14px/20px Arial,Helvetica,sans-serif; position:relative;color: #444;}
+body{font:normal 14px/20px Arial,Helvetica,sans-serif; position:relative;color: #444;margin: 0;}
 /* hides from IE-mac \*/
 * html, * html .ex-block{height: 1%;}
 /* end hide from IE-mac */
@@ -42,6 +57,41 @@ body{font:normal 14px/20px Arial,Helvetica,sans-serif; position:relative;color: 
 
 #ex-menu{position: relative;z-index: 99}
 
+/*
+ * Print Style Sheet - Only used when printing
+ * Thanks to HTML5 Boilerplate
+ */
+@media print {
+
+	* {
+		background: transparent !important;
+		color: black !important;
+		box-shadow: none !important;
+		text-shadow: none !important;
+		filter: none !important;
+		-ms-filter: none !important;
+	}
+
+	a, a:visited { text-decoration: underline; }
+
+	pre, blockquote {
+		border: 1px solid #999;
+		page-break-inside: avoid;
+	}
+
+	thead { display: table-header-group; }
+
+	tr, img { page-break-inside: avoid; }
+
+	img { max-width: 100% !important; }
+
+	@page { margin: 0.5cm; }
+
+	p, h2, h3 { orphans: 3; widows: 3; }
+
+	h2, h3 { page-break-after: avoid; }
+
+}
 /* RTL Core
 -------------------------------------------*/
 /* Overall */

@@ -50,7 +50,6 @@ ul.megamenu li { overflow: visible; }
 	display: block;
 	background-repeat: no-repeat;
 	background-position: 0;
-    line-height: 125%;
 }
 
 .ex-megamenu ul.level-0 li.mega span.menu-title { display: block; }
