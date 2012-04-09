@@ -126,7 +126,7 @@ class ExposeLayout
                     foreach($this->activeWidgets[$positionName] as $widget)
                     {
                         $name = 'widget-' . $widget->name;
-                        $html .= "<div class=\"ex-block ex-widget no-title column-spacing $name clearfix\">";
+                        $html .= "<div class=\"ex-widget no-title column-spacing $name clearfix\">";
                             $html .= "<div class=\"ex-content\">";
                                 $html .= $widget->render();
                             $html .= "</div>";
@@ -136,6 +136,8 @@ class ExposeLayout
                 }
 
                 $modWrapperStart = "<div class=\"$containerClass $class $positionName\" $style>";
+                    $blockStart = "<div class=\"ex-block\">";
+                    $blockEnd   = "</div>";
                 $modWrapperEnd = "</div>";
 
                 //now load modules content
@@ -143,7 +145,7 @@ class ExposeLayout
 
                 $html .= '<jdoc:include type="modules" name="'.$positionName.'" style="'.$chrome.'" />';
 
-                echo $modWrapperStart . $html . $modWrapperEnd;
+                echo $modWrapperStart . $blockStart . $html . $blockEnd . $modWrapperEnd;
 
                 $i++;
             }
