@@ -16,8 +16,8 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 
 /* Clear Float
 ---------------------------------------*/
-.clearfix:before, .clearfix:after, .ex-row:before, .ex-row:after, .ex-block:before, .ex-block:after {content: '';display: table;}
-.clearfix:after, .ex-row:after, .ex-block:after{clear: both;}
+.clearfix:before, .clearfix:after, .ex-row:before, .ex-row:after, .ex-content:before, .ex-content:after {content: '';display: table;}
+.clearfix:after, .ex-row:after, .ex-content:after{clear: both;}
 
 /* Remove outline when clicking links: people.opera.com/patrickl/experiments/keyboard/test */
 a:hover, a:active { outline: none; }
@@ -39,13 +39,15 @@ body{font:normal 14px/20px Arial,Helvetica,sans-serif; position:relative;color: 
 
 .ex-row, .ex-wrapper {margin-right: auto; margin-left: auto; text-align: left; position :relative; clear:left;}
     .ex-column {float:left;}
-        .ex-block {padding: 15px; margin:10px; position: relative; display: block;}
+        .ex-block {margin:0 10px; position: relative; display: block;}
+        	.ex-module, .ex-widget{padding: 15px;}
             .no-title > .ex-header{display: none;}
             .ex-title{margin: 0 0 7px;padding: 0 0 7px;}
     * html .ie6-offset {margin-right: -4px;}
 
 #ex-mainbody, #ex-sidebar-a, #ex-sidebar-b{position: relative;}
     #ex-sidebar-a .ex-column, #ex-sidebar-b .ex-column, #ex-legal .ex-column{width:100%}
+#ex-component{padding: 15px;}
 #ex-copyright .ex-block{padding: 10px 15px;margin: 0;}
 
 /* Core Widgets
