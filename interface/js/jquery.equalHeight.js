@@ -4,18 +4,22 @@
         var c = 0,
             b = [];
         this.each(function () {
-            var c = a ? f(this).find(a + ":first") : f(this);
+            var c = a ? f(this).find(a) : f(this);
             b.push(c);
-            c.css("min-height", "")
+            //c.css("min-height", "")
         });
+
+        //calculate max height
         this.each(function () {
             c = Math.max(c, f(this).outerHeight())
         });
+
         return this.each(function (a) {
-            var g = f(this),
-                a = b[a],
-                g = a.height() + (c - g.outerHeight());
-            a.css("min-height", g + "px")
+            var total = b[a].length;
+            if(total > 1) return;
+
+            var a = b[a];
+            a.css("min-height", c + "px")
         })
     };
 

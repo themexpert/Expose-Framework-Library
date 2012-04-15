@@ -39,8 +39,7 @@ body{font:normal 14px/20px Arial,Helvetica,sans-serif; position:relative;color: 
 
 .ex-row, .ex-wrapper {margin-right: auto; margin-left: auto; text-align: left; position :relative; clear:left;}
     .ex-column {float:left;}
-        .ex-block {margin:0 10px; position: relative; display: block;}
-        	.ex-module, .ex-widget{padding: 15px;}
+        .ex-block {margin:0 10px;padding: 15px; position: relative; display: block;}
             .no-title > .ex-header{display: none;}
             .ex-title{margin: 0 0 7px;padding: 0 0 7px;}
     * html .ie6-offset {margin-right: -4px;}
