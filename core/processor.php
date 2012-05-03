@@ -258,7 +258,6 @@ class ExposeProcessor {
             }
 
             ksort($expose->styleSheets);
-            $version = '?v=' . EXPOSE_VERSION;
 
             foreach($expose->styleSheets as $key => $v){
                 foreach($v as $link)
@@ -269,7 +268,8 @@ class ExposeProcessor {
                             continue;
                         }
                     }
-                    $expose->document->addStyleSheet($link->url.$version,'text/css',$link->media);
+                    
+                    $expose->document->addStyleSheet($link->url,'text/css',$link->media);                    
                 }
             }
         }
@@ -286,7 +286,6 @@ class ExposeProcessor {
             }
             //sort scripts
             ksort($expose->scripts);
-            $version = '?v=' . EXPOSE_VERSION;
 
             foreach($expose->scripts as $key => $v){
                 foreach($v as $link)
@@ -297,7 +296,8 @@ class ExposeProcessor {
                            continue;
                         }
                     }
-                    $expose->document->addScript($link->url.$version);
+                    
+                    $expose->document->addScript($link->url);
                 }
             }
         }
