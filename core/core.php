@@ -103,8 +103,8 @@ class ExposeCore{
         if(isset ($this->jqDom) AND $this->jqDom != NULL){
             $this->_renderCombinedDom();
         }
-         //load custom css file based on platform check
-        $this->setCustomStyles();
+        //load custom css from template settings
+        $this->setCustomCss();
 
         //add custom js
         if($this->get('custom-js') != NULL)
@@ -112,9 +112,6 @@ class ExposeCore{
             $js = $this->get('custom-js');
             $this->document->addScriptDeclaration($js);
         }
-
-        $typo = new ExposeTypography();
-        $typo->renderFonts();
 
         define('EXPOSE_FINAL', 1);
 
@@ -157,8 +154,8 @@ class ExposeCore{
             $browser = strtolower($this->browser->getBrowser());
             $file = 'expose-'.$browser.'.css';
             $this->addLink($file,'css',1);
-
         }
+
         //load preset style
         $this->loadPresetStyle();
     }
@@ -369,7 +366,7 @@ class ExposeCore{
             return;
         }
 
-        //we won't load jquery on mobile device
+        //we will not load jquery on mobile device
         if($this->platform == 'mobile') return;
         
         if($this->get('jquery-enabled') AND !$this->app->get('jQuery')){
@@ -409,7 +406,7 @@ class ExposeCore{
         }
     }
 
-    private function setCustomStyles()
+    private function setCustomCss()
     {
         if(defined('EXPOSE_FINAL')) return;
 
@@ -418,116 +415,27 @@ class ExposeCore{
 
         $layoutType = (isset ($_COOKIE[$this->templateName.'_layoutsType'])) ? $_COOKIE[$this->templateName.'_layoutsType'] : $this->get('layouts-type','fixed');
 
-        if(isset ($_REQUEST['layoutsType'])){
+        if(isset ($_REQUEST['layoutsType']))
+        {
             setcookie($this->templateName.'_layoutsType',$_REQUEST['layoutsType'],time()+3600,'/');
             $layoutType = $_REQUEST['layoutsType'];
         }
 
-        if($layoutType == 'fixed' AND $this->platform != 'mobile'){
+        if($layoutType == 'fixed' AND $this->platform != 'mobile')
+        {
 
             $width   = $this->get('template-width','980').'px';
             $css    .= "\t.{$prefix}row, .{$prefix}wrapper{width: $width}";
-            //$css    .= '.ex-row, .ex-wrapper{width:'.$width.'}';
 
         }
 
-        if($this->get('custom-style-enabled') AND $this->platform != 'mobile')
-        {
-            $css .= "
-                body{
-                    background-color: #{$this->get('background-color')};
-                    {$this->setBackgroundImage('background-image')}
-                }
-
-                .ex-header .ex-title{
-                    color: #{$this->get('module-title-color')}
-                }
-
-                #{$prefix}main #ex-content .ex-title,
-                #{$prefix}main #ex-content .ex-title a{
-                    color: #{$this->get('article-title-color')}
-                }
-
-                #{$prefix}header{
-                    background-color: #{$this->get('header-bg-color')};
-                    {$this->setBackgroundImage('header-image')}
-                    color: #{$this->get('header-text-color')};
-                }
-                #{$prefix}header a{
-                    color: #{$this->get('header-link-color')};
-                }
-                #{$prefix}header a:hover{
-                    color: #{$this->get('header-link-hover-color')};
-                }
-
-                #{$prefix}top{
-                    background-color: #{$this->get('top-bg-color')};
-                    {$this->setBackgroundImage('top-image')}
-                    color: #{$this->get('top-text-color')};
-                }
-                #{$prefix}top a{
-                    color: #{$this->get('top-link-color')};
-                }
-                #{$prefix}top a:hover{
-                    color: #{$this->get('top-link-hover-color')};
-                }
-
-                #{$prefix}feature{
-                    background-color: #{$this->get('feature-bg-color')};
-                    {$this->setBackgroundImage('feature-image')}
-                    color: #{$this->get('feature-text-color')};
-                }
-                #{$prefix}feature a{
-                    color: #{$this->get('feature-link-color')};
-                }
-                #{$prefix}feature a:hover{
-                    color: #{$this->get('feature-link-hover-color')};
-                }
-
-                #{$prefix}main #ex-content{
-                    background-color: #{$this->get('maincontent-bg-color')};
-                    {$this->setBackgroundImage('maincontent-image')}
-                    color: #{$this->get('maincontent-text-color')};
-                }
-                #{$prefix}main #ex-content a{
-                    color: #{$this->get('maincontent-link-color')};
-                }
-                #{$prefix}main #ex-content a:hover{
-                    color: #{$this->get('maincontent-link-hover-color')};
-                }
-
-                #{$prefix}bottom{
-                    background-color: #{$this->get('bottom-bg-color')};
-                    {$this->setBackgroundImage('bottom-image')}
-                    color: #{$this->get('bottom-text-color')};
-                }
-                #{$prefix}bottom a{
-                    color: #{$this->get('bottom-link-color')};
-                }
-                #{$prefix}bottom a:hover{
-                    color: #{$this->get('bottom-link-hover-color')};
-                }
-
-                #{$prefix}footer{
-                    background-color: #{$this->get('footer-bg-color')};
-                    {$this->setBackgroundImage('footer-image')}
-                    color: #{$this->get('footer-text-color')};
-                }
-                #{$prefix}footer a{
-                    color: #{$this->get('footer-link-color')};
-                }
-                #{$prefix}footer a:hover{
-                    color: #{$this->get('footer-link-hover-color')};
-                }
-
-            ";
-        }
-
-        if( ($this->get('custom-css') != NULL) AND $this->platform != 'mobile' )
+        if( ($this->get('custom-css') != NULL))
         {
             $css .= $this->get('custom-css');
         }
+
         $this->addInlineStyles($css);
+
     }
 
     public function setPrefix($name)
@@ -543,21 +451,6 @@ class ExposeCore{
         }
 
         return $this->prefix;
-    }
-
-    public function setBackgroundImage($param, $dir='backgrounds')
-    {
-        $image = $this->get($param);
-        $repeat = $this->get($param.'-repeat','repeat');
-        $css = '';
-
-        if($image == -1) return;
-
-        $path = $this->templateUrl . '/images/'. $dir .'/' . $image;
-        $css  .= "background-image: url({$path});";
-        $css .= "background-repeat: $repeat;";
-
-        return $css;
     }
 
     public function addInlineStyles($content){
@@ -683,7 +576,6 @@ class ExposeCore{
     public function countModules($position)
     {
         $layout = ExposeLayout::getInstance();
-
         return $layout->countModules($position);
     }
 
