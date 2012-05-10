@@ -189,7 +189,7 @@ class ExposeCore{
     {
         $obj = $this->styleSheets[$priority][] = new stdClass();
 
-        if(preg_match('/^http/', $file))
+        if(preg_match('/\/\//', $file))
         {
             $obj->media = $media;
             $obj->url = $file;
@@ -251,7 +251,7 @@ class ExposeCore{
     {
         $obj = $this->scripts[$priority][] = new stdClass();
 
-        if(preg_match('/^http/', $file))
+        if(preg_match('/\/\//', $file))
         {
             $obj->url = $file;
             $obj->path = $file;
