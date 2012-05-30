@@ -27,7 +27,22 @@ class ExposeWidgetLogo extends ExposeWidget{
         if ( $this->get('image') ) {
             $imagePath = $this->get('image', '');
         } else {
-            $imagePath = "templates/{$expose->templateName}/images/logo.png";
+            //if logo is avaialble on its own style use it otherwise use default logo
+            $preset_file = (isset ($_COOKIE[$expose->templateName.'_style'])) ? $_COOKIE[$expose->templateName.'_style'] : $expose->get('style');
+            if(isset ($_REQUEST['style'])){
+                setcookie($expose->templateName.'_style',$_REQUEST['style'],time()+3600,'/');
+                $preset_file = $_REQUEST['style'];
+            }
+            
+            $styleLogo = "templates/{$expose->templateName}/images/{$preset_file}/logo.png";
+
+            if( JFile:: exists($styleLogo))
+            {
+                $imagePath = $styleLogo;
+            }else{
+                $imagePath = "templates/{$expose->templateName}/images/logo.png";
+            }
+            
         }
 
         if(!JFile::exists(JPATH_ROOT. '/' . $imagePath)) return;
