@@ -28,14 +28,14 @@ class ExposeWidgetDate extends ExposeWidget{
     {
         global $expose;
 
-        //$date = new JDate();
+        $now = &JFactory::getDate();
         $format = $this->get('formats');
-        //$dates = $date->format($format);
+        $date = $now->toFormat($format);
 
         ob_start();
         ?>
         <div id="ex-date">
-            <?php echo $format; ?>
+            <?php echo $date; ?>
         </div>
     <?php
         return ob_get_clean();
