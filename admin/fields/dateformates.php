@@ -82,7 +82,7 @@ class JFormFieldDateFormates extends JFormField{
                 $value = $now->toFormat($option['value']);
 
                 // Create a new option object based on the <option /> element.
-                $tmp = JHtml::_('select.option', (string) $value, JText::alt(trim((string) $option), preg_replace('/[^a-zA-Z0-9_\-]/', '_', $this->fieldname)), 'value', 'text', ((string) $option['disabled']=='true'));
+                $tmp = JHtml::_('select.option', $option['value'] , (string) $value,  'value', 'text', ((string) $option['disabled']=='true'));
 
                 // Set some option attributes.
                 $tmp->class = (string) $option['class'];
