@@ -7,7 +7,7 @@
     <authorUrl>http://themexpert.com/</authorUrl>
     <copyright>Copyright (C) 2010 - 2011 ThemeXpert</copyright>
     <license>http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3</license>
-    <version>3.0</version>
+    <version>3.0.1</version>
     <description>Expose is a flexible and powerful rapid development theme framework for joomla 2.5 with a very small footprint provides an extensible environment for developing, maintaining, and deploying high quality themes. Choosing Expose allows you to release your themes earlier, host and scale them without problem, and maintain them over time with no hassle.
 Expose is based on experience. It does not reinvent the wheel: it uses most of the best practices of web development and integrates nicely with joomla framework with some great third-party libraries.
     </description>

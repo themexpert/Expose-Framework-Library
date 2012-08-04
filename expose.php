@@ -3,7 +3,7 @@
  * Bootstrap for Expose Framework
  *  
  * @package     Expose
- * @version     3.0.0
+ * @version     3.0.1
  * @author      ThemeXpert http://www.themexpert.com
  * @copyright   Copyright (C) 2010 - 2011 ThemeXpert
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
@@ -32,7 +32,7 @@ if(!defined('EXPOSE_VERSION'))
 
     // Define framework version.
 
-    define('EXPOSE_VERSION', '3.0.0');
+    define('EXPOSE_VERSION', '3.0.1');
 
     //define directory separator
     defined('DS') or define('DS', DIRECTORY_SEPARATOR);
