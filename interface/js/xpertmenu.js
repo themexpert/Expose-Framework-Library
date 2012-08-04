@@ -240,7 +240,7 @@ jQuery.extend(jQuery.easing, {
            $(this).find('li').bind({
                 'mouseleave': function (e){
                     var _chiThis = this,_tarCurrent,_isParentBool = false;
-                    
+
                     clearTimeout(_globalTimerChild);
                     _globalTimerChild = setTimeout(function(){
                         _this.XpertMenu("defaultLavaPosition");
@@ -322,16 +322,17 @@ jQuery.extend(jQuery.easing, {
             }, _options._hideDelay);
         },
         defaultLavaPosition: function () {
-            _setLavaTimer = setTimeout(function(){
-                var lavaTarget = _options._defaultLava;
-                var _currTarOffset = lavaTarget.offset();
-                $('.' + _options._lavaClass + '').stop().animate({
-                width: lavaTarget.width() + "px",
-                left: _currTarOffset.left + "px",
-                top: _currTarOffset.top + "px"
-            }, _options._hideDelay);
-            },600);
-            
+            if (_options._isFancy) {
+                _setLavaTimer = setTimeout(function(){
+                    var lavaTarget = _options._defaultLava;
+                    var _currTarOffset = lavaTarget.offset();
+                    $('.' + _options._lavaClass + '').stop().animate({
+                    width: lavaTarget.width() + "px",
+                    left: _currTarOffset.left + "px",
+                    top: _currTarOffset.top + "px"
+                }, _options._hideDelay);
+                },600);
+            }
         },
         setDirection: function (_tarObj) {
             var _currTar = _tarObj;
