@@ -51,7 +51,10 @@ jQuery(document).ready(function($){
 
     //lets remove template details
     $('.template-name ul li').each(function(index,val){
-        if(index !=0){
+        // Only show: Template name and Language dropdown
+        if(index ==0 || index == 2){
+            $(this).show();
+        }else {
             $(this).hide();
         }
     });

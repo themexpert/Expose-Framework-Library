@@ -29,9 +29,9 @@ class JFormFieldList extends JFormField{
         $class = $this->element['class'];
 
         // To avoid user's confusion, readonly="true" should imply disabled="true".
-        if ( (string) $this->element['readonly'] == 'true' || (string) $this->element['disabled'] == 'true') {
-                $attr .= ' disabled="disabled"';
-        }
+//        if ( (string) $this->element['readonly'] == 'true' || (string) $this->element['disabled'] == 'true') {
+//                $attr .= ' disabled="disabled"';
+//        }
 
         $attr .= $this->element['size'] ? ' size="'.(int) $this->element['size'].'"' : '';
         $attr .= $this->multiple ? ' multiple="multiple"' : '';
