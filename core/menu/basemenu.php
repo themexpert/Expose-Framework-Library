@@ -721,6 +721,7 @@ class ExposeBaseMenu extends JObject{
     {
        $active = $this->genClass($mitem, $level, $pos);
        $desc = $mitem->megaparams->get('desc');
+       $cls = '';
 
        if( $desc != "&nbsp;" AND !empty($desc) ) $cls = "has-desc";
 
@@ -755,6 +756,7 @@ class ExposeBaseMenu extends JObject{
     */
     function genClass($mitem, $level, $pos)
     {
+        $cls = '';
        $iParams = $mitem->jparams;
        $active = in_array($mitem->id, $this->open);
        $cls = ($level ? "" : "menu-item{$mitem->_idx}") . ($active ? " active" : "") . ($pos ? " $pos-item" : "");
