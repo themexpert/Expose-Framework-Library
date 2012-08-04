@@ -26,7 +26,7 @@ class ExposeWidgetLazyloader extends ExposeWidget{
     {
         global $expose;
         $js ='jQuery(\'img\').lazyload({effect: "fadeIn",threshold : 100});';
-        $expose->addLink('lazyload.js','js');
+        $expose->addLink('jquery.lazyload.js','js');
         $expose->addjQDom($js);
     }
 }
