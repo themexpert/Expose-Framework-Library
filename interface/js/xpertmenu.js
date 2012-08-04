@@ -242,13 +242,14 @@ jQuery.extend(jQuery.easing, {
                     var _chiThis = this,_tarCurrent,_isParentBool = false;
 
                     clearTimeout(_globalTimerChild);
+
                     _globalTimerChild = setTimeout(function(){
                         _this.XpertMenu("defaultLavaPosition");
                     },_options._hideDelay*2);
 
                     if ($(this).hasClass(_options._hasClass)) {
                        
-                       if ($(_chiThis).hasClass('level-0'))
+                       //if ($(_chiThis).hasClass('level-0'))
                         _isParentBool = true;
                         $(this).XpertMenu("hideElement",$(e.currentTarget).find(_options.childClass),_isParentBool);
                     }
