@@ -11,7 +11,6 @@
  **/
 
 expose_import('core.layout');
-expose_import('core.typography');
 
 class ExposeCore{
 
