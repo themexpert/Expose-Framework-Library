@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<extension type="library" version="1.6" method="upgrade">
+<extension type="library" version="2.5" method="upgrade">
     <name>Expose Templaet Framework for Joomla 2.5</name>
     <libraryname>expose</libraryname>
     <creationDate>Mar 03, 2011</creationDate>

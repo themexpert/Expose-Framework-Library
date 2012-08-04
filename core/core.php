@@ -305,6 +305,14 @@ class ExposeCore{
         }
     }
 
+    /*
+     * Get File path from url.
+     *
+     * This function is borrowed from Gantry GPL theme framework http://www.gantry-framework.org
+     * Author: Rockettheme
+     *
+     **/
+
     private function getFilePath($url)
     {
         $uri	    =& JURI::getInstance();

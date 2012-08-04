@@ -1,6 +1,6 @@
 <?php
 /**
- * Bootstrap for Expose
+ * Bootstrap for Expose Framework
  *  
  * @package     Expose
  * @version     3.0.0
@@ -18,11 +18,10 @@ if(defined('PHP_VERSION')) {
 } elseif(function_exists('phpversion')) {
 	$version = phpversion();
 } else {
-	// No version info. I'll lie and hope for the best.
 	$version = '5.0.0';
 }
 
-// Old PHP version detected. EJECT! EJECT! EJECT!
+// if older version detect, raise an error
 if(!version_compare($version, '5.0.0', '>='))
 {
 	return JError::raise(E_ERROR, 500, 'PHP 4 is not supported by Expose Framework');
@@ -38,13 +37,13 @@ if(!defined('EXPOSE_VERSION'))
     //define directory separator
     defined('DS') or define('DS', DIRECTORY_SEPARATOR);
 
-    //Expose base path will depend on Joomla version
+    /*//Expose base path will depend on Joomla version
     if(version_compare(JVERSION, '1.5', '>=') && version_compare(JVERSION, '1.7', '<')){
         //define joomla version for further use
         define('EXPOSE_JVERSION','15');
     }else{
         define('EXPOSE_JVERSION','17');
-    }
+    }*/
 
     //declare global ver
     global $expose;
