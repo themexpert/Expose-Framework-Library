@@ -26,6 +26,7 @@ class ExposeWidgetWebfonts extends ExposeWidget{
     protected $urls = array();
     protected $gfonts = array();
     protected $gfontUrl = 'http://fonts.googleapis.com/css?family=';
+    protected $subset = '&subset=latin,latin-ext';
 
     public function isEnabled()
     {
@@ -47,7 +48,7 @@ class ExposeWidgetWebfonts extends ExposeWidget{
 
             $family= "font-family:'{$this->cleanName($this->get('body-font'))}';";
             $this->css .= $this->get('body-selectors'). '{'. $family .'}';
-            $this->urls[]= $this->gfontUrl . $this->get('body-font');
+            $this->urls[]= $this->gfontUrl . $this->get('body-font') . $this->subset;
 
             $render = TRUE;
         }
@@ -57,7 +58,7 @@ class ExposeWidgetWebfonts extends ExposeWidget{
 
             $family= "font-family:'{$this->cleanName($this->get('menu-font'))}';";
             $this->css .= $this->get('menu-selectors'). '{'.$family .'}';
-            $this->urls[]= $this->gfontUrl . $this->get('menu-font');
+            $this->urls[]= $this->gfontUrl . $this->get('menu-font') . $this->subset;
 
             $render = TRUE;
         }
@@ -67,7 +68,7 @@ class ExposeWidgetWebfonts extends ExposeWidget{
 
             $family= "font-family:'{$this->cleanName($this->get('heading-font'))}';";
             $this->css .= $this->get('heading-selectors'). '{'.$family.'}';
-            $this->urls[]= $this->gfontUrl . $this->get('heading-font');
+            $this->urls[]= $this->gfontUrl . $this->get('heading-font') . $this->subset;
 
             $render = TRUE;
         }
@@ -76,7 +77,7 @@ class ExposeWidgetWebfonts extends ExposeWidget{
 
             $family= "font-family:'{$this->cleanName($this->get('module-font'))}';";
             $this->css .= $this->get('module-selectors'). '{'.$family.'}';
-            $this->urls[]= $this->gfontUrl . $this->get('module-font');
+            $this->urls[]= $this->gfontUrl . $this->get('module-font') . $this->subset;
 
             $render = TRUE;
         }
