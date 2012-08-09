@@ -428,11 +428,11 @@ class ExposeCore{
             $layoutType = $_REQUEST['layoutsType'];
         }
 
-        if($layoutType == 'fixed' AND $this->platform != 'mobile')
+        if($layoutType == 'fixed')
         {
 
             $width   = $this->get('template-width','980').'px';
-            $css    .= "\t.{$prefix}row, .{$prefix}wrapper{width: $width}";
+            $css    .= "\t.{$prefix}row, .{$prefix}wrapper{max-width: $width}";
 
         }
 
