@@ -90,7 +90,7 @@ class ExposeWidgetMenu extends ExposeWidget{
 
             <?php $menu->loadMenu(); ?>
 
-            <?php $menu->genMenu(); ?>
+            <?php $menuItems = $menu->genMenu(); ?>
 
             <?php if($hasSubMenu AND $menu->hasSubMenu(1) AND $menu->showSeparatedSub)
             { ?>
@@ -102,6 +102,25 @@ class ExposeWidgetMenu extends ExposeWidget{
 
         </div> <!-- ex-menu end -->
 
+        <div id="ex-mobile-menu">
+            <select onChange="window.location.replace(this.options[this.selectedIndex].value)">
+                <?php foreach($menu->items as $key => $val):?>
+                    <option value="<?php echo $val->link;?>">
+                        <?php
+                            if( count($val->tree) > 1 )
+                            {
+                                for($i=0; $i < (count($val->tree)-1); $i++){
+                                    echo "-";
+                                }
+                            }
+                        ?>
+
+                        <?php echo $val->title; ?>
+
+                    </option>
+                <?php endforeach;?>
+            </select>
+        </div>
 
         <?php
         return ob_get_clean();
