@@ -86,11 +86,11 @@ class ExposeWidgetMenu extends ExposeWidget{
         ob_start();
         ?>
 
-        <div id="ex-menu">
+        <div id="ex-menu" class="hidden-phone">
 
             <?php $menu->loadMenu(); ?>
 
-            <?php $menuItems = $menu->genMenu(); ?>
+            <?php $menu->genMenu(); ?>
 
             <?php if($hasSubMenu AND $menu->hasSubMenu(1) AND $menu->showSeparatedSub)
             { ?>
@@ -102,7 +102,7 @@ class ExposeWidgetMenu extends ExposeWidget{
 
         </div> <!-- ex-menu end -->
 
-        <div id="ex-mobile-menu">
+        <div id="ex-mobile-menu" class="visible-phone">
             <select onChange="window.location.replace(this.options[this.selectedIndex].value)">
                 <?php foreach($menu->items as $key => $val):?>
                     <option value="<?php echo $val->link;?>">
