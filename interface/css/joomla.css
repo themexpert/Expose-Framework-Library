@@ -80,9 +80,11 @@ tr.sectiontableentry0 td, td.sectiontableentry0, tr.sectiontableentry1 td, td.se
 #ex-component .edit .formelm{float: left; width: 70%;margin-top: 10px}
 #ex-component .edit .formelm label{float: left;line-height: 22px; width:110px}
 #ex-component .edit textarea{margin-top: 10px;}
-#ex-component .edit .formelm-buttons{float: right; margin-top: 10px;}
+#ex-component .edit .pull-left{width: 50%}
+#ex-component .CodeMirror-wrapping{box-sizing: border-box;margin-top: 20px}
+#ex-component .edit .formelm-buttons{ margin-top: 10px;}
 #ex-component .button2-left {float: left;margin-right: 5px;}
-
+#ex-component #editor-xtd-buttons{margin-top: 15px; height: 32px;}
 
 /* User */
 #ex-component .registration dt{ float: left; width: 200px;}
