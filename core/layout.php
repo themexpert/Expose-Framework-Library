@@ -277,17 +277,6 @@ class ExposeLayout
         global $expose;
 
         $parentField = substr($position,0,strpos($position,'-')); //split the number and get the parent field name
-
-        if($expose->platform == 'mobile')
-        {
-            if($expose->get($parentField.'-mobile'))
-            {
-                return $expose->document->countModules($position);
-            }else{
-                return FALSE;
-            }
-        }
-
         return $expose->document->countModules($position);
 
     }
@@ -368,27 +357,11 @@ class ExposeLayout
         $tPath = $expose->templatePath . DS .'layouts';
         $ext = '.php';
 
-        if( $expose->platform == 'mobile' )
-        {
-            $device = strtolower($expose->browser->getBrowser());
-            $bfile = $bPath .DS . $device . $ext;
-            $tfile = $tPath .DS . $device . $ext;
+        $bfile = $bPath .DS . $layouts . $ext;
+        $tfile = $tPath .DS . $layouts . $ext;
 
-            if($expose->get('iphone-enabled') AND $device == 'iphone')
-            {
-                $this->loadFile(array($tfile,$bfile));
-            }elseif($expose->get('android-enabled') AND $device == 'android'){
-                $this->loadFile(array($tfile,$bfile));
-            }else{
-                return FALSE;
-            }
+        $this->loadFile(array($tfile,$bfile));
 
-        }else{
-            $bfile = $bPath .DS . $layouts . $ext;
-            $tfile = $tPath .DS . $layouts . $ext;
-
-            $this->loadFile(array($tfile,$bfile));
-        }
     }
 
 
