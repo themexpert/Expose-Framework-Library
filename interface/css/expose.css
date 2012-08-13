@@ -11,52 +11,6 @@
  * Stripped down and improved collection of best practises
 **/
 
-/* Reset */
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, caption {margin: 0;padding: 0;border: 0;outline: 0;font-size: 100%;background: transparent;}
-
-/* Clear Float
----------------------------------------*/
-.clearfix:before, .clearfix:after, .ex-row:before, .ex-row:after, .ex-content:before, .ex-content:after {content: '';display: table;}
-.clearfix:after, .ex-row:after, .ex-content:after{clear: both;}
-
-/* Remove outline when clicking links: people.opera.com/patrickl/experiments/keyboard/test */
-a:hover, a:active { outline: none; }
-
-/* Removes scrollbar in IE */
-textarea { overflow: auto; }
-
-/* Remove background from selected images */
-img::selection { background: transparent; }
-img::-moz-selection { background: transparent; }
-
-/* Layout 
-----------------------------------------*/
-html{overflow-y:scroll;min-height:100%}
-body{font:normal 14px/20px Arial,Helvetica,sans-serif; position:relative;color: #444;margin: 0;}
-/* hides from IE-mac \*/
-* html, * html .ex-block{height: 1%;}
-/* end hide from IE-mac */
-
-.ex-row, .ex-wrapper {margin-right: auto; margin-left: auto; text-align: left; position :relative; clear:left;}
-    .ex-column {float:left;}
-        .ex-block {margin:0 10px;padding: 15px; position: relative; display: block;}
-            .no-title > .ex-header{display: none;}
-            .ex-title{margin: 0 0 7px;padding: 0 0 7px;}
-    * html .ie6-offset {margin-right: -4px;}
-
-#ex-mainbody, #ex-sidebar-a, #ex-sidebar-b{position: relative;}
-    #ex-sidebar-a .ex-column, #ex-sidebar-b .ex-column, #ex-legal .ex-column{width:100%}
-#ex-component{padding: 15px;}
-#ex-copyright .ex-block{padding: 10px 15px;margin: 0;}
-
-/* Core Widgets
--------------------------------------------*/
-.expose-logo, .expose-logo a{width: 152px;height: 40px;display: block}
-    .expose-logo-light{background: url(../images/expose_logo_light.png) no-repeat;}
-    .expose-logo-dark{background: url(../images/expose_logo_dark.png) no-repeat;}
-    .expose-logo span{display: none}
-
-#ex-menu{position: relative;z-index: 99}
 
 /*
  * Print Style Sheet - Only used when printing
@@ -93,25 +47,3 @@ body{font:normal 14px/20px Arial,Helvetica,sans-serif; position:relative;color: 
 	h2, h3 { page-break-after: avoid; }
 
 }
-/* RTL Core
--------------------------------------------*/
-/* Overall */
-body.align-rtl *{text-align: right}
-body.align-rtl #ex-mainbody, body.align-rtl #ex-sidebar-a, body.align-rtl #ex-sidebar-b, body.align-rtl .ex-column{float: right}
-/* Menu (Mega + Dropline + Split) */
-body.align-rtl .ex-megamenu ul.level-0 > li.mega,
-body.align-rtl #exdl-mainnav li,
-body.align-rtl #ex-splitmenu li,
-body.align-rtl #exdl-subnav > ul > li,
-body.align-rtl #ex-subnav .sublevel > ul > li{float: right}
-body.align-rtl {min-width: inherit;}
-body.align-rtl .ex-menu ul li:hover ul, body.align-rtl .ex-menu ul li.over ul{right: 0;}
-body.align-rtl .ex-menu ul li:hover li ul, body.align-rtl .ex-menu ul li.over li ul{right: -999em;}
-body.align-rtl .ex-menu ul li li:hover ul, body.align-rtl .ex-menu ul li li.over ul{right:13em;}
-body.align-rtl .ex-menu ul li li li:hover ul,body.align-rtl .ex-menu ul li li li.over ul {right: 10em;top:0;}
-
-body.align-rtl .ex-megamenu ul.level-0 li.has-submenu a.mega span.menu-title,
-body.align-rtl .ex-megamenu ul.level-0 li.has-submenu span.mega.level-0 span.menu-title {padding-right: 12px;background-position: right center;}
-body.align-rtl .ex-megamenu ul.level-0 li.has-submenu a.mega span.menu-desc,
-.ex-megamenu ul.level-0 li.has-submenu span.mega span.menu-desc{padding-right: 12px;}
-body.align-rtl .ex-megamenu ul.level-0 li.mega .has-image{padding-right: 35px;padding-left: 0; background-position: 100%;}

@@ -147,7 +147,7 @@ class ExposeCore{
 
         if($this->platform == 'desktop')
         {
-            $files = array('expose.css','joomla.css');
+            $files = array('joomla.css');
             $this->addLink($files,'css',1);
         }else{
             $browser = strtolower($this->browser->getBrowser());
