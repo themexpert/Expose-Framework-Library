@@ -83,11 +83,11 @@ class ExposeWidgetLogo extends ExposeWidget{
         // Output the logo. Determine whether it's text or an image, then pull in all the values set previously to display properly.
         if ( $this->get('type') == 'text' )
         {
-            $logo = "<{$tag} id=\"ex-logo\" class=\"brand {$this->get('type')}\"> <a href=\"{$expose->baseUrl}\">$logoText $tagline</a>  </{$tag}>";
+            $logo = "<{$tag} id=\"logo\" class=\"brand {$this->get('type')}\"> <a href=\"{$expose->baseUrl}\">$logoText $tagline</a>  </{$tag}>";
 
         } else {
 
-            $logo = "<{$tag} id=\"ex-logo\" class=\"brand {$this->get('type')}\" style=\"{$tagStyle}\">
+            $logo = "<{$tag} id=\"logo\" class=\"brand {$this->get('type')}\" style=\"{$tagStyle}\">
                         <a class=\"auto-size\" style=\"{$linkStyle}\"  href=\"{$expose->baseUrl}\">$logoText $tagline</a>
                     </{$tag}>";
 

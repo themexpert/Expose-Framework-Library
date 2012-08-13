@@ -35,7 +35,6 @@ class ExposeWidgetStylus extends ExposeWidget{
         global $expose;
 
         $css = '';
-        $prefix = $expose->getPrefix();
 
         $css .= "
             body{
@@ -47,80 +46,80 @@ class ExposeWidgetStylus extends ExposeWidget{
                 color: #{$this->get('module-title-color')}
             }
 
-            #{$prefix}main #ex-content .ex-title,
-            #{$prefix}main #ex-content .ex-title a{
+            #main #ex-content .ex-title,
+            #main #ex-content .ex-title a{
                 color: #{$this->get('article-title-color')}
             }
 
-            #{$prefix}header{
+            #header{
                 background-color: #{$this->get('header-bg-color')};
                 {$this->setBackgroundImage('header-image')}
                 color: #{$this->get('header-text-color')};
             }
-            #{$prefix}header a{
+            #header a{
                 color: #{$this->get('header-link-color')};
             }
-            #{$prefix}header a:hover{
+            #header a:hover{
                 color: #{$this->get('header-link-hover-color')};
             }
 
-            #{$prefix}top{
+            #top{
                 background-color: #{$this->get('top-bg-color')};
                 {$this->setBackgroundImage('top-image')}
                 color: #{$this->get('top-text-color')};
             }
-            #{$prefix}top a{
+            #top a{
                 color: #{$this->get('top-link-color')};
             }
-            #{$prefix}top a:hover{
+            #top a:hover{
                 color: #{$this->get('top-link-hover-color')};
             }
 
-            #{$prefix}feature{
+            #feature{
                 background-color: #{$this->get('feature-bg-color')};
                 {$this->setBackgroundImage('feature-image')}
                 color: #{$this->get('feature-text-color')};
             }
-            #{$prefix}feature a{
+            #feature a{
                 color: #{$this->get('feature-link-color')};
             }
-            #{$prefix}feature a:hover{
+            #feature a:hover{
                 color: #{$this->get('feature-link-hover-color')};
             }
 
-            #{$prefix}main #ex-content{
+            #main #ex-content{
                 background-color: #{$this->get('maincontent-bg-color')};
                 {$this->setBackgroundImage('maincontent-image')}
                 color: #{$this->get('maincontent-text-color')};
             }
-            #{$prefix}main #ex-content a{
+            #main #ex-content a{
                 color: #{$this->get('maincontent-link-color')};
             }
-            #{$prefix}main #ex-content a:hover{
+            #main #ex-content a:hover{
                 color: #{$this->get('maincontent-link-hover-color')};
             }
 
-            #{$prefix}bottom{
+            #bottom{
                 background-color: #{$this->get('bottom-bg-color')};
                 {$this->setBackgroundImage('bottom-image')}
                 color: #{$this->get('bottom-text-color')};
             }
-            #{$prefix}bottom a{
+            #bottom a{
                 color: #{$this->get('bottom-link-color')};
             }
-            #{$prefix}bottom a:hover{
+            #bottom a:hover{
                 color: #{$this->get('bottom-link-hover-color')};
             }
 
-            #{$prefix}footer{
+            #footer{
                 background-color: #{$this->get('footer-bg-color')};
                 {$this->setBackgroundImage('footer-image')}
                 color: #{$this->get('footer-text-color')};
             }
-            #{$prefix}footer a{
+            #footer a{
                 color: #{$this->get('footer-link-color')};
             }
-            #{$prefix}footer a:hover{
+            #footer a:hover{
                 color: #{$this->get('footer-link-hover-color')};
             }
 

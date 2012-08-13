@@ -24,7 +24,7 @@ class ExposeWidgetExposelogo extends ExposeWidget{
         $website = 'http://www.expose-framework.org';
         ob_start();
             ?>
-            <div id="ex-poweredby" class="expose-logo expose-logo-<?php echo $this->get('type');?>">
+            <div id="poweredby" class="expose-logo expose-logo-<?php echo $this->get('type');?>">
                 <a href="<?php echo $website ;?>" target="_blank" title="Powered By Expose Framework">
                     <span>Powered By Expose Framework</span>
                 </a>

@@ -62,7 +62,7 @@ class ExposeWidgetMenu extends ExposeWidget{
                     _easing:'{$animation}',
                     _isFancy:{$fancy}
                 };
-                jQuery('#ex-megamenu').XpertMenu(_options);
+                jQuery('#megamenu').XpertMenu(_options);
                 ";
 
                 $expose->addjQDom($js);
@@ -86,7 +86,7 @@ class ExposeWidgetMenu extends ExposeWidget{
         ob_start();
         ?>
 
-        <div id="ex-menu" class="hidden-phone">
+        <div id="menu" class="hidden-phone">
 
             <?php $menu->loadMenu(); ?>
 
@@ -94,15 +94,15 @@ class ExposeWidgetMenu extends ExposeWidget{
 
             <?php if($hasSubMenu AND $menu->hasSubMenu(1) AND $menu->showSeparatedSub)
             { ?>
-                <div id="ex-subnav" class="clearfix">
+                <div id="subnav" class="clearfix">
                    <?php $menu->genMenu(1); ?>
                 </div>
            <?php
             } ?>
 
-        </div> <!-- ex-menu end -->
+        </div> <!-- menu end -->
 
-        <div id="ex-mobile-menu" class="visible-phone">
+        <div id="mobile-menu" class="visible-phone">
             <select onChange="window.location.replace(this.options[this.selectedIndex].value)">
                 <?php foreach($menu->items as $key => $val):?>
                     <option value="<?php echo $val->link;?>">

@@ -34,7 +34,7 @@ class ExposeWidgetDate extends ExposeWidget{
 
         ob_start();
         ?>
-        <div id="ex-date" class="hidden-phone">
+        <div id="date" class="hidden-phone">
             <?php echo $date; ?>
         </div>
     <?php
