@@ -94,31 +94,26 @@ class ExposeLayout
         if($totalPublished > 0 AND isset($this->modules[$position]['active']))
         {
             $widths = $this->getModuleSchema($position);
-            $containerClass = 'ex-column';
+            $containerClass = 'grid';
 
             foreach($this->getActiveModuleLists($position) as $positionName)
             {
                 //$totalModulesInPosition = $this->countModulesForPosition( $positionName );
-                $width = array_shift($widths);
+                $grid = array_shift($widths);
                 $class = '';
                 $html = '';
 
-                //we'll make all width 100% for mobile device
-                if($expose->platform == 'mobile'){
-                    $width = 100;
-                }
-
-                if($i == 1) $class .= 'ex-first ';
+                if($i == 1) $class .= 'first ';
 
                 if($i == $totalPublished){
-                    $class .= 'ex-last ';
+                    $class .= 'last ';
                 }
 
-                $class .= ($i%2) ? 'ex-odd' : 'ex-even';
+                $class .= ($i%2) ? 'odd' : 'even';
                 if($i == ($totalPublished -1)) $class .= ' ie6-offset';
 
-                $style = "style=\"width: $width%\" ";
-                if(count($this->modules[$position]['schema']) == 1) $style = ''; //Exception for single module position
+//                $style = "style=\"width: $width%\" ";
+//                if(count($this->modules[$position]['schema']) == 1) $style = ''; //Exception for single module position
 
                 //we'll load all widgets first published in this position
                 if($this->countWidgetsForPosition($positionName))
@@ -126,8 +121,8 @@ class ExposeLayout
                     foreach($this->activeWidgets[$positionName] as $widget)
                     {
                         $name = 'widget-' . $widget->name;
-                        $html .= "<div class=\"ex-block ex-widget no-title column-spacing $name clearfix\">";
-                            $html .= "<div class=\"ex-content\">";
+                        $html .= "<div class=\"block widget $name no-title \">";
+                            $html .= "<div class=\"content\">";
                                 $html .= $widget->render();
                             $html .= "</div>";
                         $html .= "</div>";
@@ -135,7 +130,7 @@ class ExposeLayout
                     }
                 }
 
-                $modWrapperStart = "<div class=\"$containerClass $class $positionName\" $style>";
+                $modWrapperStart = "<div class=\"$containerClass$grid $class $positionName\">";
                 $modWrapperEnd = "</div>";
 
                 //now load modules content
