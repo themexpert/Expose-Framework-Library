@@ -110,10 +110,7 @@ class ExposeLayout
                 }
 
                 $class .= ($i%2) ? 'odd' : 'even';
-                if($i == ($totalPublished -1)) $class .= ' ie6-offset';
-
-//                $style = "style=\"width: $width%\" ";
-//                if(count($this->modules[$position]['schema']) == 1) $style = ''; //Exception for single module position
+                //if($i == ($totalPublished -1)) $class .= ' ie6-offset';
 
                 //we'll load all widgets first published in this position
                 if($this->countWidgetsForPosition($positionName))
@@ -130,7 +127,7 @@ class ExposeLayout
                     }
                 }
 
-                $modWrapperStart = "<div class=\"$containerClass$grid $class $positionName\">";
+                $modWrapperStart = "<div class=\"$containerClass$grid column $class $positionName\">";
                 $modWrapperEnd = "</div>";
 
                 //now load modules content
