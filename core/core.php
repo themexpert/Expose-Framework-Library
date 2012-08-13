@@ -420,20 +420,10 @@ class ExposeCore{
         $css = '';
         $prefix = $this->getPrefix();
 
-        $layoutType = (isset ($_COOKIE[$this->templateName.'_layoutsType'])) ? $_COOKIE[$this->templateName.'_layoutsType'] : $this->get('layouts-type','fixed');
-
         if(isset ($_REQUEST['layoutsType']))
         {
             setcookie($this->templateName.'_layoutsType',$_REQUEST['layoutsType'],time()+3600,'/');
             $layoutType = $_REQUEST['layoutsType'];
-        }
-
-        if($layoutType == 'fixed')
-        {
-
-            $width   = $this->get('template-width','980').'px';
-            $css    .= "\t.{$prefix}row, .{$prefix}wrapper{max-width: $width}";
-
         }
 
         if( ($this->get('custom-css') != NULL))
