@@ -563,6 +563,19 @@
       margin-left: (@gridColumnWidth * @columns) + (@gridGutterWidth * (@columns + 1));
     }
 
+    // Extended by ThemeXpert
+    // inset classess for pulling the grid
+    // --------------------------------------------------
+    .insetX (@index) when (@index > 0) {
+    (~".inset@{index}") { .inset(@index); }
+    .insetX(@index - 1);
+    }
+    .insetX (0) {}
+
+    .inset (@columns) {
+        margin-left: -((@gridColumnWidth * @columns) + (@gridGutterWidth * (@columns - 1)));
+    }
+
     .grid (@columns) {
       width: (@gridColumnWidth * @columns) + (@gridGutterWidth * (@columns - 1));
     }
@@ -585,6 +598,9 @@
     // generate .gridX and .offsetX
     .gridX (@gridColumns);
     .offsetX (@gridColumns);
+
+    // Extended by ThemeXpert
+    .insetX (@gridColumns);
 
   }
 
