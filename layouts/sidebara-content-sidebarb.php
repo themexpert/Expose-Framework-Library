@@ -61,7 +61,7 @@ defined ('EXPOSE_VERSION') or die ('resticted aceess');
     <?php /**Begin Sidebar-B**/ if($expose->countModules('sidebar-b')): ?>
 
         <!--Start Sidebar-B Modules-->
-        <div id="sidebar-b" class="grid<?php echo $expose->getSidebarsWidth('sidebar-b') ?>" role="complementary">
+        <div id="sidebar-b" class="grid<?php echo $grid['sidebar-b'] ?>" role="complementary">
             <?php $expose->renderModules('sidebar-b'); ?>
         </div>
         <!--End Sidebar-B Modules-->
