@@ -117,8 +117,8 @@
     margin-left: 0;
   }
   // Make all grid-sized elements block level again
-  [class*="span"],
-  .row-fluid [class*="span"] {
+  [class*="grid"],
+  .row-fluid [class*="grid"] {
     float: none;
     display: block;
     width: auto;
@@ -131,17 +131,17 @@
   .input-large,
   .input-xlarge,
   .input-xxlarge,
-  input[class*="span"],
-  select[class*="span"],
-  textarea[class*="span"],
+  input[class*="grid"],
+  select[class*="grid"],
+  textarea[class*="grid"],
   .uneditable-input {
     .input-block-level();
   }
   // But don't let it screw up prepend/append inputs
   .input-prepend input,
   .input-append input,
-  .input-prepend input[class*="span"],
-  .input-append input[class*="span"] {
+  .input-prepend input[class*="grid"],
+  .input-append input[class*="grid"] {
     display: inline-block; // redeclare so they don't wrap to new lines
     width: auto;
   }
