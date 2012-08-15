@@ -23,7 +23,7 @@ defined ('EXPOSE_VERSION') or die ('resticted aceess');
         <?php /**Begin Content top**/ if($expose->countModules('contenttop')): ?>
         <!--Start Content Top Modules-->
         <div id="content-top" class="row">
-            <?php $expose->renderModules('contenttop'); ?>
+            <?php $expose->renderModules('contenttop', TRUE); ?>
         </div>
         <!--End Content top Modules-->
         <?php /**End Content top **/ endif;?>
@@ -41,7 +41,7 @@ defined ('EXPOSE_VERSION') or die ('resticted aceess');
         <?php /**Begin Content bottom**/ if($expose->countModules('contentbottom')): ?>
         <!--Start Content Bottom Modules-->
         <div id="content-bottom" class="row">
-            <?php $expose->renderModules('contentbottom'); ?>
+            <?php $expose->renderModules('contentbottom', TRUE); ?>
         </div>
         <!--End Content Bottom Modules-->
         <?php /**End Content bottom **/ endif;?>

@@ -569,10 +569,21 @@ class ExposeCore{
         return $layout->countModules($position);
     }
 
-    public function renderModules($position)
+    public function renderModules($position, $inset=FALSE)
     {
         $layout = ExposeLayout::getInstance();
-        $layout->renderModules($position);
+        //check for the inset module position, used in content-top/bottom
+        if($inset)
+        {
+            //Get the component grid
+            $com = $this->getComponentWidth();
+            $grid = $com['component'];
+
+            $layout->renderModules($position, TRUE, $grid);
+        }else{
+            $layout->renderModules($position);
+        }
+
     }
 
     public function renderBody()

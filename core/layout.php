@@ -84,7 +84,7 @@ class ExposeLayout
 
     }
 
-    public function renderModules($position)
+    public function renderModules($position, $inset=FALSE, $grid=NULL)
     {
         global $expose;
 
@@ -93,13 +93,21 @@ class ExposeLayout
 
         if($totalPublished > 0 AND isset($this->modules[$position]['active']))
         {
-            $widths = $this->getModuleSchema($position);
+            //check for inset position
+            if($inset)
+            {
+                $grids = $this->getInsetModuleSchema($position,$grid);
+
+            }else{
+                $grids = $this->getModuleSchema($position);
+            }
+
             $containerClass = 'grid';
 
             foreach($this->getActiveModuleLists($position) as $positionName)
             {
                 //$totalModulesInPosition = $this->countModulesForPosition( $positionName );
-                $grid = array_shift($widths);
+                $grid = array_shift($grids);
                 $class = '';
                 $html = '';
 
@@ -167,6 +175,26 @@ class ExposeLayout
         //return module schema based on active modules
         return $this->modules[$position]['schema'][$published];
 
+    }
+
+    public function getInsetModuleSchema($position, $grid)
+    {
+        //total module published in this position
+        $total = $this->modules[$position]['published'];
+        $tempGrid = '';
+
+        //set module schema
+        for( $i = 0; $i<$total; $i++ )
+        {
+            $tempGrid = ceil($grid/$total);
+            if( ($i+1) == $total AND is_float($grid/$total)) $tempGrid = $tempGrid - $i;
+
+            if($tempGrid == 0) $tempGrid = $grid;
+
+            $this->modules[$position]['schema'][$total][$i] = $tempGrid;
+        }
+
+        return $this->modules[$position]['schema'][$total];
     }
 
     public function getModuleChrome($position, $module)
