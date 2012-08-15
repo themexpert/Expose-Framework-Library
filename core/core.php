@@ -145,15 +145,8 @@ class ExposeCore{
     {
         if($this->isAdmin()) return;
 
-        if($this->platform == 'desktop')
-        {
-            $files = array('joomla.css');
-            $this->addLink($files,'css',1);
-        }else{
-            $browser = strtolower($this->browser->getBrowser());
-            $file = 'expose-'.$browser.'.css';
-            $this->addLink($file,'css',1);
-        }
+        $files = array('joomla.css');
+        $this->addLink($files,'css',1);
 
         //load preset style
         $this->loadPresetStyle();
@@ -536,35 +529,35 @@ class ExposeCore{
 
     public function getComponentWidth()
     {
-        $widths = array();
+        $grids = array();
         $layout = ExposeLayout::getInstance();
-        $widths['a'] = 0;
-        $widths['b'] = 0;
-        $widths['component'] = 0;
+        $grids['a'] = 0;
+        $grids['b'] = 0;
+        $grids['component'] = 0;
 
         if($layout->countModulesForPosition('sidebar-a') OR $layout->countWidgetsForPosition('sidebar-a'))
         {
             $width = explode(':',$this->get('sidebar-a'));
-            $widths['a'] = $width[1];
+            $grids['a'] = $width[1];
 
         }
 
         if($layout->countModulesForPosition('sidebar-b') OR $layout->countWidgetsForPosition('sidebar-b'))
         {
             $width = explode(':',$this->get('sidebar-b'));
-            $widths['b'] = $width[1];
+            $grids['b'] = $width[1];
         }
 
-        $mainBodyWidth = 100 - ($widths['a'] + $widths['b']);
+        $mainBodyWidth = 12 - ($grids['a'] + $grids['b']);
 
         if($this->isEditpage())
         {
-            $mainBodyWidth = 100;
+            $mainBodyWidth = 12;
         }
 
         $width['component']= $mainBodyWidth;
-        $width['sidebar-a'] = $widths['a'];
-        $width['sidebar-b'] = $widths['b'];
+        $width['sidebar-a'] = $grids['a'];
+        $width['sidebar-b'] = $grids['b'];
 
         return $width;
 
