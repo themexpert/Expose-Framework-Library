@@ -517,7 +517,12 @@ class ExposeCore{
             return TRUE;
         }
     }
-
+    /*
+     * Get sidebar width for % values
+     *
+     * @since       @3.0
+     * @deprecated  @4.5
+     **/
     public function getSidebarsWidth($position)
     {
         $width = array();
