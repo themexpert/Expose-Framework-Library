@@ -40,7 +40,7 @@ defined ('EXPOSE_VERSION') or die ('resticted aceess');
 
         <?php /**Begin Content bottom**/ if($expose->countModules('contentbottom')): ?>
         <!--Start Content Bottom Modules-->
-        <div id="content-bottom" class="clearfix">
+        <div id="content-bottom" class="row">
             <?php $expose->renderModules('contentbottom'); ?>
         </div>
         <!--End Content Bottom Modules-->
