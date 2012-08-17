@@ -466,22 +466,22 @@ class ExposeCore{
 
     public function generateBodyClass()
     {
-        $menu = $this->app->getMenu();
-        $active = $menu->getActive();
-        $class  = NULL;
-        $component = str_replace('_','-', JRequest::getCmd('option'));
-        $view = JRequest::getCmd('view');
-        $class .= ($this->get('style') == '-1') ? 'style-none' : $this->get('style');
-        $class .= ' align-'.$this->direction;
-        $class .= ' page-id-'. (isset($active) ? $active->id : $menu->getDefault()->id);
-        $class .= ' '.$component . '-' . $view;
+        $itemid         = JRequest::getVar('Itemid');
+        $menu           = $this->app->getMenu();
+        $active         = $menu->getItem($itemid);
+        $params         = $menu->getParams( $active->id );
+        $class          = NULL;
+        $component      = str_replace('_','-', JRequest::getCmd('option'));
+        $view           = JRequest::getCmd('view');
 
-        $class .= (isset ($_COOKIE[$this->templateName.'_layouts'])) ? ' '.$_COOKIE[$this->templateName.'_layouts'] : ' '.$this->get('layouts');
+        $class         .= ($this->get('style') == '-1') ? 'style-none' : $this->get('style');
+        $class         .= ' align-'.$this->direction;
+        $class         .= ' page-id-'. (isset($active) ? $active->id : $menu->getDefault()->id);
+        $class         .= ' ' . $component . '-' . $view;
 
-        $class .= (isset ($_COOKIE[$this->templateName.'_layoutsType'])) ? ' layout-'.$_COOKIE[$this->templateName.'_layoutsType'] : ' layout-'.$this->get('layouts-type');
-
-        $class .= ' ' . strtolower($this->browser->getBrowser());
-        $class .= ($this->displayComponent()) ? '' : ' com-disabled';
+        $class         .= ' ' . strtolower($this->browser->getBrowser());
+        $class         .= ($this->displayComponent()) ? '' : ' com-disabled';
+        $class         .= ' ' . $params->get( 'pageclass_sfx' );
 
         return 'class="'.$class.'"';
     }
