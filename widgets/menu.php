@@ -86,7 +86,7 @@ class ExposeWidgetMenu extends ExposeWidget{
         ob_start();
         ?>
 
-        <div id="menu" class="hidden-phone">
+        <nav id="menu" class="hidden-phone">
 
             <?php $menu->loadMenu(); ?>
 
@@ -100,9 +100,9 @@ class ExposeWidgetMenu extends ExposeWidget{
            <?php
             } ?>
 
-        </div> <!-- menu end -->
+        </nav> <!-- menu end -->
 
-        <div id="mobile-menu" class="visible-phone">
+        <nav id="mobile-menu" class="visible-phone">
             <select onChange="window.location.replace(this.options[this.selectedIndex].value)">
                 <?php foreach($menu->items as $key => $val):?>
                 <?php
@@ -126,7 +126,7 @@ class ExposeWidgetMenu extends ExposeWidget{
                     </option>
                 <?php endforeach;?>
             </select>
-        </div>
+        </nav>
 
         <?php
         return ob_get_clean();
