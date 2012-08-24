@@ -40,11 +40,10 @@ tr.sectiontableentry0 td, td.sectiontableentry0, tr.sectiontableentry1 td, td.se
 #component .description img.right {margin-left: 15px;float: right;}
 #component .filter {margin: 10px 0;}
 #component span.number {color: #969696;font-style: italic;}
-#component .article-icons {width: 65px;overflow: hidden;float: right;}
-#component .article-icons ul {margin: 0;padding: 0;list-style: none;}
-#component .article-icons ul li {margin: 0;padding: 0}
-#component .article-icons ul li a {display: block;width: 16px;height: 16px;float: right;margin-left: 3px;background-image: url(../images/typography.png);background-repeat: no-repeat;}
-#component .article-icons ul li img {display: none;}
+#component .actions {overflow: hidden;float: right;}
+#component .actions ul {margin: 0;padding: 0;list-style: none;}
+#component .actions li {margin: 0 10px 0 0;padding: 0;float: left;}
+#component .actions img {display: none;}
 #component .print-icon a {background-position: 0 0;}
 #component .email-icon a {background-position: -16px 0;}
 #component .edit-icon a {background-position: -48px 0;margin-left: 0 !important;margin-right: 5px;}
