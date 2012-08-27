@@ -556,6 +556,7 @@
 
     .offsetX (@index) when (@index > 0) {
       (~".offset@{index}") { .offset(@index); }
+      (~"html[dir='rtl'] .offset@{index}") { .offsetRTL(@index); }
       .offsetX(@index - 1);
     }
     .offsetX (0) {}
@@ -563,12 +564,18 @@
     .offset (@columns) {
       margin-left: (@gridColumnWidth * @columns) + (@gridGutterWidth * (@columns + 1));
     }
+    .offsetRTL (@columns) {
+      margin-right: (@gridColumnWidth * @columns) + (@gridGutterWidth * (@columns + 1));
+      margin-left: 0;
+    }
 
     // Extended by ThemeXpert
+    // ---------------------------------------------------
     // inset classess for pulling the grid
     // --------------------------------------------------
     .insetX (@index) when (@index > 0) {
     (~".inset@{index}") { .inset(@index); }
+    (~"html[dir='rtl'] .inset@{index}") { .insetRTL(@index); }
     .insetX(@index - 1);
     }
     .insetX (0) {}
@@ -576,6 +583,12 @@
     .inset (@columns) {
       margin-left: -((@gridColumnWidth * @columns) + (@gridGutterWidth * (@columns - 1)));
     }
+    .insetRTL (@columns) {
+      margin-right: -((@gridColumnWidth * @columns) + (@gridGutterWidth * (@columns - 1)));
+      margin-left: 0;
+    }
+
+    //------------ End ThemeXpert customization --------------
 
     .grid (@columns) {
       width: (@gridColumnWidth * @columns) + (@gridGutterWidth * (@columns - 1));
