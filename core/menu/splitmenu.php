@@ -41,7 +41,7 @@ if (!defined ('_EXPOSE_SPLIT_MENU')) {
         function beginMenu($startlevel = 0, $endlevel = 10)
         {
             if ($startlevel == 0) {
-                echo "<div id=\"ex-splitmenu\" class=\"mainlevel clearfix\">\n";
+                echo "<div id=\"splitmenu\" class=\"mainlevel clearfix\">\n";
             } else {
                 echo "<div class=\"sublevel\">\n";
             }
