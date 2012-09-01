@@ -32,18 +32,22 @@ class JFormFieldPositionLayouts extends JFormField{
         if(!empty($this->value)){
             $tempVal        = explode(',',$this->value);
 
+            /*
+             * Take the value from xml and convert it to array
+             *
+             * @deprecated : 4.0
+             **/
             foreach($tempVal as $value){
                 list($index, $val) = explode(':',$value);
                 $finalValue[$index][] = $val;
             }
 
             /*
-             * Expose 3.0 backward compatibility
+             * Backward compatibility
              * This code will check and compare with default value, if find old % based value replace with
              * grid value
              *
-             * @deprecated : 4.0
-             * */
+             **/
             $tempDefault    = explode(',',$this->element['default']);
 
             foreach($tempDefault as $value){
@@ -58,7 +62,7 @@ class JFormFieldPositionLayouts extends JFormField{
                     foreach( $val as $key => $v )
                     {
 
-                        if( $finalValue[$index][$key] > 12 OR !isset($finalValue[$index][$key]) ){
+                        if( !isset($finalValue[$index][$key]) OR $finalValue[$index][$key] > 12 ){
 
                             $finalValue[$index][$key] = $tempDefaultVaule[$index][$key];
                         }
