@@ -97,6 +97,7 @@ span.pre-text{
 .input-small input[type=text]{
     width: 50px;
 }
+[name*='jform[params][social-']{width: 172px !important;}
 /* Expose global style
 -----------------------------------------------*/
 #expose-wrapper{

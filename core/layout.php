@@ -126,7 +126,7 @@ class ExposeLayout
                     foreach($this->activeWidgets[$positionName] as $widget)
                     {
                         $name = 'widget-' . $widget->name;
-                        $html .= "<div class=\"block widget $name no-title \">";
+                        $html .= "<div class=\"block widget $name no-title clearfix \">";
                             $html .= "<div class=\"content\">";
                                 $html .= $widget->render();
                             $html .= "</div>";
