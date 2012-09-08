@@ -15,7 +15,7 @@ defined ('EXPOSE_VERSION') or die ('resticted aceess');
 ?>
     <jdoc:include type="message" />
 
-<section id="mainbody" role="main" class="grid<?php echo $grid['component'];?> offset<?php echo $grid['sidebar-a'] + $grid['sidebar-b']; ?>">
+<section id="mainbody" role="main" class="grid<?php echo $grid['component'];?> offset<?php echo $grid['sidebar-a'] + $grid['sidebar-b']; ?> clearfix">
 
     <?php /**Begin Content top**/ if($expose->countModules('contenttop')): ?>
     <!--Start Content Top Modules-->
@@ -47,7 +47,7 @@ defined ('EXPOSE_VERSION') or die ('resticted aceess');
 
 <?php /**Begin Sidebar-A**/ if($expose->countModules('sidebar-a')): ?>
     <!--Start Sidebar-A Modules-->
-    <aside id="sidebar-a" class="grid<?php echo $grid['sidebar-a'];?> inset<?php echo ($grid['component'] + $grid['sidebar-a'] + $grid['sidebar-b']) ?>" role="complementary">
+    <aside id="sidebar-a" class="grid<?php echo $grid['sidebar-a'];?> inset<?php echo ($grid['component'] + $grid['sidebar-a'] + $grid['sidebar-b']) ?> clearfix" role="complementary">
         <?php $expose->renderModules('sidebar-a'); ?>
     </aside>
 <!--End Sidebar-A Modules-->
@@ -55,7 +55,7 @@ defined ('EXPOSE_VERSION') or die ('resticted aceess');
 
 <?php /**Begin Sidebar-B**/ if($expose->countModules('sidebar-b')): ?>
     <!--Start Sidebar-B Modules-->
-    <aside id="sidebar-b" class="grid<?php echo $grid['sidebar-b'] ?> inset<?php echo ($grid['component'] + $grid['sidebar-b']) ?>" role="complementary">
+    <aside id="sidebar-b" class="grid<?php echo $grid['sidebar-b'] ?> inset<?php echo ($grid['component'] + $grid['sidebar-b']) ?> clearfix" role="complementary">
         <?php $expose->renderModules('sidebar-b'); ?>
     </aside>
     <!--End Sidebar-B Modules-->
