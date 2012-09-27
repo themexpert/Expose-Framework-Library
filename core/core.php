@@ -366,9 +366,9 @@ class ExposeCore{
     {
         //come form admin? just add jquery without asking any question because jquery is heart of
         //expose admin
-        if($this->isAdmin() AND !$this->app->get('jQuery')){
+        if($this->isAdmin()){
             $file = 'jquery-1.7.1.min.js';
-            $this->app->set('jQuery','1.7.1');
+            //$this->app->set('jQuery','1.7.1');
             $this->addLink($file,'js',1);
             return;
         }
@@ -376,7 +376,7 @@ class ExposeCore{
         //we will not load jquery on mobile device
         if($this->platform == 'mobile') return;
         
-        if($this->get('jquery-enabled') AND !$this->app->get('jQuery')){
+        if($this->get('jquery-enabled')){
             $version = $this->get('jquery-version');
             //get the cdn
             $cdn = $this->get('jquery-source');
@@ -388,7 +388,7 @@ class ExposeCore{
                     $file = 'jquery-'.$version.'.min.js';
                     break;
             }
-            $this->app->set('jQuery',$version);
+            //$this->app->set('jQuery',$version);
             $this->addLink($file,'js',1);
         }
         return;

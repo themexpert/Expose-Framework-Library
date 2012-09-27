@@ -277,12 +277,10 @@ span.pre-text{
     width: 30%;
     float: right;
 }
-.overview-panel-left .overview-inner{
-    margin: 25px 15px;
-}
-.overview-panel-right .overview-inner{
-    margin: 25px 15px 25px 0;
-}
+.overview-panel-left .overview-inner{ margin: 25px 15px; }
+.overview-panel-right .overview-inner{ margin: 25px 15px 25px 0;}
+
+.overview-panel-left .overview-inner img { float: left; margin-right: 20px !important; }
 .overview-panel-left .overview-inner h3{margin: 32px 0 5px 0; font-size: 16px;line-height: 24px}
 .overview-panel-left .overview-inner ul{}
 .overview-panel-left .overview-inner ul li{float: left; list-style: square inside;width: 48%}
@@ -336,16 +334,23 @@ span.pre-text{
     border: 3px solid #fff;
     box-shadow: 0 0 4px #eee;
 }
+
+/*Joomla 3 fix*/
+.overview .controls{ margin-left: 0 !important;}
+#details label { min-width: 66px !important; padding-right: 0 !important;}
+#details input[type='text'] { width: 165px; float: left;}
+#jform_params_logo_image{ background: none; margin-right: 0 !important; width: 200px;}
+
 #mods-wrap{float: left;margin-right: 20px}
 #mods-wrap .inputs input[type=text],
 #mods-wrap .inputs span {float:left}
 #mods-wrap .inputs span{line-height: 34px;margin-right: 8px}
 #mods-wrap input[type=text]{width:60px;text-align: center;font-weight: bold;margin-right: 2px;}
+.mod-tabs ul{ list-style: none; margin: 0;}
 .mod-tabs ul li{float: left;margin: 0 !important;padding: 0}
 .mod-tabs ul li a{padding: 0 6px;border-right: 1px solid #eee;display: block;cursor: pointer}
 .mod-tabs ul li a:hover, .mod-tabs ul li a.current{font-weight: bold;color: #7ab1fa;}
 .mod-inputs{clear: both}
-
 .mods-chrome{
     background:#fff;
     display:none;
@@ -487,6 +492,7 @@ span.pre-text{
     padding: 10px 15px;
     margin: 10px 0 0 ;
     position: relative;
+    clear: both;
 }
 .font-preview span{
     background: #f5f5f5;
@@ -701,18 +707,22 @@ p.toggleLabelOff {
     background: #f00;
 }
 .colorpicker input {
-    background: transparent;
-    border: 1px solid transparent;
-    position: absolute;
-    font-size: 10px;
+    width: auto;
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    position: absolute !important;
+    font-size: 10px !important;
     font-family: Arial, Helvetica, sans-serif;
-    color: #898989;
-    top: 4px;
-    right: 11px;
-    text-align: right;
-    margin: 0;
-    padding: 0;
-    height: 11px;
+    color: #898989 !important;
+    top: 4px !important;
+    right: 11px !important;
+    text-align: right !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 11px !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
 }
 .colorpicker_hex {
     position: absolute;

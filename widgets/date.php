@@ -10,7 +10,7 @@
 defined ('EXPOSE_VERSION') or die ('resticted aceess');
 
 //import date utility class
-jimport('joomla.utilities.date');
+jimport('joomla.html.html');
 
 //import parent gist class
 expose_import('core.widget');
@@ -28,9 +28,9 @@ class ExposeWidgetDate extends ExposeWidget{
     {
         global $expose;
 
-        $now = &JFactory::getDate();
+        $now = JFactory::getDate('now');
         $format = $this->get('formats');
-        $date = $now->toFormat($format);
+        $date = JHtml::_('date', $now, $format);
 
         ob_start();
         ?>

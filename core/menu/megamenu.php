@@ -242,7 +242,7 @@ if (!defined ('_EXPOSE_MEGA_MENU')) {
          */
         function genClass($mitem, $level, $pos)
         {
-            $iParams = new JParameter($mitem->params);
+            $iParams = new JForm($mitem->params);
             $cls = "mega" . ($pos ? " $pos" : "");
             if($level == NULL) $level = 0;
             $cls .= ' level-'.$level;

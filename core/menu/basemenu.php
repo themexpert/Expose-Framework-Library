@@ -12,7 +12,7 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-jimport( 'joomla.html.parameter' );
+jimport( 'joomla.form.form' );
 
 if (!defined ('_EXPOSE_BASE_MENU')) {
 	define ('_EXPOSE_BASE_MENU', 1);
@@ -55,7 +55,7 @@ class ExposeBaseMenu extends JObject{
     */
    function createParameterObject($param, $path = '', $type = 'menu')
    {
-       return new JParameter($param, $path);
+       return new JForm($param);
    }
 
    /**
@@ -199,8 +199,8 @@ class ExposeBaseMenu extends JObject{
                $v->url = $v->flink = JRoute::_($v->flink);
 
                // Handle SSL links
-               $iParams = $this->createParameterObject($v->jparams);
-               $iSecure = $iParams->def('secure', 0);
+               //$iParams = $this->createParameterObject($v->jparams);
+               //$iSecure = $iParams->def('secure', 0);
                if ($v->home == 1) {
                    $v->url = JURI::base();
                } elseif (strcasecmp(substr($v->url, 0, 4), 'http') && (strpos($v->link, 'index.php?') !== false)) {
@@ -210,7 +210,7 @@ class ExposeBaseMenu extends JObject{
                }
                //calculate menu column
                if (!isset($v->clssfx)) {
-                   $v->clssfx = $iParams->get('pageclass_sfx', '');
+                   $v->clssfx = $megaparams->get('pageclass_sfx', '');
                    if ($v->megaparams->get('cols')) {
                        $v->cols = $v->megaparams->get('cols');
                        $v->col = array();
@@ -317,7 +317,7 @@ class ExposeBaseMenu extends JObject{
         }
 
         $date = JFactory::getDate();
-        $now = $date->toMySQL();
+        $now = $date->toSql();
         $nullDate = $db->getNullDate();
         $query->where('(m.publish_up = '.$db->Quote($nullDate).' OR m.publish_up <= '.$db->Quote($now).')');
         $query->where('(m.publish_down = '.$db->Quote($nullDate).' OR m.publish_down >= '.$db->Quote($now).')');
@@ -431,7 +431,7 @@ class ExposeBaseMenu extends JObject{
        $Itemid = $this->Itemid;
        $app = JFactory::getApplication();
        $user = JFactory::getUser();
-       $groups = implode(',', $user->authorisedLevels());
+       $groups = implode(',', JUser::getAuthorisedViewLevels());
        $db = JFactory::getDbo();
 
        //$query = new JDatabaseQuery;
@@ -442,8 +442,8 @@ class ExposeBaseMenu extends JObject{
        $query->where('m.published = 1');
        $query->where('m.id = ' . $id);
 
-       $date = JFactory::getDate();
-       $now = $date->toMySQL();
+       $date = JFactory::getDate('now');
+       $now = $date->toSql();
        $nullDate = $db->getNullDate();
        $query->where('(m.publish_up = ' . $db->Quote($nullDate) . ' OR m.publish_up <= ' . $db->Quote($now) . ')');
        $query->where('(m.publish_down = ' . $db->Quote($nullDate) . ' OR m.publish_down >= ' . $db->Quote($now) . ')');
