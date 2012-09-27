@@ -12,13 +12,20 @@ jQuery.noConflict();
 
 jQuery(document).ready(function($){
 
+    var joomla3 = 0;
+
     //create basic html skeleton for admin
     var skeleton = '<div id="expose-wrapper" class="clearfix"><div class="expose-tab-wrapper clearfix"><div class="expose-tab"><ul></ul></div><div class="expose-tab-content"></div></div></div>';
 
     $('#element-box form.form-validate').append(skeleton);
 
     //Joomla 3 compatibility fix
-    $('#style-form fieldset').prepend(skeleton);
+    if( $('#content').length > 0 )
+    {
+        joomla3 = 1;
+
+        $('#style-form fieldset').prepend(skeleton);
+    }
 
     //Mission Control admin template bug fix
     $('#mc-component form.form-validate').append(skeleton);
@@ -40,7 +47,9 @@ jQuery(document).ready(function($){
         //$(this).remove();
 
         //Joomla 3 compatibility fix
-        obj.closest('.accordion-group').find('.accordion-inner').removeClass().addClass(function(){
+        if( joomla3 )
+        {
+            obj.closest('.accordion-group').find('.accordion-inner').removeClass().addClass(function(){
 
             if(title == 'assignments'){
                 $(this).empty();
@@ -48,7 +57,9 @@ jQuery(document).ready(function($){
 
             return 'panel ' + title + ' clearfix';
 
-        }).appendTo('.expose-tab-content');
+            }).appendTo('.expose-tab-content');    
+        }
+        
     });
 
     //finally remove the parent div of all accordion
@@ -80,7 +91,7 @@ jQuery(document).ready(function($){
     $('span.mod-desc').appendTo('#expose-wrapper');
 
     //Joomla 3 compatibility fix
-    if($('#content').find('#style-form'))
+    if( joomla3 )
     {
         $('.remove-lbl').each(function(){
             //cache its contents
@@ -121,17 +132,21 @@ jQuery(document).ready(function($){
     });*/
 
     //Joomla 3 compatibility fix
-    $('#assignment').appendTo('.expose-tab-content .assignments');
-    //remove template details
-    $('#details').prependTo('.template-info').removeClass();
-    $('#details .control-group').each(function(index,val){
-        // Only show: Template name and Language dropdown
-        if(index ==0 || index == 3){
-            $(this).show();
-        }else {
-            $(this).hide();
-        }
-    });
+    if( joomla3 )
+    {
+        $('#assignment').appendTo('.expose-tab-content .assignments');
+        //remove template details
+        $('#details').prependTo('.template-info').removeClass();
+        $('#details .control-group').each(function(index,val){
+            // Only show: Template name and Language dropdown
+            if(index ==0 || index == 3){
+                $(this).show();
+            }else {
+                $(this).hide();
+            }
+        });    
+    }
+    
     //hide joomla3 tab and content
     $('#style-form').find('.nav, .tab-content').remove();
 
@@ -144,11 +159,11 @@ jQuery(document).ready(function($){
 
     $("p[rel]").overlay({
         mask: {
-		color: '#000',
-		loadSpeed: 200,
-		opacity: 0.5
+        color: '#000',
+        loadSpeed: 200,
+        opacity: 0.5
 
-	    }
+        }
     });
 
     //Beautify select dorpdown.
