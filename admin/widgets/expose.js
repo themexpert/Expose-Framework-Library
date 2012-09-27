@@ -12,17 +12,27 @@ jQuery.noConflict();
 
 jQuery(document).ready(function($){
 
+    var joomla3 = 0;
+
     //create basic html skeleton for admin
     var skeleton = '<div id="expose-wrapper" class="clearfix"><div class="expose-tab-wrapper clearfix"><div class="expose-tab"><ul></ul></div><div class="expose-tab-content"></div></div></div>';
 
     $('#element-box form.form-validate').append(skeleton);
+
+    //Joomla 3 compatibility fix
+    if( $('#content').length > 0 )
+    {
+        joomla3 = 1;
+
+        $('#style-form fieldset').prepend(skeleton);
+    }
 
     //Mission Control admin template bug fix
     $('#mc-component form.form-validate').append(skeleton);
 
 
     //loop through all h3 element and convert them to expose tab
-    $('h3.title').each(function(){
+    $('h3.title , .accordion-heading a').each(function(){
         //lets cache some vaue
         var obj = $(this);
         var title = $(this).text(); // this title will use as class name
@@ -35,6 +45,21 @@ jQuery(document).ready(function($){
             return 'panel ' + title + ' clearfix';
         }).appendTo('.expose-tab-content');
         //$(this).remove();
+
+        //Joomla 3 compatibility fix
+        if( joomla3 )
+        {
+            obj.closest('.accordion-group').find('.accordion-inner').removeClass().addClass(function(){
+
+            if(title == 'assignments'){
+                $(this).empty();
+            }
+
+            return 'panel ' + title + ' clearfix';
+
+            }).appendTo('.expose-tab-content');    
+        }
+        
     });
 
     //finally remove the parent div of all accordion
@@ -65,18 +90,39 @@ jQuery(document).ready(function($){
     //now move the template description to expose-wrapper
     $('span.mod-desc').appendTo('#expose-wrapper');
 
-    $('.remove-lbl').each(function(){
-        //cache its contents
-        var content = $(this);
-        //remove the immediate before label;
-        $(this).prev().remove();
+    //Joomla 3 compatibility fix
+    if( joomla3 )
+    {
+        $('.remove-lbl').each(function(){
+            //cache its contents
+            var content = $(this);
+            //remove label div
+            $(this).closest('.control-group').find('.control-label').remove();
+            $(this).closest('.control-group').replaceWith(content);
 
-        $(this).parent().replaceWith(content);
-        //take its previous li node
-        var prevli = $(this).prev();
-        //now append to it
-        $(this).appendTo(prevli);
-    });
+            //take its previous li node
+            var prevli = $(this).prev().find('.controls');
+            //now append to it
+            $(this).appendTo(prevli);
+        });
+        //hide utility row
+        $('#jform_params_utility_func-lbl').closest('.control-group').remove();
+        $('.overview').find('.control-label').remove();
+
+    }else{
+        $('.remove-lbl').each(function(){
+            //cache its contents
+            var content = $(this);
+            //remove the immediate before label;
+            $(this).prev().remove();
+
+            $(this).parent().replaceWith(content);
+            //take its previous li node
+            var prevli = $(this).prev();
+            //now append to it
+            $(this).appendTo(prevli);
+        });
+    }
 
     $('<div class="clear"></div>').appendTo('.panel li');
     $('<span class="tips"></span>').appendTo('.expose-tab-wrapper label');
@@ -85,7 +131,24 @@ jQuery(document).ready(function($){
         $(this).parent().parent().addClass('highlight');
     });*/
 
-
+    //Joomla 3 compatibility fix
+    if( joomla3 )
+    {
+        $('#assignment').appendTo('.expose-tab-content .assignments');
+        //remove template details
+        $('#details').prependTo('.template-info').removeClass();
+        $('#details .control-group').each(function(index,val){
+            // Only show: Template name and Language dropdown
+            if(index ==0 || index == 3){
+                $(this).show();
+            }else {
+                $(this).hide();
+            }
+        });    
+    }
+    
+    //hide joomla3 tab and content
+    $('#style-form').find('.nav, .tab-content').remove();
 
     $(".toggle").exposeToggle();
     $('.toggleContainer').bind('iPhoneDragEnd',function(){
@@ -94,14 +157,13 @@ jQuery(document).ready(function($){
         });
     });
 
-
     $("p[rel]").overlay({
         mask: {
-		color: '#000',
-		loadSpeed: 200,
-		opacity: 0.5
+        color: '#000',
+        loadSpeed: 200,
+        opacity: 0.5
 
-	    }
+        }
     });
 
     //Beautify select dorpdown.

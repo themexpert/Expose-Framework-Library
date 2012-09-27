@@ -13,6 +13,7 @@
 defined('_JEXEC') or die( 'Restricted access' );
 
 jimport('joomla.html.html');
+jimport('joomla.html.date');
 jimport('joomla.form.formfield');
 
 
@@ -78,8 +79,9 @@ class JFormFieldDateFormates extends JFormField{
                 if ($option->getName() != 'option') {
                         continue;
                 }
-                $now = &JFactory::getDate();
-                $value = $now->toFormat($option['value']);
+                $now = JFactory::getDate('now');
+
+                $value = JHtml::_('date', $now, $option['value']);
 
                 // Create a new option object based on the <option /> element.
                 $tmp = JHtml::_('select.option', $option['value'] , (string) $value,  'value', 'text', ((string) $option['disabled']=='true'));

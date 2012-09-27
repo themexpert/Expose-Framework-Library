@@ -145,8 +145,15 @@ class ExposeCore{
     {
         if($this->isAdmin()) return;
 
-        $files = array('joomla.css');
-        $this->addLink($files,'css',1);
+        if($this->platform == 'desktop')
+        {
+            $files = array('expose.css','joomla.css');
+            $this->addLink($files,'css',1);
+        }else{
+            $browser = strtolower($this->browser->getBrowser());
+            $file = 'expose-'.$browser.'.css';
+            $this->addLink($file,'css',1);
+        }
 
         //load preset style
         $this->loadPresetStyle();
@@ -359,9 +366,9 @@ class ExposeCore{
     {
         //come form admin? just add jquery without asking any question because jquery is heart of
         //expose admin
-        if($this->isAdmin() AND !$this->app->get('jQuery')){
-            $file = 'jquery-1.7.2.min.js';
-            $this->app->set('jQuery','1.7.2');
+        if($this->isAdmin()){
+            $file = 'jquery-1.7.1.min.js';
+            //$this->app->set('jQuery','1.7.1');
             $this->addLink($file,'js',1);
             return;
         }
@@ -369,7 +376,7 @@ class ExposeCore{
         //we will not load jquery on mobile device
         if($this->platform == 'mobile') return;
         
-        if($this->get('jquery-enabled') AND !$this->app->get('jQuery')){
+        if($this->get('jquery-enabled')){
             $version = $this->get('jquery-version');
             //get the cdn
             $cdn = $this->get('jquery-source');
@@ -381,7 +388,7 @@ class ExposeCore{
                     $file = 'jquery-'.$version.'.min.js';
                     break;
             }
-            $this->app->set('jQuery',$version);
+            //$this->app->set('jQuery',$version);
             $this->addLink($file,'js',1);
         }
         return;
@@ -413,10 +420,20 @@ class ExposeCore{
         $css = '';
         $prefix = $this->getPrefix();
 
+        $layoutType = (isset ($_COOKIE[$this->templateName.'_layoutsType'])) ? $_COOKIE[$this->templateName.'_layoutsType'] : $this->get('layouts-type','fixed');
+
         if(isset ($_REQUEST['layoutsType']))
         {
             setcookie($this->templateName.'_layoutsType',$_REQUEST['layoutsType'],time()+3600,'/');
             $layoutType = $_REQUEST['layoutsType'];
+        }
+
+        if($layoutType == 'fixed' AND $this->platform != 'mobile')
+        {
+
+            $width   = $this->get('template-width','980').'px';
+            $css    .= "\t.{$prefix}row, .{$prefix}wrapper{width: $width}";
+
         }
 
         if( ($this->get('custom-css') != NULL))
@@ -460,32 +477,28 @@ class ExposeCore{
             echo '<jdoc:include type="head" />';
             echo "<link rel=\"apple-touch-icon-precomposed\" href=". $this->templateUrl. '/images/apple_touch_icon.png' ." />";
 
-            if( $this->isResponsive() )
-            {
-                $this->document->setMetaData('viewport','width=device-width, initial-scale=1.0');
-            }
-
+            $this->document->setMetaData('viewport','width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1');
         }
     }
 
     public function generateBodyClass()
     {
-        $itemid         = JRequest::getVar('Itemid');
-        $menu           = $this->app->getMenu();
-        $active         = $menu->getItem($itemid);
-        $params         = $menu->getParams( $active->id );
-        $class          = NULL;
-        $component      = str_replace('_','-', JRequest::getCmd('option'));
-        $view           = JRequest::getCmd('view');
+        $menu = $this->app->getMenu();
+        $active = $menu->getActive();
+        $class  = NULL;
+        $component = str_replace('_','-', JRequest::getCmd('option'));
+        $view = JRequest::getCmd('view');
+        $class .= ($this->get('style') == '-1') ? 'style-none' : $this->get('style');
+        $class .= ' align-'.$this->direction;
+        $class .= ' page-id-'. (isset($active) ? $active->id : $menu->getDefault()->id);
+        $class .= ' '.$component . '-' . $view;
 
-        $class         .= ($this->get('style') == '-1') ? 'style-none' : $this->get('style');
-        $class         .= ' align-'.$this->direction;
-        $class         .= ' page-id-'. (isset($active) ? $active->id : $menu->getDefault()->id);
-        $class         .= ' ' . $component . '-' . $view;
+        $class .= (isset ($_COOKIE[$this->templateName.'_layouts'])) ? ' '.$_COOKIE[$this->templateName.'_layouts'] : ' '.$this->get('layouts');
 
-        $class         .= ' ' . strtolower($this->browser->getBrowser());
-        $class         .= ($this->displayComponent()) ? '' : ' com-disabled';
-        $class         .= ' ' . $params->get( 'pageclass_sfx' );
+        $class .= (isset ($_COOKIE[$this->templateName.'_layoutsType'])) ? ' layout-'.$_COOKIE[$this->templateName.'_layoutsType'] : ' layout-'.$this->get('layouts-type');
+
+        $class .= ' ' . strtolower($this->browser->getBrowser());
+        $class .= ($this->displayComponent()) ? '' : ' com-disabled';
 
         return 'class="'.$class.'"';
     }
@@ -521,12 +534,7 @@ class ExposeCore{
             return TRUE;
         }
     }
-    /*
-     * Get sidebar width for % values
-     *
-     * @since       @3.0
-     * @deprecated  @4.5
-     **/
+
     public function getSidebarsWidth($position)
     {
         $width = array();
@@ -538,35 +546,35 @@ class ExposeCore{
 
     public function getComponentWidth()
     {
-        $grids = array();
+        $widths = array();
         $layout = ExposeLayout::getInstance();
-        $grids['a'] = 0;
-        $grids['b'] = 0;
-        $grids['component'] = 0;
+        $widths['a'] = 0;
+        $widths['b'] = 0;
+        $widths['component'] = 0;
 
         if($layout->countModulesForPosition('sidebar-a') OR $layout->countWidgetsForPosition('sidebar-a'))
         {
             $width = explode(':',$this->get('sidebar-a'));
-            $grids['a'] = $width[1];
+            $widths['a'] = $width[1];
 
         }
 
         if($layout->countModulesForPosition('sidebar-b') OR $layout->countWidgetsForPosition('sidebar-b'))
         {
             $width = explode(':',$this->get('sidebar-b'));
-            $grids['b'] = $width[1];
+            $widths['b'] = $width[1];
         }
 
-        $mainBodyWidth = 12 - ($grids['a'] + $grids['b']);
+        $mainBodyWidth = 100 - ($widths['a'] + $widths['b']);
 
         if($this->isEditpage())
         {
-            $mainBodyWidth = 12;
+            $mainBodyWidth = 100;
         }
 
         $width['component']= $mainBodyWidth;
-        $width['sidebar-a'] = $grids['a'];
-        $width['sidebar-b'] = $grids['b'];
+        $width['sidebar-a'] = $widths['a'];
+        $width['sidebar-b'] = $widths['b'];
 
         return $width;
 
@@ -578,21 +586,10 @@ class ExposeCore{
         return $layout->countModules($position);
     }
 
-    public function renderModules($position, $inset=FALSE)
+    public function renderModules($position)
     {
         $layout = ExposeLayout::getInstance();
-        //check for the inset module position, used in content-top/bottom
-        if($inset)
-        {
-            //Get the component grid
-            $com = $this->getComponentWidth();
-            $grid = $com['component'];
-
-            $layout->renderModules($position, TRUE, $grid);
-        }else{
-            $layout->renderModules($position);
-        }
-
+        $layout->renderModules($position);
     }
 
     public function renderBody()
@@ -620,11 +617,6 @@ class ExposeCore{
             $this->platform = 'desktop';
         }
 
-    }
-
-    public function isResponsive()
-    {
-        return $this->get('responsive-enabled',1);
     }
 
     public function isEditpage()

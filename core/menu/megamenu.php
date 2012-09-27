@@ -28,7 +28,7 @@ if (!defined ('_EXPOSE_MEGA_MENU')) {
         {
             $params->set('megamenu', 1);
             parent::__construct($params);
-            if (!$this->getParam('menuname')) $this->setParam('menuname', 'megamenu');
+            if (!$this->getParam('menuname')) $this->setParam('menuname', 'ex-megamenu');
 
         }
 
@@ -42,7 +42,7 @@ if (!defined ('_EXPOSE_MEGA_MENU')) {
          */
         function beginMenu($startlevel = 0, $endlevel = 10)
         {
-            echo "<div class=\"megamenu clearfix\" id=\"" . $this->getParam('menuname') . "\">\n";
+            echo "<div class=\"ex-megamenu clearfix\" id=\"" . $this->getParam('menuname') . "\">\n";
         }
 
         /**
@@ -242,7 +242,7 @@ if (!defined ('_EXPOSE_MEGA_MENU')) {
          */
         function genClass($mitem, $level, $pos)
         {
-            $iParams = new JParameter($mitem->params);
+            $iParams = new JForm($mitem->params);
             $cls = "mega" . ($pos ? " $pos" : "");
             if($level == NULL) $level = 0;
             $cls .= ' level-'.$level;
