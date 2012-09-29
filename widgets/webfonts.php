@@ -2,7 +2,7 @@
 /**
  *
  * @package     Expose
- * @version     3.0.2
+ * @version     3.0.3
  * @author      ThemeXpert http://www.themexpert.com
  * @copyright   Copyright (C) 2010 - 2011 ThemeXpert
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
