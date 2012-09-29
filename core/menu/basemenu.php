@@ -201,13 +201,16 @@ class ExposeBaseMenu extends JObject{
                // Handle SSL links
                //$iParams = $this->createParameterObject($v->jparams);
                //$iSecure = $iParams->def('secure', 0);
-               if ($v->home == 1) {
+               /*if ($v->home == 1) {
                    $v->url = JURI::base();
                } elseif (strcasecmp(substr($v->url, 0, 4), 'http') && (strpos($v->link, 'index.php?') !== false)) {
                    $v->url = JRoute::_($v->url, true, $iSecure);
                } else {
                    $v->url = str_replace('&', '&amp;', $v->url);
-               }
+               }*/
+
+               if ($v->home == 1) $v->url = JURI::base();
+
                //calculate menu column
                if (!isset($v->clssfx)) {
                    $v->clssfx = $megaparams->get('pageclass_sfx', '');
