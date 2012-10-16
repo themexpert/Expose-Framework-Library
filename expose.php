@@ -37,13 +37,12 @@ if(!defined('EXPOSE_VERSION'))
     //define directory separator
     defined('DS') or define('DS', '/');
 
-    /*//Expose base path will depend on Joomla version
-    if(version_compare(JVERSION, '1.5', '>=') && version_compare(JVERSION, '1.7', '<')){
-        //define joomla version for further use
-        define('EXPOSE_JVERSION','15');
+    if ( version_compare(JVERSION, '2.5', 'ge') && version_compare(JVERSION, '3.0', 'lt') )
+    {
+        define('EXPOSE_JVERSION', '25');
     }else{
-        define('EXPOSE_JVERSION','17');
-    }*/
+        define('EXPOSE_JVERSION', '30');
+    }
 
     //declare global ver
     global $expose;

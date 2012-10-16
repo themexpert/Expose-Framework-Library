@@ -360,30 +360,44 @@ class ExposeCore{
         //come form admin? just add jquery without asking any question because jquery is heart of
         //expose admin
         if($this->isAdmin()){
+
             $file = 'jquery-1.7.2.min.js';
-            //$this->app->set('jQuery','1.7.2');
             $this->addLink($file,'js',1);
+
             return;
         }
 
         //we will not load jquery on mobile device
         //if($this->platform == 'mobile') return;
-        
-        if($this->get('jquery-enabled')){
-            $version = $this->get('jquery-version');
-            //get the cdn
-            $cdn = $this->get('jquery-source');
-            switch ($cdn){
-                case 'google-cdn':
-                    $file = 'https://ajax.googleapis.com/ajax/libs/jquery/'.$version.'/jquery.min.js';
-                    break;
-                case 'local':
-                    $file = 'jquery-'.$version.'.min.js';
-                    break;
+        $version = $this->get('jquery-version');
+        $cdn = $this->get('jquery-source');
+        $file = 'https://ajax.googleapis.com/ajax/libs/jquery/'.$version.'/jquery.min.js';
+
+        if( $this->get('jquery-enabled') ){
+
+            if( EXPOSE_JVERSION == '25')
+            {
+                if( !$this->app->get('jQuery') )
+                {
+                    if( $cdn == 'local')
+                    {
+                        $file = 'jquery-'.$version.'.min.js';
+                    }
+
+                    $this->app->set('jQuery',$version);
+
+                }
+                $this->addLink($file,'js',1);
+            }else{
+                if( $cdn = 'google-cdn')
+                {
+                    $this->addLink($file,'js',1);
+                }else{
+                    JHtml::_('jquery.framework');
+                }
             }
-            //$this->app->set('jQuery',$version);
-            $this->addLink($file,'js',1);
         }
+        
         return;
     }
 
