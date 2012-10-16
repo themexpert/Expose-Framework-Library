@@ -483,18 +483,29 @@ class ExposeCore{
 
     public function generateBodyClass()
     {
-        $itemid         = JRequest::getVar('Itemid');
+        $url            = JURI::getInstance();
+        $itemid         = $url->getVar('Itemid');
         $menu           = $this->app->getMenu();
         $active         = $menu->getItem($itemid);
         $params         = $menu->getParams( $active->id );
         $class          = NULL;
-        $component      = str_replace('_','-', JRequest::getCmd('option'));
-        $view           = JRequest::getCmd('view');
+
+
 
         $class         .= ($this->get('style') == '-1') ? 'style-none' : $this->get('style');
         $class         .= ' align-'.$this->direction;
         $class         .= ' page-id-'. (isset($active) ? $active->id : $menu->getDefault()->id);
-        $class         .= ' ' . $component . '-' . $view;
+
+        //Add class of homepage if it's home
+        if ($menu->getActive() == $menu->getDefault())
+        {
+            $class     .= ' homepage ';
+        }else{
+            $view       = $url->getVar('view');
+            $component      = str_replace('_','-', $url->getVar('option'));
+            $class     .= ' ' . $component . '-' . $view;
+        }
+
 
         $class         .= ' ' . strtolower($this->browser->getBrowser());
         $class         .= ($this->displayComponent()) ? '' : ' com-disabled';
