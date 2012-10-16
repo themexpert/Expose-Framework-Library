@@ -35,7 +35,7 @@ if(!defined('EXPOSE_VERSION'))
     define('EXPOSE_VERSION', '4.0');
 
     //define directory separator
-    defined('DS') or define('DS', DIRECTORY_SEPARATOR);
+    defined('DS') or define('DS', '/');
 
     /*//Expose base path will depend on Joomla version
     if(version_compare(JVERSION, '1.5', '>=') && version_compare(JVERSION, '1.7', '<')){
@@ -49,7 +49,7 @@ if(!defined('EXPOSE_VERSION'))
     global $expose;
 
     expose_import('core.core');
-    $expose =& ExposeCore::getInstance();
+    $expose = ExposeCore::getInstance();
 
 }
 
@@ -64,8 +64,8 @@ if(!defined('EXPOSE_VERSION'))
 */
 
 function expose_import($paths){
-    $paths = str_replace('.', DS, $paths);
-    $file = realpath(dirname(__FILE__)).DS.$paths.'.php';
+    $paths = str_replace('.', '/', $paths);
+    $file = realpath(dirname(__FILE__)) . '/' . $paths . '.php';
     if(file_exists($file))    include_once ($file);
 }
 

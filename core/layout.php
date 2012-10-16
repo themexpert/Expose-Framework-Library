@@ -314,8 +314,8 @@ class ExposeLayout
         global $expose;
         //define widgets paths
         $widgetPaths = array(
-            $expose->exposePath . DS . 'widgets',
-            $expose->templatePath . DS .'widgets'
+            $expose->exposePath . '/' . 'widgets',
+            $expose->templatePath .'/' .'widgets'
         );
         $widgetLists = array();
 

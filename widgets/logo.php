@@ -21,7 +21,7 @@ class ExposeWidgetLogo extends ExposeWidget{
     {
         global $expose;
 
-        $menu = JSite::getMenu();
+        $menu = $expose->app->getMenu();
 
         // Checking to see if new logo was uploaded. If so then use that. If not then use logo.png within the template image folder.
         if ( $this->get('image') ) {

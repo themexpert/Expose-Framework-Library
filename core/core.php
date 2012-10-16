@@ -44,10 +44,10 @@ class ExposeCore{
 
     public function __construct(){
         //get the document object
-        $this->document =& JFactory::getDocument();
+        $this->document = JFactory::getDocument();
 
         //get the application object
-        $this->app =& JFactory::getApplication();
+        $this->app = JFactory::getApplication();
 
         //set the baseurl
         $this->baseUrl = JURI::root(true);
@@ -56,7 +56,7 @@ class ExposeCore{
         $this->basePath = JPATH_ROOT;
 
         $this->exposeUrl = $this->baseUrl . '/libraries/expose';
-        $this->exposePath = $this->basePath . DS . 'libraries' . DS . 'expose';
+        $this->exposePath = $this->basePath . '/' . 'libraries' . '/' . 'expose';
 
         //get the current template name
         $this->templateName = $this->getActiveTemplate();
@@ -65,7 +65,7 @@ class ExposeCore{
         $this->templateUrl = $this->baseUrl . '/templates/'. $this->templateName;
 
         //template path
-        $this->templatePath = $this->basePath . DS . 'templates'. DS . $this->templateName ;
+        $this->templatePath = $this->basePath . '/' . 'templates'. '/' . $this->templateName ;
 
         //set document direction
         $this->direction = $this->getDirection();
@@ -307,12 +307,12 @@ class ExposeCore{
 
     private function getFilePath($url)
     {
-        $uri        =& JURI::getInstance();
+        $uri        = JURI::getInstance();
         $base       = $uri->toString( array('scheme', 'host', 'port'));
         $path       = JURI::Root(true);
         if ($url && $base && strpos($url,$base)!==false) $url = preg_replace('|^'.$base.'|',"",$url);
         if ($url && $path && strpos($url,$path)!==false) $url = preg_replace('|^'.$path.'|',"",$url);
-        if (substr($url,0,1) != DS) $url = DS.$url;
+        if (substr($url,0,1) != '/') $url = '/'.$url;
         $filepath = JPATH_SITE.$url;
         return $filepath;
 

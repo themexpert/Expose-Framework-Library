@@ -22,7 +22,7 @@ class JFormFieldUtility extends JFormField{
     protected function getInput(){
 
         //load expose bootstrap
-        require_once (JPATH_LIBRARIES.DS.'expose'.DS.'expose.php');
+        require_once (JPATH_LIBRARIES.'/expose/expose.php');
 
         global $expose;
         // Initialize some field attributes.
