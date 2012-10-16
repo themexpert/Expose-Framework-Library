@@ -21,7 +21,8 @@ img::-moz-selection	{background: transparent;}
 /* More advance*/
 .clearfix:after {clear: both;content: ' ';display: block;font-size: 0;line-height: 0; visibility: hidden;width: 0;height: 0;}
 html[xmlns] .clearfix {display: block;height: 1%;}
-
+/*Auto image resize*/
+.auto-size{max-width: 100%;height: auto}
 /* Joomla Default admin override
 -----------------------------------------------*/
 /*div#element-box {background: url(images/wrap-bg.jpg) repeat center top  #f1f1f1 !important;}*/
@@ -280,7 +281,7 @@ span.pre-text{
 .overview-panel-left .overview-inner{ margin: 25px 15px; }
 .overview-panel-right .overview-inner{ margin: 25px 15px 25px 0;}
 
-.overview-panel-left .overview-inner img { float: left; margin-right: 20px !important; }
+.overview-panel-left .overview-inner img { float: left; margin-right: 20px !important; border: 2px solid #eee; }
 .overview-panel-left .overview-inner h3{margin: 32px 0 5px 0; font-size: 16px;line-height: 24px}
 .overview-panel-left .overview-inner ul{}
 .overview-panel-left .overview-inner ul li{float: left; list-style: square inside;width: 48%}
@@ -334,7 +335,8 @@ span.pre-text{
     border: 3px solid #fff;
     box-shadow: 0 0 4px #eee;
 }
-
+.version-info{ font-size: 14px; font-weight: bold; margin-bottom: 5px; color: #676767;}
+.version-info span{ color: #222;}
 /*Joomla 3 fix*/
 .overview .controls{ margin-left: 0 !important;}
 #details label { min-width: 66px !important; padding-right: 0 !important;}

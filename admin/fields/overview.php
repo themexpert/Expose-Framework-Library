@@ -25,9 +25,22 @@ class JFormFieldOverview extends JFormField{
         // Initialize some field attributes.
         $action     = $this->element['action'];
         $class		= (string) $this->element['class'];
+        $uri = JURI::getInstance();
+        $id = $uri->getVar('id');
+
         $html = '';
 
-        $html .= "<div class='overview-panel-left'>";
+        //overview override path
+        $templatePath   = JPATH_ROOT . '/templates/'. getTemplate($id);
+        $templateUrl    = JURI::root(true) . '/templates/'. getTemplate($id);
+
+        if( JFile::exists( $templatePath . '/overview.php' ) )
+        {
+            include_once ( $templatePath . '/overview.php' ) ;
+
+        }else{
+
+            $html .= "<div class='overview-panel-left'>";
             $html .= "<div class='overview-inner gradient3 clearfix'>";
                 $html .= "<img src='". $expose->baseUrl. '/templates/' . $this->getCurrentTemplate()."/template_thumbnail.png' width='275px' height='250px' alt='".$expose->templateName."_preview' />";
                 $html .= JText::_('EXPOSE_DESCRIPTION');
@@ -52,26 +65,9 @@ class JFormFieldOverview extends JFormField{
                 $html .= "</div>";
             $html .= "</div>";
         $html .= "</div>";
-
-
-
+        }
 
         return $html;
-    }
-    private function getCurrentTemplate()
-    {
-       //get template name from template id
-       $id = JRequest::getInt('id');
-
-       $db = JFactory::getDbo();
-       $query = $db->getQuery(true);
-       $query->select('template');
-       $query->from('#__template_styles');
-       $query->where("id=$id");
-       $db->setQuery($query);
-       $result = $db->loadObject();
-
-       return $result->template;
     }
 }
 

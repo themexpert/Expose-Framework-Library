@@ -397,7 +397,7 @@ class ExposeCore{
                 }
             }
         }
-        
+
         return;
     }
 
