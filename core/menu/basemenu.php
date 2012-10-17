@@ -434,7 +434,7 @@ class ExposeBaseMenu extends JObject{
        $Itemid = $this->Itemid;
        $app = JFactory::getApplication();
        $user = JFactory::getUser();
-       $groups = implode(',', JUser::getAuthorisedViewLevels());
+       $groups = implode(',', $user->getAuthorisedViewLevels());
        $db = JFactory::getDbo();
 
        //$query = new JDatabaseQuery;

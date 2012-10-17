@@ -486,7 +486,7 @@ class ExposeCore{
         $url            = JURI::getInstance();
         $itemid         = $url->getVar('Itemid');
         $menu           = $this->app->getMenu();
-        $active         = $menu->getItem($itemid);
+        $active         = $menu->getActive();
         $params         = $menu->getParams( $active->id );
         $class          = NULL;
 
