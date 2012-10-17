@@ -11,6 +11,9 @@
 //prevent direct access
 defined ('EXPOSE_VERSION') or die ('resticted aceess');
 
+//Import Module chrome generator class
+expose_import('core.html');
+
 //import joomla filesystem classes
 jimport('joomla.filesystem.folder');
 jimport('joomla.filesystem.file');
@@ -106,19 +109,26 @@ class ExposeLayout
 
             foreach($this->getActiveModuleLists($position) as $positionName)
             {
-                //$totalModulesInPosition = $this->countModulesForPosition( $positionName );
+                //get the total published module/widget number for assigned position
+                $totalModulesInPosition = $this->countModulesForPosition( $positionName );
+                $totalWidgetsInPosition = $this->countWidgetsForPosition( $positionName );
+
+                //get the grid number from grids array
                 $grid = array_shift($grids);
+
                 $class = '';
                 $html = '';
 
+                //Set the class first and last
                 if($i == 1) $class .= 'first ';
 
                 if($i == $totalPublished){
                     $class .= 'last ';
                 }
-
+                //Odd even class
                 $class .= ($i%2) ? 'odd' : 'even';
-                //if($i == ($totalPublished -1)) $class .= ' ie6-offset';
+                //set the grid class eg: grid6
+                $grid = $containerClass . $grid;
 
                 //we'll load all widgets first published in this position
                 if($this->countWidgetsForPosition($positionName))
@@ -126,22 +136,52 @@ class ExposeLayout
                     foreach($this->activeWidgets[$positionName] as $widget)
                     {
                         $name = 'widget-' . $widget->name;
-                        $html .= "<div class=\"block widget $name no-title clearfix \">";
-                            $html .= "<div class=\"content\">";
-                                $html .= $widget->render();
-                            $html .= "</div>";
-                        $html .= "</div>";
-
+                        //get the widget content
+                        $content = $widget->render();
+                        // get widget specific html
+                        $html .= ExposeHtml::widget($name, $content);
                     }
                 }
 
-                $modWrapperStart = "<div class=\"$containerClass$grid column $class $positionName\">";
-                $modWrapperEnd = "</div>";
+                //if there is more then 1 module published we'll assign a identifier class
+                if ( ( $totalModulesInPosition + $totalWidgetsInPosition ) > 1 )
+                {
+                    $class .= ' multi-module-column';
+                }
 
                 //now load modules content
-                $chrome = $this->getModuleChrome($position,$positionName);
+                $chrome = $this->getModuleChrome($position, $positionName);
 
-                $html .= '<jdoc:include type="modules" name="'.$positionName.'" style="'.$chrome.'" />';
+                $modWrapperStart = "<div class=\"$grid column $class $positionName\">";
+                $modWrapperEnd = "</div>";
+
+
+
+                switch ( $chrome ) {
+
+                    case 'tabs':
+
+                        $html .= ExposeHtml::tabs($positionName);
+                        break;
+
+                    case 'accordion':
+
+                        $html .= ExposeHtml::accordion($positionName);
+                        break;
+
+                    case 'basic':
+
+                        $html .= ExposeHtml::basic($positionName);
+                        break;
+
+                    default :
+
+                        $html .= ExposeHtml::standard($positionName);
+                        break;
+                }
+
+                //$html .= '<jdoc:include type="modules" name="'.$positionName.'" style="'.$chrome.'" />';
+                //$html   .= '<jdoc:include type="modules" name="'.$positionName.'" style="'.$chrome.'" class="'.$class.'" positionName="'.$positionName.'" />';
 
                 echo $modWrapperStart . $html . $modWrapperEnd;
 
