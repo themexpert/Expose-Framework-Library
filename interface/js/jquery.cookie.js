@@ -6,36 +6,4 @@
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl.html
  *
- */
-jQuery.cookie = function (key, value, options) {
-
-    // key and at least value given, set cookie...
-    if (arguments.length > 1 && String(value) !== "[object Object]") {
-        options = jQuery.extend({}, options);
-
-        if (value === null || value === undefined) {
-            options.expires = -1;
-        }
-
-        if (typeof options.expires === 'number') {
-            var days = options.expires, t = options.expires = new Date();
-            t.setDate(t.getDate() + days);
-        }
-
-        value = String(value);
-
-        return (document.cookie = [
-            encodeURIComponent(key), '=',
-            options.raw ? value : encodeURIComponent(value),
-            options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
-            options.path ? '; path=' + options.path : '',
-            options.domain ? '; domain=' + options.domain : '',
-            options.secure ? '; secure' : ''
-        ].join(''));
-    }
-
-    // key and possibly options given, get cookie...
-    options = value || {};
-    var result, decode = options.raw ? function (s) { return s; } : decodeURIComponent;
-    return (result = new RegExp('(?:^|; )' + encodeURIComponent(key) + '=([^;]*)').exec(document.cookie)) ? decode(result[1]) : null;
-};
+ */jQuery.cookie=function(e,t,n){if(arguments.length>1&&String(t)!=="[object Object]"){n=jQuery.extend({},n);if(t===null||t===undefined)n.expires=-1;if(typeof n.expires=="number"){var r=n.expires,i=n.expires=new Date;i.setDate(i.getDate()+r)}t=String(t);return document.cookie=[encodeURIComponent(e),"=",n.raw?t:encodeURIComponent(t),n.expires?"; expires="+n.expires.toUTCString():"",n.path?"; path="+n.path:"",n.domain?"; domain="+n.domain:"",n.secure?"; secure":""].join("")}n=t||{};var s,o=n.raw?function(e){return e}:decodeURIComponent;return(s=(new RegExp("(?:^|; )"+encodeURIComponent(e)+"=([^;]*)")).exec(document.cookie))?o(s[1]):null};
