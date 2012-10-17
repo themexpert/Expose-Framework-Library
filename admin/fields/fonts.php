@@ -20,10 +20,16 @@ class JFormFieldFonts extends JFormField{
 
 
     protected function getInput(){
+        global $expose;
+
         $html = '';
+        $fonts = '';
         $options = array();
+
         //get template id
-        $id = JRequest::getInt('id');
+        $url = JURI::getInstance();
+        $id = $url->getVar('id');
+
         // Initialize some field attributes.
         $class = $this->element['class'];
         $selectClass = 'class="gfonts"';
@@ -44,16 +50,64 @@ class JFormFieldFonts extends JFormField{
             $this->createFontList($path);
         }
 
+        $fontsPath = JPATH_ROOT . '/templates/' . getTemplate($id). '/fonts/';
+
+        if ( JFolder::exists($fontsPath) )
+        {
+            $fontFolders = JFolder::listFolderTree($fontsPath, $filter = '', $maxLevel = 1, $level = 0, $parent = 0);
+        }
+
         $data = JFile::read($path);
         $data = explode(',', $data);
-        //add none
-        $options[] = JHtml::_('select.option', '0', JText::alt('JOPTION_DO_NOT_USE',preg_replace('/[^a-zA-Z0-9_\-]/', '_', $this->fieldname)));
 
+        //add none
+        $options[] = JHtml::_('select.option', '0', JText::alt('JOPTION_DO_NOT_USE', 'language'));
+
+        $options[] = JHtml::_('select.option', '-1', JText::alt('---------- General fonts ----------', 'language'));
+
+        $options[] = JHtml::_('select.option', 'Arial, Helvetica, sans-serif', JText::alt('Arial, Helvetica, sans-serif','language'));
+        $options[] = JHtml::_('select.option', '\'Times New Roman\', Times, serif', JText::alt('"Times New Roman", Times, serif', 'language'));
+        $options[] = JHtml::_('select.option', '"Courier New", Courier, monospace', JText::alt('"Courier New", Courier, monospace', 'language'));
+        $options[] = JHtml::_('select.option', 'Georgia,"Times New Roman", Times, serif', JText::alt('Georgia,"Times New Roman", Times, serif', 'language'));
+        $options[] = JHtml::_('select.option', 'Verdana, Arial, Helvetica, sans-serif', JText::alt('Verdana, Arial, Helvetica, sans-serif', 'language'));
+
+        // Add custom fonts in font folder as options
+        /*if ( JFolder::exists($fontsPath) )
+        {
+            foreach($fontFolders as $fontFolder){
+                $customFontName = ucwords( str_replace( "-", " ", $fontFolder['name'] ) );
+                $options[] = JHtml::_('select.option', $fontFolder['name'] . '-webfont', JText::alt($customFontName,'language'));
+
+                // Add @font-face for font preview in admin
+                $templatePath = JURI::root(true) . '/templates/' . getTemplate($id);
+                $fontFilename = $fontFolder['name'] . '-webfont';
+                $fontFamily = $fontFolder['name'];
+                $fontFamily = ucwords( str_replace( "-", " ", $fontFamily ) );
+                $fonts .= "
+                    @font-face {
+                        font-family: {$fontFamily};
+                        src: url('{$templatePath}/fonts/{$fontFolder['name']}/{$fontFilename}.eot');
+                        src: local({$fontFamily}),
+                        url('{$templatePath}/fonts/{$fontFolder['name']}/{$fontFilename}.woff') format('woff'),
+                        url('{$templatePath}/fonts/{$fontFolder['name']}/{$fontFilename}.ttf') format('truetype'),
+                        url('{$templatePath}/fonts/{$fontFolder['name']}/{$fontFilename}.svg#font')
+                    }
+                ";
+            }
+        }*/
+
+        //$expose->document->addStyleDeclaration($fonts);
+
+        // Load set parameter values to make fonts show on load
+        //$expose->document->addStyleSheet('http://fonts.googleapis.com/css?family=Abril+Fatface');
+
+        $options[] = JHtml::_('select.option', '-1', JText::alt('---------- Google fonts ----------',preg_replace('/[^a-zA-Z0-9_\-]/', '_', $this->fieldname)));
         foreach($data as $val){
             list($fontVal, $fontName) = explode('=', "$val=");
             $fontVal = str_replace(' ','+',$fontVal);
             $options[] = JHtml::_('select.option',$fontVal, $fontName);
         }
+
         //pop the last empty array
         array_pop($options);
 
