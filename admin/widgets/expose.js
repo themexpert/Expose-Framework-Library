@@ -153,6 +153,11 @@ jQuery(document).ready(function($){
     //show admin area
     $('#element-box .m').fadeIn(600);
 
+    //Fadeout system message after 5sec
+    setInterval(function(){
+        $("#system-message-container").fadeOut('slow');
+    },5000);
+
     $(".toggle").exposeToggle();
     $('.toggleContainer').bind('iPhoneDragEnd',function(){
         $(this).parent().find('input').each(function(){
