@@ -9,9 +9,6 @@
 //prevent direct access
 defined ('EXPOSE_VERSION') or die ('resticted aceess');
 
-//import date utility class
-jimport('joomla.utilities.date');
-
 //import parent gist class
 expose_import('core.widget');
 
