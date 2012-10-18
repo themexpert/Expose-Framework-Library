@@ -119,7 +119,7 @@ class ExposeProcessor {
                         $buffer .= "\n\n/*** " . $url.$file . " ***/\n\n" . $content;
 
                     }
-                   JFile::write($cachePath,$buffer);
+                   JFile::write($cachePath,$buffer, true);
 
                 }
                 $cacheFiles[$cacheFile] = $url;
@@ -175,7 +175,7 @@ class ExposeProcessor {
             {
                 $header = self::getFileheader($type);
                 $buffer = $header . $buffer;
-                JFile::write($cachePath,$buffer);
+                JFile::write($cachePath,$buffer, true);
             }
             unset($expose->scripts);
             $cacheFiles[$cacheFile] = $jsurl;
