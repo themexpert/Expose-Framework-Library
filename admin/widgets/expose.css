@@ -99,6 +99,10 @@ span.pre-text{
 .input-small input[type=text]{
     width: 50px;
 }
+.fltlft,
+.button2-left {margin-top: 12px;}
+.button2-left {margin-left: 10px; margin-right: 0!important;}
+.hasTipPreview{margin-left: 6px; background: #F6F6F6; padding: 4px 7px; display: inline-block; border-radius: 4px;}
 /* Expose global style
 -----------------------------------------------*/
 #expose-wrapper{
