@@ -34,7 +34,9 @@ class JFormFieldOverview extends JFormField{
         $templatePath   = JPATH_ROOT . '/templates/'. getTemplate($id);
         $templateUrl    = JURI::root(true) . '/templates/'. getTemplate($id);
 
+        $imagePath = $templateUrl . '/template_thumbnail.png';
         $templateXml = $templatePath . '/templateDetails.xml';
+
         $version = '1.0';
 
         if ( JFile::exists($templateXml) )
@@ -51,7 +53,7 @@ class JFormFieldOverview extends JFormField{
 
             $html .= "<div class='overview-panel-left'>";
             $html .= "<div class='overview-inner gradient3 clearfix'>";
-                $html .= "<img src='". $expose->baseUrl. '/templates/' . getTemplate($id)."/template_thumbnail.png' width='275px' height='250px' alt='".$expose->templateName."_preview' />";
+                $html .= "<img src='$imagePath' width='275px' height='250px' alt='".$expose->templateName."_preview' />";
                 $html .= JText::_('EXPOSE_DESCRIPTION');
             $html .= "</div>";
         $html .= "</div>";
