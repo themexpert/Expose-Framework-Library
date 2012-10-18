@@ -26,7 +26,7 @@ class ExposeWidgetModernizr extends ExposeWidget{
     public function init()
     {
         global $expose;
-        $expose->addLink($expose->exposeUrl.'/interface/js/modernizr-1.7.min.js','js');
+        $expose->addLink($expose->exposeUrl.'/interface/js/modernizr.js','js');
 
     }
 }
