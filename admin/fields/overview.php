@@ -34,6 +34,15 @@ class JFormFieldOverview extends JFormField{
         $templatePath   = JPATH_ROOT . '/templates/'. getTemplate($id);
         $templateUrl    = JURI::root(true) . '/templates/'. getTemplate($id);
 
+        $templateXml = $templatePath . '/templateDetails.xml';
+        $version = '1.0';
+
+        if ( JFile::exists($templateXml) )
+        {
+            $xml = simplexml_load_file($templateXml);
+            $version = $xml->version[0];
+        }
+
         if( JFile::exists( $templatePath . '/overview.php' ) )
         {
             include_once ( $templatePath . '/overview.php' ) ;
@@ -42,7 +51,7 @@ class JFormFieldOverview extends JFormField{
 
             $html .= "<div class='overview-panel-left'>";
             $html .= "<div class='overview-inner gradient3 clearfix'>";
-                $html .= "<img src='". $expose->baseUrl. '/templates/' . $this->getCurrentTemplate()."/template_thumbnail.png' width='275px' height='250px' alt='".$expose->templateName."_preview' />";
+                $html .= "<img src='". $expose->baseUrl. '/templates/' . getTemplate($id)."/template_thumbnail.png' width='275px' height='250px' alt='".$expose->templateName."_preview' />";
                 $html .= JText::_('EXPOSE_DESCRIPTION');
             $html .= "</div>";
         $html .= "</div>";
@@ -55,7 +64,8 @@ class JFormFieldOverview extends JFormField{
                 $html .= "</div>";
 
                 $html .= "<div class='live-update gradient'>";
-                    $html .= "<h2 class='version-title'>". JText::_('Expose v') . EXPOSE_VERSION ."</h2>";
+                    $html .= "<p class='version-info'>" . JText::_('EXPOSE_TEMPLATE_VERSION') . "<span>" . $version . "</span></p>";
+                    $html .= "<p class='version-info'>" . JText::_('EXPOSE_FRAMEWORK_VERSION') . "<span>"  . EXPOSE_VERSION . "</span> </p>";
                     $html .= "<p class='version-guide'>". JText::_('EXPOSE_VERSION_GUIDE') ."</p>";
                 $html .= "</div>";
 
