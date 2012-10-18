@@ -150,6 +150,9 @@ jQuery(document).ready(function($){
     //hide joomla3 tab and content
     $('#style-form').find('.nav, .tab-content').remove();
 
+    //show admin area
+    $('#element-box .m').fadeIn(600);
+
     $(".toggle").exposeToggle();
     $('.toggleContainer').bind('iPhoneDragEnd',function(){
         $(this).parent().find('input').each(function(){

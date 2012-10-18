@@ -36,7 +36,7 @@ html[xmlns] .clearfix {display: block;height: 1%;}
 #system-message{margin: 10px}
 #system-message dd ul{border-top: 2px solid #C6EDF9 !important;border-bottom: 2px solid #C6EDF9 !important;}
 #system-message dd.message ul {background-color: #DDF4FB !important}
-#element-box .m{background: none !important; border: none !important;padding: }
+#element-box .m{background: none !important; border: none !important;}
 legend{display: none !important;}
 pre,code{
     background: #ffefbe;
@@ -75,16 +75,16 @@ fieldset.panelform select {
     -webkit-border-radius: 2px;
     border-radius: 2px;
 }
-ul.adminformlist li{margin: 5px !important;}
+ul.adminformlist li{border-bottom: 1px solid #eee;}
 input.picker{width: 50px !important;float: left}
-span.tips{background: url(images/icon_tips.png) no-repeat;width: 13px;height: 13px;float: right;margin: 5px;}
+span.tips{background: url(images/icon_tips.png) no-repeat;width: 13px;height: 13px; position: absolute; top: 50%; margin-top: -7px; right: 8px;}
 .assignments span.tips{display: none;}
 
 .highlight{
     background: #fffff3;
     outline: 1px dotted #fbad48;
 }
-.field-wrap{float: left}
+.field-wrap{float: left; margin-top: 4px;}
 .field-wrap.border-left{margin-left: 10px;}
 span.pre-text{
     display: block;
@@ -201,13 +201,19 @@ span.pre-text{
     color: #444;
     font-size: 11px;
     font-weight: bold;
-    height: 24px;
-    line-height: 24px;
+    line-height: 50px;
     max-width: 150px !important;
     min-width: 150px !important;
-    padding: 0 20px 0 10px;
+    padding: 0 30px 0 10px;
     text-align: right;
+    background: #f9f9f9;
+    margin: 0 15px 0 0;
+    position: relative;
 }
+/*.expose-tab-content .panel label[id $='font-lbl']
+{
+    line-height: 80px;
+}*/
 .expose-spacer.hasText{
     background: #eee;
     color: #999;
@@ -221,8 +227,11 @@ span.pre-text{
     padding: 3px;
     background: #fff;
 }
-/*.expose-tab-content .panel input{margin: 0;line-height: 20px;}
-.expose-tab-content .panel input{margin-right: 5px;}*/
+/*Exception label*/
+#jform_params_copyrightinfo_enabled-lbl,
+#jform_params_prevent_css_js-lbl{line-height: 84px;}
+#jform_params_custom_css-lbl,
+#jform_params_custom_js-lbl { line-height: 104px;}
 
 #expose-wrapper .mod-desc{
     position: absolute;
@@ -285,13 +294,16 @@ span.pre-text{
 .overview-panel-left .overview-inner img { float: left; margin-right: 20px !important; border: 2px solid #eee; }
 .overview-panel-left .overview-inner h3{margin: 32px 0 5px 0; font-size: 16px;line-height: 24px}
 .overview-panel-left .overview-inner ul{}
-.overview-panel-left .overview-inner ul li{float: left; list-style: square inside;width: 48%}
+.overview-panel-left .overview-inner ul li{float: left; list-style: square inside;width: 48%; border: none; line-height: 21px;}
 
 .overview-panel-right .template-name .adminform{
     margin: 0;
     padding: 0;
 }
+.overview-panel-right .template-name li {border: 0;}
 .overview-panel-right .template-name label{
+    line-height: 36px;
+    background: none;
     margin: 0;
     padding: 0 5px 0 0;
     float: left;
@@ -493,7 +505,7 @@ span.pre-text{
     font-size: 16px;
     text-align: center;
     padding: 10px 15px;
-    margin: 10px 0 0 ;
+    margin: 0 ;
     position: relative;
     clear: both;
 }
