@@ -30,7 +30,7 @@ class ExposeWidgetFontresizer extends ExposeWidget{
         ob_start();
         ?>
 
-        <div id="font-resizer">
+        <div id="font-resizer" class="hidden-phone">
             <a class="fr-button" id="fr-m">A-</a>
             <a class="fr-button" id="fr-d">A</a>
             <a class="fr-button" id="fr-p">A+</a>
