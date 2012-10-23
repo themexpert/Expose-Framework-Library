@@ -221,17 +221,23 @@ class ExposeLayout
     {
         //total module published in this position
         $total = $this->modules[$position]['published'];
-        $tempGrid = '';
+        $used = 0;
 
         //set module schema
-        for( $i = 0; $i<$total; $i++ )
-        {
-            $tempGrid = ceil($grid/$total);
-            if( ($i+1) == $total AND is_float($grid/$total)) $tempGrid = $tempGrid - $i;
+        $tempGrid = round($grid/$total);
 
-            if($tempGrid == 0) $tempGrid = $grid;
+        for( $i = 0; $i < $total; $i++ )
+        {
+
+            if( ($i+1) == $total )
+            {
+
+                $tempGrid = $grid - $used;
+            }
 
             $this->modules[$position]['schema'][$total][$i] = $tempGrid;
+
+            $used += $tempGrid ;
         }
 
         return $this->modules[$position]['schema'][$total];
