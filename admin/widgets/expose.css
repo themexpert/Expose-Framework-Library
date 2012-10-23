@@ -236,6 +236,7 @@ span.pre-text{
 #jform_params_prevent_css_js-lbl{line-height: 84px;}
 #jform_params_custom_css-lbl,
 #jform_params_custom_js-lbl { line-height: 104px;}
+#sidebar_a, #sidebar_b { margin-top: 12px;}
 
 #expose-wrapper .mod-desc{
     position: absolute;
@@ -385,7 +386,7 @@ span.pre-text{
     font-size: 11px;
     color: #222;
     position: absolute;
-    top: 296px;
+    top: 215px;
     right: 40px;
 }
     .positions-map span{
@@ -484,7 +485,7 @@ span.pre-text{
     color: #555;
 }
 
-#layout-selector{float: left;}
+#layout-selector{float: left; margin-top: 4px;}
 #layout-selector span{
     width:45px;
     height: 36px;
