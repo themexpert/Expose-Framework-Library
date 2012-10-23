@@ -48,8 +48,7 @@ class ExposeCore{
         $this->document = JFactory::getDocument();
 
         //get the application object
-        jimport('joomla.application.application');
-        $this->app = JFactory::getApplication('site');
+        $this->app = JFactory::getApplication('site', array(), 'J');
 
         //set the baseurl
         $this->baseUrl = JURI::root(true);
@@ -141,9 +140,9 @@ class ExposeCore{
     
     public function getActiveTemplate(){
         if (!$this->isAdmin()) {
-            $app      = JApplication::getInstance('site', array(), 'J');
-            $template = $app->getTemplate();
-        } else {
+            $template = $this->app->getTemplate();
+        } else
+        {
             $url = JURI::getInstance();
             $id = $url->getVar('id');
             $template = getTemplate($id);
