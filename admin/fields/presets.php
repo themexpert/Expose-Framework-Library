@@ -27,7 +27,8 @@ class JFormFieldPresets extends JFormField
         $html = array();
         $options = array();
         //get template id
-        $id = JRequest::getInt('id');
+        $url = JURI::getInstance();
+        $id = $url->getVar('id');
 
         // Initialize some field attributes.
         $filter			= '\.css$';
@@ -46,6 +47,7 @@ class JFormFieldPresets extends JFormField
         $wrapend    = '</div>';
 
         $path = JPATH_ROOT . '/templates/' . getTemplate($id) . '/css/styles';
+        $lessPath = JPATH_ROOT . '/templates/' . getTemplate($id) . '/less/styles';
 
 
          // Prepend some default options based on field attributes.
@@ -53,8 +55,22 @@ class JFormFieldPresets extends JFormField
 			$options[] = JHtml::_('select.option', '-1', JText::alt('JOPTION_DO_NOT_USE', preg_replace('/[^a-zA-Z0-9_\-]/', '_', $this->fieldname)));
 		}
 
-        // Get a list of files in the search path with the given filter.
-		$files = JFolder::files($path, $filter);
+        // Get the less folder path
+        $lessFiles = JFolder::files($lessPath, '\.less$');
+
+         //compile all preset less files first
+         if( is_array($lessFiles))
+         {
+             foreach( $lessFiles as $lessFile)
+             {
+                 $filePath = 'styles/'.$lessFile;
+                 $lessFile = substr($lessFile, 0, strpos($lessFile, '.')) . '.css';
+                 $expose->compileLessFile($filePath, 'css/styles', $lessFile);
+             }
+         }
+
+         // Get a list of files in the search path with the given filter.
+        $files = JFolder::files($path, $filter);
 
         // Build the options list from the list of files.
 		if (is_array($files)) {

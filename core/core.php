@@ -11,6 +11,7 @@
  **/
 
 expose_import('core.layout');
+expose_import('libs.lessc');
 
 class ExposeCore{
 
@@ -47,7 +48,8 @@ class ExposeCore{
         $this->document = JFactory::getDocument();
 
         //get the application object
-        $this->app = JFactory::getApplication();
+        jimport('joomla.application.application');
+        $this->app = JFactory::getApplication('site');
 
         //set the baseurl
         $this->baseUrl = JURI::root(true);
@@ -131,14 +133,23 @@ class ExposeCore{
     //public function to get template params
     public function get($params,$default=NULL){
         if(!$this->isAdmin()){
-            $value = ($this->document->params->get($params) != NULL) ? $this->document->params->get($params) : $default;
+            $field = $this->app->getTemplate(true)->params;
+            $value = ($field->get($params) != NULL) ? $field->get($params) : $default;
             return $value;
         }
     }
     
     public function getActiveTemplate(){
-        $app = JFactory::getApplication('site');
-        return $app->getTemplate();
+        if (!$this->isAdmin()) {
+            $app      = JApplication::getInstance('site', array(), 'J');
+            $template = $app->getTemplate();
+        } else {
+            $url = JURI::getInstance();
+            $id = $url->getVar('id');
+            $template = getTemplate($id);
+        }
+
+        return $template;
     }
 
     public function loadCoreStyleSheets()
@@ -152,15 +163,40 @@ class ExposeCore{
         $this->loadPresetStyle();
     }
 
+    /*
+     * Primary function for adding css/js file in template header.
+     * LESS file is also handled via this function
+     *
+     * @params string/array     $file   can be file name or array of files
+     *
+     * @params string           $type   File type css/js/less
+     *
+     * @params int              $priority file priority
+     *
+     * @params string       $media  media type
+     *
+     * @return  NULL
+     *
+     * */
+
     public function addLink($file, $type, $priority=10, $media='screen')
     {
-        if(is_array($file)){
-            foreach($file as $path){
+        if(is_array($file))
+        {
+            foreach($file as $path)
+            {
                 if($type == 'css')
                 {
                     $this->addStyleSheet($path,$priority,$media);
-                }else if($type == 'js'){
+
+                }else if($type == 'js')
+                {
                     $this->addScript($path, $priority);
+
+                }else if($type = 'less')
+                {
+                    $cssFile = $this->compileLessFile($path);
+                    $this->addStyleSheet($cssFile, $priority, $media);
                 }
             }
             return;
@@ -169,12 +205,134 @@ class ExposeCore{
         if($type == 'css')
         {
             $this->addStyleSheet($file,$priority,$media);
-        }else if($type == 'js'){
+
+        }else if($type == 'js')
+        {
             $this->addScript($file, $priority);
+
+        }else if($type = 'less')
+        {
+            $file = $this->compileLessFile($file);
+            $this->addStyleSheet($file, $priority, $media);
         }
 
         return;
 
+    }
+
+    /*
+     * Compile less files. Fucntion will compile less file and return compiled file name
+     * to use for addLink() function.
+     * If you want to compile less file and add the file in output header call addLink() instead.
+     *
+     * @params string $file Name of the file or with path. eg: 'template.less' or 'style/blue.less'
+     *
+     * @params string $outputDir Default template css folder can be change to any folder inside template dir
+     *
+     * @params string $cssFile Name of the css file the less file compile into
+     *
+     * @return string $outputFileName Name of the output file including extension
+     **/
+
+    public function compileLessFile($file, $outputDir='css', $cssFile= NULL)
+    {
+        //import joomla filesystem classes
+        jimport('joomla.filesystem.folder');
+
+        //Template less path
+        $tmplPath   = $this->templatePath . '/less/';
+        $inputFile  = $tmplPath . $file;
+
+        //if less file is missing eject
+        if (!file_exists($inputFile))
+        {
+            echo JText::_('LESS_ERROR_LESS_FILE_MISSING') . "<br/>";
+            return;
+        }
+
+        //If output dir is set to null set output dir to default css folder
+        if ($outputDir == NULL) $outputDir = 'css';
+
+        //define output path
+        $outputPath = $this->templatePath . '/' . $outputDir;
+
+        //Create output directory if not exist
+        if( !@JFolder::exists($outputPath))
+        {
+            @JFolder::create($outputPath);
+        }
+
+        if( $cssFile == NULL)
+        {
+            $outputFile = substr($file, 0, strpos($file, '.')) . '.css';
+        }else{
+            $outputFile = $cssFile;
+        }
+
+        $outputFilePath     = $outputPath . '/' . $outputFile;
+
+        // load the cache
+        $cacheFile = md5($file).".cache";
+        $cacheFilePath = JPATH_CACHE . '/expose';
+
+        if ( !@JFolder::exists($cacheFilePath))
+        {
+            @JFolder::create($cacheFilePath);
+        }
+
+        $cacheFilePath = $cacheFilePath . '/' . $cacheFile;
+
+        $runcompile = $this->get('less-enabled',0);
+
+        //If less is turned OFF and appropriate css file is missing we'll compile the LESS once
+        if ( !$this->get('less-enabled',0) AND !file_exists($outputFilePath) )
+        {
+            //remove the cache file first for re-compiling
+            if(@JFile::exists($cacheFilePath))
+            {
+                @Jfile::delete($cacheFilePath);
+            }
+            $runcompile = TRUE;
+
+        }
+
+        if($runcompile)
+        {
+            //create less instance
+            $less = new lessc;
+
+            //compress the output
+            if( $this->get('less-compression','compressed') )
+            {
+                $compress = $this->get('less-compression','compressed');
+            }else{
+                $compress = 'compressed';
+            }
+
+            $less->setFormatter($compress);
+
+            if (file_exists($cacheFilePath)) {
+                $cache = unserialize(file_get_contents($cacheFilePath));
+            } else {
+                $cache = $inputFile;
+            }
+
+            // create a new cache object, and compile
+            try {
+
+                $newCache = $less->cachedCompile($cache);
+
+                if (!is_array($cache) || $newCache["updated"] > $cache["updated"]) {
+                    file_put_contents($cacheFilePath, serialize($newCache));
+                    file_put_contents($outputFilePath, $newCache['compiled']);
+                }
+
+            } catch (Exception $ex) {
+                echo "LESS ERROR : ".$ex->getMessage();
+            }
+        }
+
+        return $outputFile;
     }
 
     private function addStyleSheet( $file, $priority, $media='screen' )
