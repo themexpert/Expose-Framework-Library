@@ -158,7 +158,8 @@ class ExposeCore{
         $files = array('joomla.css');
         $this->addLink($files,'css',1);
 
-        //load preset style
+        //Compile preset styles less first then load preset style
+        $this->compilePresetStyles();
         $this->loadPresetStyle();
     }
 
@@ -475,6 +476,30 @@ class ExposeCore{
 
     }
 
+    /*
+     * Compile the preset styles file first before load
+     **/
+    public function compilePresetStyles()
+    {
+
+        // Get the less folder path
+        $lessPath = $this->templatePath . '/less/styles';
+        $lessFiles = JFolder::files($lessPath, '\.less$');
+
+         //compile all preset less files first
+         if( is_array($lessFiles))
+         {
+             foreach( $lessFiles as $lessFile)
+             {
+                 $filePath = 'styles/'.$lessFile;
+                 $lessFile = substr($lessFile, 0, strpos($lessFile, '.')) . '.css';
+                 $this->compileLessFile($filePath, 'css/styles', $lessFile);
+             }
+         }
+    }
+    /*
+     * Add preset styles to header
+     **/
     public function loadPresetStyle()
     {
 
@@ -491,6 +516,7 @@ class ExposeCore{
         $path = $this->templateUrl . '/css/styles/';
         $file = $path . $preset_file.'.css';
         $this->addLink($file, 'css');
+
     }
 
 

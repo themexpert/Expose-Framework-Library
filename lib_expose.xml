@@ -22,6 +22,7 @@ Expose is based on experience. It does not reinvent the wheel: it uses most of t
         <folder>libs</folder>
         <file>index.html</file>
         <file>expose.php</file>
+        <file>README.md</file>
     </files>
 
     <!-- UPDATESERVER DEFINITION -->

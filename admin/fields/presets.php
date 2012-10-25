@@ -56,10 +56,12 @@ class JFormFieldPresets extends JFormField
 		}
 
         // Get the less folder path
-        $lessFiles = JFolder::files($lessPath, '\.less$');
+        /*$lessFiles = JFolder::files($lessPath, '\.less$');*/
 
          //compile all preset less files first
-         if( is_array($lessFiles))
+         $expose->compilePresetStyles();
+         
+         /*if( is_array($lessFiles))
          {
              foreach( $lessFiles as $lessFile)
              {
@@ -67,7 +69,7 @@ class JFormFieldPresets extends JFormField
                  $lessFile = substr($lessFile, 0, strpos($lessFile, '.')) . '.css';
                  $expose->compileLessFile($filePath, 'css/styles', $lessFile);
              }
-         }
+         }*/
 
          // Get a list of files in the search path with the given filter.
         $files = JFolder::files($path, $filter);
