@@ -67,15 +67,20 @@ ul.megamenu li { overflow: visible; }
 
 .megamenu ul.level-0 li.over, ul.level-0 li.has-submenu-over {}
 
-.megamenu ul.level-0 li.has-submenu a.mega span.menu-title,
-.megamenu ul.level-0 li.has-submenu span.mega.level-0 span.menu-title{
-	background: url(../images/arrow3.png) no-repeat left center;
-	padding-left: 12px;
+#menu .megamenu ul.level-0 > li.has-submenu > a.mega,
+#menu .megamenu ul.level-0 > li.has-submenu > span.mega{
+	background: url(../images/arrow-down.png) no-repeat 100% 0;
+	padding-right: 12px;
+}
+#menu .megamenu ul.level-0 > li.has-submenu:hover > a.mega,
+#menu .megamenu ul.level-0 > li.has-submenu:hover > span.mega
+{
+    background-position: 100% -100px;
 }
 
-.megamenu ul.level-0 li.has-submenu a.mega span.menu-desc,
-.megamenu ul.level-0 li.has-submenu span.mega span.menu-desc
-{padding-left: 12px;}
+#menu .megamenu ul.level-0 li.has-submenu a.mega span.menu-desc,
+#menu .megamenu ul.level-0 li.has-submenu span.mega span.menu-desc
+{padding-right: 12px;}
 
 .megamenu ul.level-0 li.active {}
 
@@ -123,7 +128,7 @@ ul.megamenu li { overflow: visible; }
 	background: none;
 	border: 0;
 	font-weight: normal;
-	padding: 8px 10px;
+	padding: 0 10px;
 }
 .megamenu ul.level-1 li.mega .group-content > ul > li > a,
 .megamenu ul.level-1 li.mega .group-content > ul > li > span{
