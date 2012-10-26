@@ -42,12 +42,12 @@ class ExposeWidgetStylus extends ExposeWidget{
                 {$this->setBackgroundImage('background-image')}
             }
 
-            .ex-header .ex-title{
+            .header .title{
                 color: #{$this->get('module-title-color')}
             }
 
-            #main #ex-content .ex-title,
-            #main #ex-content .ex-title a{
+            #main #component .title,
+            #main #component .title a{
                 color: #{$this->get('article-title-color')}
             }
 
@@ -87,15 +87,15 @@ class ExposeWidgetStylus extends ExposeWidget{
                 color: #{$this->get('feature-link-hover-color')};
             }
 
-            #main #ex-content{
+            #main{
                 background-color: #{$this->get('maincontent-bg-color')};
                 {$this->setBackgroundImage('maincontent-image')}
                 color: #{$this->get('maincontent-text-color')};
             }
-            #main #ex-content a{
+            #main a{
                 color: #{$this->get('maincontent-link-color')};
             }
-            #main #ex-content a:hover{
+            #main a:hover{
                 color: #{$this->get('maincontent-link-hover-color')};
             }
 
