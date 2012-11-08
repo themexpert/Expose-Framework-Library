@@ -60,7 +60,7 @@ class JFormFieldPresets extends JFormField
 
          //compile all preset less files first
          $expose->compilePresetStyles();
-         
+
          /*if( is_array($lessFiles))
          {
              foreach( $lessFiles as $lessFile)
