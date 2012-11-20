@@ -515,6 +515,7 @@ class ExposeCore{
 
         $path = $this->templateUrl . '/css/styles/';
         $file = $path . $preset_file.'.css';
+        // Load preset style
         $this->addLink($file, 'css');
 
     }

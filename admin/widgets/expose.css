@@ -465,7 +465,7 @@ span.pre-text{
     border-radius: .15em 0 0 .15em;
     pointer-events: none;
 }
-.mods-chrome a.close:after{content: "Save"}
+.mods-chrome a.close:after{content: "Apply"}
 .mods-chrome-boxs {
     width: 95px;
     float: left;

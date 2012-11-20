@@ -190,6 +190,7 @@ jQuery(document).ready(function($){
     });
 
     function getCurrentIndex(){
+        var val = 0;
          $('.expose-tab li').each(function(i){
             //get the current class name
             var klass = $(this).attr('class');
