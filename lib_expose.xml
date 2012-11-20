@@ -25,6 +25,10 @@ Expose is based on experience. It does not reinvent the wheel: it uses most of t
         <file>README.md</file>
     </files>
 
+    <languages>
+        <language tag="en-GB">en-GB.lib_expose.ini</language>
+    </languages>
+
     <!-- UPDATESERVER DEFINITION -->
     <updateservers>
         <server type="library" priority="1" name="Expose framework site">http://themexpert.com/update/expose.xml</server>
