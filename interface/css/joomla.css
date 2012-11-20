@@ -49,10 +49,10 @@ tr.sectiontableentry0 td, td.sectiontableentry0, tr.sectiontableentry1 td, td.se
 #component .edit-icon a {background-position: -48px 0;margin-left: 0 !important;margin-right: 5px;}
 #component .edit img {opacity: 0;}
 #component .article-cat {font-weight: bold;margin-top: 15px;margin-bottom: 0;}
+#component .article-tools .article-info{margin: 0; float: left;}
+#component .article-tools .article-info dd{display: inline-block; margin: 0 10px 0 0;}
 /*Auto image resize*/
 .auto-size{max-width: 100%;height: auto}
-
-
 
 /* User */
 #component .registration dt{ float: left; width: 200px;}
@@ -67,7 +67,6 @@ tr.sectiontableentry0 td, td.sectiontableentry0, tr.sectiontableentry1 td, td.se
 #component .contact .title a{display: block;padding: 8px 15px;}
 #component .contact .pane-slider{ padding: 9px 15px;}
 #component .contact .pane-toggler-down{border-bottom: 1px solid #E5E5E5;margin-bottom: 9px;}
-#component #contact-form label{float: left; max-width: 140px; padding-top: 5px;text-align: right;}
 
 /* Accessibility */
 #accessibility .desc {float: left;padding-right: 5px;}
