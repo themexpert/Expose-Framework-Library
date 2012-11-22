@@ -3,7 +3,7 @@
  * Expose Main controller
  *
  * @package     Expose
- * @version     3.0.3
+ * @version     4.0
  * @author      ThemeXpert http://www.themexpert.com
  * @copyright   Copyright (C) 2010 - 2011 ThemeXpert
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
@@ -11,6 +11,7 @@
  **/
 
 expose_import('core.layout');
+expose_import('libs.lessc');
 
 class ExposeCore{
 
@@ -44,10 +45,10 @@ class ExposeCore{
 
     public function __construct(){
         //get the document object
-        $this->document =& JFactory::getDocument();
+        $this->document = JFactory::getDocument();
 
         //get the application object
-        $this->app =& JFactory::getApplication();
+        $this->app = JFactory::getApplication('site', array(), 'J');
 
         //set the baseurl
         $this->baseUrl = JURI::root(true);
@@ -56,7 +57,7 @@ class ExposeCore{
         $this->basePath = JPATH_ROOT;
 
         $this->exposeUrl = $this->baseUrl . '/libraries/expose';
-        $this->exposePath = $this->basePath . DS . 'libraries' . DS . 'expose';
+        $this->exposePath = $this->basePath . '/' . 'libraries' . '/' . 'expose';
 
         //get the current template name
         $this->templateName = $this->getActiveTemplate();
@@ -65,7 +66,7 @@ class ExposeCore{
         $this->templateUrl = $this->baseUrl . '/templates/'. $this->templateName;
 
         //template path
-        $this->templatePath = $this->basePath . DS . 'templates'. DS . $this->templateName ;
+        $this->templatePath = $this->basePath . '/' . 'templates'. '/' . $this->templateName ;
 
         //set document direction
         $this->direction = $this->getDirection();
@@ -131,43 +132,71 @@ class ExposeCore{
     //public function to get template params
     public function get($params,$default=NULL){
         if(!$this->isAdmin()){
-            $value = ($this->document->params->get($params) != NULL) ? $this->document->params->get($params) : $default;
+            $field = $this->app->getTemplate(true)->params;
+            $value = ($field->get($params) != NULL) ? $field->get($params) : $default;
             return $value;
         }
     }
     
     public function getActiveTemplate(){
-        $app = JFactory::getApplication('site');
-        return $app->getTemplate();
+        if (!$this->isAdmin()) {
+            $template = $this->app->getTemplate();
+        } else
+        {
+            $url = JURI::getInstance();
+            $id = $url->getVar('id');
+            $template = getTemplate($id);
+        }
+
+        return $template;
     }
 
     public function loadCoreStyleSheets()
     {
         if($this->isAdmin()) return;
 
-        if($this->platform == 'desktop')
-        {
-            $files = array('expose.css','joomla.css');
-            $this->addLink($files,'css',1);
-        }else{
-            $browser = strtolower($this->browser->getBrowser());
-            $file = 'expose-'.$browser.'.css';
-            $this->addLink($file,'css',1);
-        }
+        $files = array('joomla.css');
+        $this->addLink($files,'css',1);
 
-        //load preset style
+        //Compile preset styles less first then load preset style
+        $this->compilePresetStyles();
         $this->loadPresetStyle();
     }
 
+    /*
+     * Primary function for adding css/js file in template header.
+     * LESS file is also handled via this function
+     *
+     * @params string/array     $file   can be file name or array of files
+     *
+     * @params string           $type   File type css/js/less
+     *
+     * @params int              $priority file priority
+     *
+     * @params string       $media  media type
+     *
+     * @return  NULL
+     *
+     * */
+
     public function addLink($file, $type, $priority=10, $media='screen')
     {
-        if(is_array($file)){
-            foreach($file as $path){
+        if(is_array($file))
+        {
+            foreach($file as $path)
+            {
                 if($type == 'css')
                 {
                     $this->addStyleSheet($path,$priority,$media);
-                }else if($type == 'js'){
+
+                }else if($type == 'js')
+                {
                     $this->addScript($path, $priority);
+
+                }else if($type = 'less')
+                {
+                    $cssFile = $this->compileLessFile($path);
+                    $this->addStyleSheet($cssFile, $priority, $media);
                 }
             }
             return;
@@ -176,12 +205,134 @@ class ExposeCore{
         if($type == 'css')
         {
             $this->addStyleSheet($file,$priority,$media);
-        }else if($type == 'js'){
+
+        }else if($type == 'js')
+        {
             $this->addScript($file, $priority);
+
+        }else if($type = 'less')
+        {
+            $file = $this->compileLessFile($file);
+            $this->addStyleSheet($file, $priority, $media);
         }
 
         return;
 
+    }
+
+    /*
+     * Compile less files. Fucntion will compile less file and return compiled file name
+     * to use for addLink() function.
+     * If you want to compile less file and add the file in output header call addLink() instead.
+     *
+     * @params string $file Name of the file or with path. eg: 'template.less' or 'style/blue.less'
+     *
+     * @params string $outputDir Default template css folder can be change to any folder inside template dir
+     *
+     * @params string $cssFile Name of the css file the less file compile into
+     *
+     * @return string $outputFileName Name of the output file including extension
+     **/
+
+    public function compileLessFile($file, $outputDir='css', $cssFile= NULL)
+    {
+        //import joomla filesystem classes
+        jimport('joomla.filesystem.folder');
+
+        //Template less path
+        $tmplPath   = $this->templatePath . '/less/';
+        $inputFile  = $tmplPath . $file;
+
+        //if less file is missing eject
+        if (!file_exists($inputFile))
+        {
+            echo JText::_('LESS_ERROR_LESS_FILE_MISSING') . "<br/>";
+            return;
+        }
+
+        //If output dir is set to null set output dir to default css folder
+        if ($outputDir == NULL) $outputDir = 'css';
+
+        //define output path
+        $outputPath = $this->templatePath . '/' . $outputDir;
+
+        //Create output directory if not exist
+        if( !@JFolder::exists($outputPath))
+        {
+            @JFolder::create($outputPath);
+        }
+
+        if( $cssFile == NULL)
+        {
+            $outputFile = substr($file, 0, strpos($file, '.')) . '.css';
+        }else{
+            $outputFile = $cssFile;
+        }
+
+        $outputFilePath     = $outputPath . '/' . $outputFile;
+
+        // load the cache
+        $cacheFile = md5($file).".cache";
+        $cacheFilePath = JPATH_CACHE . '/expose';
+
+        if ( !@JFolder::exists($cacheFilePath))
+        {
+            @JFolder::create($cacheFilePath);
+        }
+
+        $cacheFilePath = $cacheFilePath . '/' . $cacheFile;
+
+        $runcompile = $this->get('less-enabled',0);
+
+        //If less is turned OFF and appropriate css file is missing we'll compile the LESS once
+        if ( !$this->get('less-enabled',0) AND !file_exists($outputFilePath) )
+        {
+            //remove the cache file first for re-compiling
+            if(@JFile::exists($cacheFilePath))
+            {
+                @Jfile::delete($cacheFilePath);
+            }
+            $runcompile = TRUE;
+
+        }
+
+        if($runcompile)
+        {
+            //create less instance
+            $less = new lessc;
+
+            //compress the output
+            if( $this->get('less-compression','compressed') )
+            {
+                $compress = $this->get('less-compression','compressed');
+            }else{
+                $compress = 'compressed';
+            }
+
+            $less->setFormatter($compress);
+
+            if (file_exists($cacheFilePath)) {
+                $cache = unserialize(file_get_contents($cacheFilePath));
+            } else {
+                $cache = $inputFile;
+            }
+
+            // create a new cache object, and compile
+            try {
+
+                $newCache = $less->cachedCompile($cache);
+
+                if (!is_array($cache) || $newCache["updated"] > $cache["updated"]) {
+                    file_put_contents($cacheFilePath, serialize($newCache));
+                    file_put_contents($outputFilePath, $newCache['compiled']);
+                }
+
+            } catch (Exception $ex) {
+                echo "LESS ERROR : ".$ex->getMessage();
+            }
+        }
+
+        return $outputFile;
     }
 
     private function addStyleSheet( $file, $priority, $media='screen' )
@@ -314,17 +465,41 @@ class ExposeCore{
 
     private function getFilePath($url)
     {
-        $uri	    =& JURI::getInstance();
-        $base	    = $uri->toString( array('scheme', 'host', 'port'));
+        $uri        = JURI::getInstance();
+        $base       = $uri->toString( array('scheme', 'host', 'port'));
         $path       = JURI::Root(true);
         if ($url && $base && strpos($url,$base)!==false) $url = preg_replace('|^'.$base.'|',"",$url);
         if ($url && $path && strpos($url,$path)!==false) $url = preg_replace('|^'.$path.'|',"",$url);
-        if (substr($url,0,1) != DS) $url = DS.$url;
+        if (substr($url,0,1) != '/') $url = '/'.$url;
         $filepath = JPATH_SITE.$url;
         return $filepath;
 
     }
 
+    /*
+     * Compile the preset styles file first before load
+     **/
+    public function compilePresetStyles()
+    {
+
+        // Get the less folder path
+        $lessPath = $this->templatePath . '/less/styles';
+        $lessFiles = JFolder::files($lessPath, '\.less$');
+
+         //compile all preset less files first
+         if( is_array($lessFiles))
+         {
+             foreach( $lessFiles as $lessFile)
+             {
+                 $filePath = 'styles/'.$lessFile;
+                 $lessFile = substr($lessFile, 0, strpos($lessFile, '.')) . '.css';
+                 $this->compileLessFile($filePath, 'css/styles', $lessFile);
+             }
+         }
+    }
+    /*
+     * Add preset styles to header
+     **/
     public function loadPresetStyle()
     {
 
@@ -340,7 +515,9 @@ class ExposeCore{
 
         $path = $this->templateUrl . '/css/styles/';
         $file = $path . $preset_file.'.css';
+        // Load preset style
         $this->addLink($file, 'css');
+
     }
 
 
@@ -367,30 +544,44 @@ class ExposeCore{
         //come form admin? just add jquery without asking any question because jquery is heart of
         //expose admin
         if($this->isAdmin()){
-            $file = 'jquery-1.7.1.min.js';
-            //$this->app->set('jQuery','1.7.1');
+
+            $file = 'jquery-1.7.2.min.js';
             $this->addLink($file,'js',1);
+
             return;
         }
 
         //we will not load jquery on mobile device
-        if($this->platform == 'mobile') return;
-        
-        if($this->get('jquery-enabled')){
-            $version = $this->get('jquery-version');
-            //get the cdn
-            $cdn = $this->get('jquery-source');
-            switch ($cdn){
-                case 'google-cdn':
-                    $file = 'https://ajax.googleapis.com/ajax/libs/jquery/'.$version.'/jquery.min.js';
-                    break;
-                case 'local':
-                    $file = 'jquery-'.$version.'.min.js';
-                    break;
+        //if($this->platform == 'mobile') return;
+        $version = $this->get('jquery-version');
+        $cdn = $this->get('jquery-source');
+        $file = 'https://ajax.googleapis.com/ajax/libs/jquery/'.$version.'/jquery.min.js';
+
+        if( $this->get('jquery-enabled') ){
+
+            if( EXPOSE_JVERSION == '25')
+            {
+                if( !$this->app->get('jQuery') )
+                {
+                    if( $cdn == 'local')
+                    {
+                        $file = 'jquery-'.$version.'.min.js';
+                    }
+
+                    $this->app->set('jQuery',$version);
+
+                }
+                $this->addLink($file,'js',1);
+            }else{
+                if( $cdn = 'google-cdn')
+                {
+                    $this->addLink($file,'js',1);
+                }else{
+                    JHtml::_('jquery.framework');
+                }
             }
-            //$this->app->set('jQuery',$version);
-            $this->addLink($file,'js',1);
         }
+
         return;
     }
 
@@ -418,22 +609,11 @@ class ExposeCore{
         if(defined('EXPOSE_FINAL')) return;
 
         $css = '';
-        $prefix = $this->getPrefix();
-
-        $layoutType = (isset ($_COOKIE[$this->templateName.'_layoutsType'])) ? $_COOKIE[$this->templateName.'_layoutsType'] : $this->get('layouts-type','fixed');
 
         if(isset ($_REQUEST['layoutsType']))
         {
             setcookie($this->templateName.'_layoutsType',$_REQUEST['layoutsType'],time()+3600,'/');
             $layoutType = $_REQUEST['layoutsType'];
-        }
-
-        if($layoutType == 'fixed' AND $this->platform != 'mobile')
-        {
-
-            $width   = $this->get('template-width','980').'px';
-            $css    .= "\t.{$prefix}row, .{$prefix}wrapper{width: $width}";
-
         }
 
         if( ($this->get('custom-css') != NULL))
@@ -477,28 +657,43 @@ class ExposeCore{
             echo '<jdoc:include type="head" />';
             echo "<link rel=\"apple-touch-icon-precomposed\" href=". $this->templateUrl. '/images/apple_touch_icon.png' ." />";
 
-            $this->document->setMetaData('viewport','width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1');
+            if( $this->isResponsive() )
+            {
+                $this->document->setMetaData('viewport','width=device-width, initial-scale=1.0');
+            }
+
         }
     }
 
     public function generateBodyClass()
     {
-        $menu = $this->app->getMenu();
-        $active = $menu->getActive();
-        $class  = NULL;
-        $component = str_replace('_','-', JRequest::getCmd('option'));
-        $view = JRequest::getCmd('view');
-        $class .= ($this->get('style') == '-1') ? 'style-none' : $this->get('style');
-        $class .= ' align-'.$this->direction;
-        $class .= ' page-id-'. (isset($active) ? $active->id : $menu->getDefault()->id);
-        $class .= ' '.$component . '-' . $view;
+        $url            = JURI::getInstance();
+        $itemid         = $url->getVar('Itemid');
+        $menu           = $this->app->getMenu();
+        $active         = $menu->getActive();
+        $params         = $menu->getParams( $active->id );
+        $class          = NULL;
 
-        $class .= (isset ($_COOKIE[$this->templateName.'_layouts'])) ? ' '.$_COOKIE[$this->templateName.'_layouts'] : ' '.$this->get('layouts');
 
-        $class .= (isset ($_COOKIE[$this->templateName.'_layoutsType'])) ? ' layout-'.$_COOKIE[$this->templateName.'_layoutsType'] : ' layout-'.$this->get('layouts-type');
 
-        $class .= ' ' . strtolower($this->browser->getBrowser());
-        $class .= ($this->displayComponent()) ? '' : ' com-disabled';
+        $class         .= ($this->get('style') == '-1') ? 'style-none' : $this->get('style');
+        $class         .= ' align-'.$this->direction;
+        $class         .= ' page-id-'. (isset($active) ? $active->id : $menu->getDefault()->id);
+
+        //Add class of homepage if it's home
+        if ($menu->getActive() == $menu->getDefault())
+        {
+            $class     .= ' homepage ';
+        }else{
+            $view       = $url->getVar('view');
+            $component      = str_replace('_','-', $url->getVar('option'));
+            $class     .= ' ' . $component . '-' . $view;
+        }
+
+
+        $class         .= ' ' . strtolower($this->browser->getBrowser());
+        $class         .= ($this->displayComponent()) ? '' : ' com-disabled';
+        $class         .= ' ' . $params->get( 'pageclass_sfx' );
 
         return 'class="'.$class.'"';
     }
@@ -534,7 +729,12 @@ class ExposeCore{
             return TRUE;
         }
     }
-
+    /*
+     * Get sidebar width for % values
+     *
+     * @since       @3.0
+     * @deprecated  @4.5
+     **/
     public function getSidebarsWidth($position)
     {
         $width = array();
@@ -546,35 +746,35 @@ class ExposeCore{
 
     public function getComponentWidth()
     {
-        $widths = array();
+        $grids = array();
         $layout = ExposeLayout::getInstance();
-        $widths['a'] = 0;
-        $widths['b'] = 0;
-        $widths['component'] = 0;
+        $grids['a'] = 0;
+        $grids['b'] = 0;
+        $grids['component'] = 0;
 
         if($layout->countModulesForPosition('sidebar-a') OR $layout->countWidgetsForPosition('sidebar-a'))
         {
             $width = explode(':',$this->get('sidebar-a'));
-            $widths['a'] = $width[1];
+            $grids['a'] = $width[1];
 
         }
 
         if($layout->countModulesForPosition('sidebar-b') OR $layout->countWidgetsForPosition('sidebar-b'))
         {
             $width = explode(':',$this->get('sidebar-b'));
-            $widths['b'] = $width[1];
+            $grids['b'] = $width[1];
         }
 
-        $mainBodyWidth = 100 - ($widths['a'] + $widths['b']);
+        $mainBodyWidth = 12 - ($grids['a'] + $grids['b']);
 
         if($this->isEditpage())
         {
-            $mainBodyWidth = 100;
+            $mainBodyWidth = 12;
         }
 
         $width['component']= $mainBodyWidth;
-        $width['sidebar-a'] = $widths['a'];
-        $width['sidebar-b'] = $widths['b'];
+        $width['sidebar-a'] = $grids['a'];
+        $width['sidebar-b'] = $grids['b'];
 
         return $width;
 
@@ -586,10 +786,21 @@ class ExposeCore{
         return $layout->countModules($position);
     }
 
-    public function renderModules($position)
+    public function renderModules($position, $inset=FALSE)
     {
         $layout = ExposeLayout::getInstance();
-        $layout->renderModules($position);
+        //check for the inset module position, used in content-top/bottom
+        if($inset)
+        {
+            //Get the component grid
+            $com = $this->getComponentWidth();
+            $grid = $com['component'];
+
+            $layout->renderModules($position, TRUE, $grid);
+        }else{
+            $layout->renderModules($position);
+        }
+
     }
 
     public function renderBody()
@@ -617,6 +828,11 @@ class ExposeCore{
             $this->platform = 'desktop';
         }
 
+    }
+
+    public function isResponsive()
+    {
+        return $this->get('responsive-enabled',1);
     }
 
     public function isEditpage()

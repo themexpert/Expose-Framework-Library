@@ -1,7 +1,7 @@
 <?php
 /**
  * @package     Expose
- * @version     3.0.3
+ * @version     4.0
  * @author      ThemeXpert http://www.themexpert.com
  * @copyright   Copyright (C) 2010 - 2011 ThemeXpert
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
@@ -34,7 +34,7 @@ class ExposeWidgetDate extends ExposeWidget{
 
         ob_start();
         ?>
-        <div id="ex-date">
+        <div id="ex-date" class="hidden-phone">
             <?php echo $date; ?>
         </div>
     <?php

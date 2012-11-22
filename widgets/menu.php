@@ -28,11 +28,6 @@ class ExposeWidgetMenu extends ExposeWidget{
         //$style = $this->get('style','mega');
         $hasSubMenu = '';
 
-        if($expose->platform == 'mobile')
-        {
-            $style = 'iphone';
-        }
-
         $fileName = $style.'menu';
 
 
@@ -51,14 +46,6 @@ class ExposeWidgetMenu extends ExposeWidget{
                 $expose->addLink('splitmenu.css','css',2);
                 break;
 
-            case 'iphone':
-                $class = 'ExposeIphoneMenu';
-                $hasSubMenu = FALSE;
-
-                $expose->addLink('iphone.js','js',1);
-
-                break;
-
             case 'mega':
             default:
                 $class = 'ExposeMegaMenu';
@@ -75,7 +62,7 @@ class ExposeWidgetMenu extends ExposeWidget{
                     _easing:'{$animation}',
                     _isFancy:{$fancy}
                 };
-                jQuery('#ex-megamenu').XpertMenu(_options);
+                jQuery('#megamenu').XpertMenu(_options);
                 ";
 
                 $expose->addjQDom($js);
@@ -99,25 +86,7 @@ class ExposeWidgetMenu extends ExposeWidget{
         ob_start();
         ?>
 
-        <div id="ex-menu">
-            <?php if($expose->platform == 'mobile'): ?>
-            <div id="ex-toolbar">
-            <div id="ex-toolbar-top">
-                <div class="nav-btns">
-                    <div class="links">
-                        <a class="toggle button btn-menu ip-button" href="#ex-iphonemenu" title="Menu">Menu</a>
-                    </div>
-                </div>
-            </div>
-
-            <div id="ex-toolbar-main">
-                <div id="ex-toolbar-wrap">
-                    <div id="ex-toolbar-title">
-                        <a class="button btn-back" href="#" id="toolbar-back" title=""></a>
-                        <span id="toolbar-title">&nbsp;</span>
-                        <a class="button btn-close" href="#" id="toolbar-close" title="">Close</a>
-                    </div>
-            <?php endif; ?>
+        <nav id="menu" class="hidden-phone">
 
             <?php $menu->loadMenu(); ?>
 
@@ -125,21 +94,39 @@ class ExposeWidgetMenu extends ExposeWidget{
 
             <?php if($hasSubMenu AND $menu->hasSubMenu(1) AND $menu->showSeparatedSub)
             { ?>
-                <div id="ex-subnav" class="clearfix">
+                <div id="subnav" class="clearfix">
                    <?php $menu->genMenu(1); ?>
                 </div>
            <?php
             } ?>
 
-            <?php if($expose->platform == 'mobile'):?>
-                </div><!-- ex-toolbar-wrap end -->
-            </div> <!-- ex-toolbar-main end -->
-            </div>
-            <div id="ex-overlay">&nbsp;</div>
-            <?php endif;?>
+        </nav> <!-- menu end -->
 
-        </div> <!-- ex-menu end -->
+        <nav id="mobile-menu" class="visible-phone">
+            <select onChange="window.location.replace(this.options[this.selectedIndex].value)">
+                <?php foreach($menu->items as $key => $val):?>
+                <?php
+                    $itemId = JRequest::getvar('Itemid');
+                    $active = '';
+                   if ($itemId == $val->id) $active = 'selected="selected"';
+                ?>
+                ?>
+                    <option value="<?php echo $val->url;?>" <?php echo $active; ?> >
+                        <?php
+                            if( count($val->tree) > 1 )
+                            {
+                                for($i=0; $i < (count($val->tree)-1); $i++){
+                                    echo "-";
+                                }
+                            }
+                        ?>
 
+                        <?php echo $val->title; ?>
+
+                    </option>
+                <?php endforeach;?>
+            </select>
+        </nav>
 
         <?php
         return ob_get_clean();

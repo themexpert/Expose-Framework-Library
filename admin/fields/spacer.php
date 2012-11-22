@@ -1,7 +1,7 @@
 <?php
 /**
  * @package     Expose
- * @version     3.0.3    Mar 18, 2011
+ * @version     4.0    Mar 18, 2011
  * @author      ThemeXpert http://www.themexpert.com
  * @copyright   Copyright (C) 2010 - 2011 ThemeXpert
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
@@ -42,7 +42,7 @@ class JFormFieldSpacer extends JFormField{
         //only for positions page image
         if($class != NULL AND $class == 'positions-map')
         {
-            $label = "<a class=\"$class gradient2\" href=\"{$expose->exposeUrl}/admin/widgets/images/positions_map.jpg\" target='_blank' title=\"Module Position maps\" /><span>". JText::_($text) . "</span></a>";
+            $label = "<a class=\"$class gradient2\" href=\"https://s3.amazonaws.com/expose/positions_map.jpg\" target='_blank' title=\"Module Position maps\" /><span>". JText::_($text) . "</span></a>";
         }
         $html[] = $label;
 

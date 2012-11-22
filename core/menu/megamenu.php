@@ -1,7 +1,7 @@
 <?php
 /**
  * @package     Expose
- * @version     3.0.3
+ * @version     4.0
  * @author      ThemeXpert http://www.themexpert.com
  * @copyright   Copyright (C) 2010 - 2011 ThemeXpert
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
@@ -28,7 +28,7 @@ if (!defined ('_EXPOSE_MEGA_MENU')) {
         {
             $params->set('megamenu', 1);
             parent::__construct($params);
-            if (!$this->getParam('menuname')) $this->setParam('menuname', 'ex-megamenu');
+            if (!$this->getParam('menuname')) $this->setParam('menuname', 'megamenu');
 
         }
 
@@ -42,7 +42,7 @@ if (!defined ('_EXPOSE_MEGA_MENU')) {
          */
         function beginMenu($startlevel = 0, $endlevel = 10)
         {
-            echo "<div class=\"ex-megamenu clearfix\" id=\"" . $this->getParam('menuname') . "\">\n";
+            echo "<div class=\"megamenu clearfix\" id=\"" . $this->getParam('menuname') . "\">\n";
         }
 
         /**

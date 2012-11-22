@@ -1,7 +1,7 @@
 /**
  *
  * @package     Expose
- * @version     3.0.3
+ * @version     4.0
  * @author      ThemeXpert http://www.themexpert.com
  * @copyright   Copyright (C) 2010 - 2011 ThemeXpert
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
@@ -150,6 +150,14 @@ jQuery(document).ready(function($){
     //hide joomla3 tab and content
     $('#style-form').find('.nav, .tab-content').remove();
 
+    //show admin area
+    $('#element-box .m').fadeIn(600);
+
+    //Fadeout system message after 5sec
+    setInterval(function(){
+        $("#system-message-container").fadeOut('slow');
+    },5000);
+
     $(".toggle").exposeToggle();
     $('.toggleContainer').bind('iPhoneDragEnd',function(){
         $(this).parent().find('input').each(function(){
@@ -182,6 +190,7 @@ jQuery(document).ready(function($){
     });
 
     function getCurrentIndex(){
+        var val = 0;
          $('.expose-tab li').each(function(i){
             //get the current class name
             var klass = $(this).attr('class');

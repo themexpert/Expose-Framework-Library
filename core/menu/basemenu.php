@@ -1,7 +1,7 @@
 <?php
 /**
  * @package     Expose
- * @version     3.0.3
+ * @version     4.0
  * @author      ThemeXpert http://www.themexpert.com
  * @copyright   Copyright (C) 2010 - 2011 ThemeXpert
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
@@ -209,7 +209,7 @@ class ExposeBaseMenu extends JObject{
                    $v->url = str_replace('&', '&amp;', $v->url);
                }*/
 
-               if ( $v->home == 1 ) $v->url = JURI::base();
+               if ($v->home == 1) $v->url = JURI::base();
 
                //calculate menu column
                if (!isset($v->clssfx)) {
@@ -434,7 +434,7 @@ class ExposeBaseMenu extends JObject{
        $Itemid = $this->Itemid;
        $app = JFactory::getApplication();
        $user = JFactory::getUser();
-       $groups = implode(',', JUser::getAuthorisedViewLevels());
+       $groups = implode(',', $user->getAuthorisedViewLevels());
        $db = JFactory::getDbo();
 
        //$query = new JDatabaseQuery;

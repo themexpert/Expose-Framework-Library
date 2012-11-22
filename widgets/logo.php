@@ -1,7 +1,7 @@
 <?php
 /**
  * @package     Expose
- * @version     3.0.3
+ * @version     4.0
  * @author      ThemeXpert http://www.themexpert.com
  * @copyright   Copyright (C) 2010 - 2011 ThemeXpert
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
@@ -21,7 +21,7 @@ class ExposeWidgetLogo extends ExposeWidget{
     {
         global $expose;
 
-        $menu = JSite::getMenu();
+        $menu = $expose->app->getMenu();
 
         // Checking to see if new logo was uploaded. If so then use that. If not then use logo.png within the template image folder.
         if ( $this->get('image') ) {
@@ -59,15 +59,12 @@ class ExposeWidgetLogo extends ExposeWidget{
             $tag = 'p';
         }
 
-        // If it's a mobile device then set the CSS style to be 100% of the mobile window and resize the logo background image to be 100% wide and automatically set height to stay in perspective.
-        if ( $expose->platform == 'mobile' )
-        {
-            $tagStyle = 'width:100%;';
-            $linkStyle = "background: url({$imagePath}) no-repeat; width:{$imageWidth}px; width: 100%;height:60px; -o-background-size: 210px; -webkit-background-size: 210px; background-size: 210px;";
-        } else {
-            $tagStyle = '';
-            $linkStyle = "background: url({$imagePath}) no-repeat; width: {$imageWidth}px; height:{$imageHeight}px;";
-        }
+
+        $tagStyle = '';
+        $linkStyle = "background: url({$imagePath}) no-repeat;
+                      background-size: contain;
+                      width: {$imageWidth}px; height:{$imageHeight}px;";
+
 
         // If there is no text filled in for Logo Text field then default to site title
         if ( $this->get('text') == '' ) {
@@ -86,11 +83,13 @@ class ExposeWidgetLogo extends ExposeWidget{
         // Output the logo. Determine whether it's text or an image, then pull in all the values set previously to display properly.
         if ( $this->get('type') == 'text' )
         {
-            $logo = "<{$tag} id=\"ex-logo\" class=\"brand {$this->get('type')}\"> <a href=\"{$expose->baseUrl}\">$logoText $tagline</a>  </{$tag}>";
+            $logo = "<{$tag} id=\"logo\" class=\"brand {$this->get('type')}\"> <a href=\"{$expose->baseUrl}\">$logoText $tagline</a>  </{$tag}>";
 
         } else {
 
-            $logo = "<{$tag} id=\"ex-logo\" class=\"brand {$this->get('type')}\" style=\"{$tagStyle}\"> <a style=\"{$linkStyle} display:block;text-indent: -9999px;font-size:0\"  href=\"{$expose->baseUrl}\">$logoText $tagline</a>  </{$tag}>";
+            $logo = "<{$tag} id=\"logo\" class=\"brand {$this->get('type')}\" style=\"{$tagStyle}\">
+                        <a class=\"auto-size\" style=\"{$linkStyle}\"  href=\"{$expose->baseUrl}\">$logoText $tagline</a>
+                    </{$tag}>";
 
         }
 

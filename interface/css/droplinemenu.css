@@ -1,63 +1,52 @@
 /**
  * @package     Expose
- * @version     3.0.3
+ * @version     4.0
  * @author      ThemeXpert http://www.themexpert.com
  * @copyright   Copyright (C) 2010 - 2011 ThemeXpert
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
  **/
 
 
-#exdl-mainnav {
-	position: relative;
-}
+#mainnav { position: relative; }
+#menu ul { margin: 0; list-style: none; }
+#mainnav li { float: left; padding: 0; margin: 0;}
 
-#ex-menu ul {
-    margin: 0;
-    list-style: none;
-}
-
-#exdl-mainnav li {
-	float: left;
-	padding: 0;
-	margin: 0;
-}
-
-#exdl-mainnav a,
-#exdl-mainnav ul li > span {
+#mainnav a,
+#mainnav ul li > span {
 	display: block;
 	float: left;
 	font-weight: bold;
 	line-height: 30px;
 	margin: 0;
 	padding: 8px 15px;
-	text-decoration: none;
+	tt-decoration: none;
 }
-#exdl-mainnav li.has-desc a,
-#exdl-mainnav ul li.has-desc > span{line-height: 15px}
+#mainnav li.has-desc a,
+#mainnav ul li.has-desc > span{line-height: 15px}
 
-#exdl-mainnav .menu-title,
-#ex-subnav .menu-title{
+#mainnav .menu-title,
+#subnav .menu-title{
     display: block;
 }
-#exdl-mainnav .menu-desc,
-#ex-subnav .menu-desc{
+#mainnav .menu-desc,
+#subnav .menu-desc{
     display: block;
     font-weight: normal;
     font-size: 92%;
 }
-#exdl-mainnav a:hover,
-#exdl-mainnav ul li.hover a {}
+#mainnav a:hover,
+#mainnav ul li.hover a {}
 
-#exdl-mainnav li.active a,
-#exdl-mainnav li.active a:hover,
-#exdl-mainnav li.active a:active,
-#exdl-mainnav li.active a:focus {}
+#mainnav li.active a,
+#mainnav li.active a:hover,
+#mainnav li.active a:active,
+#mainnav li.active a:focus {}
 
-#ex-subnav .first-item {}
+#subnav .first-item {}
 
-#ex-subnav { display: none; }
+#subnav { display: none; }
 
-#ex-menu .has-image {
+#menu .has-image {
 	padding-left: 35px;
 	display: block;
 	background-repeat: no-repeat;
@@ -65,32 +54,32 @@
 }
 /* SubNav Common= Dropline+Split menu
 -----------------------------------*/
-#ex-subnav { clear: both; position: relative; z-index: 9; }
+#subnav { clear: both; position: relative; z-ind: 9; }
 
-#ex-subnav .sublevel { line-height: 1; z-index: 10;}
-#ex-subnav ul.active { }
+#subnav .sublevel { line-height: 1; z-ind: 10;}
+#subnav ul.active { }
 
-#ex-subnav li { background: none; display: block; float: left; margin: 0 10px; padding: 10px 0;position: relative; }
+#subnav li { background: none; display: block; float: left; margin: 0 10px; padding: 10px 0;position: relative; }
 
-#ex-subnav li.first-item { }
+#subnav li.first-item { }
 
-#ex-subnav ul li a { display: block; text-decoration: none; }
+#subnav ul li a { display: block; text-decoration: none; }
 
-#ex-subnav ul li a:hover { color: #333;}
+#subnav ul li a:hover { color: #333;}
 
-#ex-subnav ul li.active a.active,
-#ex-subnav ul li.active a.active:hover,
-#ex-subnav ul li.active a.active:active,
-#ex-subnav ul li.active a.active:focus { color: #333; }
+#subnav ul li.active a.active,
+#subnav ul li.active a.active:hover,
+#subnav ul li.active a.active:active,
+#subnav ul li.active a.active:focus { color: #333; }
 
-#ex-subnav ul.active li a { }
+#subnav ul.active li a { }
 
-#ex-subnav ul.active li a:hover { }
+#subnav ul.active li a:hover { }
 
-#ex-subnav ul li.empty { visibility: hidden; }
+#subnav ul li.empty { visibility: hidden; }
 
 /* Sub Nav (lv2) ---*/
-#ex-subnav ul li ul {
+#subnav ul li ul {
 	display: block;
 	height: auto;
 	left: -999em;
@@ -101,7 +90,7 @@
     z-index : 10;
 }
 
-#ex-subnav ul li:hover > ul {
+#subnav ul li:hover > ul {
     display: block;
     height: auto;
     left: auto;
@@ -109,17 +98,17 @@
     background: #f5f5f5
 }
 
-#ex-subnav ul li.has-submenu a.has-submenu span.menu-title {
+#subnav ul li.has-submenu a.has-submenu span.menu-title {
 	background: url(../images/arrow.png) no-repeat right center;
-	padding-right: 12px;
+	padding-right: 20px;
     display: block;
 }
 
-#ex-subnav ul li.has-submenu a.has-submenu:hover span.menu-title { background-image: url(../images/arrow3.png) }
+#subnav ul li.has-submenu a.has-submenu:hover span.menu-title { background-image: url(../images/arrow3.png) }
 
-#ex-subnav ul li.has-submenu li.has-submenu a.has-submenu:hover span.menu-title { background-image: url(../images/arrow.png) }
+#subnav ul li.has-submenu li.has-submenu a.has-submenu:hover span.menu-title { background-image: url(../images/arrow.png) }
 
-#ex-subnav ul li ul li {
+#subnav ul li ul li {
 	display: block;
 	float: none;
 	padding: 5px;
@@ -127,22 +116,22 @@
 	text-align: left;
 }
 
-#ex-subnav ul li ul li a { }
+#subnav ul li ul li a { }
 
-#ex-subnav ul li ul li a span.menu-title { line-height: 1.5em; }
+#subnav ul li ul li a span.menu-title { line-height: 1.5em; }
 
-#ex-subnav ul li ul li a.active { }
+#subnav ul li ul li a.active { }
 
 /* Sub Nav (lv3) ---*/
-#ex-subnav ul li:hover ul ul { display: none; top: auto; }
+#subnav ul li:hover ul ul { display: none; top: auto; }
 
-#ex-subnav ul ul li:hover > ul {
+#subnav ul ul li:hover > ul {
 	display: block;
 	height: auto;
 	left: auto;
 	margin: -1.8em 0 0 12em;
 }
 
-#ex-subnav ul li li.has-submenu a.has-submenu span.menu-title {
+#subnav ul li li.has-submenu a.has-submenu span.menu-title {
 	display: block;
 }

@@ -1,15 +1,23 @@
+/**
+ * @package     Expose
+ * @version     4.0
+ * @author      ThemeXpert http://www.themexpert.com
+ * @copyright   Copyright (C) 2010 - 2011 ThemeXpert
+ * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
+ **/
+
 jQuery(document).ready(function($){
 
-    var mainnav = $('#exdl-mainnav');
-    var subnav = $('#ex-subnav');
+    var mainnav = $('#mainnav');
+    var subnav = $('#subnav');
 
     //subnav.filter('ul').eq(0).hide();
 
     mainnav.on('mouseenter', 'li', function(){
         //get the menu unique id
         var fullid = $(this).attr('id');
-        var idnum = fullid.replace('exdl-mainnav','');
-        var subnavid = '#exdl-subnav' + idnum;
+        var idnum = fullid.replace('mainnav','');
+        var subnavid = '#dl-subnav' + idnum;
         var klass = subnav.find(subnavid).find('li').attr('class');
 
         subnav
@@ -25,7 +33,7 @@ jQuery(document).ready(function($){
 
     });
 
-    $('#ex-menu').on('mouseleave', function(){
+    $('#menu').on('mouseleave', function(){
         subnav.slideUp();
     });
 

@@ -1,7 +1,7 @@
 <?php
 /**
  * @package     Expose
- * @version     3.0.3    Mar 15, 2011
+ * @version     4.0    Mar 15, 2011
  * @author      ThemeXpert http://www.themexpert.com
  * @copyright   Copyright (C) 2010 - 2011 ThemeXpert
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
@@ -22,7 +22,7 @@ class JFormFieldUtility extends JFormField{
     protected function getInput(){
 
         //load expose bootstrap
-        require_once (JPATH_LIBRARIES.DS.'expose'.DS.'expose.php');
+        require_once (JPATH_LIBRARIES.'/expose/expose.php');
 
         global $expose;
         // Initialize some field attributes.

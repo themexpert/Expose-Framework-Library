@@ -1,7 +1,7 @@
 <?php
 /**
  * @package     Expose
- * @version     3.0.3
+ * @version     4.0
  * @author      ThemeXpert http://www.themexpert.com
  * @copyright   Copyright (C) 2010 - 2011 ThemeXpert
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
@@ -22,21 +22,21 @@ class ExposeWidgetEqualheight extends ExposeWidget{
     public function init()
     {
         global $expose;
-        $prefix = $expose->getPrefix();
+        
         $js = '';
 
-        $js .= "jQuery('#{$prefix}roof .ex-column').equalHeight('.ex-block');";
-        $js .= "jQuery('#{$prefix}header .ex-column').equalHeight('.ex-block');";
-        $js .= "jQuery('#{$prefix}top .ex-column').equalHeight('.ex-block');";
-        $js .= "jQuery('#{$prefix}utility .ex-column').equalHeight('.ex-block');";
-        $js .= "jQuery('#{$prefix}feature .ex-column').equalHeight('.ex-block');";
-        $js .= "jQuery('#{$prefix}main-top .ex-column').equalHeight('.ex-block');";
-        $js .= "jQuery('#{$prefix}content-top .ex-column').equalHeight('.ex-block');";
-        $js .= "jQuery('#{$prefix}content-bottom .ex-column').equalHeight('.ex-block');";
-        $js .= "jQuery('#{$prefix}main-bottom .ex-column').equalHeight('.ex-block');";
-        $js .= "jQuery('#{$prefix}bottom .ex-column').equalHeight('.ex-block');";
-        $js .= "jQuery('#{$prefix}footer .ex-column').equalHeight('.ex-block');";
-        $js .= "jQuery('#{$prefix}mainbody, #{$prefix}sidebar-a, #{$prefix}sidebar-b').equalHeight();";
+        $js .= "jQuery('#roof .column').equalHeight('.block');";
+        $js .= "jQuery('#header .column').equalHeight('.block');";
+        $js .= "jQuery('#top .column').equalHeight('.block');";
+        $js .= "jQuery('#utility .column').equalHeight('.block');";
+        $js .= "jQuery('#feature .column').equalHeight('.block');";
+        $js .= "jQuery('#main-top .column').equalHeight('.block');";
+        $js .= "jQuery('#content-top .column').equalHeight('.block');";
+        $js .= "jQuery('#content-bottom .column').equalHeight('.block');";
+        $js .= "jQuery('#main-bottom .column').equalHeight('.block');";
+        $js .= "jQuery('#bottom .column').equalHeight('.block');";
+        $js .= "jQuery('#footer .column').equalHeight('.block');";
+        $js .= "jQuery('#mainbody, #sidebar-a, #sidebar-b').equalHeight();";
 
         $expose->addLink('jquery.equalheight.js','js');
         $expose->addjQDom($js);

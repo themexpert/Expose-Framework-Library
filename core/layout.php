@@ -1,7 +1,7 @@
 <?php
 /**
  * @package     Expose
- * @version     3.0.3
+ * @version     4.0
  * @author      ThemeXpert http://www.themexpert.com
  * @copyright   Copyright (C) 2010 - 2011 ThemeXpert
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
@@ -10,6 +10,9 @@
 
 //prevent direct access
 defined ('EXPOSE_VERSION') or die ('resticted aceess');
+
+//Import Module chrome generator class
+expose_import('core.html');
 
 //import joomla filesystem classes
 jimport('joomla.filesystem.folder');
@@ -84,7 +87,7 @@ class ExposeLayout
 
     }
 
-    public function renderModules($position)
+    public function renderModules($position, $inset=FALSE, $grid=NULL)
     {
         global $expose;
 
@@ -93,32 +96,39 @@ class ExposeLayout
 
         if($totalPublished > 0 AND isset($this->modules[$position]['active']))
         {
-            $widths = $this->getModuleSchema($position);
-            $containerClass = 'ex-column';
+            //check for inset position
+            if($inset)
+            {
+                $grids = $this->getInsetModuleSchema($position,$grid);
+
+            }else{
+                $grids = $this->getModuleSchema($position);
+            }
+
+            $containerClass = 'grid';
 
             foreach($this->getActiveModuleLists($position) as $positionName)
             {
-                //$totalModulesInPosition = $this->countModulesForPosition( $positionName );
-                $width = array_shift($widths);
+                //get the total published module/widget number for assigned position
+                $totalModulesInPosition = $this->countModulesForPosition( $positionName );
+                $totalWidgetsInPosition = $this->countWidgetsForPosition( $positionName );
+
+                //get the grid number from grids array
+                $grid = array_shift($grids);
+
                 $class = '';
                 $html = '';
 
-                //we'll make all width 100% for mobile device
-                if($expose->platform == 'mobile'){
-                    $width = 100;
-                }
-
-                if($i == 1) $class .= 'ex-first ';
+                //Set the class first and last
+                if($i == 1) $class .= 'first ';
 
                 if($i == $totalPublished){
-                    $class .= 'ex-last ';
+                    $class .= 'last ';
                 }
-
-                $class .= ($i%2) ? 'ex-odd' : 'ex-even';
-                if($i == ($totalPublished -1)) $class .= ' ie6-offset';
-
-                $style = "style=\"width: $width%\" ";
-                if(count($this->modules[$position]['schema']) == 1) $style = ''; //Exception for single module position
+                //Odd even class
+                $class .= ($i%2) ? 'odd' : 'even';
+                //set the grid class eg: grid6
+                $grid = $containerClass . $grid;
 
                 //we'll load all widgets first published in this position
                 if($this->countWidgetsForPosition($positionName))
@@ -126,22 +136,52 @@ class ExposeLayout
                     foreach($this->activeWidgets[$positionName] as $widget)
                     {
                         $name = 'widget-' . $widget->name;
-                        $html .= "<div class=\"ex-block ex-widget no-title column-spacing $name clearfix\">";
-                            $html .= "<div class=\"ex-content\">";
-                                $html .= $widget->render();
-                            $html .= "</div>";
-                        $html .= "</div>";
-
+                        //get the widget content
+                        $content = $widget->render();
+                        // get widget specific html
+                        $html .= ExposeHtml::widget($name, $content);
                     }
                 }
 
-                $modWrapperStart = "<div class=\"$containerClass $class $positionName\" $style>";
-                $modWrapperEnd = "</div>";
+                //if there is more then 1 module published we'll assign a identifier class
+                if ( ( $totalModulesInPosition + $totalWidgetsInPosition ) > 1 )
+                {
+                    $class .= ' multi-module-column';
+                }
 
                 //now load modules content
-                $chrome = $this->getModuleChrome($position,$positionName);
+                $chrome = $this->getModuleChrome($position, $positionName);
 
-                $html .= '<jdoc:include type="modules" name="'.$positionName.'" style="'.$chrome.'" />';
+                $modWrapperStart = "<div class=\"$grid column $class $positionName\">";
+                $modWrapperEnd = "</div>";
+
+
+
+                switch ( $chrome ) {
+
+                    case 'tabs':
+
+                        $html .= ExposeHtml::tabs($positionName);
+                        break;
+
+                    case 'accordion':
+
+                        $html .= ExposeHtml::accordion($positionName);
+                        break;
+
+                    case 'basic':
+
+                        $html .= ExposeHtml::basic($positionName);
+                        break;
+
+                    default :
+
+                        $html .= ExposeHtml::standard($positionName);
+                        break;
+                }
+
+                //$html .= '<jdoc:include type="modules" name="'.$positionName.'" style="'.$chrome.'" />';
+                //$html   .= '<jdoc:include type="modules" name="'.$positionName.'" style="'.$chrome.'" class="'.$class.'" positionName="'.$positionName.'" />';
 
                 echo $modWrapperStart . $html . $modWrapperEnd;
 
@@ -175,6 +215,32 @@ class ExposeLayout
         //return module schema based on active modules
         return $this->modules[$position]['schema'][$published];
 
+    }
+
+    public function getInsetModuleSchema($position, $grid)
+    {
+        //total module published in this position
+        $total = $this->modules[$position]['published'];
+        $used = 0;
+
+        //set module schema
+        $tempGrid = round($grid/$total);
+
+        for( $i = 0; $i < $total; $i++ )
+        {
+
+            if( ($i+1) == $total )
+            {
+
+                $tempGrid = $grid - $used;
+            }
+
+            $this->modules[$position]['schema'][$total][$i] = $tempGrid;
+
+            $used += $tempGrid ;
+        }
+
+        return $this->modules[$position]['schema'][$total];
     }
 
     public function getModuleChrome($position, $module)
@@ -285,17 +351,6 @@ class ExposeLayout
         global $expose;
 
         $parentField = substr($position,0,strpos($position,'-')); //split the number and get the parent field name
-
-        if($expose->platform == 'mobile')
-        {
-            if($expose->get($parentField.'-mobile'))
-            {
-                return $expose->document->countModules($position);
-            }else{
-                return FALSE;
-            }
-        }
-
         return $expose->document->countModules($position);
 
     }
@@ -305,8 +360,8 @@ class ExposeLayout
         global $expose;
         //define widgets paths
         $widgetPaths = array(
-            $expose->exposePath . DS . 'widgets',
-            $expose->templatePath . DS .'widgets'
+            $expose->exposePath . '/' . 'widgets',
+            $expose->templatePath .'/' .'widgets'
         );
         $widgetLists = array();
 
@@ -376,27 +431,11 @@ class ExposeLayout
         $tPath = $expose->templatePath . DS .'layouts';
         $ext = '.php';
 
-        if( $expose->platform == 'mobile' )
-        {
-            $device = strtolower($expose->browser->getBrowser());
-            $bfile = $bPath .DS . $device . $ext;
-            $tfile = $tPath .DS . $device . $ext;
+        $bfile = $bPath .DS . $layouts . $ext;
+        $tfile = $tPath .DS . $layouts . $ext;
 
-            if($expose->get('iphone-enabled') AND $device == 'iphone')
-            {
-                $this->loadFile(array($tfile,$bfile));
-            }elseif($expose->get('android-enabled') AND $device == 'android'){
-                $this->loadFile(array($tfile,$bfile));
-            }else{
-                return FALSE;
-            }
+        $this->loadFile(array($tfile,$bfile));
 
-        }else{
-            $bfile = $bPath .DS . $layouts . $ext;
-            $tfile = $tPath .DS . $layouts . $ext;
-
-            $this->loadFile(array($tfile,$bfile));
-        }
     }
 
 

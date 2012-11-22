@@ -1,7 +1,7 @@
 <?php
 /**
  * @package     Expose
- * @version     3.0.3
+ * @version     4.0
  * @author      ThemeXpert http://www.themexpert.com
  * @copyright   Copyright (C) 2010 - 2011 ThemeXpert
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
@@ -41,7 +41,7 @@ if (!defined ('_EXPOSE_SPLIT_MENU')) {
         function beginMenu($startlevel = 0, $endlevel = 10)
         {
             if ($startlevel == 0) {
-                echo "<div id=\"ex-splitmenu\" class=\"mainlevel clearfix\">\n";
+                echo "<div id=\"splitmenu\" class=\"mainlevel clearfix\">\n";
             } else {
                 echo "<div class=\"sublevel\">\n";
             }

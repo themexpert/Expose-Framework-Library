@@ -1,7 +1,7 @@
 <?php
 /**
  * @package     Expose
- * @version     3.0.3
+ * @version     4.0
  * @author      ThemeXpert http://www.themexpert.com
  * @copyright   Copyright (C) 2010 - 2011 ThemeXpert
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
@@ -23,7 +23,7 @@ class ExposeWidgetTotop extends ExposeWidget{
     {
         global $expose;
         $js = "
-            jQuery('#ex-scrolltop').click(function () {
+            jQuery('#scrolltop').click(function () {
                 jQuery('body,html').animate({
                     scrollTop: 0
                 }, 800);
@@ -34,7 +34,7 @@ class ExposeWidgetTotop extends ExposeWidget{
 
         ob_start()
     ?>
-    <a id="ex-scrolltop" href="#top"><span>Back to Top</span></a>
+    <a id="scrolltop" href="#top"><span>Back to Top</span></a>
 
     <?php
         return ob_get_clean();

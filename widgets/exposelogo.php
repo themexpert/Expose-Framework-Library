@@ -1,7 +1,7 @@
 <?php
 /**
  * @package     Expose
- * @version     3.0.3
+ * @version     4.0
  * @author      ThemeXpert http://www.themexpert.com
  * @copyright   Copyright (C) 2010 - 2011 ThemeXpert
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
@@ -24,7 +24,7 @@ class ExposeWidgetExposelogo extends ExposeWidget{
         $website = 'http://www.expose-framework.org';
         ob_start();
             ?>
-            <div id="ex-poweredby" class="expose-logo expose-logo-<?php echo $this->get('type');?>">
+            <div id="poweredby" class="expose-logo expose-logo-<?php echo $this->get('type');?>">
                 <a href="<?php echo $website ;?>" target="_blank" title="Powered By Expose Framework">
                     <span>Powered By Expose Framework</span>
                 </a>

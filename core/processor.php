@@ -3,7 +3,7 @@
  * Expose Css and Js processor with combine and minify option
  *
  * @package     Expose
- * @version     3.0.3
+ * @version     4.0
  * @author      ThemeXpert http://www.themexpert.com
  * @copyright   Copyright (C) 2010 - 2011 ThemeXpert
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3
@@ -119,7 +119,7 @@ class ExposeProcessor {
                         $buffer .= "\n\n/*** " . $url.$file . " ***/\n\n" . $content;
 
                     }
-                   JFile::write($cachePath,$buffer);
+                   JFile::write($cachePath,$buffer, true);
 
                 }
                 $cacheFiles[$cacheFile] = $url;
@@ -175,7 +175,7 @@ class ExposeProcessor {
             {
                 $header = self::getFileheader($type);
                 $buffer = $header . $buffer;
-                JFile::write($cachePath,$buffer);
+                JFile::write($cachePath,$buffer, true);
             }
             unset($expose->scripts);
             $cacheFiles[$cacheFile] = $jsurl;
