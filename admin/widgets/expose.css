@@ -355,11 +355,18 @@ span.pre-text{
 }
 .version-info{ font-size: 14px; font-weight: bold; margin-bottom: 5px; color: #676767;}
 .version-info span{ color: #222;}
-/*Joomla 3 fix*/
+
+/* Joomla 3 fix Start */
 .overview .controls{ margin-left: 0 !important;}
 #details label { min-width: 66px !important; padding-right: 0 !important;}
 #details input[type='text'] { width: 165px; float: left;}
 #jform_params_logo_image{ background: none; margin-right: 0 !important; width: 200px;}
+.row-fluid .expose-wrapper{margin-top: 10px;}
+.row-fluid .expose-tab-content{width: 82%; padding: 0 5px;}
+.row-fluid .form-horizontal .control-group{border-bottom: 1px solid #eee; margin-bottom: 0;}
+.row-fluid .field-wrap{margin-top: 0;}
+.row-fluid #details input[type="text"]{width: 150px; margin-top: 10px !important;}
+/*Joomla 3 fix end*/
 
 #mods-wrap{float: left;margin-right: 20px}
 #mods-wrap .inputs input[type=text],
