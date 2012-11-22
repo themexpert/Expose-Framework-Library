@@ -22,7 +22,7 @@ class ExposeWidgetCopyrightinfo extends ExposeWidget{
         ob_start();
             ?>
             <span class="copyright">
-                <?php echo ($this->get('text') ==='EXPOSE_DEFAULT_COPYRIGHT') ? JText::_('EXPOSE_DEFAULT_COPYRIGHT')  : $this->get('text'); ?>
+                <?php echo ($this->get('text')) ? $this->get('text') :  JText::_('EXPOSE_DEFAULT_COPYRIGHT'); ?>
             </span>
         <?php
         return ob_get_clean();
