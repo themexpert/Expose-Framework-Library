@@ -767,10 +767,10 @@ class ExposeCore{
 
         $mainBodyWidth = 12 - ($grids['a'] + $grids['b']);
 
-        if($this->isEditpage())
+        /*if($this->isEditpage())
         {
             $mainBodyWidth = 12;
-        }
+        }*/
 
         $width['component']= $mainBodyWidth;
         $width['sidebar-a'] = $grids['a'];
