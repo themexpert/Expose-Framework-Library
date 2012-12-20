@@ -137,6 +137,12 @@ class ExposeCore{
             return $value;
         }
     }
+    // Set value to params
+    public function set($params, $value=NULL){
+
+        $field = $this->app->getTemplate(true)->params;
+        $field->set($params, $value);
+    }
     
     public function getActiveTemplate(){
         if (!$this->isAdmin()) {
