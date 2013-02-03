@@ -126,7 +126,7 @@ class ExposeLayout
                     $class .= 'last ';
                 }
                 //Odd even class
-                $class .= ($i%2) ? 'odd' : 'even';
+                $class .= ($i%2) ? 'ex-odd' : 'ex-even';
                 //set the grid class eg: grid6
                 $grid = $containerClass . $grid;
 

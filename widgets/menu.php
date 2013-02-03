@@ -110,27 +110,23 @@ class ExposeWidgetMenu extends ExposeWidget{
                     $active = '';
                    if ($itemId == $val->id) $active = 'selected="selected"';
                 ?>
-                ?>
-                    <option value="<?php echo $val->url;?>" <?php echo $active; ?> >
-                        <?php
-                            if( count($val->tree) > 1 )
-                            {
-                                for($i=0; $i < (count($val->tree)-1); $i++){
-                                    echo "-";
-                                }
+                <option value="<?php echo $val->url;?>" <?php echo $active; ?> >
+                    <?php
+                        if( count($val->tree) > 1 )
+                        {
+                            for($i=0; $i < (count($val->tree)-1); $i++){
+                                echo "-";
                             }
-                        ?>
-
-                        <?php echo $val->title; ?>
-
-                    </option>
+                        }
+                    ?>
+                    <?php echo $val->title; ?>
+                </option>
                 <?php endforeach;?>
             </select>
         </nav>
 
         <?php
         return ob_get_clean();
-
     }
 
 }
