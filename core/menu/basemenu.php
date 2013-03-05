@@ -558,11 +558,11 @@ class ExposeBaseMenu extends JObject{
                        default:
                        case 0:
                            // _top
-                           $data = '<a href="' . $tmp->url . '" ' . $active . ' ' . $id . ' ' . $title . '>' . $txt . '</a>';
+                           $data = '<a href="' . $tmp->url . '" ' . $active . ' ' . $id . '>' . $txt . '</a>';
                            break;
                        case 1:
                            // _blank
-                           $data = '<a href="' . $tmp->url . '" target="_blank" ' . $active . ' ' . $id . ' ' . $title . '>' . $txt . '</a>';
+                           $data = '<a href="' . $tmp->url . '" target="_blank" ' . $active . ' ' . $id . '>' . $txt . '</a>';
                            break;
                        case 2:
                            // window.open
@@ -570,7 +570,7 @@ class ExposeBaseMenu extends JObject{
 
                            // hrm...this is a bit dickey
                            $link = str_replace('index.php', 'index2.php', $tmp->url);
-                           $data = '<a href="' . $link . '" onclick="window.open(this.href,\'targetWindow\',\'' . $attribs . '\');return false;" ' . $active . ' ' . $id . ' ' . $title . '>' . $txt . '</a>';
+                           $data = '<a href="' . $link . '" onclick="window.open(this.href,\'targetWindow\',\'' . $attribs . '\');return false;" ' . $active . ' ' . $id . ' >' . $txt . '</a>';
                            break;
                    }
                } else {
