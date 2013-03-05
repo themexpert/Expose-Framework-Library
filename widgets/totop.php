@@ -34,7 +34,7 @@ class ExposeWidgetTotop extends ExposeWidget{
 
         ob_start()
     ?>
-    <a id="scrolltop" href="#top"><span>Back to Top</span></a>
+    <a id="scrolltop" href="#top"><span><?php echo JText::_('BACK_TO_TOP'); ?></span></a>
 
     <?php
         return ob_get_clean();
