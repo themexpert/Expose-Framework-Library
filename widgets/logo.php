@@ -54,7 +54,7 @@ class ExposeWidgetLogo extends ExposeWidget{
 
         // For good SEO your logo should be an H1 tag on homepage, then degrade to a P tag on inner pages.
         if ( $menu->getActive() == $menu->getDefault() ) {
-            $tag = 'h1';
+            $tag = 'p';
         } else {
             $tag = 'p';
         }
