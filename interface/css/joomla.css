@@ -35,7 +35,7 @@ tr.sectiontableentry0 td, td.sectiontableentry0, tr.sectiontableentry1 td, td.se
 #component .articleinfo {margin-bottom: 15px;}
 #component .author {font-style: italic;}
 #component .date-created, #component .date-published {font-weight: bold;}
-#component .description {margin: 10px 0px 10px 0px;overflow: hidden;}
+#component .description {margin: 10px 0px 0px 0px;overflow: hidden;}
 #component .description img.left {margin-right: 15px;float: left;}
 #component .description img.right {margin-left: 15px;float: right;}
 #component .filter {margin: 10px 0;}
