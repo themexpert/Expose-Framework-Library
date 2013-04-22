@@ -297,9 +297,15 @@ class ExposeLayout
 
         foreach($this->widgets as $name => $instance)
         {
-            if($instance->isEnabled() AND $instance->isInPosition($position) AND method_exists($instance, 'render')){
-
-                $widgets[$name] = $instance;
+            if($instance->isInPosition($position))
+            {
+                if(method_exists($instance, 'render'))
+                {
+                    if($instance->isEnabled()) 
+                    {
+                        $widgets[$name] = $instance;        
+                    }    
+                }
             }
         }
 
@@ -408,9 +414,12 @@ class ExposeLayout
                     $instance->init();
                 }
             }else{
-                if($instance->isEnabled() AND method_exists($instance, 'init'))
+                if( method_exists($instance, 'init') )
                 {
+                   if( $instance->isEnabled() ) 
+                   {
                     $instance->init();
+                   }
                 }
             }
         }
@@ -464,7 +473,5 @@ class ExposeLayout
     {
         return $this->modules;
     }
-
-
 
 }
