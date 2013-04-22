@@ -47,7 +47,10 @@ class JFormFieldModulePositions extends JFormField
             $jquery_uri = str_replace('admin/fields','interface/js',$uri) ;
             $doc = JFactory::getDocument();
 
-            $doc->addScript($jquery_uri.'/jquery-1.7.1.min.js');
+            if ( version_compare(JVERSION, '2.5', 'ge') && version_compare(JVERSION, '3.0', 'lt') )
+            {
+                $doc->addScript($jquery_uri.'/jquery-1.7.1.min.js');
+            }
 
             $js = "
                 jQuery.noConflict();
