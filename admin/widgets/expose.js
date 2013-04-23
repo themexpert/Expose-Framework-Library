@@ -34,15 +34,18 @@ jQuery(document).ready(function($){
     //loop through all h3 element and convert them to expose tab
     $('h3.title , .accordion-heading a').each(function(){
         //lets cache some vaue
-        var obj = $(this);
-        var title = $(this).text(); // this title will use as class name
+        var obj = $(this),
+            // this title will use as class name
+            title = $(this).text(),
+            idclass = $(this).attr('id').replace('-options','');
 
-        $('<li><span>'+ title +'</span></li>').appendTo('.expose-tab ul').addClass(title);
+        $('<li><span>'+ title +'</span></li>').appendTo('.expose-tab ul').addClass(idclass);
+
         obj.next().removeClass().removeAttr('style').addClass(function(){
             if(title == 'assignments'){
                 $(this).empty();
             }
-            return 'panel ' + title + ' clearfix';
+            return 'panel ' + idclass + ' clearfix';
         }).appendTo('.expose-tab-content');
         //$(this).remove();
 
@@ -57,9 +60,9 @@ jQuery(document).ready(function($){
 
             return 'panel ' + title + ' clearfix';
 
-            }).appendTo('.expose-tab-content');    
+            }).appendTo('.expose-tab-content');
         }
-        
+
     });
 
     //finally remove the parent div of all accordion
@@ -144,9 +147,9 @@ jQuery(document).ready(function($){
             }else {
                 $(this).hide();
             }
-        });    
+        });
     }
-    
+
     //hide joomla3 tab and content
     $('#style-form').find('.nav, .tab-content').remove();
 
