@@ -76,6 +76,7 @@ fieldset.panelform select {
     border-radius: 2px;
 }
 ul.adminformlist li{border-bottom: 1px solid #eee;}
+.overview ul.adminformlist li{ border-bottom: none; }
 input.picker{width: 50px !important;float: left}
 span.tips{background: url(images/icon_tips.png) no-repeat;width: 13px;height: 13px; position: absolute; top: 50%; margin-top: -7px; right: 8px;}
 .assignments span.tips{display: none;}
@@ -388,6 +389,51 @@ span.pre-text{
     text-align:left;
     z-index: 999999;
 }
+/*Configurator*/
+#jform_params_configurator-lbl{ display: none; }
+div.toolbar-list .config-btn{
+    padding: 10px;
+    margin: 7px 10px;
+    font-weight: bold;
+    float: left;
+}
+div.toolbar-list .config-btn span{
+    padding: 0 0 0 29px;
+    line-height: 18px;
+    height: auto;
+    width: auto;
+}
+#configurator-form{
+    background: #fff;
+    display: none;
+    width: 550px;
+    height: auto;
+    padding: 15px;
+    z-index: 9999;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    top: 40%;
+}
+#configurator-form h3{
+    font-size: 20px;
+    font-weight: normal;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin: 0 0 15px;
+}
+#configurator-form > div { height: 25px; margin-bottom: 10px; background:  #f5f5f5; border:  1px solid #ddd; padding: 10px; border-radius: 4px; }
+
+#configurator-form div *{ float: left; }
+#configurator-form span.label {
+    width: 120px;
+    text-align: right;
+    margin-right: 20px;
+    border-right: 1px solid #ddd;
+    padding-right: 10px;
+    line-height: 24px;
+    box-shadow: 1px 0 1px #fff;
+}
+#configurator-form div a{ margin: 0 15px; padding: 4px 10px; }
+
 .positions-map{
     /*padding: 8px 3px;*/
     font-size: 11px;

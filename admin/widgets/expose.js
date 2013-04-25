@@ -153,6 +153,9 @@ jQuery(document).ready(function($){
     //hide joomla3 tab and content
     $('#style-form').find('.nav, .tab-content').remove();
 
+    // Take the config-btn and prepend it with toolbar buttons
+    $('.config-btn').prependTo('#toolbar ul');
+
     //show admin area
     $('#element-box .m').fadeIn(600);
 
