@@ -413,6 +413,18 @@ div.toolbar-list .config-btn span{
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
     top: 40%;
 }
+#configurator-form a.close{
+    position : absolute;
+    padding: 0 10px;
+    right: 20px;
+    line-height: 20px;
+    color: #999;
+    cursor : pointer;
+}
+#configurator-form a.close:after{
+    content: 'x';
+    display: block;
+}
 #configurator-form h3{
     font-size: 20px;
     font-weight: normal;
