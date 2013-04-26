@@ -30,38 +30,45 @@ jQuery(document).ready(function($){
     //Mission Control admin template bug fix
     $('#mc-component form.form-validate').append(skeleton);
 
+    // Set a counter for tab
+    var i = 0;
 
     //loop through all h3 element and convert them to expose tab
     $('h3.title , .accordion-heading a').each(function(){
         //lets cache some vaue
         var obj = $(this),
             // this title will use as class name
-            title = $(this).text(),
-            idclass = $(this).attr('id').replace('-options','');
-
-        $('<li><span>'+ title +'</span></li>').appendTo('.expose-tab ul').addClass(idclass);
-
-        obj.next().removeClass().removeAttr('style').addClass(function(){
-            if(title == 'assignments'){
-                $(this).empty();
-            }
-            return 'panel ' + idclass + ' clearfix';
-        }).appendTo('.expose-tab-content');
-        //$(this).remove();
+            title = $(this).text();
 
         //Joomla 3 compatibility fix
         if( joomla3 )
         {
+            $('<li><span>'+ title +'</span></li>').appendTo('.expose-tab ul').addClass(title + ' tab-' + i);
+
             obj.closest('.accordion-group').find('.accordion-inner').removeClass().addClass(function(){
 
             if(title == 'assignments'){
                 $(this).empty();
             }
 
-            return 'panel ' + title + ' clearfix';
+            return 'panel ' + title + ' tab-content-' + i + ' clearfix';
 
             }).appendTo('.expose-tab-content');
+        }else{
+
+            var idclass = $(this).attr('id').replace('-options','');
+
+            $('<li><span>'+ title +'</span></li>').appendTo('.expose-tab ul').addClass(idclass);
+
+            obj.next().removeClass().removeAttr('style').addClass(function(){
+                if(title == 'assignments'){
+                    $(this).empty();
+                }
+                return 'panel ' + idclass + ' clearfix';
+            }).appendTo('.expose-tab-content');
+            //$(this).remove();
         }
+        i++;
 
     });
 
@@ -154,7 +161,13 @@ jQuery(document).ready(function($){
     $('#style-form').find('.nav, .tab-content').remove();
 
     // Take the config-btn and prepend it with toolbar buttons
-    $('.config-btn').prependTo('#toolbar ul');
+    if( joomla3 )
+    {
+        $('.config-btn').appendTo('#toolbar');
+    }else{
+        $('.config-btn').prependTo('#toolbar ul');
+    }
+
 
     //show admin area
     $('#element-box .m').fadeIn(600);
