@@ -104,7 +104,7 @@ class JFormFieldConfigurator extends JFormField {
         $html .= "<p class='mod-chrome-button config-btn gradient hasTip' rel='#configurator-form' title='::".JText::_($this->description)."'><span>".JText::_('CONFIGURATOR_BTN_LABEL')."</span></p>";
 
 		$html .= '<div id="configurator-form">';
-            $html .= '<h3>Configuration manager</h3>';
+            $html .= '<h3>' . JText::_('CONFIGURATOR_TITLE') . '</h3>';
             $html .= '<p class="alert-message">'. JText::_('CONFIGURATOR_MSG') .'</p>';
 
             $html .= '<div><span class="label">' . JText::_('CONFIGURATOR_LOAD_LABEL') . '</span>' . $file_select . '<a id="configurator-load" class="gradient" href="#">' . JText::_('CONFIGURATOR_LOAD_BTN') . '</a> </div>';

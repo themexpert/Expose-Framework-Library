@@ -112,7 +112,8 @@ class JFormFieldFonts extends JFormField{
         array_pop($options);
 
 
-        $html .= "<a href=\"http://www.google.com/webfonts\" target=\"_blank\">Check Google Font Directory</a><br/>";
+        $html .= '<a href="http://www.google.com/webfonts" target="_blank">'. JText::_('GOOGLE_FONT_LINK_LABLE') .'</a>';
+        $html .= "<br/>";
         $html .= JHtml::_('select.genericlist', $options, $this->name , $selectClass, 'value', 'text', $this->value, $this->id);
 
         return $wrapstart . $pretext. $html . $posttext . $wrapend;
