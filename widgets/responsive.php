@@ -27,6 +27,10 @@ class ExposeWidgetResponsive extends ExposeWidget{
     {
         global $expose;
 
+        // Set the viewport meta
+        $expose->document->setMetaData('viewport','width=device-width, initial-scale=1.0');
+
+        // Add breakpoint js
         $expose->addLink('breakpoints.js','js');
     }
 }

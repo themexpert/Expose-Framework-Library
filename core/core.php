@@ -663,11 +663,6 @@ class ExposeCore{
             echo '<jdoc:include type="head" />';
             echo "<link rel=\"apple-touch-icon-precomposed\" href=". $this->templateUrl. '/images/apple_touch_icon.png' ." />";
 
-            if( $this->isResponsive() )
-            {
-                $this->document->setMetaData('viewport','width=device-width, initial-scale=1.0');
-            }
-
         }
     }
 
