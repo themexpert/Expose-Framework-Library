@@ -579,7 +579,7 @@ class ExposeCore{
                 }
                 $this->addLink($file,'js',1);
             }else{
-                if( $cdn = 'google-cdn')
+                if( $cdn == 'google-cdn')
                 {
                     $this->addLink($file,'js',1);
                 }else{
