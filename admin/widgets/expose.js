@@ -79,8 +79,13 @@ jQuery(document).ready(function($){
     $('.width-60:first').appendTo('.template-name').removeClass('width-60 fltlft').addClass('inner');
 
     //lets take the menu assingments div and append it to its own div under tab
-    $('.width-60 .adminform').appendTo('div.assignments');
-
+    if( joomla3 )
+    {
+        $('#assignment').appendTo('div.Assignments');
+    }else{
+        $('.width-60 .adminform').appendTo('div.assignments');    
+    }
+    
     //remove old parent div
     $('.width-60').remove();
 
