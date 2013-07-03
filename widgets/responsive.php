@@ -26,7 +26,7 @@ class ExposeWidgetResponsive extends ExposeWidget{
     public function init()
     {
         global $expose;
-
+        
         // Set the viewport meta
         $expose->document->setMetaData('viewport','width=device-width, initial-scale=1.0');
 
