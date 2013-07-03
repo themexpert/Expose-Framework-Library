@@ -672,8 +672,8 @@ class ExposeCore{
     }
 
     public function generateBodyClass()
-    {
-        $url            = JURI::getInstance();
+    { 
+        $url            = new JInput();
         $itemid         = $url->getVar('Itemid');
         $menu           = @$this->app->getMenu();
         $active         = @$menu->getActive();
@@ -691,8 +691,8 @@ class ExposeCore{
         {
             $class     .= ' homepage ';
         }else{
-            $view       = $url->getVar('view');
-            $component      = str_replace('_','-', $url->getVar('option'));
+            $view       = $url->getWord('view');
+            $component      = str_replace('_','-', $url->getCmd('option'));
             $class     .= ' ' . $component . '-' . $view;
         }
 
