@@ -27,7 +27,7 @@ class JFormFieldModulePositions extends JFormField
 	protected $type = 'ModulePositions';
 
 	protected function getInput() {
-		$db =& JFactory::getDBO();
+		$db = JFactory::getDBO();
 		$query = "SELECT DISTINCT position FROM #__modules ORDER BY position ASC";
 		$db->setQuery($query);
 		$groups = $db->loadObjectList();
