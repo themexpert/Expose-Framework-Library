@@ -199,7 +199,10 @@ jQuery(document).ready(function($){
     });
 
     //Beautify select dorpdown.
-    $("select").uniform();
+    if ( !joomla3 )
+    {
+        $("select").uniform();    
+    }
 
     $('body').css('display','block');
 

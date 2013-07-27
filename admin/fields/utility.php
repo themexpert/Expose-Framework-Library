@@ -31,7 +31,11 @@ class JFormFieldUtility extends JFormField{
         $html = '';
 
         if($action == 'boot'){
-            $expose->addLink($expose->exposeUrl.'/interface/js/jquery.uniform.min.js','js');
+            if ( EXPOSE_JVERSION == '25')
+            {
+                $expose->addLink($expose->exposeUrl.'/interface/js/jquery.uniform.min.js','js');    
+            }
+            
             $expose->addLink($expose->exposeUrl.'/interface/js/jquery.cookie.js','js');
 
             //load expose.css file
