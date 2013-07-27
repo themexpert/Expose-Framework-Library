@@ -2,12 +2,12 @@
 <extension type="library" version="2.5" method="upgrade">
     <name>Expose Templaet Framework for Joomla 2.5</name>
     <libraryname>expose</libraryname>
-    <creationDate>7/3/2013</creationDate>
+    <creationDate>7/27/2013</creationDate>
     <author>ThemeXpert</author>
     <authorUrl>http://themexpert.com/</authorUrl>
     <copyright>Copyright (C) 2010 - 2013 ThemeXpert</copyright>
     <license>http://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3</license>
-    <version>4.1.1</version>
+    <version>4.1.2</version>
 
     <description>Expose is a flexible and powerful rapid development theme framework for joomla 2.5 and 3.x with a very small footprint provides an extensible environment for developing, maintaining, and deploying high quality themes. Choosing Expose allows you to release your themes earlier, host and scale them without problem, and maintain them over time with no hassle.
     </description>
@@ -28,9 +28,9 @@
         <language tag="en-GB">en-GB.lib_expose.ini</language>
     </languages>
 
-    <!-- UPDATESERVER DEFINITION -->
+    <!-- Extension Update Specification -->
     <updateservers>
-       <!--  <server type="library" priority="1" name="Expose framework site">http://themexpert.com/update/expose.xml</server> -->
+        <server name="Expose Framework Update Site" priority="1" type="extension">http://www.themexpert.com/ustreams/extensions/exposeframework.xml</server>
     </updateservers>
 
 </extension>
