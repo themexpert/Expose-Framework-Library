@@ -1,0 +1,332 @@
+/* Component - Ex-menu
+ ========================================================================== */
+.ex-menu{
+	.hook-menu;
+}
+.ex-menu ul{ margin: 0; padding: 0; list-style: none; }
+
+/*
+ * Micro clearfix
+ */
+
+.ex-menu > ul.l1:before,
+.ex-menu > ul.l1:after,
+.ex-menu .dropdown .column:before,
+.ex-menu .dropdown .column:after { content: " "; display: table; }
+.ex-menu > ul.l1:after,
+.ex-menu .dropdown .column:after { clear: both; }
+
+/*
+ * 1. Create first level float
+ * 2. Create position context for dropdowns
+ */
+
+/*1*/
+.ex-menu > ul.l1 > li { float: left; }
+
+/*2*/
+.ex-menu ul li{ position: relative; }
+
+/*
+ * 1. Dimensions
+ * 2. Style
+ * 3. Cursor
+ */
+
+.ex-menu li > a {
+	display: block;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	text-decoration: none;
+	/* 1 */
+	padding: 0 @menu-padding-horizontal;
+	line-height: @menu-line-height;
+	/* 2 */
+	color: @menu-color;
+	font-size: @menu-font-size;
+	font-weight: @menu-font-weight;
+	/*3*/
+	cursor: pointer;
+	.hook-menu-item;
+}
+/*
+ * Icon font
+ */
+ .ex-menu li a[class^="icon-"], 
+ .ex-menu li a[class*=" icon-"] { 
+	width: auto;
+	text-align: left;
+	.hook-menu-icon;
+
+	&:before{ margin-right: 5px;}
+
+	&:hover:before{ .hook-menu-icon-hover; }
+}
+/*
+ * Modifier - Level 1
+ */
+.ex-menu > ul.l1 > li { .hook-menu-level1; }
+
+/* Appear not as link */
+.ex-menu li a[href='#'] { cursor: auto; }
+
+/*
+ * Hover
+ * 1. Apply hover style also to focus state
+ * 2. Also apply if dropdown is opened
+ * 3. Remove default focus style
+ */
+
+.ex-menu li:hover > a,
+.ex-menu li > a:focus{ 
+	background-color: @menu-hover-background;
+	color: @menu-hover-color;
+	outline: none; /* 3 */
+	.hook-menu-item-hover;
+}
+.ex-menu ul.l1 li:hover > a{
+	.hook-menu-level1-hover;
+}
+/* OnClick */  
+.ex-menu li > a:active {
+	background-color: @menu-onclick-background;
+	color: @menu-onclick-color;
+	.hook-menu-item-onclick;
+}
+
+/* Active */
+.ex-menu li.active > a {
+	background-color: @menu-active-background;
+	color: @menu-active-color;
+	.hook-menu-item-active;
+}
+
+/* Sub-objects: `image`
+========================================================================== */
+.ex-menu li a img{
+	float: left;
+	margin-right: 5px; 
+	margin-top: 5px; 
+	.hook-menu-item-image;
+}
+
+/* Sub-objects: `subtitle`
+========================================================================== */
+
+.ex-menu .subtitle { line-height: (@menu-line-height - @menu-subtitle-font-size - @menu-subtitle-offset) + 1; }
+
+.subtitle > div {
+	margin-top: ((@menu-line-height - @menu-subtitle-font-size - @menu-font-size) / -2) + @menu-subtitle-offset;
+	font-size: @menu-subtitle-font-size;
+	line-height: @menu-subtitle-font-size + @menu-subtitle-offset;
+	.hook-menu-item-subtitle;
+}
+
+/* Sub-object: `toggle`
+========================================================================== */
+
+.ex-menu .toggle {
+	font-size: @toggle-font-size;
+	color: @toggle-color;
+}
+
+/*
+ * 1. Apply hover style also to focus state
+ * 2. Remove default focus style
+ */
+
+.ex-menu .toggle:hover,
+.ex-menu .toggle:focus { /* 1 */
+	color: @toggle-hover-color;
+	text-decoration: none;
+	outline: none; /* 2 */
+}
+
+/*
+ * 1. Center icon vertically
+ */
+
+.ex-menu .toggle:after {
+	content: @toggle-icon;
+	font-family: "FontAwesome";
+	vertical-align: middle; /* 1 */
+}
+
+/* Component - Dropdown
+ ========================================================================== */
+
+/*
+ * 1. Hide by default
+ * 2. Set position
+ * 3. Box-sizing is needed for `dropdown-justify`
+ * 4. Set style
+ * 5. Reset button group whitespace hack
+ */
+
+.ex-menu .dropdown {
+	/* 1 */
+	display: none;
+	/* 2 */
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: @dropdown-z-index;
+	/* 3 */
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	/* 4 */
+	background: @dropdown-background;
+	color: @dropdown-color;
+	/* 5 */
+	letter-spacing: normal;
+	.hook-menu-dropdown;
+}
+
+/*
+ * 1. Show dropdown
+ */
+
+.ex-menu li:hover > .dropdown {
+	/* 1 */
+	display: block;
+	.hook-menu-dropdown-hover;
+
+	li:hover > .dropdown{
+		left: 100%;
+ 		top: 0;
+		.hook-menu-nested-dropdown-hover;
+	}
+}
+
+/* Sub-objects: `grouped`
+========================================================================== */
+.ex-menu .dropdown .grouped > ul{
+	margin: 10px;
+	.hook-menu-grouped;
+}
+
+/* Sub-objects: `column`
+========================================================================== */
+.ex-menu .dropdown .column{
+	float: left; 
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	.hook-menu-column;	
+}
+
+/* Dropdown Animation - First level and sublevel
+==========================================================================*/
+// Fade
+[dropdown-animation="fade"] li:hover > .dropdown,
+[dropdown-sub-animation="fade"] li:hover > .dropdown li:hover > .dropdown{ 
+	-webkit-animation: fade 0.2s ease-in-out;
+			animation: fade 0.2s ease-in-out;
+}
+
+// Scale up
+[dropdown-animation="scale-up"] li:hover > .dropdown,
+[dropdown-sub-animation="scale-up"] li:hover > .dropdown li:hover > .dropdown{ 
+	-webkit-animation: scale-up 0.2s ease-in-out;
+			animation: scale-up 0.2s ease-in-out;
+
+	-webkit-transform-origin: 0 0;
+			transform-origin: 0 0;
+}
+
+// Scale down
+[dropdown-animation="scale-down"] li:hover > .dropdown,
+[dropdown-sub-animation="scale-down"] li:hover > .dropdown li:hover > .dropdown{ 
+	-webkit-animation: scale-down 0.2s ease-in-out;
+			animation: scale-down 0.2s ease-in-out;
+
+	-webkit-transform-origin: 0 0;
+			transform-origin: 0 0;
+}
+
+// Slide up
+[dropdown-animation="slide-top"] li:hover > .dropdown,
+[dropdown-sub-animation="slide-top"] li:hover > .dropdown li:hover > .dropdown{ 
+	-webkit-animation: slide-top-fixed 0.2s ease-in-out;
+			animation: slide-top-fixed 0.2s ease-in-out;
+
+	-webkit-transform-origin: 0 0;
+			transform-origin: 0 0;
+}
+// Slide down
+[dropdown-animation="slide-bottom"] li:hover > .dropdown,
+[dropdown-sub-animation="slide-bottom"] li:hover > .dropdown li:hover > .dropdown{ 
+	-webkit-animation: slide-bottom-fixed 0.2s ease-in-out;
+			animation: slide-bottom-fixed 0.2s ease-in-out;
+
+	-webkit-transform-origin: 0 0;
+			transform-origin: 0 0;
+}
+
+// Slide left
+[dropdown-animation="slide-left"] li:hover > .dropdown,
+[dropdown-sub-animation="slide-left"] li:hover > .dropdown li:hover > .dropdown{ 
+	-webkit-animation: slide-left-fixed 0.2s ease-in-out;
+			animation: slide-left-fixed 0.2s ease-in-out;
+
+	-webkit-transform-origin: 0 0;
+			transform-origin: 0 0;
+}
+
+// Slide left
+[dropdown-animation="slide-right"] li:hover > .dropdown,
+[dropdown-sub-animation="slide-right"] li:hover > .dropdown li:hover > .dropdown{ 
+	-webkit-animation: slide-right-fixed 0.2s ease-in-out;
+			animation: slide-right-fixed 0.2s ease-in-out;
+
+	-webkit-transform-origin: 0 0;
+			transform-origin: 0 0;
+}
+
+// Flipin-x
+[dropdown-animation="flipin-x"] li:hover > .dropdown,
+[dropdown-sub-animation="flipin-x"] li:hover > .dropdown li:hover > .dropdown{ 
+    -webkit-animation: flipin-x .5s ease-in-out;
+            animation: flipin-x .5s ease-in-out;
+}
+
+// Flipin-y
+[dropdown-animation="flipin-y"] li:hover > .dropdown,
+[dropdown-sub-animation="flipin-y"] li:hover > .dropdown li:hover > .dropdown{ 
+	-webkit-animation: flipin-y .5s ease-in-out;
+		    animation: flipin-y .5s ease-in-out;
+}
+
+// Bounce In
+[dropdown-animation="bounce-in"] li:hover > .dropdown,
+[dropdown-sub-animation="bounce-in"] li:hover > .dropdown li:hover > .dropdown{ 
+	-webkit-animation: bounce-in 0.6s ease-in-out;
+		    animation: bounce-in 0.6s ease-in-out;
+}
+
+// Bounce In up
+[dropdown-animation="bounce-in-up"] li:hover > .dropdown,
+[dropdown-sub-animation="bounce-in-up"] li:hover > .dropdown li:hover > .dropdown{ 
+	-webkit-animation: bounce-in-up 0.6s ease-in-out;
+		    animation: bounce-in-up 0.6s ease-in-out;
+}
+
+// Bounce In left
+[dropdown-animation="bounce-in-left"] li:hover > .dropdown,
+[dropdown-sub-animation="bounce-in-left"] li:hover > .dropdown li:hover > .dropdown{ 
+	-webkit-animation: bounce-in-left 0.6s ease-in-out;
+		    animation: bounce-in-left 0.6s ease-in-out;
+}
+
+// Bounce In right
+[dropdown-animation="bounce-in-right"] li:hover > .dropdown,
+[dropdown-sub-animation="bounce-in-right"] li:hover > .dropdown li:hover > .dropdown{ 
+	-webkit-animation: bounce-in-right 0.6s ease-in-out;
+		    animation: bounce-in-right 0.6s ease-in-out;
+}
+
+// Roll In
+[dropdown-animation="roll-in"] li:hover > .dropdown,
+[dropdown-sub-animation="roll-in"] li:hover > .dropdown li:hover > .dropdown{ 
+	-webkit-animation: roll-in 0.6s ease-in-out;
+		    animation: roll-in 0.6s ease-in-out;
+}

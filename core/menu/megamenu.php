@@ -42,7 +42,7 @@ if (!defined ('_EXPOSE_MEGA_MENU')) {
          */
         function beginMenu($startlevel = 0, $endlevel = 10)
         {
-            echo "<div class=\"megamenu clearfix\" id=\"" . $this->getParam('menuname') . "\">\n";
+            //echo "<div class=\"megamenu clearfix\" id=\"" . $this->getParam('menuname') . "\">\n";
         }
 
         /**
@@ -62,7 +62,7 @@ if (!defined ('_EXPOSE_MEGA_MENU')) {
                 if (preg_match('/slide/', $animation)) $slide = 1;
                 if (preg_match('/fade/', $animation)) $fade = 1;
             }*/
-            echo "\n</div>";
+            //echo "\n</div>";
             //Create menu
 
         }
@@ -82,7 +82,7 @@ if (!defined ('_EXPOSE_MEGA_MENU')) {
                 if ($this->items[$pid]->megaparams->get('group')) {
                     $cols = $pid && $this->getParam('megamenu') && isset($this->items[$pid]->cols) && $this->items[$pid]->cols ? $this->items[$pid]->cols : 1;
                     $cols_cls = ($cols > 1) ? " cols$cols" : '';
-                    $data = "<div class=\"group-content$cols_cls\">";
+                    //$data = "<div class=\"group-content$cols_cls\">";
                 } else {
                     $style = $this->getParam('mega-style', 1);
                     if (!method_exists($this, "beginMenuItems$style")) $style = 1; //default
@@ -108,7 +108,7 @@ if (!defined ('_EXPOSE_MEGA_MENU')) {
         {
             if ($level) {
                 if ($this->items[$pid]->megaparams->get('group')) {
-                    $data = "</div>";
+                    //$data = "</div>";
                 } else {
                     $style = $this->getParam('mega-style', 1);
                     if (!method_exists($this, "endMenuItems$style")) $style = 1; //default
@@ -132,22 +132,30 @@ if (!defined ('_EXPOSE_MEGA_MENU')) {
          *
          * @return mixed  Markup if return = true, otherwise VOID
          */
-        function beginSubMenuItems($pid = 0, $level = 0, $pos = null, $i = 0, $return = false)
+        function beginSubMenuItems($pid = 0, $level = 1, $pos = null, $i = 0, $return = false)
         {
-            $level = (int) $level;
+            $level = (int) $level + 1;
             $data = '';
-            if (isset($this->items[$pid]) && $level) {
+            if (isset($this->items[$pid]) && $level) 
+            {
                 $cols = $pid && $this->getParam('megamenu') && isset($this->items[$pid]->cols) && $this->items[$pid]->cols ? $this->items[$pid]->cols : 1;
-                if ($this->items[$pid]->megaparams->get('group') && $cols < 2) {
+                if ($this->items[$pid]->megaparams->get('group') && $cols < 2) 
+                {
+
                 } else {
+
                     $colw = $this->items[$pid]->megaparams->get('colw' . ($i + 1), 0);
+
                     if (!$colw) $colw = $this->items[$pid]->megaparams->get('colw', $this->getParam('mega-colwidth', 200));
+
                     if (is_null($colw) || !is_numeric($colw)) $colw = 200;
+
                     $style = $colw ? " style=\"width: {$colw}px;\"" : "";
-                    $data .= "<div class=\"megacol col-" . ($i + 1) . ($pos ? " $pos" : "") . "\"$style>";
+                    $data .= "<div class=\"column col" . ($i + 1) . ($pos ? " $pos" : "") . "\"$style>";
                 }
             }
-            if (@$this->children[$pid]) $data .= "<ul class=\"megamenu level-$level\">";
+
+            if (@$this->children[$pid]) $data .= "<ul class=\"l$level\">";
             if ($return)
                 return $data;
             else
@@ -242,23 +250,32 @@ if (!defined ('_EXPOSE_MEGA_MENU')) {
          */
         function genClass($mitem, $level, $pos)
         {
+            $cls = '';
             $iParams = new JForm($mitem->params);
-            $cls = "mega" . ($pos ? " $pos" : "");
-            if($level == NULL) $level = 0;
-            $cls .= ' level-'.$level;
+            if($level == NULL) $level = 1;
+
+            // Set item id
+            $cls .= 'item' . $mitem->id ;
 
             if (@$this->children[$mitem->id] || (isset($mitem->content) && $mitem->content)) {
                 if ($mitem->megaparams->get('group'))
-                    $cls .= " group";
-                else if ($level < $this->getParam('endlevel')) $cls .= " has-submenu";
+                    $cls .= " grouped";
+                else if ($level < $this->getParam('endlevel')) $cls .= " parent";
             }
 
-            $desc = (string) $mitem->megaparams->get('desc');
-            if( $desc != "&nbsp;" AND !empty($desc) ) $cls .= " has-desc";
-
+            // $desc = (string) $mitem->megaparams->get('desc');
+            // if( $desc != "&nbsp;" AND !empty($desc) ) $cls .= " has-desc";
+            
+            // Set active class
             $active = in_array($mitem->id, $this->open);
-            if (!preg_match('/group/', $cls)) $cls .= ($active ? " active" : "");
+            if (!preg_match('/grouped/', $cls)) $cls .= ($active ? ' active' : '');
+
+            // additionl class coming from menu admin
             if ($mitem->megaparams->get('class')) $cls .= " " . $mitem->megaparams->get('class');
+
+            // Set position first/last
+            $cls .=  ($pos ? " $pos" : '');
+
             return $cls;
         }
 
@@ -276,7 +293,7 @@ if (!defined ('_EXPOSE_MEGA_MENU')) {
             $active = $this->genClass($mitem, $level, $pos);
             if ($active) $active = " class=\"$active\"";
             echo "<li $active>";
-            if ($mitem->megaparams->get('group')) echo "<div class=\"group\">";
+            //if ($mitem->megaparams->get('group')) echo "<div class=\"group\">";
         }
 
         /**
@@ -290,7 +307,7 @@ if (!defined ('_EXPOSE_MEGA_MENU')) {
          */
         function endMenuItem($mitem = null, $level = 0, $pos = '')
         {
-            if ($mitem->megaparams->get('group')) echo "</div>";
+            //if ($mitem->megaparams->get('group')) echo "</div>";
             echo "</li>";
         }
 
@@ -318,9 +335,7 @@ if (!defined ('_EXPOSE_MEGA_MENU')) {
             }
             $style = $width ? " style=\"width: {$width}px;\"" : "";
             $right = $this->items[$pid]->megaparams->get('right') ? 'right' : '';
-            $data = "<div class=\"childcontent cols-$cols $right\">\n";
-            $data .= "<div class=\"childcontent-inner-wrap\">\n"; //Add wrapper
-            $data .= "<div class=\"childcontent-inner clearfix\"$style>"; //Move width into inner
+            $data = "<div class=\"dropdown cols$cols $right\" $style>\n";
             if ($return)
                 return $data;
             else
@@ -340,127 +355,11 @@ if (!defined ('_EXPOSE_MEGA_MENU')) {
         function endMenuItems1($pid = 0, $level = 0, $return = false)
         {
             $data = "</div>\n"; //Close of childcontent-inner
-            $data .= "</div></div>"; //Close wrapper and childcontent
             if ($return)
                 return $data;
             else
                 echo $data;
         }
 
-        /**
-         * Echo markup before menu items markup
-         * Sub nav style - 2 - advanced
-         *
-         * @param int $pid     Menu item id
-         * @param int $level   Menu item level
-         * @param int $return  Return or not
-         *
-         * @return mixed  String markup data if return = false, otherwise VOID
-         */
-        function beginMenuItems2($pid = 0, $level = 0, $return = false)
-        {
-            $cols = $pid && $this->getParam('megamenu') && isset($this->items[$pid]->cols) && $this->items[$pid]->cols ? $this->items[$pid]->cols : 1;
-
-            $width = $this->items[$pid]->megaparams->get('width', 0);
-            if (!$width) {
-                for ($col = 0; $col < $cols; $col++) {
-                    $colw = $this->items[$pid]->megaparams->get('colw' . ($col + 1), 0);
-                    if (!$colw) $colw = $this->items[$pid]->megaparams->get('colw', $this->getParam('mega-colwidth', 200));
-                    if (is_null($colw) || !is_numeric($colw)) $colw = 200;
-                    $width += $colw;
-                }
-            }
-            $style = $width ? " style=\"width: {$width}px;\"" : "";
-            $right = $this->items[$pid]->megaparams->get('right') ? 'right' : '';
-            $data = "<div class=\"childcontent cols$cols $right\">\n";
-            $data .= "<div class=\"childcontent-inner-wrap\">\n"; //Add wrapper
-            $data .= "<div class=\"l\"></div>\n"; //Left border
-            $data .= "<div class=\"childcontent-inner clearfix\"$style>"; //Childcontent-inner - Move width into inner
-            if ($return)
-                return $data;
-            else
-                echo $data;
-        }
-
-        /**
-         * Echo markup after menu items markup
-         * Sub nav style - 2 - advanced
-         *
-         * @param int $pid     Menu item id
-         * @param int $level   Menu item level
-         * @param int $return  Return or not
-         *
-         * @return mixed  String markup data if return = false, otherwise VOID
-         */
-        function endMenuItems2($pid = 0, $level = 0, $return = false)
-        {
-            $data = "</div>\n"; //Close of childcontent-inner
-            $data .= "<div class=\"r\" ></div>\n"; //Right border
-            $data .= "</div></div>"; //Close wrapper and childcontent
-            if ($return)
-                return $data;
-            else
-                echo $data;
-        }
-
-        /**
-         * Echo markup before menu items markup
-         * Sub nav style - 3 - complex
-         *
-         * @param int $pid     Menu item id
-         * @param int $level   Menu item level
-         * @param int $return  Return or not
-         *
-         * @return mixed  String markup data if return = false, otherwise VOID
-         */
-        function beginMenuItems3($pid = 0, $level = 0, $return = false)
-        {
-            $cols = $pid && $this->getParam('megamenu') && isset($this->items[$pid]->cols) && $this->items[$pid]->cols ? $this->items[$pid]->cols : 1;
-
-            $width = $this->items[$pid]->megaparams->get('width', 0);
-            if (!$width) {
-                for ($col = 0; $col < $cols; $col++) {
-                    $colw = $this->items[$pid]->megaparams->get('colw' . ($col + 1), 0);
-                    if (!$colw) $colw = $this->items[$pid]->megaparams->get('colw', $this->getParam('mega-colwidth', 200));
-                    if (is_null($colw) || !is_numeric($colw)) $colw = 200;
-                    $width += $colw;
-                }
-            }
-            $style = $width ? " style=\"width: {$width}px;\"" : "";
-            $right = $this->items[$pid]->megaparams->get('right') ? 'right' : '';
-            $data = "<div class=\"childcontent cols$cols $right\">\n";
-            $data .= "<div class=\"childcontent-inner-wrap\">\n"; //Add wrapper
-            $data .= "<div class=\"top\" ><div class=\"tl\"></div><div class=\"tr\"></div></div>\n"; //Top
-            $data .= "<div class=\"mid\">\n"; //Middle
-            $data .= "<div class=\"ml\"></div>\n"; //Middle left
-            $data .= "<div class=\"childcontent-inner clearfix\"$style>"; //Move width into inner
-            if ($return)
-                return $data;
-            else
-                echo $data;
-        }
-
-        /**
-         * Echo markup after menu items markup
-         * Sub nav style - 3 - complex
-         *
-         * @param int $pid     Menu item id
-         * @param int $level   Menu item level
-         * @param int $return  Return or not
-         *
-         * @return mixed  String markup data if return = false, otherwise VOID
-         */
-        function endMenuItems3($pid = 0, $level = 0, $return = false)
-        {
-            $data = "</div>\n"; //Close of childcontent-inner
-            $data .= "<div class=\"mr\"></div>\n"; //Middle right
-            $data .= "</div>"; //Close Middle
-            $data .= "<div class=\"bot\" ><div class=\"bl\"></div><div class=\"br\"></div></div>\n"; //Bottom
-            $data .= "</div></div>"; //Close wrapper and childcontent
-            if ($return)
-                return $data;
-            else
-                echo $data;
-        }
 	}
 }

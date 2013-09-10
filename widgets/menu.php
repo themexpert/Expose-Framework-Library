@@ -14,9 +14,13 @@ class ExposeWidgetMenu extends ExposeWidget{
     {
         global $expose;
         $html = '';
-        $action = $this->get('action');
-        $delay = $this->get('delay', 300);
+
+        // Assign params values
         $animation = $this->get('animation');
+        $animation_sublevel = $this->get('animation-sublevel');
+        $startlevel = $this->get('startlevel', 1);
+        $endlevel = $this->get('endlevel', -1);
+
         $fancy = ($this->get('fancy-animation')) ? 'true' : 'false';
 
         $style = (isset ($_COOKIE[$expose->templateName.'_menu'])) ? $_COOKIE[$expose->templateName.'_menu'] : $this->get('style','mega');
@@ -32,13 +36,6 @@ class ExposeWidgetMenu extends ExposeWidget{
 
 
         switch($style){
-            case 'dropline':
-                $class = 'ExposeDroplineMenu';
-                $hasSubMenu = TRUE;
-                $expose->addLink('droplinemenu.css','css',2);
-                //load dropline menu js file
-                $expose->addLink('droplinemenu.js','js');
-                break;
 
             case 'split':
                 $class = 'ExposeSplitMenu';
@@ -50,22 +47,6 @@ class ExposeWidgetMenu extends ExposeWidget{
             default:
                 $class = 'ExposeMegaMenu';
                 $hasSubMenu = FALSE;
-
-                $expose->addLink('megamenu.css','css',2);
-
-                //load xpertmenu aka mega menu js file
-                $expose->addLink('xpertmenu.js','js');
-
-                $js = "
-                var _options = {
-                    _hideDelay:{$delay},
-                    _easing:'{$animation}',
-                    _isFancy:{$fancy}
-                };
-                jQuery('#megamenu').XpertMenu(_options);
-                ";
-
-                $expose->addjQDom($js);
                 break;
         }
 
@@ -73,20 +54,16 @@ class ExposeWidgetMenu extends ExposeWidget{
         expose_import("core.menu.$fileName");
 
         //set some menu params
-        $expose->document->params->set('menu_background', 1); //0: image, 1: background
         $align = ($expose->direction == 'rtl') ? 'right' : 'left';
-        $expose->document->params->set('menu_images_align', $align); //applicapbe when selected as image
-        //$expose->document->params->set('mega-colwidth', 200); //Megamenu only: Default column width
-        $expose->document->params->set('mega-style', 1); //Megamenu only: Menu style.
-        $expose->document->params->set('startlevel', 0); //Startlevel
-        $expose->document->params->set('endlevel', -1); //endlevel
+        $expose->document->params->set('startlevel', $startlevel); //Startlevel
+        $expose->document->params->set('endlevel', $endlevel); //endlevel
 
         $menu = new $class($expose->document->params);
 
         ob_start();
         ?>
 
-        <nav id="menu" class="hidden-phone">
+        <nav class="ex-menu hidden-phone" dropdown-animation="<?php echo $animation; ?>" dropdown-sub-animation="<?php echo $animation_sublevel; ?>">
 
             <?php $menu->loadMenu(); ?>
 

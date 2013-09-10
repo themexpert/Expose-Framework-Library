@@ -512,31 +512,42 @@ class ExposeBaseMenu extends JObject{
        $tmp = $item;
        $tmpname = ($this->getParam('megamenu') && !$tmp->megaparams->get('showtitle', 1)) ? '' : $tmp->name;
        // Print a link if it exists
-       $active = $this->genClass($tmp, $level, $pos);
-       if ($active) $active = " class=\"$active\"";
+       $cls = '';
 
-       $id = 'id="menu' . $tmp->id . '"';
+       //if ($active) $active = " class=\"$active\"";
+
+       $id = '';
        $iParams = $item->jparams;
        $itembg = '';
-       if ($iParams->get('menu_image') && $iParams->get('menu_image') != -1) {
-           if ($this->getParam('menu_background')) {
-               $itembg = 'style="background-image:url(' . JURI::base(true) . '/' . $iParams->get('menu_image') . ');"';
-               $txt = '<span class="menu-title">' . $tmpname . '</span>';
-           } else {
-               $txt = '<span class="menu-image"><img src="' . JURI::base(true) . '/' . $iParams->get('menu_image') . '" alt="' . $tmpname . '" title="' . $tmpname . '" /></span><span class="menu-title">' . $tmpname . '</span>';
-           }
+
+       if ($iParams->get('menu_image') && $iParams->get('menu_image') != -1) 
+       {
+          $img = '<img src="'. JURI::base(true) . '/' . $iParams->get('menu_image') .'" alt="' . $tmpname . '" />';
+          $txt = $img . $tmpname;
+
        } else {
-           $txt = '<span class="menu-title">' . $tmpname . '</span>';
-       }
-       //Add page title to item
-        $desc = $tmp->megaparams->get('desc');
-       if ( $desc != "&nbsp;" AND !empty($desc) ) {
-           $txt .= '<span class="menu-desc">' . JText::_($tmp->megaparams->get('desc')) . '</span>';
+
+           $txt = $tmpname;
        }
 
-       if (isset($itembg) && $itembg) {
-           $txt = "<span class=\"has-image\" $itembg>" . $txt . "</span>";
+       //Item description
+       $desc = (string) $tmp->megaparams->get('desc');
+       if ( $desc != "&nbsp;" AND !empty($desc) ) {
+           $cls .= "subtitle";
+           $txt .= '<div>' . JText::_($tmp->megaparams->get('desc')) . '</div>';
        }
+
+       // Icon class
+       $icon = (string) $tmp->megaparams->get('icon');
+       if ( $icon != "&nbsp;" AND !empty($icon) ) {
+          $cls .= ' ' . (string) $tmp->megaparams->get('icon');
+        }
+
+       // if( $tmp->megaparams->get('icon') )
+       // {
+       //  $txt = '<i class="'. $tmp->megaparams->get('icon') .'"></i>' . $txt;
+       // }
+       
        $title = "title=\"$tmpname\"";
 
        if ($tmp->type == 'menulink') {
@@ -548,21 +559,25 @@ class ExposeBaseMenu extends JObject{
                $tmp->url = $alias_item->link;
            }
        }
+       
+       // Class modifier
+       $cls = ($cls) ? " class=\"$cls\"" : '' ;
+
        if ($tmpname) {
            if ($tmp->type == 'separator') {
                //$data = '<a href="#" ' . $active . ' ' . $id . ' ' . $title . '>' . $txt . '</a>';
-               $data = '<span ' . $active . ' ' . $id . ' ' . $title . '>' . $txt . '</span>';
+               $data = '<a ' . $cls . ' ' . $id . ' ' . $title . '>' . $txt . '</a>';
            } else {
                if ($tmp->url != null) {
                    switch ($tmp->browserNav) {
                        default:
                        case 0:
                            // _top
-                           $data = '<a href="' . $tmp->url . '" ' . $active . ' ' . $id . '>' . $txt . '</a>';
+                           $data = '<a href="' . $tmp->url . '" ' . $cls . ' ' . $id . '>' . $txt . '</a>';
                            break;
                        case 1:
                            // _blank
-                           $data = '<a href="' . $tmp->url . '" target="_blank" ' . $active . ' ' . $id . '>' . $txt . '</a>';
+                           $data = '<a href="' . $tmp->url . '" target="_blank" ' . $cls . ' ' . $id . '>' . $txt . '</a>';
                            break;
                        case 2:
                            // window.open
@@ -570,11 +585,11 @@ class ExposeBaseMenu extends JObject{
 
                            // hrm...this is a bit dickey
                            $link = str_replace('index.php', 'index2.php', $tmp->url);
-                           $data = '<a href="' . $link . '" onclick="window.open(this.href,\'targetWindow\',\'' . $attribs . '\');return false;" ' . $active . ' ' . $id . ' >' . $txt . '</a>';
+                           $data = '<a href="' . $link . '" onclick="window.open(this.href,\'targetWindow\',\'' . $attribs . '\');return false;" ' . $cls . ' ' . $id . ' >' . $txt . '</a>';
                            break;
                    }
                } else {
-                   $data = '<a ' . $active . ' ' . $id . ' ' . $title . '>' . $txt . '</a>';
+                   $data = '<a ' . $cls . ' ' . $id . ' ' . $title . '>' . $txt . '</a>';
                }
            }
        }
@@ -582,11 +597,11 @@ class ExposeBaseMenu extends JObject{
        //for megamenu
        if ($this->getParam('megamenu')) {
            //For group
-           if ($tmp->megaparams->get('group') && $data) $data = "<div class=\"group-title\">$data</div>";
+           //if ($tmp->megaparams->get('group') && $data) $data = "<div class=\"group-title\">$data</div>";
 
            if (isset($item->content) && $item->content) {
                if ($item->megaparams->get('group')) {
-                   $data .= "<div class=\"group-content\">{$item->content}</div>";
+                   $data .= $item->content;
                } else {
                    $data .= $this->beginMenuItems($item->id, $level + 1, true);
                    $data .= $item->content;
@@ -762,9 +777,9 @@ class ExposeBaseMenu extends JObject{
         $cls = '';
        $iParams = $mitem->jparams;
        $active = in_array($mitem->id, $this->open);
-       $cls = ($level ? "" : "menu-item{$mitem->_idx}") . ($active ? " active" : "") . ($pos ? " $pos-item" : "");
+       $cls = ($level ? "" : "item{$mitem->_idx}") . ($active ? " active" : "") . ($pos ? " $pos-item" : "");
        if (@$this->children[$mitem->id] && (!$level || $level < $this->getParam('endlevel'))) {
-           $cls .= " has-submenu";
+           $cls .= " parent";
        }
        if ($mitem->megaparams->get('class')) {
            $cls .= ' ' . $mitem->megaparams->get('class');
