@@ -21,7 +21,7 @@ class ExposeWidgetMenu extends ExposeWidget{
         $startlevel = $this->get('startlevel', 1);
         $endlevel = $this->get('endlevel', -1);
 
-        $fancy = ($this->get('fancy-animation')) ? 'true' : 'false';
+        //$fancy = ($this->get('fancy-animation')) ? 'true' : 'false';
 
         $style = (isset ($_COOKIE[$expose->templateName.'_menu'])) ? $_COOKIE[$expose->templateName.'_menu'] : $this->get('style','mega');
         if(isset ($_REQUEST['menu'])){
@@ -78,6 +78,8 @@ class ExposeWidgetMenu extends ExposeWidget{
             } ?>
 
         </nav> <!-- menu end -->
+
+
 
         <nav id="mobile-menu" class="visible-phone">
             <select onChange="window.location.replace(this.options[this.selectedIndex].value)">
