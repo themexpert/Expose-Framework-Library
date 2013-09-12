@@ -116,14 +116,14 @@
 	.ex-menu > ul.l1 > li{ 
 		float: none; 
 	}
-	.ex-menu ul a{ color: #88898E; }
+	.ex-menu ul a{ color: @offcanvas-item-color; }
 	.ex-menu > ul.l1 > li{
 		> a{
-			color: rgba(255, 255, 255, 0.8);
+			color: @offcanvas-l1-item-color;
 			border-bottom: 1px solid rgba(0, 0, 0, 0.4);
 			box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);	
 		}
-		&.active > a{ color: #fff; }
+		&.active > a{ color: @offcanvas-l1-item-active-color; }
 		
 		ul {
 			padding: 5px 0 5px 15px;
@@ -132,7 +132,7 @@
 				padding: 5px 0; line-height: 30px;
 				&:hover,
 				&:focus,
-				&:active{ color: red; }
+				&:active{ color: @offcanvas-item-hover-color; }
 			}	
 		}
 	}
