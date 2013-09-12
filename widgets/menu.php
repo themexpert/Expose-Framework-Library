@@ -79,31 +79,6 @@ class ExposeWidgetMenu extends ExposeWidget{
 
         </nav> <!-- menu end -->
 
-
-
-        <nav id="mobile-menu" class="visible-phone">
-            <select onChange="window.location.replace(this.options[this.selectedIndex].value)">
-                <?php foreach($menu->items as $key => $val):?>
-                <?php
-                    $itemId = JRequest::getvar('Itemid');
-                    $active = '';
-                   if ($itemId == $val->id) $active = 'selected="selected"';
-                ?>
-                <option value="<?php echo $val->url;?>" <?php echo $active; ?> >
-                    <?php
-                        if( count($val->tree) > 1 )
-                        {
-                            for($i=0; $i < (count($val->tree)-1); $i++){
-                                echo "-";
-                            }
-                        }
-                    ?>
-                    <?php echo $val->title; ?>
-                </option>
-                <?php endforeach;?>
-            </select>
-        </nav>
-
         <?php
         return ob_get_clean();
     }

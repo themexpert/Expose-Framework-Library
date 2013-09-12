@@ -92,7 +92,8 @@ class ExposeWidgetLogo extends ExposeWidget{
                     </{$tag}>";
 
         }
+        $nav = '<a href="#offcanvas" class="menu-toggle visible-phone" data-uk-offcanvas=""></a>';
 
-        return $logo;
+        return $nav . $logo;
     }
 }

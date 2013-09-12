@@ -1,0 +1,141 @@
+/* Component
+ ========================================================================== */
+
+/*
+ * This is the offcanvas overlay and bar container
+ * 1. Hide by default
+ * 2. Set fixed position
+ * 3. Mask the background page
+ */
+
+.uk-offcanvas {
+	/* 1 */
+	display: none;
+	/* 2 */
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: @offcanvas-z-index;
+	/* 3 */
+	background: @offcanvas-background;
+	.hook-offcanvas;
+}
+
+.uk-offcanvas.uk-active { display: block; }
+
+
+/* Sub-object `uk-offcanvas-page`
+ ========================================================================== */
+
+/*
+ * Prepares the whole HTML page to slide-out
+ * 1. Fix the main page and disallow scrolling
+ * 2. Side-out transition
+ */
+
+.uk-offcanvas-page {
+	/* 1 */
+	position: fixed;
+	/* 2 */
+	-webkit-transition: margin-left 0.3s ease-in-out 50ms;
+	transition: margin-left 0.3s ease-in-out 50ms;
+}
+
+
+/* Sub-object `uk-offcanvas-bar`
+ ========================================================================== */
+
+/*
+ * This is the offcanvas bar
+ * 1. Set fixed position
+ * 2. Size and style
+ * 3. Allow scrolling
+ * 4. Side-out transition
+ */
+
+.uk-offcanvas-bar {
+	/* 1 */
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	-webkit-transform: translateX(-100%);
+	transform: translateX(-100%);
+	z-index: @offcanvas-z-index + 1;
+	/* 2 */
+	width: @offcanvas-bar-width;
+	max-width: 100%;
+	background: @offcanvas-bar-background;
+	/* 3 */
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+	/* 4 */
+	-webkit-transition: -webkit-transform 0.3s ease-in-out;
+	transition: transform 0.3s ease-in-out;
+	.hook-offcanvas-bar;
+}
+
+.uk-offcanvas.uk-active .uk-offcanvas-bar.uk-offcanvas-bar-show {
+	-webkit-transform: translateX(0%);
+	transform: translateX(0%);
+}
+
+/* Modifier `uk-offcanvas-bar-flip`
+ ========================================================================== */
+
+.uk-offcanvas-bar-flip {
+	left: auto;
+	right: 0;
+	-webkit-transform: translateX(100%);
+	transform: translateX(100%);
+}
+
+/* Grid in offcanvas
+ ========================================================================== */
+ .uk-offcanvas [class*="grid"]{
+ 	width: auto;
+ 	float: none;
+ }
+
+/* block in offcanvas
+ ========================================================================== */
+
+.uk-offcanvas .block {
+	margin: 0;
+	padding:0;
+	.hook-offcanvas-block;
+	+ .block{ margin-top: 20px; }
+}
+
+/* Nav in offcanvas
+ ========================================================================== */
+.uk-offcanvas{
+	.ex-menu,
+	.ex-menu > ul.l1 > li{ 
+		float: none; 
+	}
+	.ex-menu ul a{ color: #88898E; }
+	.ex-menu > ul.l1 > li{
+		> a{
+			color: rgba(255, 255, 255, 0.8);
+			border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+			box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);	
+		}
+		&.active > a{ color: #fff; }
+		
+		ul {
+			padding: 5px 0 5px 15px;
+			li:first-child a { margin-left: -15px; padding-left: 15px;}
+			li > a{ 
+				padding: 5px 0; line-height: 30px;
+				&:hover,
+				&:focus,
+				&:active{ color: red; }
+			}	
+		}
+	}
+	.ex-menu li:hover > a, 
+	.ex-menu li > a:focus{ background-color: none; }
+} 

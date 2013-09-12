@@ -214,6 +214,37 @@
 	.hook-menu-column;	
 }
 
+/* Sub-objects: 'menu-toggle
+ ========================================================================== */
+.menu-toggle {
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	height: 55px;
+	padding: 0 20px;
+	float: left;
+}
+.menu-toggle:before {
+	content: '';
+	display: inline-block;
+	height: 100%; 
+	vertical-align: middle;
+}
+.menu-toggle {
+	font-size: 19px;
+	color: #88898E;
+}
+.menu-toggle:hover,
+.menu-toggle:focus { /* 1 */
+	color: #88898E;
+	text-decoration: none;
+	outline: none; /* 2 */
+}
+.menu-toggle:after {
+	content: "\f0c9";
+	font-family: "FontAwesome";
+	vertical-align: middle; /* 1 */
+}
+
 /* Dropdown Animation - First level and sublevel
 ==========================================================================*/
 // Fade
@@ -330,3 +361,6 @@
 	-webkit-animation: roll-in 0.6s ease-in-out;
 		    animation: roll-in 0.6s ease-in-out;
 }
+
+// Import Offcanvas menu
+@import 'offcanvas.less';
