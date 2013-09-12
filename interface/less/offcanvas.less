@@ -123,7 +123,13 @@
 			border-bottom: 1px solid rgba(0, 0, 0, 0.4);
 			box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);	
 		}
-		&.active > a{ color: @offcanvas-l1-item-active-color; }
+		&:hover > a,
+		&.active > a,
+		a:focus,
+		a:active{ 
+			background-color: @offcanvas-l1-item-background;
+			color: @offcanvas-l1-item-active-color; 
+		}
 		
 		ul {
 			padding: 5px 0 5px 15px;
