@@ -40,11 +40,12 @@ if (!defined ('_EXPOSE_SPLIT_MENU')) {
          */
         function beginMenu($startlevel = 0, $endlevel = 10)
         {
-            if ($startlevel == 0) {
-                echo "<div id=\"splitmenu\" class=\"mainlevel clearfix\">\n";
-            } else {
-                echo "<div class=\"sublevel\">\n";
-            }
+            return ;
+            // if ($startlevel == 0) {
+            //     echo "<div id=\"splitmenu\" class=\"mainlevel clearfix\">\n";
+            // } else {
+            //     echo "<div class=\"sublevel\">\n";
+            // }
         }
 
         /**
@@ -57,7 +58,8 @@ if (!defined ('_EXPOSE_SPLIT_MENU')) {
          */
         function endMenu($startlevel = 0, $endlevel = 10)
         {
-            echo "\n</div>";
+            return; 
+            //echo "\n</div>";
         }
 
         /**
@@ -70,10 +72,17 @@ if (!defined ('_EXPOSE_SPLIT_MENU')) {
          */
         function beginMenuItems($pid = 0, $level = 0)
         {
+            $level = $level + 1;
+            //echo "<ul class=\"l$level\">";
             if ($level == 1)
-                echo "<ul class=\"active\">";
+                echo "<ul class=\"l$level\">";
             else
-                echo "<ul>";
+                echo "<ul class=\"nav nav-list\">";
+        }
+
+        function endMenuItems($pid = 0, $level = 0)
+        {
+            echo "</ul>";
         }
 
         /**

@@ -29,9 +29,6 @@ class ExposeWidgetMenu extends ExposeWidget{
             $style = $_REQUEST['menu'];
         }
 
-        //$style = $this->get('style','mega');
-        $hasSubMenu = '';
-
         $fileName = $style.'menu';
 
 
@@ -39,14 +36,11 @@ class ExposeWidgetMenu extends ExposeWidget{
 
             case 'split':
                 $class = 'ExposeSplitMenu';
-                $hasSubMenu = TRUE;
-                $expose->addLink('splitmenu.css','css',2);
                 break;
 
             case 'mega':
             default:
                 $class = 'ExposeMegaMenu';
-                $hasSubMenu = FALSE;
                 break;
         }
 
@@ -68,14 +62,6 @@ class ExposeWidgetMenu extends ExposeWidget{
             <?php $menu->loadMenu(); ?>
 
             <?php $menu->genMenu(); ?>
-
-            <?php if($hasSubMenu AND $menu->hasSubMenu(1) AND $menu->showSeparatedSub)
-            { ?>
-                <div id="subnav" class="clearfix">
-                   <?php $menu->genMenu(1); ?>
-                </div>
-           <?php
-            } ?>
 
         </nav> <!-- menu end -->
 

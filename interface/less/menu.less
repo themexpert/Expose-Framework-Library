@@ -362,5 +362,67 @@
 		    animation: roll-in 0.6s ease-in-out;
 }
 
+/* Component - Splitmenu
+========================================================================== */
+// Horizontal
+#ex-splitmenu.horizontal{
+	.nav-list li{ position: relative; }
+	> .nav-list > li { float: left;}
+	.nav-list > li > a{
+		display: block;
+		text-decoration: none;
+		/* 1 */
+		padding: 0 @menu-padding-horizontal;
+		margin: 0; 
+		line-height: @menu-line-height;
+		/* 2 */
+		color: @menu-color;
+		font-size: @menu-font-size;
+		font-weight: @menu-font-weight;
+		/*3*/
+		cursor: pointer;
+	}
+	.nav-list li:hover a{
+		background-color: @split-h-item-hover-background;
+		color: @split-h-hover-color;	
+	}
+	.nav-list li.parent > ul{ 
+		display: none;
+		position: absolute;
+		top: 100%;
+		left: 0;
+		padding: 0;
+		width: 200px;
+		z-index: @dropdown-z-index;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+		background: @split-h-dropdown-background;
+		letter-spacing: normal;
+	}
+	.nav-list li.parent:hover > ul{
+		display: block;
+		-webkit-animation: scale-up 0.2s ease-in-out;
+				animation: scale-up 0.2s ease-in-out;
+		-webkit-transform-origin: 0 0;
+				transform-origin: 0 0;
+
+				li.parent ul{left: 100%; top: 0;}
+	}
+	> .nav-list > li.hover a,
+	> .nav-list > li.active a,
+	> .nav-list > li.active a:focus{
+		background-color: @split-h-level1-hover-background;
+		color: @split-h-level1-hover-color;	
+	}
+	// Icon menu
+	 a[class^="icon-"], a[class*=" icon-"] { 
+		width: auto;
+		text-align: left;
+
+		&:before{ margin-right: 5px;}
+
+		&:hover:before{ .hook-menu-icon-hover; }
+	}
+}
 // Import Offcanvas menu
 @import 'offcanvas.less';
