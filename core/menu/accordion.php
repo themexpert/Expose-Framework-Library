@@ -27,7 +27,8 @@ if (!defined ('_EXPOSE_ACCORDION_MENU')) {
         */
         function __construct($params)
         {
-           parent::__construct($params);
+            $params->set('megamenu', 0); // Tell its not a mega menu
+            parent::__construct($params);
         }
 
         /**

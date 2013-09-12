@@ -41,9 +41,6 @@ class ExposeWidgetOffcanvas extends ExposeWidget{
         $expose->document->params->set('startlevel', $startlevel); //Startlevel
         $expose->document->params->set('endlevel', $endlevel); //endlevel
 
-        // Tell that its not megamenu
-        $expose->document->params->set('megamenu', 0); //endlevel
-
         $menu = new ExposeAccordionMenu($expose->document->params);
 
         // Load offcanvas js

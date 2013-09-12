@@ -38,8 +38,11 @@
                     <option value="mod">Modules</option>
                     <option value="pos">Module positions</option>
                 </field>
+
                 <field name="mega_subcontent_mod_modules" type="modules" default="0" label="Select Modules" description="Select Modules" />
+
                 <field name="mega_subcontent_pos_positions" type="modulepositions" default="0" label="Select Positions" description="Select Positions" />
+                
             </fieldset>
 		</fields>
 </form>
