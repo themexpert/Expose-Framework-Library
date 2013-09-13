@@ -111,6 +111,7 @@
 
 /* Nav in offcanvas
  ========================================================================== */
+ #offcanvas .ex-menu{ background-color: transparent; }
 .uk-offcanvas{
 	.ex-menu,
 	.ex-menu > ul.l1 > li{ 
@@ -133,12 +134,12 @@
 		
 		ul {
 			padding: 5px 0 5px 15px;
-			li:first-child a { margin-left: -15px; padding-left: 15px;}
+			li.parent > a { margin-left: -15px; padding-left: 15px;}
 			li > a{ 
 				padding: 5px 0; line-height: 30px;
-				&:hover,
-				&:focus,
-				&:active{ color: @offcanvas-item-hover-color; }
+				// &:hover,
+				// &:focus,
+				// &:active{ color: @offcanvas-item-hover-color; }
 			}	
 		}
 	}
