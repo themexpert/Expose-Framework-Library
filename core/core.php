@@ -551,7 +551,7 @@ class ExposeCore{
         //expose admin
         if($this->isAdmin()){
 
-            $file = 'jquery-1.7.2.min.js';
+            $file = 'jquery-1.8.3.min.js';
             $this->addLink($file,'js',1);
 
             return;
@@ -559,7 +559,7 @@ class ExposeCore{
 
         //we will not load jquery on mobile device
         //if($this->platform == 'mobile') return;
-        $version = $this->get('jquery-version');
+        $version = $this->get('jquery-version', '1.8.3');
         $cdn = $this->get('jquery-source');
         $file = 'https://ajax.googleapis.com/ajax/libs/jquery/'.$version.'/jquery.min.js';
 
