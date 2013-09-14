@@ -78,6 +78,7 @@ if (!defined ('_EXPOSE_MEGA_MENU')) {
          */
         function beginMenuItems($pid = 0, $level = 0, $return = false)
         {
+            $data = '';
             if ($level) {
                 if ($this->items[$pid]->megaparams->get('group')) {
                     $cols = $pid && $this->getParam('megamenu') && isset($this->items[$pid]->cols) && $this->items[$pid]->cols ? $this->items[$pid]->cols : 1;
@@ -106,6 +107,7 @@ if (!defined ('_EXPOSE_MEGA_MENU')) {
          */
         function endMenuItems($pid = 0, $level = 0, $return = false)
         {
+            $data = '';
             if ($level) {
                 if ($this->items[$pid]->megaparams->get('group')) {
                     //$data = "</div>";

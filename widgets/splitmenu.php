@@ -17,7 +17,7 @@ class ExposeWidgetSplitmenu extends ExposeWidget{
         global $expose;
 
         // If menu style is not split eject
-        $style = $_COOKIE[$expose->templateName.'_menu'];
+        $style = ( isset($_COOKIE[$expose->templateName.'_menu']) ) ? $_COOKIE[$expose->templateName.'_menu'] : '';
         if( $style !== 'split' AND $expose->get('menu-style') !== 'split') return FALSE; 
 
         if( !class_exists('ExposeSplitMenu') )

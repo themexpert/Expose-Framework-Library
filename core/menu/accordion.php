@@ -97,7 +97,7 @@ if (!defined ('_EXPOSE_ACCORDION_MENU')) {
          *
          * @return mixed  Markup if return = true, otherwise VOID
          */
-        function beginSubMenuItems($pid = 0, $level = 1, $pos = null, $i = 0)
+        function beginSubMenuItems($pid = 0, $level = 1, $pos = null, $i = 0, $return = false)
         {
             $level = (int) $level + 1;
             $data = '';
@@ -115,7 +115,7 @@ if (!defined ('_EXPOSE_ACCORDION_MENU')) {
          *
          * @return mixed  Markup if return = true, otherwise VOID
          */
-        function endSubMenuItems($pid = 0, $level = 0)
+        function endSubMenuItems($pid = 0, $level = 0, $return = false)
         {
             $data = '';
             if (@$this->children[$pid]) $data .= "</ul>";
