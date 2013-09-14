@@ -38,7 +38,7 @@ class ExposeWidgetEqualheight extends ExposeWidget{
         $js .= "jQuery('#footer .column').equalHeight('.block');";
         $js .= "jQuery('#mainbody, #sidebar-a, #sidebar-b').equalHeight();";
 
-        $expose->addLink('jquery.equalheight.js','js');
+        $expose->addLink('equalheight.js','js');
         $expose->addjQDom($js);
     }
 }
