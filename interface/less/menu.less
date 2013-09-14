@@ -56,9 +56,11 @@
  .ex-menu li a[class*=" icon-"] { 
 	width: auto;
 	text-align: left;
+	font-family: inherit;
+	-webkit-font-smoothing: inherit;
 	.hook-menu-icon;
 
-	&:before{ margin-right: 5px;}
+	&:before{ font-family: FontAwesome; margin-right: 5px; }
 
 	&:hover:before{ .hook-menu-icon-hover; }
 }
