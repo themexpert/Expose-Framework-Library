@@ -42,7 +42,8 @@ class ExposeWidgetJqueryfix extends ExposeWidget{
         if( $option == 'com_virtuemart')
         {
             // Expose jquery path
-            $jqueryPath = $expose->exposeUrl . '/interface/js/jquery-1.8.2.min.js';
+            $version = $expose->get('jquery-version', '1.8.3');
+            $jqueryPath = $expose->exposeUrl . '/interface/js/jquery-' . $version .'.min.js';
 
             // Create script array to marge with joomla script array
             $js[$jqueryPath] = array( 'mime' => 'text/javascript' );
