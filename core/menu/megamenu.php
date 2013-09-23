@@ -205,13 +205,15 @@ if (!defined ('_EXPOSE_MEGA_MENU')) {
             $data = '';
             if ($level) {
                 if ($item->megaparams->get('group')) {
-                } else {
+                } 
+                else {
                     $colw = $item->megaparams->get('colw' . ($i + 1), 0);
                     if (!$colw) $colw = $item->megaparams->get('colw', $this->getParam('mega-colwidth', 200));
                     $style = $colw ? " style=\"width: {$colw}px;\"" : "";
-                    $data .= "<div class=\"megacol column" . ($i + 1) . ($pos ? " $pos" : "") . "\"$style>";
+                    $data .= "<div class=\"column col" . ($i + 1) . ($pos ? " $pos" : "") . "\"$style>";
                 }
             }
+            
             if ($return)
                 return $data;
             else

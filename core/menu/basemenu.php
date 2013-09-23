@@ -157,7 +157,9 @@ class ExposeBaseMenu extends JObject{
                                if (!isset($mod->name)) $mod->name = $mod->module;
                                $i += $cols;
                                $mod_params = new JObject(json_decode($mod->params));
-                               $v->content .= $this->loadModule($mod->id);
+                               $v->content .= $this->beginSubMenuModules($v, 1, $pos, $col, true);
+                                $v->content .= $this->loadModule($mod->id);
+                               $v->content .= $this->endSubMenuModules($v, 1, true);
                            }
                            if ($cols > 1) $v->content .= $this->endSubMenuModules($v->id, 1, true);
                        }
