@@ -339,7 +339,7 @@ if (!defined ('_EXPOSE_MEGA_MENU')) {
             }
             $style = $width ? " style=\"width: {$width}px;\"" : "";
             $right = $this->items[$pid]->megaparams->get('right') ? 'right' : '';
-            $data = "<div class=\"dropdown cols$cols $right\" $style>\n";
+            $data = "<span class=\"dropdown-spacer\"></span><div class=\"dropdown cols$cols $right\" $style>\n";
             if ($return)
                 return $data;
             else
