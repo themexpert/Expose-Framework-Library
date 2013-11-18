@@ -35,7 +35,9 @@ class JFormFieldUtility extends JFormField{
             {
                 $expose->addLink($expose->exposeUrl.'/interface/js/jquery.uniform.min.js','js');    
             }
-            
+            if( EXPOSE_JVERSION == '30'){
+                JHtml::_('formbehavior.chosen', 'select');
+            }
             $expose->addLink($expose->exposeUrl.'/interface/js/jquery.cookie.js','js');
 
             //load expose.css file

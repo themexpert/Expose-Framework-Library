@@ -24,7 +24,7 @@ jQuery(document).ready(function($){
     {
         joomla3 = 1;
 
-        $('#style-form fieldset').prepend(skeleton);
+        //$('#style-form .form-horizontal').prepend(skeleton);
     }
 
     //Mission Control admin template bug fix
@@ -32,29 +32,33 @@ jQuery(document).ready(function($){
 
     // Set a counter for tab
     var i = 0;
-
+    
     //loop through all h3 element and convert them to expose tab
-    $('h3.title , .accordion-heading a').each(function(){
-        //lets cache some vaue
-        var obj = $(this),
-            // this title will use as class name
-            title = $(this).text();
+    if( joomla3 ){
+        // Remove all span6 div and append it to its parent
+        $('.tab-pane .span6').each(function(){
+            var contex = $(this).html();
+            $(this).parent().append(contex);
+            $(this).remove();
+        });
 
-        //Joomla 3 compatibility fix
-        if( joomla3 )
-        {
-            $('<li><span>'+ title +'</span></li>').appendTo('.expose-tab ul').addClass(title + ' tab-' + i);
+        // Make tab left
+        $('#style-form .form-horizontal').addClass('tabbable tabs-left');
+        
+        // Grab template details form elements and appent to overvied tab
+        $('.template-info').append( $('#details .form-vertical').html() );
+        $('#details').remove();
+        // Template name append to overview area
+        $('#jform_title').closest('.form-inline').prependTo('.template-info').removeClass();
+    }
 
-            obj.closest('.accordion-group').find('.accordion-inner').removeClass().addClass(function(){
-
-            if(title == 'assignments'){
-                $(this).empty();
-            }
-
-            return 'panel ' + title + ' tab-content-' + i + ' clearfix';
-
-            }).appendTo('.expose-tab-content');
-        }else{
+    if( !joomla3 )
+    {
+        $('h3.title, .accordion-heading a').each(function(){
+            //lets cache some vaue
+            var obj = $(this),
+                // this title will use as class name
+                title = $(this).text();
 
             var idclass = $(this).attr('id').replace('-options','');
 
@@ -67,27 +71,26 @@ jQuery(document).ready(function($){
                 return 'panel ' + idclass + ' clearfix';
             }).appendTo('.expose-tab-content');
             //$(this).remove();
-        }
-        i++;
+            i++;
 
-    });
+        });
 
-    //finally remove the parent div of all accordion
-    $('.width-40').remove();
+        //finally remove the parent div of all accordion
+        $('.width-40').remove();
 
-    //lets insert template info input boxes to expose-details.
-    $('.width-60:first').appendTo('.template-name').removeClass('width-60 fltlft').addClass('inner');
+        //lets insert template info input boxes to expose-details.
+        $('.width-60:first').appendTo('.template-name').removeClass('width-60 fltlft').addClass('inner');
 
-    //lets take the menu assingments div and append it to its own div under tab
-    if( joomla3 )
-    {
-        $('#assignment').appendTo('div.Assignments');
-    }else{
-        $('.width-60 .adminform').appendTo('div.assignments');    
     }
     
-    //remove old parent div
-    $('.width-60').remove();
+    
+    //lets take the menu assingments div and append it to its own div under tab
+    if( !joomla3 )
+    {
+        $('.width-60 .adminform').appendTo('div.assignments');    
+        //remove old parent div
+        $('.width-60').remove();
+    }
 
     //lets remove template details
     $('.template-name ul li').each(function(index,val){
@@ -141,29 +144,6 @@ jQuery(document).ready(function($){
 
     $('<div class="clear"></div>').appendTo('.panel li');
     $('<span class="tips"></span>').appendTo('.expose-tab-wrapper label');
-
-    /*$('#expose-wrapper').find('select,input,.handle,textarea,radio').change(function(){
-        $(this).parent().parent().addClass('highlight');
-    });*/
-
-    //Joomla 3 compatibility fix
-    if( joomla3 )
-    {
-        $('#assignment').appendTo('.expose-tab-content .assignments');
-        //remove template details
-        $('#details').prependTo('.template-info').removeClass();
-        $('#details .control-group').each(function(index,val){
-            // Only show: Template name and Language dropdown
-            if(index ==0 || index == 3){
-                $(this).show();
-            }else {
-                $(this).hide();
-            }
-        });
-    }
-
-    //hide joomla3 tab and content
-    $('#style-form').find('.nav, .tab-content').remove();
 
     // Take the config-btn and prepend it with toolbar buttons
     if( joomla3 )
@@ -269,9 +249,17 @@ jQuery(document).ready(function($){
     ****************************/
 
     var previewText = 'Grumpy wizards make toxic brew for the evil Queen and Jack.';
-    $('div.typography .fonts-list').each(function(){
+    if( joomla3 )
+    {
+        $('#attrib-typography .fonts-list')
+        .closest('.control-group')
+        .append('<div class="font-preview"><span>Live Preview</span>'+previewText+'</div>');
+    }else{
+        $('div.typography .fonts-list').each(function(){
         $(this).parent().append('<div class="font-preview"><span>Live Preview</span>'+previewText+'</div>');
-    });
+    });    
+    }
+    
 
     $('.gfonts').change(function(){
         var fontName = "";

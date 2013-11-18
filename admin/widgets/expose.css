@@ -145,7 +145,14 @@ span.pre-text{
     border-radius: 5px;
 }
 /*J3 fix*/
+[href*="#details"],
+[href*="#attrib-assignments"]{ display: none !important; }
+#style-form{ margin-top: 10px;}
+#style-form .control-group{ padding: 6px; }
+.form-horizontal .template-info .control-label{ float: none; }
+.form-horizontal .template-info .controls{ margin-left: 0; }
 #content .expose-tab-wrapper{ margin-top: 10px; }
+
 .expose-tab{
     width: 16%;
     float: left;
