@@ -47,9 +47,11 @@ jQuery(document).ready(function($){
         
         // Grab template details form elements and appent to overvied tab
         $('.template-info').append( $('#details .form-vertical').html() );
-        $('#details').remove();
+
         // Template name append to overview area
         $('#jform_title').closest('.form-inline').prependTo('.template-info').removeClass();
+
+        $('#details').empty().append( $('#attrib-overview') );
     }
 
     if( !joomla3 )

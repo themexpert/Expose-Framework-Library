@@ -145,7 +145,7 @@ span.pre-text{
     border-radius: 5px;
 }
 /*J3 fix*/
-[href*="#details"],
+[href*="#attrib-overview"],
 [href*="#attrib-assignments"]{ display: none !important; }
 #style-form{ margin-top: 10px;}
 #style-form .control-group{ padding: 6px; }
