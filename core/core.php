@@ -549,7 +549,8 @@ class ExposeCore{
     {
         //come form admin? just add jquery without asking any question because jquery is heart of
         //expose admin
-        if($this->isAdmin()){
+        if($this->isAdmin() AND EXPOSE_JVERSION != '30')
+        {
 
             $file = 'jquery-1.8.3.min.js';
             $this->addLink($file,'js',1);
