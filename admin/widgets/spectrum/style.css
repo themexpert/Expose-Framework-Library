@@ -1,0 +1,69 @@
+/************************************
+	Style For spectrum color picker
+	Author : Parvez Akther;
+	Website : ThemeXpert;
+************************************/
+/*Some basic styling*/
+/*Spacer*/
+.expose-spacer{
+	background: #EEE;
+	padding: 0 10px;
+	line-height: 30px;
+	display: block;
+	margin: 10px 0;
+	border-radius: 3px;
+	border: 1px solid #ddd;
+	clear: both;
+	font-weight: bold;
+	color: #777;
+	text-shadow: 1px 1px 0 #FFF;
+}
+/*Picker*/
+.picker{ display: none !important; }
+
+/*Placeholder*/
+.sp-replacer{
+	border: 0;
+	background: transparent;
+}
+/*Down arrow*/
+.sp-dd{ display: none; }
+/*Preview*/
+.sp-preview{ 
+	margin-right: 0; 
+	border: 0;
+	width: 30px;
+	height: 30px;
+	border-radius: 3px;
+}
+.sp-preview-inner {
+	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1) inset;
+	border-radius: 2px;
+}
+.sp-preview .sp-clear-display{ background-image: none; }
+
+/*Color Container*/
+.sp-container{ 
+	border: 1px solid #D3D3D3;
+	background-color: #FFF;
+	border-radius: 4px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.sp-container button {
+	min-height: 30px;
+	padding: 0 12px;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-bottom-color: rgba(0, 0, 0, 0.3);
+	border-radius: 4px;
+	background-color: #EEE;
+	background-image: -webkit-linear-gradient(top, #FFF, #EEE);
+	background-image: linear-gradient(to bottom, #FFF, #EEE);
+	color: #666;
+	line-height: 28px;
+	text-shadow: 0 1px 0 #FFF;
+}
+.sp-container button:hover{
+	background-color: #FFF;
+	background-image: -webkit-linear-gradient(top, #EEE, #FFF);
+	background-image: linear-gradient(to bottom, #EEE, #FFF);
+}
