@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <fields name="params" addfieldpath="libraries/expose/admin/fields">
+        <fieldset name="module-styles" label="Module Customizer - ThemeXpert">
+            
+        <field name="spacer1" type="spacer" text="SPACER_MODULE_BLOCK_STYLE_LABEL" description="SPACER_MODULE_BLOCK_STYLE_DESC" />
+			
+			<field name="module-bg-color" type="colorchooser" default="" label="MODULE_CUSTOMIZER_BG_COLOR_LABEL" description="MODULE_CUSTOMIZER_COLOR_DESC" />
+
+			<field name="module-text-color" type="colorchooser" default="" label="MODULE_CUSTOMIZER_TEXT_COLOR_LABEL" description="MODULE_CUSTOMIZER_COLOR_DESC" />
+			
+			<field name="module-bg-image" type="media" default="" label="MODULE_CUSTOMIZER_MODULE_BG_IMAGE_LABEL" description="MODULE_CUSTOMIZER_MODULE_BG_IMAGE_DESC" />
+
+			<field name="module-bg-image-position" type="text" default="center center" label="MODULE_CUSTOMIZER_MODULE_BG_IMAGE_POSITION_LABEL" description="MODULE_CUSTOMIZER_MODULE_BG_IMAGE_POSITION_DESC" />
+
+			<field name="module-bg-image-repeat" type="list" default="no-repeat" label="MODULE_CUSTOMIZER_MODULE_BG_IMAGE_REPEAT_LABEL" description="MODULE_CUSTOMIZER_MODULE_BG_IMAGE_REPEAT_DESC">
+				<option value="repeat-x">REPEAT-X</option>
+				<option value="repeat-y">REPEAT-Y</option>
+				<option value="no-repeat">NO-REPEAT</option>
+			</field>
+
+			<field name="module-border" type="text" default="" label="MODULE_CUSTOMIZER_BORDER_LABEL" description="MODULE_CUSTOMIZER_BORDER_DESC" />
+			
+			<field name="module-border-radius" type="text" default="" label="MODULE_CUSTOMIZER_BORDER_RADIUS_LABEL" description="MODULE_CUSTOMIZER_BORDER_RADIUS_DESC" />
+
+			<field name="module-padding" type="text" default="" label="MODULE_CUSTOMIZER_PADDING_LABEL" description="MODULE_CUSTOMIZER_PADDING_DESC" />
+
+			<field name="module-margin" type="text" default="" label="MODULE_CUSTOMIZER_MARGIN_LABEL" description="MODULE_CUSTOMIZER_MARGIN_DESC" />
+
+		<field name="spacer2" type="spacer" text="SPACER_MODULE_HEADER_STYLE_LABEL" description="SPACER_MODULE_HEADER_STYLE_DESC" />
+
+			<field name="header-bg-color" type="colorchooser" default="" label="MODULE_CUSTOMIZER_BG_COLOR_LABEL" description="MODULE_CUSTOMIZER_COLOR_DESC" />
+			
+			<field name="header-text-color" type="colorchooser" default="" label="MODULE_CUSTOMIZER_TEXT_COLOR_LABEL" description="MODULE_CUSTOMIZER_COLOR_DESC" />
+
+			<field name="header-icon" type="text" default="" label="MODULE_CUSTOMIZER_ICON_LABEL" description="MODULE_CUSTOMIZER_ICON_DESC" />
+			
+			<field name="header-border" type="text" default="" label="MODULE_CUSTOMIZER_BORDER_LABEL" description="MODULE_CUSTOMIZER_BORDER_DESC" />
+			
+			<field name="header-border-radius" type="text" default="" label="MODULE_CUSTOMIZER_BORDER_RADIUS_LABEL" description="MODULE_CUSTOMIZER_BORDER_RADIUS_DESC" />
+
+			<field name="header-padding" type="text" default="" label="MODULE_CUSTOMIZER_PADDING_LABEL" description="MODULE_CUSTOMIZER_PADDING_DESC" />
+
+			<field name="header-margin" type="text" default="" label="MODULE_CUSTOMIZER_MARGIN_LABEL" description="MODULE_CUSTOMIZER_MARGIN_DESC" />
+        </fieldset>
+    </fields>
+</form>
