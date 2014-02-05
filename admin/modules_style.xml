@@ -9,6 +9,10 @@
 
 			<field name="module-text-color" type="colorchooser" default="" label="MODULE_CUSTOMIZER_TEXT_COLOR_LABEL" description="MODULE_CUSTOMIZER_COLOR_DESC" />
 			
+			<field name="module-link-color" type="colorchooser" default="" label="MODULE_CUSTOMIZER_LINK_COLOR_LABEL" description="MODULE_CUSTOMIZER_COLOR_DESC" />
+
+			<field name="module-btn-color" type="colorchooser" default="" label="MODULE_CUSTOMIZER_BUTTON_COLOR_LABEL" description="MODULE_CUSTOMIZER_BUTTON_COLOR_DESC" />
+			
 			<field name="module-bg-image" type="media" default="" label="MODULE_CUSTOMIZER_MODULE_BG_IMAGE_LABEL" description="MODULE_CUSTOMIZER_MODULE_BG_IMAGE_DESC" />
 
 			<field name="module-bg-image-position" type="text" default="center center" label="MODULE_CUSTOMIZER_MODULE_BG_IMAGE_POSITION_LABEL" description="MODULE_CUSTOMIZER_MODULE_BG_IMAGE_POSITION_DESC" />
@@ -19,13 +23,15 @@
 				<option value="no-repeat">NO-REPEAT</option>
 			</field>
 
-			<field name="module-border" type="text" default="" label="MODULE_CUSTOMIZER_BORDER_LABEL" description="MODULE_CUSTOMIZER_BORDER_DESC" />
+			<!-- <field name="module-border" type="text" default="" label="MODULE_CUSTOMIZER_BORDER_LABEL" description="MODULE_CUSTOMIZER_BORDER_DESC" />
 			
 			<field name="module-border-radius" type="text" default="" label="MODULE_CUSTOMIZER_BORDER_RADIUS_LABEL" description="MODULE_CUSTOMIZER_BORDER_RADIUS_DESC" />
 
 			<field name="module-padding" type="text" default="" label="MODULE_CUSTOMIZER_PADDING_LABEL" description="MODULE_CUSTOMIZER_PADDING_DESC" />
 
 			<field name="module-margin" type="text" default="" label="MODULE_CUSTOMIZER_MARGIN_LABEL" description="MODULE_CUSTOMIZER_MARGIN_DESC" />
+ -->
+			<field name="module-css" type="textarea" rows="3" cols="30" default="" label="MODULE_CUSTOMIZER_CSS_LABEL" description="MODULE_CUSTOMIZER_CSS_DESC" />
 
 		<field name="spacer2" type="spacer" text="SPACER_MODULE_HEADER_STYLE_LABEL" description="SPACER_MODULE_HEADER_STYLE_DESC" />
 
