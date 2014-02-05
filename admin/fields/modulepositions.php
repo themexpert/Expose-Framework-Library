@@ -39,6 +39,9 @@ class JFormFieldModulePositions extends JFormField
 			}
 		}
 		$lists = JHTML::_('select.genericlist', $groupHTML, $this->name.'[]', ' multiple="multiple"  size="10" ', 'value', 'text', $this->value);
+        
+        //Define DS
+        define('DS', '/');
 
         if(!defined('EXPOSE_MENU_PARAMS')){
             define('EXPOSE_MENU_PARAMS',1);
