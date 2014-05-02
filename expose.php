@@ -32,7 +32,7 @@ if(!defined('EXPOSE_VERSION'))
 
     // Define framework version.
 
-    define('EXPOSE_VERSION', '4.2.3');
+    define('EXPOSE_VERSION', '4.2.4');
 
     //define directory separator
     defined('DS') or define('DS', '/');
