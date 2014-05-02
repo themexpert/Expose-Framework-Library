@@ -25,7 +25,7 @@ class ExposeWidgetWebfonts extends ExposeWidget{
     protected $css = NULL;
     protected $urls = array();
     protected $gfonts = array();
-    protected $gfontUrl = 'http://fonts.googleapis.com/css?family=';
+    protected $gfontUrl = '//fonts.googleapis.com/css?family=';
     protected $subset = '&subset=latin,latin-ext';
 
     public function isEnabled()
