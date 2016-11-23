@@ -204,7 +204,7 @@
 
 		const OPERATING_SYSTEM_UNKNOWN = 'unknown';
 
-		public function ExposeBrowser($useragent="") {
+		public function __construct($useragent="") {
 			$this->reset();
 			if( $useragent != "" ) {
 				$this->setUserAgent($useragent);
