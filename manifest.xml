@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<updates>
+    <update>
+        <name>Expose</name>
+        <description>Expose Templaet Framework for Joomla 2.5 Update</description>
+        <element>lib_expose</element>
+        <type>library</type>
+        <version>4.2.5</version>
+        <client>site</client>
+        <infourl title="Expose Library">https://github.com/themexpert/Expose-Framework-Library/releases/tag/4.2.5</infourl>
+        <downloads>
+            <downloadurl type="full" format="zip">https://github.com/themexpert/Expose-Framework-Library/archive/4.2.5.zip</downloadurl>
+        </downloads>
+        <tags>
+            <tag>stable</tag>
+        </tags>
+        <targetplatform name="joomla" version="3.[123456789]" />
+    </update>
+  </updates>
