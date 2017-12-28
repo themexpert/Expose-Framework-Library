@@ -328,7 +328,7 @@ if (!defined ('_EXPOSE_MEGA_MENU')) {
         function beginMenuItems1($pid = 0, $level = 0, $return = false)
         {
             $cols = $pid && $this->getParam('megamenu') && isset($this->items[$pid]->cols) && $this->items[$pid]->cols ? $this->items[$pid]->cols : 1;
-            $width = $this->items[$pid]->megaparams->get('width', 0);
+            $width = (int) $this->items[$pid]->megaparams->get('width', 0);
             if (!$width) {
                 for ($col = 0; $col < $cols; $col++) {
                     $colw = $this->items[$pid]->megaparams->get('colw' . ($col + 1), 0);
